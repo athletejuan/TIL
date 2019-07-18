@@ -27,7 +27,7 @@ scores = {
 
 sum = 0
 
-for s in scores['a']:
-    sum += scores['a'][s]
-print(sum/len(scores['a'].keys))
+for s in scores[a]:
+    sum += scores[a][s]
+print(sum/len(scores[a].keys))
 

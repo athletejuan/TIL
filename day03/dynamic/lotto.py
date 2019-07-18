@@ -58,6 +58,8 @@ print(count)
 
 trial = 0
 while True:
+    lotto = sorted(random.sample(range(1,46),6))
+    count = len(set(winner) & set(lotto))
     if count == 6:
         print("1등입니다.")
         break
