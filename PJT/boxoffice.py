@@ -22,9 +22,9 @@ for targetDt in targetDt_list:
     url = f'{base}?key={API_Key}&targetDt={targetDt}&weekGb={weekGb}'
     res = requests.get(url).json()
     movies = res.get('boxOfficeResult').get('weeklyBoxOfficeList')
+    result={}
     # def movie_list():
-    for movie in movies:
-        result={}
+    for movie in movies:        
         # key_name = ['movieCd','movieNm','audiAcc']
         title = movie.get('movieNm')
         # for k,v in movie.items():
