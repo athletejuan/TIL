@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template()
+    return render_template('index.html')
 
 @app.route('/cube/<num>')
 def cube(num):
