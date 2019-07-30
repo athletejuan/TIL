@@ -1,0 +1,56 @@
+.big_box {
+  position: relative;
+  height: 500px;
+  width: 500px;
+  border: solid 5px;
+}
+
+.small_box {
+  height: 100px;
+  width: 100px;  
+}
+
+#pink {
+  background-color: pink;  
+}
+
+#skyblue {
+  background-color: skyblue;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+}
+
+#green {
+  background-color: mediumaquamarine;
+  position: absolute;
+  left: 200px;
+  top: 200px;
+}
+
+#red {
+  background-color: orangered;
+  position: absolute;
+  left: 400px;
+  top: 400px;
+}
+#yellow {
+  background-color: goldenrod;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+}
+
+#purple {
+  background-color: purple;
+  position: absolute;
+  left: 300px;
+  top: 300px;
+}
+
+#orange {
+  background-color: orange;
+  position: absolute;
+  left: 200px;
+  top: 0px;
+}
