@@ -36,3 +36,11 @@ form action="/utils/output/" method="GET" <= G.E.T 전부 대문자
 
 
 
+- pip install art
+
+
+
+- ngrok download
+  - 실행파일 django 폴더로 이동
+  - cmd 창에서 ngrok http 8000
+

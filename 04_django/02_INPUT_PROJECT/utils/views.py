@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-# from art import *
+from art import *
 
 def index(request):
     return render(request, 'utils/index.html')
