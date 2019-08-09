@@ -1,0 +1,16 @@
+{% extends 'board/base.html' %}
+{% block title %} New Article {% endblock title %}
+{% block body %}
+<h1>글을 쓰자</h1>
+<form action="/board/articles/create/">
+    <div>
+        <input type="text" name="input_title">
+    </div>
+    <div>
+        <textarea name="input_content" id="" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+{% endblock body %}
