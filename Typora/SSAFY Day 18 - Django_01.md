@@ -2,6 +2,39 @@
 
 # First Django
 
+## Class 1.
+
+- 장고(독선적), 대세
+  - Full-functioning Framework
+- 하나의 패턴
+
+
+
+사용자 -(request)-> urls(문지기) -> View -> Model(<->Database) -> View -> Template -> HTML -(response)-> 사용자
+
+
+
+urls.py
+
+path()
+
+- 첫번째 인자: 주문서(url 경로)
+- 두번째 인자: view 함수의 위치
+
+
+
+django는 trailing comma 를 붙이는 것이 convention : 편리함
+
+/lotto/
+
+-> random 통해서 6개의 숫자 출력
+
+
+
+
+
+## Class 3.
+
 ## Start project
 
 - 가상(독립)환경 생성 및 django 설치
