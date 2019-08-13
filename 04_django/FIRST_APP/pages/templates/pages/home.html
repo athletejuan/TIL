@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Home</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block body %}
   <h1>DTL(Django Template Language) 관련 문법</h1>
   <ul>
   <li>for</li>
@@ -17,7 +13,6 @@
   {% for item in data %}
     <p>{{ item }}</p>
   {% endfor %}
-</body>
 
 <h2>for문 활용법</h2>
 <h2>데이터가 없을 때,</h2>
@@ -52,3 +47,7 @@
   {% now 'Y년 m월 d일 h시 i분 a' %}
 </ul>
 </html>
+<footer class="d-flex fixed-bottom justify-content-center">
+  <h3>Made by Juan</h3>
+</footer>
+{% endblock %}
