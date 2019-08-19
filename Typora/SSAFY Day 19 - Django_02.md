@@ -2,6 +2,64 @@
 
 # Second Django
 
+## Class 1.
+
+#### template 상속
+
+1. 공통적으로 쓸 템플릿(코드)을 뽑아낸다.
+2. 해당 파일(base.html)을 따로 만들고,
+3. 활용할 다른 템플릿 파일에서 불러와 쓴다.
+
+
+
+1. 사용자의 입력을 받아
+   - /artii/
+2. artii API를 통해 ascii art
+   - /artii/result
+
+
+
+#### artii API code (views.py)
+
+```
+def artii(request):
+    return render(request, 'artii/artii.html')
+
+def result(request):
+    # 1. 단어를 받아온다.
+    word = request.GET.get('word')
+    # 2. artii api를 통해 ascii art 결과들을 요청하고,
+    url = 'http://artii.herokuapp.com/make?text='
+    result = requests.get(url + word).text
+    # 3. 결과를 받아와 보여준다.
+    context = {
+        'word':word,
+        'result':result,
+    }
+    return render(request, 'artii/result.html', context)
+```
+
+
+
+
+
+1. 앱 만들기 python manage.py startapp 
+2. 등록하기 settings.py installed apps
+
+
+
+- templates 폴더를 찾고 없으면 다른 앱 안의 templates 폴더까지는 찾아보지만 상위폴더는 찾지 않는다
+  - So. settings.py안의 TEMPLATES =[{ .. 'DIR':[ ] }] 수정
+    --> [os.path.join(BASE_DIR, 'first_app', 'templates')]
+
+- 즉 다른 앱 안의 templates 폴더안에 있는 template는 별다른 작업 없이도 불러와서 쓸 수 있다.
+
+
+
+
+
+## Class 3.
+
 ## Start app
 
 - app의 이름이 다르더라도 django는 자체적으로 templates를 합쳐서 관리함
