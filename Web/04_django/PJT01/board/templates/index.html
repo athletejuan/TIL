@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} INDEX {% endblock %}
+{% block body %}
+<h1>INDEX</h1>
+<div>
+    <a href="/board/new/">새 글</a>
+</div>
+<div>
+    <ul>
+        {% for article in articles %}
+        <li>
+            <a href="/board/{{article.id}}/">{{ article.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

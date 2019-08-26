@@ -1,0 +1,15 @@
+{% extends 'board/base.html' %}
+{% block title %} DETAIL {% endblock %}
+{% block body %}
+  <h1>글 상세보기</h1>
+  <h2>{{ article.title }}</h2>
+  <p>
+    {{ article.content }}
+  </p>
+  <div>
+    <a href="/board/articles/"><button>목록</button></a>
+  </div>
+  <div>
+    <a href="/board/articles/{{ article.id }}/delete/"><button>삭제</button></a>
+  </div>
+  {% endblock %}

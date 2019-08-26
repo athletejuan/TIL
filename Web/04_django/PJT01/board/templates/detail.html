@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} DETAIL {% endblock %}
+{% block body %}
+<h1>DETAIL</h1>
+<h4>제목: {{ article.title }}</h4>
+<p>내용: {{ article.content }}</p>
+<p>작성시간: {{ article.created_at }}</p>
+<p>수정시간: {{ article.updated_at }}</p>
+<div>
+    <form action="/board/">
+        <button type="submit">목록</button>
+    </form>
+    <form action="/board/{{ article.id }}/edit/">
+        <button type="submit">수정</button>
+    </form>
+    <form action="/board/{{ article.id }}/delete/" method="POST">
+        {% csrf_token %}
+        <button type="submit">삭제</button>
+    </form>
+</div>
+{% endblock %}

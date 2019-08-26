@@ -1,0 +1,59 @@
+div {
+  height: 100px;
+  width: 100px;
+  background-color: navy;
+  line-height: 100px;
+  text-align: center;
+  color: #f0f0f0;
+}
+
+.relative {
+  position: relative;  
+  height: 100px;
+  width: 100px;
+  color: navy
+}
+
+.relative0 {
+  position: relative;  
+}
+
+.relative1 {
+  position: relative;
+  left: 100px
+}
+
+.relative2 {
+  position: relative;
+  left: 200px;
+}
+
+.absolute {
+  position: absolute;
+  bottom: 100px;
+  left: 200px;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
+
+
+.box1 {
+  background-color: mediumaquamarine
+}
+.box2 {
+  background-color: mediumslateblue
+}
+.box3 {
+  background-color: orchid
+}
+.box4 {
+  background-color: orange
+}
+.box5 {
+  background-color: orangered
+}

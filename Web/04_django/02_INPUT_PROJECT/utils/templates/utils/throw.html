@@ -1,0 +1,16 @@
+{% extends 'utils/base.html' %}
+{% block title %}Translation{% endblock %}
+{% block body %}
+<h1>Translate</h1>
+<p>Input Some Text below</p>
+
+<form action="/utils/output/" method="GET">
+    <div>
+        <label for="word">text</label>
+        <input id="word" name="user-input" type="text" required>
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+{% endblock %}

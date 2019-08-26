@@ -1,0 +1,20 @@
+{% extends 'board/base.html' %}
+{% block title %}	Board Main {% endblock title %}
+{% block body %}
+<h1>Board Index</h1>
+<div>
+	{% comment %} TODO: new href 설정하기{% endcomment %}
+	<a href="/board/articles/new/">새 글</a>
+</div>
+<div>
+<ul>
+	{% for article in articles %}
+		<li>
+		{% comment %} TODO: show href page {% endcomment %}
+			<a href="/board/articles/{{ article.id }}/">{{ article.title }}</a>
+		</li>
+	{% endfor %}	
+</ul>
+</div>
+{% endblock body %}
+

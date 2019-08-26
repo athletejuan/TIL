@@ -1,0 +1,19 @@
+div.a {
+    border: solid 5px navy;
+    border-radius: 20px;
+    background-color: ivory;
+    width: 300px;    
+    padding: 10px;
+    margin: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;    
+    color: darkred;
+    overflow: hidden;
+
+}
+div.rounded{
+    border-radius: 20px;
+    border: solid 3px blue;
+    width: 250px;
+    height: 200px;    
+}

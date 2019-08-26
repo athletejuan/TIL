@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} DETAIL {% endblock %}
+{% block body %}
+<h2>DETAIL</h2>
+<h4>{{ article.title }}</h4> <br>
+{{ article.content }} <br>
+{{ article.created_at }} <br>
+<div>
+    <a href="/board/">목록</a>
+    <a href="/board/{{article.id}}/delete/">삭제</a>
+</div>
+{% endblock %}
