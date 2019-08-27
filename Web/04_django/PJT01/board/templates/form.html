@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if request.resolver_match.url_name == 'create' %}
+    <h1 align="center">Create</h1>
+{% else %}
+    <h1 align="center">Update</h1>
+{% endif %}
+<hr>
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+
+<!--    {{ form.as_p }}   form의 내용을 p 태그로 만들겠다. -->
+<!--    <input type="submit" value="등록">-->
+
+    {% if request.resolver_match.url_name == 'create' %}
+        <a href="{% url 'board:index' %}" class="btn btn-primary">메인페이지</a>
+    {% else %}
+        <a href="{% url 'board:detail' article.id %}" class="btn btn-primary">상세페이지</a>
+    {% endif %}
+
+</form>
+
+{% endblock %}
