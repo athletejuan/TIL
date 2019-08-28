@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'board/base.html' %}
 {% block title %} DETAIL {% endblock %}
 {% block body %}
 <h1>DETAIL</h1>
@@ -22,11 +22,10 @@
         <p>댓글이 없습니다</p>
     {% endfor %}
 
-<!-- {% else %}
+{% else %}
     <a href="{% url 'accounts:login' %}">로그인이 필요합니다</a>
-{% endif %} -->
+{% endif %}
 <hr>
-
 
 <h3>댓글 작성</h3>
 <form action="{% url 'board:comments_create' article.id %}" method="post">
@@ -35,17 +34,15 @@
     <input type="submit" value="댓글등록">
 </form>
 
-
+<hr>
 <div>
-    <form action="/board/">
-        <button type="submit">목록</button>
-    </form>
-    <form action="/board/{{ article.id }}/edit/">
-        <button type="submit">수정</button>
-    </form>
-    <form action="/board/{{ article.id }}/delete/" method="POST">
+    <form action="{% url 'board:delete' article.id %}" method="post">
         {% csrf_token %}
-        <button type="submit">삭제</button>
+        <a href="{% url 'board:index' %}"><button type="submit">메인 페이지</button></a>
+    {% if user == article.user %}
+        <a href="{% url 'board:update' article.id %}"><input type="button" value="수정"></a>
+        <input type="submit" value="삭제">
+    {% endif %}
     </form>
 </div>
 {% endblock %}
