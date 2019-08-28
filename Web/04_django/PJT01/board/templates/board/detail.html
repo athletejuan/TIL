@@ -28,7 +28,7 @@
 <hr>
 
 <h3>댓글 작성</h3>
-<form action="{% url 'board:comments_create' article.id %}" method="post">
+<form action="{% url 'board:comments_create' article.id %}" method="POST">
     {% csrf_token %}
     {{ comment_form.as_p }}
     <input type="submit" value="댓글등록">
@@ -36,13 +36,13 @@
 
 <hr>
 <div>
-    <form action="{% url 'board:delete' article.id %}" method="post">
+    <form action="{% url 'board:delete' article.id %}" method="POST">
         {% csrf_token %}
-        <a href="{% url 'board:index' %}"><button type="submit">메인 페이지</button></a>
-    {% if user == article.user %}
-        <a href="{% url 'board:update' article.id %}"><input type="button" value="수정"></a>
-        <input type="submit" value="삭제">
-    {% endif %}
+        <a href="{% url 'board:index' %}"><input type="button" value="메인 페이지"></a>
+        {% if user == article.user %}
+            <a href="{% url 'board:update' article.id %}"><input type="button" value="수정"></a>
+            <input type="submit" value="삭제">
+        {% endif %}
     </form>
 </div>
 {% endblock %}

@@ -3,18 +3,17 @@
 {% block body %}
 <h1>INDEX</h1>
 <div>
-    <ul>
-        {% for article in articles %}
-        <li>
-            <p><b>글 작성자: {{ article.user }}</b></p>
-            <p>글 번호: {{ article.id }}</p>
-            <p>글 제목: {{ article.title }}</p>
-            <a href="{% url 'board:detail' article.id %}">[글 상세보기]</a>
+    {% for article in articles %}
+        <p><b>글 작성자: {{ article.user }}</b></p>
+        <p>글 번호: {{ article.id }}</p>
+        <p>글 제목: {{ article.title }}</p>
+        <a href="{% url 'board:detail' article.id %}">[글 상세보기]</a>
 
-            {% include 'board/_board.html' %}
-        </li>
-        {% endfor %}
-    </ul>
+        {% include 'board/_board.html' %}
+        
+        <hr>
+    {% endfor %}
+
     {% if user.is_authenticated %}
         <a href="{% url 'board:create' %}"><input type="button" value="글작성"></a>
     {% else %}

@@ -6,6 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
 
+def index(request):
+    articles = Article.objects.all()[::-1]
+    return render(request, 'board/index.html', {
+        'articles':articles,
+    })
+
 @login_required()
 def create(request):
     if request.method == 'POST':
@@ -26,18 +32,12 @@ def create(request):
             # article.content = request.POST.get('input_content')
             # article.image = request.FILES.get('image')
             # article.save()
-            return redirect('board:index', article.id)
+            return redirect('board:detail', article.id)
             # return render(request, 'create.html')
     else:
         form = ArticleForm()
     context = {'form': form}
     return render(request, 'board/form.html', context)
-
-def index(request):
-    articles = Article.objects.all()[::-1]
-    return render(request, 'board/index.html', {
-        'articles':articles,
-    })
 
 def detail(request, article_id):
     # article = Article.objects.get(id=article_id)
@@ -88,7 +88,7 @@ def update(request, article_id):
     })
 
 @login_required()
-@require_POST   # POST 요청이 아닌 요청이 들어오면 405 에러가 뜬다.
+@require_POST   # POST 요청이 아닌 요청이 들어오면 404 에러가 뜬다.
 def comments_create(request, article_id):
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():

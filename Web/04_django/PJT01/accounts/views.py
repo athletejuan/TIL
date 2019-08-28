@@ -12,7 +12,7 @@ def signup(request):
         form = UserCustomCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth.login(request, user)
+            auth_login(request, user)
             return redirect('board:index')
     else:
         form = UserCustomCreationForm()
