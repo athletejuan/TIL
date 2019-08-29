@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} DETAIL {% endblock %}
+{% block body %}
+<h1>DETAIL</h1>
+<div>
+    <p> No.{{ article.id }}</p>
+    <p> 제목: {{ article.title }} </p>
+    <p> 내용: {{ article.content }}</p>
+    <p> 작성시간: {{ article.created_at }}</p>
+    <p> 수정시간: {{ article.updated_at }}</p>
+</div>
+<hr>
+
+<div>
+    <a href="/boards/">메인페이지</a>
+</div>
+<div>
+    <a href="/boards/{{article.id}}/edit/">수정</a>
+</div>
+<div>
+    <a href="/boards/{{article.id}}/delete/">삭제</a>
+</div>
+{% endblock %}

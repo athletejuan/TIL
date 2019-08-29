@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} CREATE {% endblock %}
+{% block body %}
+<h1>CREATE</h1>
+<p> 새 글이 작성되었습니다. </p>
+<p> 제목: {{ article.title }}</p>
+<p> 내용: {{ article.content }}</p>
+<p> 작성시간: {{ article.created_at }}</p>
+
+<a href="/boards/">메인페이지</a>
+{% endblock %}

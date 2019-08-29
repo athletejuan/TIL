@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} UPDATE {% endblock %}
+{% block body %}
+<h1>UPDATE</h1>
+<p>글이 정상적으로 수정되었습니다.</p>
+<p>No.{{ article.id }}</p>
+<p>제목: {{ article.title }}</p>
+<p>내용: {{ article.content }}</p>
+<p>수정시간: {{ article.updated_at }}</p>
+<hr>
+<div>
+    <a href="/boards/{{article.id}}/">글 상세보기</a>
+</div>
+{% endblock %}
