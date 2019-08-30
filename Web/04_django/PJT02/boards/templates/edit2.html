@@ -2,7 +2,8 @@
 {% block title %} EDIT {% endblock %}
 {% block body %}
 <h1>EDIT</h1>
-<form action="/boards/{{article.id}}/update/" method="GET">
+<form action="" method="POST">
+    {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title" value={{article.title}}>
     </div>

@@ -2,7 +2,8 @@
 {% block title %} NEW {% endblock %}
 {% block body %}
 <h1>NEW</h1>
-<form action="/boards/create/" method="GET">
+<form action="" method="POST">
+    {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title">
     </div>
