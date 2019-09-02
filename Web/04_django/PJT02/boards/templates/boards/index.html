@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'boards/base.html' %}
 {% block title %} INDEX {% endblock %}
 {% block body %}
 <h1>INDEX</h1>
@@ -11,6 +11,11 @@
         {% endfor %}
     </ul>
 </div>
+{% if user.is_authenticated %}
+    <a href="{% url '/boards/new/' %}"><input type="button" value="글작성"></a>
+{% else %}
+    <a href="{% url '/accounts/login/' %}">로그인이 필요합니다</a>
+{% endif %}
 <div>
     <a href="/boards/new/">새 글</a>
 </div>

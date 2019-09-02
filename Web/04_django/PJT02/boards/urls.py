@@ -1,6 +1,8 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from . import views
+
+app_name = 'boards'
 
 urlpatterns = [
     path('', views.index),
