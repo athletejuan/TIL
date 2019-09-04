@@ -1,4 +1,3 @@
-# Cowork Project
-Github 'README.md' 만들기
+# Today I Learned
 
-Github Branch 실습
+온갖 시행착오의 결정판
