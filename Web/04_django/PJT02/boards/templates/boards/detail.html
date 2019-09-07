@@ -10,8 +10,18 @@
     <p> 수정시간: {{ article.updated_at }}</p>
 </div>
 <hr>
-
 <div>
+    <form action="/boards/{{ article.id }}/delete/" method="POST">
+        {% csrf_token %}
+        <a href="/boards/"><input type="button" value="메인페이지"></a>
+        {% if user == article.user %}
+            <a href="/boards/{{ article.id }}/edit/"><input type="button" value="수정"></a>
+            <input type="submit" value="삭제">
+        {% endif %}
+    </form>
+</div>
+
+<!-- <div>
     <a href="/boards/">메인페이지</a>
 </div>
 <div>
@@ -19,5 +29,5 @@
 </div>
 <div>
     <a href="/boards/{{article.id}}/delete/">삭제</a>
-</div>
+</div> -->
 {% endblock %}
