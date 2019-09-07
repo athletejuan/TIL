@@ -1,17 +1,21 @@
 {% extends 'boards/base.html' %}
+{% load bootstrap4 %}
+
 {% block title %} NEW {% endblock %}
 {% block body %}
-<h1>NEW</h1>
+<h1 align='center'>NEW</h1>
 <form action="" method="POST">
     {% csrf_token %}
-    <div>
+    {% bootstrap_form form layout='horizontal' %}
+    <!-- <div>
         제목: <input type="text" name="input_title">
     </div>
     <div>
         내용: <textarea name="input_content" id="" cols="30" rows="10"></textarea>
-    </div>
-    <div>
-        <button type="submit">입력</button>
-    </div>
+    </div> -->
+    <!-- <div> -->
+    <button type="submit">입력</button>
+    <a href="/boards/" class="btn btn-primary">메인페이지</a>
+    <!-- </div> -->
 </form>
 {% endblock %}

@@ -2,13 +2,14 @@
 {% load bootstrap4 %}
 
 {% block body %}
-<h1>로그인</h1>
+<h1>회원가입</h1>
+
 <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
 
     {% buttons %}
-    <button type="submit" class="btn btn-primary">로그인</button>
+        <button type="submit" class="btn btn-primary">회원가입</button>
     {% endbuttons %}
 </form>
 {% endblock %}

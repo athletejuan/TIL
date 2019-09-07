@@ -1,12 +1,17 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    {% bootstrap_css %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <div class="container">
-        {% if user.is_autheticated %}
+        {% if user.is_authenticated %}
             <h1>안녕하세요 {{ user.username }} 님</h1>
             <hr>
             <form action="/accounts/logout/" method="POST">

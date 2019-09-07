@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
-# from .forms import ArticleForm
+from .forms import ArticleForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
@@ -14,13 +14,24 @@ def index(request):
 @login_required()
 def new(request):
     if request.method == 'POST':
-        article = Article()
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.save()
-        return redirect(f'/boards/{article.id}/')
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()
+            return redirect(f'/boards/{article.id}/')
     else:
-        return render(request, 'boards/new.html')
+        form = ArticleForm()
+    context = {'form':form}
+    return render(request, 'boards/new.html', context)
+    # if request.method == 'POST':
+    #     article = Article()
+    #     article.title = request.POST.get('input_title')
+    #     article.content = request.POST.get('input_content')
+    #     article.save()
+    #     return redirect(f'/boards/{article.id}/')
+    # else:
+    #     return render(request, 'boards/new.html')
 
 def detail(request, article_id):
     # article = Article.objects.get(id=article_id)
@@ -36,16 +47,21 @@ def edit(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if article.user == request.user:
         if request.method == 'POST':
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                form.save()
             # article = Article.objects.get(id=article_id)
-            article.title = request.POST.get('input_title')
-            article.content = request.POST.get('input_content')
-            article.save()
-            return redirect(f'/boards/{article.id}/')
+            # article.title = request.POST.get('input_title')
+            # article.content = request.POST.get('input_content')
+            # article.save()
+                return redirect(f'/boards/{article.id}/')
         else:
-            article = Article.objects.get(id=article_id)
+            # article = Article.objects.get(id=article_id)
+            form = ArticleForm(instance=article)
     else:
         return redirect('/boards/')
     return render(request, 'boards/edit.html', {
+        'form':form,
         'article':article,
     })
     
