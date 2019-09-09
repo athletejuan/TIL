@@ -1,0 +1,11 @@
+{% extends 'todos/base.html' %}
+
+{% block body %}
+<h1> NEW </h1>
+<form action="{% url 'todos:create' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="title">
+    <input type="date" name="due-date">
+    <input type="submit">
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'todos/base.html' %}
+
+{% block body %}
+<h1> EDIT </h1>
+<form action="{% url 'todos:update' todo.id %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{ todo.title }}">
+    <input type="date" name="due-date" value="{{ todo.due_date | date:'Y-m-d'}}">
+    <input type="submit">
+</form>
+{% endblock %}
