@@ -2,13 +2,13 @@
 {% block title %}EDIT{% endblock %}
 {% block body %}
 <h1 align=center >EDIT</h1>
-<form action="/todos/update/" method="POST">
+<form action="/todos/update/{{ todo.pk }}/" method="POST">
     {% csrf_token %}
     <div>
-        주제: <input type="text" name="title" value="title">
+        주제: <input type="text" name="title" value="{{ todo.title }}">
     </div>
     <div>
-        일정: <input type="date" name="due-date" value="due-date">
+        일정: <input type="date" name="due-date" value="{{ todo.due_date | date:'Y-m-d' }}">
     </div>
     <div>
         <input type="submit">
