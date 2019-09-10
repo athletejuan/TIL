@@ -2,7 +2,7 @@
 {% block title %}NEW{% endblock %}
 {% block body %}
 <h1 align=center >NEW</h1>
-<form action="/todos/create/" method="POST">
+<form action="{% url 'todos:create' %}" method="POST">
     {% csrf_token %}
     <div>
         주제: <input type="text" name="title">

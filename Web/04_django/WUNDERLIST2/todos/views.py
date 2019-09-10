@@ -8,8 +8,8 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-def new(request):
-    return render(request, 'new.html')
+# def new(request):
+#     return render(request, 'new.html')
 
 def create(request):
     if request.method == "POST":
@@ -17,13 +17,15 @@ def create(request):
         due_date = request.POST.get('due-date')
         
         Todo.objects.create(title=title, due_date=due_date)
-        return redirect('/todos')
+        return redirect('todos:index')
+    else:
+        return render(request, 'new.html')
 
-def edit(request, pk):
-    todo = Todo.objects.get(id=pk)
-    return render(request, 'edit.html', {
-        'todo':todo
-    })
+# def edit(request, pk):
+#     todo = Todo.objects.get(id=pk)
+#     return render(request, 'edit.html', {
+#         'todo':todo
+#     })
 
 def update(request, pk):
     if request.method == "POST":
@@ -34,9 +36,14 @@ def update(request, pk):
         todo.title = title
         todo.due_date = due_date
         todo.save()
-        return redirect('/todos')
+        return redirect('todos:index')
+    else:
+        todo = Todo.objects.get(id=pk)
+        return render(request, 'edit.html', {
+            'todo':todo
+        })
 
 def delete(request, pk):
     todo = Todo.objects.get(id=pk)
     todo.delete()
-    return redirect('/todos')
+    return redirect('todos:index')

@@ -7,8 +7,8 @@
         <p><b>해야할 일 No.{{ todo.id }}</b></p>
         <p>주제: {{ todo.title }}</p>
         <p>시간: {{ todo.due_date }}</p>
-        <a href="/todos/edit/{{ todo.id }}/">[수정]</a>
-        <a href="/todos/delete/{{ todo.id }}/">[삭제]</a>
+        <a href="{% url 'todos:update' todo.id %}">[수정]</a>
+        <a href="{% url 'todos:delete' todo.id %}">[삭제]</a>
         <hr>
     {% endfor %}    
 </div>
