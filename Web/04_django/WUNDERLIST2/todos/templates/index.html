@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}INDEX{% endblock %}
+{% block body %}
+<h1 align=center >INDEX</h1>
+<div>
+    {% for todo in todos %}
+        <p><b>해야할 일 No.{{ todo.id }}</b></p>
+        <p>주제: {{ todo.title }}</p>
+        <p>시간: {{ todo.due_date }}</p>
+    {% endfor %}
+</div>
+{% endblock %}

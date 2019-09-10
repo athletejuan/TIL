@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}NEW{% endblock %}
+{% block body %}
+<h1 align=center >NEW</h1>
+<form action="/todos/create/" method="POST">
+    {% csrf_token %}
+    <div>
+        주제: <input type="text" name="title">
+    </div>
+    <div>
+        일정: <input type="date" name="due-date">
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+<a href="{% url 'todos:index' %}">[목록 돌아가기]</a>
+{% endblock %}
