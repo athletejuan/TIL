@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}INDEX{% endblock %}
+{% block body %}
+<h1 align=center >INDEX</h1>
+
+<a href="new/">새 글</a>
+<div>
+    {% for todo in todos %}
+        <p><b>해야할 일 No.{{ todo.id }}</b></p>
+        <p>Todo: {{ todo.title }}</p>
+        <p>Date: {{ todo.due_date }}</p>
+    {% endfor %}
+</div>
+{% endblock %}}

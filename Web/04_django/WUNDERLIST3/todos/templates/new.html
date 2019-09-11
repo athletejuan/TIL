@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}NEW{% endblock %}
+{% block body %}
+<h1 align=center >NEW</h1>
+<form action="/todos/create">
+    <div>
+        Todo: <input type="text" name='title'>
+    </div>
+    <div>
+        Date: <input type="date" name='due-date'>
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+{% endblock %}
