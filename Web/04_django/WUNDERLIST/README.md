@@ -15,8 +15,6 @@ setWebhook?
 
 url=https://9841ca72.ngrok.io/950672616:AAGbW5GEAtljEIOa1_KUIV5zMM39x7DUwfQ/ <-- django의 특성상 마지막에 '/'를 붙여줘야함.
 
-
-
 2. webhook 정보조회
  - getWebhookinfo
 

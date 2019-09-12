@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}EDIT{% endblock %}
+{% block body %}
+<h1 align=center >EDIT</h1>
+<form action="/todos/update/{{ todo.id }}">
+    <div>
+        Todo: <input type="text" name='title' value='{{ todo.title }}'>
+    </div>
+    <div>
+        Date: <input type="date" name='due-date' value='{{ todo.due_date | date:"Y-m-d" }}'>
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+{% endblock %}

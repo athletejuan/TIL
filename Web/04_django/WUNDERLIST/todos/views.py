@@ -50,7 +50,6 @@ def update(request, pk):
         title = request.POST.get('title')
         due_date = request.POST.get('due-date')
         
-        
         todo.title = title
         todo.due_date = due_date
         todo.save()
