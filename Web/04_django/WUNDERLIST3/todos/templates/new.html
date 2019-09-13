@@ -2,7 +2,8 @@
 {% block title %}NEW{% endblock %}
 {% block body %}
 <h1 align=center >NEW</h1>
-<form action="/todos/create">
+<form action="" method="POST">
+    {% csrf_token %}
     <div>
         Todo: <input type="text" name='title'>
     </div>

@@ -2,7 +2,8 @@
 {% block title %}EDIT{% endblock %}
 {% block body %}
 <h1 align=center >EDIT</h1>
-<form action="/todos/update/{{ todo.id }}">
+<form action="" method="POST">
+    {% csrf_token %}
     <div>
         Todo: <input type="text" name='title' value='{{ todo.title }}'>
     </div>

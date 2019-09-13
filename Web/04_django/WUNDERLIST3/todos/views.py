@@ -7,30 +7,36 @@ def index(request):
         'todos':todos
     })
 
-def new(request):
-    return render(request, 'new.html')
+# def new(request):
+#     return render(request, 'new.html')
 
 def create(request):
-    title = request.GET.get('title')
-    due_date = request.GET.get('due-date')
+    if request.method == "POST":
+        title = request.POST.get('title')
+        due_date = request.POST.get('due-date')
 
-    Todo.objects.create(title=title, due_date=due_date)
-    return render(request, 'create.html')
+        Todo.objects.create(title=title, due_date=due_date)
+        return redirect('/todos')
+    else:
+        return render(request, 'new.html')
 
-def edit(request, pk):
-    todo = Todo.objects.get(id=pk)
-    return render(request, 'edit.html', {
-        'todo':todo
-    })
+# def edit(request, pk):
+#     todo = Todo.objects.get(id=pk)
+#     return render(request, 'edit.html', {
+#         'todo':todo
+#     })
 
 def update(request, pk):
     todo = Todo.objects.get(id=pk)
-    todo.title = request.GET.get('title')
-    todo.due_date = request.GET.get('due-date')
-    todo.save()
-    return render(request, 'update.html', {
-        'todo':todo
-    })
+    if request.method == "POST":
+        todo.title = request.POST.get('title')
+        todo.due_date = request.POST.get('due-date')
+        todo.save()
+        return redirect('/todos')
+    else:
+        return render(request, 'edit.html', {
+            'todo':todo
+        })
 
 def delete(request, pk):
     todo = Todo.objects.get(id=pk)
