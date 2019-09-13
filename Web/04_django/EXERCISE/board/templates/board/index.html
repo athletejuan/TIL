@@ -1,15 +1,17 @@
 {% extends 'board/base.html' %}
 {% block title %} INDEX {% endblock %}
 {% block body %}
-<h1>글 목록</h1>
+<h1 align=center >글 목록</h1>
 <div>
-  <a href="/board/articles/new/">New Article</a>
+  <a href="/board/new/">New Article</a>
 </div>
 <div>  
   <ul>
     {% for article in articles %}
       <li>
-        <a href="/board/articles/{{article.id}}">{{ article.title }}</a>
+        <a href="/board/{{article.id}}">No.{{ article.id }}: {{ article.title }}</a>
+        <p>작성시간: {{ article.created }}</p>
+        <p>수정시간: {{ article.modified }}</p>
       </li>
     {% endfor %}
   </ul>
