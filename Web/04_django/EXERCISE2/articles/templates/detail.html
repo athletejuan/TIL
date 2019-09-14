@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>Detail</h1>
+<h1 align=center>Detail</h1>
 <div>
   <h3>{{ article.title }}</h3>  
 </div>
@@ -10,6 +10,7 @@
 </div>
 <div>
   <a href="/articles/"><button>목록</button></a>
+  <a href="/articles/{{article.id}}/edit"><button>수정</button></a>
   <a href="/articles/{{article.id}}/delete/"><button>삭제</button></a>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>INDEX</h1>
+<h1 align=center>INDEX</h1>
 <div>
   <a href="/articles/new/">새 글</a>
 </div>
@@ -8,7 +8,10 @@
   <ul>
     {% for article in articles %}
       <li>
-        <a href="/articles/{{article.id}}/">{{ article.title }}</a>
+        <a href="/articles/{{article.id}}/">{{ article.id}}: {{ article.title }}</a>
+        <p>{{ article.content }}</p>
+        <a href="/articles/{{ article.id }}/edit/"><button>수정</button></a>
+        <a href="/articles/{{ article.id }}/delete/"><button>삭제</button></a>
       </li>
     {% endfor %}
   </ul>

@@ -1,4 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>Edit</h1>
+<h1 align=center>Edit</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div>
+        제목: <input type="text" name="input_title" value='{{ article.title }}'>
+    </div>
+    <div>
+        내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
 {% endblock %}
