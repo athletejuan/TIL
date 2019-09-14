@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block title %} NEW {% endblock %}
 {% block body %}
-<h1>NEW</h1>
-<form action="/board/create/" method="GET">
+<h1 align=center >NEW</h1>
+<form action="" method="POST">
+    {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title">
     </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} INDEX {% endblock %}
 {% block body %}
-<h1>INDEX</h1>
+<h1 align=center>INDEX</h1>
 <div>
     <a href="/board/new/">새 글</a>
 </div>
@@ -9,7 +9,7 @@
     <ul>
         {% for article in articles %}
         <li>
-            <a href="/board/{{article.id}}/">{{ article.title }}</a>
+            <a href="/board/{{article.id}}/">No.{{ article.id }}: {{ article.title }}</a>
         </li>
         {% endfor %}
     </ul>
