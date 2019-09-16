@@ -1,14 +1,24 @@
 {% extends 'board/base.html' %}
-{% block title %} DETAIL {% endblock %}
+{% block title %} Detail {% endblock %}
 {% block body %}
   <h1 align = center >글 상세보기</h1>
   <h2>{{ article.title }}</h2>
   <p>
     {{ article.content }}
   </p>
-  <div>
-    <a href="/board/{{ article.id }}/edit/"><button>수정</button></a>
+  <div class=container>
+    <a href="/board/{{ article.id }}/update/"><button>수정</button></a>
     <a href="/board/{{ article.id }}/delete/"><button>삭제</button></a>
-    <a href="/board/"><button>목록</button></a>
+    <hr>
+    <h2>댓글 목록</h2>
+    <form action="/board/{{ article.id }}/create_comment/">
+      <input type="text" name="content">
+      <input type="submit">
+    </form>
+    <hr>
+    {% for comment in comments %}
+      <p>{{ comment.content }}</p>
+    {% endfor %}
+    <a href="/board/"><button>목록으로</button></a>
   </div>
   {% endblock %}

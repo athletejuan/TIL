@@ -3,15 +3,15 @@
 {% block body %}
 <h1 align=center >글 목록</h1>
 <div>
-  <a href="/board/new/">New Article</a>
+  <a href="/board/create/">New Article</a>
 </div>
 <div>  
   <ul>
     {% for article in articles %}
       <li>
-        <a href="/board/{{article.id}}">No.{{ article.id }}: {{ article.title }}</a>
-        <p>작성시간: {{ article.created }}</p>
-        <p>수정시간: {{ article.modified }}</p>
+        <a href="/board/{{article.id}}/">No.{{ article.id }}: {{ article.title }}</a>
+        <p>작성시간: {{ article.created_at }}</p>
+        <p>수정시간: {{ article.updated_at }}</p>
       </li>
     {% endfor %}
   </ul>
