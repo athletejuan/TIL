@@ -1,11 +1,25 @@
-.ipynb_checkpoint
 
-# Created by https://www.gitignore.io/api/python
-# Edit at https://www.gitignore.io/?templates=python
+# Created by https://www.gitignore.io/api/django
+# Edit at https://www.gitignore.io/?templates=django
 
-### Python ###
-# Byte-compiled / optimized / DLL files
+### MacBook ###
+.DS_Store
+
+### Django ###
+*.log
+*.pot
+*.pyc
 __pycache__/
+local_settings.py
+db.sqlite3
+media
+
+# If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
+# in your Git repository. Update and uncomment the following line accordingly.
+# <django-project-name>/staticfiles/
+
+### Django.Python Stack ###
+# Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
 
@@ -58,12 +72,8 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
-*.log
-local_settings.py
-db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
@@ -129,4 +139,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# End of https://www.gitignore.io/api/python
+# End of https://www.gitignore.io/api/django
