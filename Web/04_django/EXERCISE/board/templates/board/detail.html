@@ -5,6 +5,12 @@
   <h2>{{ article.title }}</h2>
   <p>
     {{ article.content }}
+    <!-- article.image가 있으면 사진보여주고, 없으면 no_photo.png 보여주기 -->
+    {% if article.image %}
+      <img src="{{ article.image.url }}" alt="{{ article.image }}">
+    {% else %}
+      <img src="/media/nophoto-available.png" alt="no_image">
+    {% endif %}
   </p>
   <div class=container>
     <a href="/board/{{ article.id }}/update/"><button>수정</button></a>
@@ -16,9 +22,22 @@
       <input type="submit">
     </form>
     <hr>
+    <!-- {{ comments.count }} -->
+    <!-- {% if comments %}
+      <p><i>{{ comments | length }}개의 댓글이 있습니다.</i></p>
+      {% for comment in comments %}
+        <p>{{ comment.content }}</p>
+      {% endfor %}
+    {% else %}
+      <p>아직 댓글이 없습니다.</p>
+    {% endif %} -->
+
     {% for comment in comments %}
       <p>{{ comment.content }}</p>
+    {% empty %}
+      <p>아직 댓글이 없습니다.ㅠㅠ</p>
     {% endfor %}
+
     <a href="/board/"><button>목록으로</button></a>
   </div>
   {% endblock %}

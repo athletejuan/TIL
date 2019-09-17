@@ -32,13 +32,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django_extensions',
+    'board',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'board',
+    'django.contrib.staticfiles',    
 ]
 
 MIDDLEWARE = [
@@ -120,3 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 1. 실제 파일 저장소의 경로를 지정
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 2. 업로드된 파일의 주소(URL을 만들어줌), default: ''
+MEDIA_URL = '/media/'

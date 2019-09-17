@@ -6,6 +6,7 @@ def create(request):
         article = Article()
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect(f'/board/{article.id}/')
     else:
@@ -21,6 +22,7 @@ def create(request):
 def index(request):
     articles = Article.objects.all()
     return render(request, 'board/index.html', {
+        # 'articles':reversed(articles)
         'articles':articles
     })
 
@@ -34,6 +36,7 @@ def detail(request, article_id):
     context = {
         'article':article,
         'comments':comments,
+        # 'num_of_comments':comments.count,
     }
     return render(request, 'board/detail.html', context)
 
@@ -42,6 +45,7 @@ def update(request, article_id):
     if request.method == "POST":
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect('/board/')
     else:

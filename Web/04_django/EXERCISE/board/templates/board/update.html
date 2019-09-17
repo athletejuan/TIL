@@ -2,7 +2,7 @@
 {% block title %} Update {% endblock %}
 {% block body %}
 <h1 align=center >Update</h1>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title" value="{{ article.title }}">
@@ -10,6 +10,7 @@
     <div>
         내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
     </div>
+    <input type="file" name='image' accept='image/*'>
     <div>
         <input type="submit">
         <a href="/board/{{ article.id }}/"><button>수정취소</button></a>
