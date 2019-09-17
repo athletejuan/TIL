@@ -7,6 +7,15 @@
 <div>
   내용: {{ article.content }}<br>
   작성시간: {{ article.created_at }}
+<hr>
+<h4>Comments</h4>
+<form action="/articles/{{article.id}}/create_comment/">
+  <input type="text" name='content'>
+  <input type="submit" value='댓글입력'>
+</form>
+{% for comment in comments %}
+  <p>{{ comment.content }}</p>
+{% endfor %}
 </div>
 <div>
   <a href="/articles/"><button>목록</button></a>

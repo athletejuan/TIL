@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Article
+from .models import Article, Comment
 
 def new(request):
     if request.method == "POST":
@@ -26,8 +26,10 @@ def index(request):
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
+    comments = article.comment_set.all()[::-1]
     return render(request, 'detail.html', {
         'article':article,
+        'comments':comments,
     })
 
 def edit(request, article_id):
@@ -46,3 +48,10 @@ def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
     return redirect('/articles/')
+
+def create_comment(request, article_id):
+    Comment.objects.create(
+        content = request.GET.get('content'),
+        article = Article.objects.get(id=article_id)
+    )
+    return redirect('articles:detail', article_id)
