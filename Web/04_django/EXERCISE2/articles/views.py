@@ -7,7 +7,7 @@ def new(request):
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
         article.save()
-        return redirect(f'/articles/{article.id}/')
+        return redirect('articles:detail', article.id)
     else:
         return render(request, 'new.html')
 
@@ -38,7 +38,7 @@ def edit(request, article_id):
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
         article.save()
-        return redirect('/articles/')
+        return redirect('articles:index')
     else:
         return render(request, 'edit.html', {
             'article':article
@@ -47,7 +47,7 @@ def edit(request, article_id):
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
-    return redirect('/articles/')
+    return redirect('articles:index')
 
 def create_comment(request, article_id):
     Comment.objects.create(
