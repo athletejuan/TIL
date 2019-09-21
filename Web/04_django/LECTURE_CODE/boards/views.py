@@ -15,9 +15,16 @@ def create(request):
     article.title = request.GET.get('title')
     article.content = request.GET.get('content')
     article.save()
-    return render(request, 'create.html', {
-        'article':article,
-    })
+    return render(request, 'create.html')
+    
+    # 2nd method
+    # title = request.GET.get('title')
+    # content = request.GET.get('content')
+    # article = Article(title=title, content=content)
+    # article.save()
+
+    # 3rd method
+    # Article.objects.create(title=title, content=content)
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -36,11 +43,12 @@ def update(request, article_id):
     article.title = request.GET.get('title')
     article.content = request.GET.get('content')
     article.save()
-    return render(request, 'update.html', {
-        'article':article,
-    })
+    return render(request, 'update.html')
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
-    return render(request, 'index.html')
+    articles = Article.objects.all()[::-1]
+    return render(request, 'index.html', {
+        'articles':articles
+    })
