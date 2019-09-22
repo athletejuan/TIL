@@ -8,7 +8,7 @@
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <a href="/boards/"><button>목록</button></a>
-    <a href="/boards/{{ article.id }}/edit/"><button>수정</button></a>
+    <a href="/boards/{{ article.id }}/update/"><button>수정</button></a>
     <a href="/boards/{{ article.id }}/delete/"><button>삭제</button></a>
 </div>
 {% endblock %}

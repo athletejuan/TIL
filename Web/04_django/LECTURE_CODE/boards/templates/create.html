@@ -2,6 +2,18 @@
 {% block title %}CREATE{% endblock %}
 {% block body %}
 <h1 align=center>CREATE</h1>
-<h3>새 글이 정상적으로 작성되었습니다.</h3>
-<a href="/boards/"><button>목록으로</button></a>
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div>
+            제목: <input type="text" name='title'>
+        </div>
+        <div>
+            내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</div>
 {% endblock %}

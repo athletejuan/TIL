@@ -2,6 +2,19 @@
 {% block title %}UPDATE{% endblock %}
 {% block body %}
 <h1 align=center>UPDATE</h1>
-<h3>글이 정상적으로 수정되었습니다.</h3>
-<a href="/boards/"><button>목록</button></a>
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div>
+            제목: <input type="text" name="title" value="{{ article.title }}">
+        </div>
+        <div>
+            내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+    <a href="/boards/{{ article.id }}/"><button>수정취소</button></a>
+</div>
 {% endblock %}
