@@ -5,6 +5,11 @@
 <div>
     <h3>No.{{ article.id}}: {{ article.title }}</h3>
     <p>내용: {{ article.content }}</p>
+    {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.image }}">
+    {% else %}
+        <img src="/media/noimages.jpg" alt="no_image">
+    {% endif %}
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
@@ -16,7 +21,7 @@
     {% if comments %}
         <br>
         {% for comment in comments %}
-            <p>{{ comment.content }}: <a href="/boards/{{ article.id }}/comment/{{ comment.id }}/delete/"><button>삭제</button></a></p>            
+            <p>{{ comment.content }} - <a href="/boards/{{ article.id }}/comment/{{ comment.id }}/delete/"><button>삭제</button></a></p>            
         {% endfor %}
     {% else %}
         <br>

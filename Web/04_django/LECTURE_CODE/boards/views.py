@@ -15,8 +15,9 @@ def create(request):
         article = Article()
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
         article.save()
-        return redirect('/boards/')
+        return redirect('articles:index')
     else:
         return render(request, 'create.html')
     
@@ -34,7 +35,7 @@ def detail(request, article_id):
     comments = article.comment_set.all()[::-1]
     return render(request, 'detail.html', {
         'article':article,
-        'comments':comments
+        'comments':comments,
     })
 
 # def edit(request, article_id):
@@ -48,15 +49,16 @@ def update(request, article_id):
     if request.method == "POST":
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
         article.save()
-        return redirect(f'/boards/{article.id}/')
+        return redirect('articles:detail', article.id)
     else:
         return render(request, 'update.html', {'article':article})
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
-    return redirect('/boards/')
+    return redirect('articles:index')
     
 def create_comment(request, article_id):
     # Comment.objects.create(
@@ -69,10 +71,10 @@ def create_comment(request, article_id):
     comment.content = request.GET.get('content')
     comment.article = Article.objects.get(id=article_id)
     comment.save()
-    return redirect(f'/boards/{article.id}/')
+    return redirect('articles:detail', article.id)
 
 def delete_comment(request, article_id, comment_id):
     article = Article.objects.get(id=article_id)
     comment = Comment.objects.get(id=comment_id)
     comment.delete()
-    return redirect(f'/boards/{article.id}/')
+    return redirect('articles:detail', article.id)
