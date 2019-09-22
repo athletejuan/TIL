@@ -125,3 +125,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 2. 업로드된 파일의 주소(URL을 만들어 줌), default = ''
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS=[os.path.join(BASE_DIR, 'boards', 'assets')]
