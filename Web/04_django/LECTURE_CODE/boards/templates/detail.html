@@ -7,6 +7,22 @@
     <p>내용: {{ article.content }}</p>
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
+    <hr>
+    <h4>Comment {% if comments %}/ {{ comments | length }}개의 댓글{% endif %}</h4>
+    <form action="/boards/{{ article.id }}/comment/">
+        Comment: <input type="text" name="content">
+        <input type="submit">
+    </form>
+    {% if comments %}
+        <br>
+        {% for comment in comments %}
+            <p>{{ comment.content }}: <a href="/boards/{{ article.id }}/comment/{{ comment.id }}/delete/"><button>삭제</button></a></p>            
+        {% endfor %}
+    {% else %}
+        <br>
+        No comment...ㅠㅠ
+    {% endif %}
+    <hr>
     <a href="/boards/"><button>목록</button></a>
     <a href="/boards/{{ article.id }}/update/"><button>수정</button></a>
     <a href="/boards/{{ article.id }}/delete/"><button>삭제</button></a>
