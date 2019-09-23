@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}CREATE{% endblock %}
+{% block body %}
+<h1 align=center>CREATE</h1>
+<div>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            제목: <input type="text" name='title'>
+        </div>
+        <div>
+            내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+        </div>
+        <input type="file" name="image" accept="image/*">
+        <div>
+            <input type="submit">
+            <a href="{% url 'articles:index' %}"><button>Cancel</button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}NEW{% endblock %}
+{% block body %}
+<h1 align=center>NEW</h1>
+<div>
+    <form action="/boards/create/">
+        <div>
+            제목: <input type="text" name='title'>
+        </div>
+        <div>
+            내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</div>
+{% endblock %}
