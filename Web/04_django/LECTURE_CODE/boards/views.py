@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Article, Comment
 
 def index(request):
-    articles = Article.objects.all()[::-1]
-    return render(request, 'index.html', {
-        'articles':articles,
-    })
+    articles = Article.objects.order_by('-pk')
+    context = {'articles':articles}
+    return render(request, 'index.html', context)
 
 # def new(request):
 #     return render(request, 'new.html')
@@ -32,11 +31,12 @@ def create(request):
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
-    comments = article.comment_set.all()[::-1]
-    return render(request, 'detail.html', {
+    comments = article.comment_set.order_by('-pk')
+    context = {
         'article':article,
         'comments':comments,
-    })
+    }
+    return render(request, 'detail.html', context)
 
 # def edit(request, article_id):
 #     article = Article.objects.get(id=article_id)
@@ -53,14 +53,17 @@ def update(request, article_id):
         article.save()
         return redirect('articles:detail', article.id)
     else:
-        return render(request, 'update.html', {'article':article})
+        context = {
+            'article':article,
+        }
+        return render(request, 'update.html', context)
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
     return redirect('articles:index')
     
-def create_comment(request, article_id):
+def comment_create(request, article_id):
     # Comment.objects.create(
     #     content = request.GET.get('content'),
     #     article = Article.objects.get(id=article_id)
@@ -73,7 +76,7 @@ def create_comment(request, article_id):
     comment.save()
     return redirect('articles:detail', article.id)
 
-def delete_comment(request, article_id, comment_id):
+def comment_delete(request, article_id, comment_id):
     article = Article.objects.get(id=article_id)
     comment = Comment.objects.get(id=comment_id)
     comment.delete()

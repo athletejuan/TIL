@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}INDEX{% endblock %}
 {% block body %}
-<h1 align=center>INDEX</h1>
-<a href="{% url 'articles:create' %}"><button>새 글</button></a>
+<div class="jumbotron">
+        <h1 class="display-4">Juan's BOARD</h1>
+        <p class="lead">This is My Board</p>
+        <hr class="my-4">
+        <p>Whatever you want to say</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'articles:create' %}" role="button">새 글</a>
+      </div>
+<!-- <h1 align=center>INDEX</h1> -->
+<!-- <a href="{% url 'articles:create' %}"><button class="btn btn-dark">새 글</button></a> -->
 <div>
     {% for article in articles %}
     <div>
         <a href="{% url 'articles:detail' article.id %}">No. {{ article.id }}: {{ article.title }}</a>    
-        <p>작성시간: {{ article.created_at }}</p>
-        <a href="{% url 'articles:update' article.id %}"><button>수정</button></a>
-        <a href="{% url 'articles:delete' article.id %}"><button>삭제</button></a>
+        <p>작성시간: {{ article.created_at }} | <a href="{% url 'articles:delete' article.id %}"><button class="btn btn-light">삭제</button></a></p>
+        <!-- <a href="{% url 'articles:update' article.id %}"><button class="btn btn-light">수정</button></a> -->
+        <hr>
     </div>
     {% endfor %}
 </div>
