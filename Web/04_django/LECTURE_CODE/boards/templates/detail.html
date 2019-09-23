@@ -14,22 +14,22 @@
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
     <h4>Comment {% if comments %}/ {{ comments | length }}개의 댓글{% endif %}</h4>
-    <form action="/boards/{{ article.id }}/comment/">
+    <form action="{% url 'articles:comment' article.id %}">
         Comment: <input type="text" name="content">
         <input type="submit">
     </form>
     {% if comments %}
         <br>
         {% for comment in comments %}
-            <p>{{ comment.content }} - <a href="/boards/{{ article.id }}/comment/{{ comment.id }}/delete/"><button>삭제</button></a></p>            
+            <p>{{ comment.content }} - <a href="{% url 'articles:delete_comment' article.id comment.id %}"><button>삭제</button></a></p>            
         {% endfor %}
     {% else %}
         <br>
         No comment...ㅠㅠ
     {% endif %}
     <hr>
-    <a href="/boards/"><button>목록</button></a>
-    <a href="/boards/{{ article.id }}/update/"><button>수정</button></a>
-    <a href="/boards/{{ article.id }}/delete/"><button>삭제</button></a>
+    <a href="{% url 'articles:index' %}"><button>목록</button></a>
+    <a href="{% url 'articles:update' article.id %}"><button>수정</button></a>
+    <a href="{% url 'articles:delete' article.id %}"><button>삭제</button></a>
 </div>
 {% endblock %}

@@ -16,6 +16,6 @@
             <input type="submit">
         </div>
     </form>
-    <a href="/boards/{{ article.id }}/"><button>Cancel</button></a>
+    <a href="{% url 'articles:detail' article.id %}"><button>Cancel</button></a>
 </div>
 {% endblock %}
