@@ -1,10 +1,11 @@
 from django import forms
+from .models import Article, Comment
 
-class ArticleForm(forms.Form):
+class ArticleForm(forms.ModelForm):
     title = forms.CharField(
         label="제목",
         widget=forms.TextInput(attrs={
-            'placeholder': 'Insert Title'
+            'placeholder': 'Enter a Title'
         })
     )
     content = forms.CharField(
@@ -13,6 +14,32 @@ class ArticleForm(forms.Form):
             'class': 'input-content',
             'rows':5,
             'cols':50,
-            'placeholder':'Fill in this Box',
+            'placeholder':'Enter the content',
         })
     )
+
+    class Meta:
+        model = Article
+        fields = ['title','content',]
+
+# class ArticleForm(forms.Form):
+#     title = forms.CharField(
+#         label="제목",
+#         widget=forms.TextInput(attrs={
+#             'placeholder': 'Insert Title'
+#         })
+#     )
+#     content = forms.CharField(
+#         label="내용",
+#         widget=forms.Textarea(attrs={
+#             'class': 'input-content',
+#             'rows':5,
+#             'cols':50,
+#             'placeholder':'Fill in this Box',
+#         })
+#     )
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content',]

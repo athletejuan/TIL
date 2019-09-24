@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}CREATE{% endblock %}
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if request.resolver_match.url_name == "create" %}
+        <h1 class="display-4">CREATE</h1>
+        <p class="lead">Create a New Article</p>
+        {% else %}
+        <h1 class="display-4">UPDATE</h1>
+        <p class="lead">Edit your Article</p>
+        {% endif %}
+    </div>
+</div>
+<!-- <h1 align=center>CREATE</h1> -->
+<div>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
+        <!-- {{ form.as_p }} -->
+        <input type="file" name="image" accept="image/*">
+        <!-- <div>
+            <input type="submit" value="등록" class="btn btn-dark">
+        </div> -->
+    </form>
+    {% if request.resolver_match.url_name == "create" %}
+    <a href="{% url 'articles:index' %}"><button class="btn btn-dark">목록으로</button></a>
+    {% else %}
+    <a href="{% url 'articles:detail' article.id%}"><button class="btn btn-dark">목록으로</button></a>
+    {% endif %}
+</div>
+{% endblock %}
