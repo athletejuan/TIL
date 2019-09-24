@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article, Comment
+from .forms import ArticleForm
 
 def index(request):
     articles = Article.objects.order_by('-pk')
@@ -11,14 +12,26 @@ def index(request):
 
 def create(request):
     if request.method == "POST":
-        article = Article()
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.image = request.FILES.get('image')
-        article.save()
-        return redirect('articles:index')
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            article = Article.objects.create(title=title, content=content)
+            return redirect('articles:detail', article.id)
     else:
-        return render(request, 'create.html')
+        form = ArticleForm()
+        return render(request, 'create.html', {'form':form})
+
+# def create(request):
+#     if request.method == "POST":
+#         article = Article()
+#         article.title = request.POST.get('title')
+#         article.content = request.POST.get('content')
+#         article.image = request.FILES.get('image')
+#         article.save()
+#         return redirect('articles:index')
+#     else:
+#         return render(request, 'create.html')
     
     # 2nd method
     # title = request.GET.get('title')
@@ -30,7 +43,8 @@ def create(request):
     # Article.objects.create(title=title, content=content)
 
 def detail(request, article_id):
-    article = Article.objects.get(id=article_id)
+    article = get_object_or_404(Article, id=article_id)
+    # article = Article.objects.get(id=article_id)
     comments = article.comment_set.order_by('-pk')
     context = {
         'article':article,
@@ -45,23 +59,41 @@ def detail(request, article_id):
 #     })
 
 def update(request, article_id):
-    article = Article.objects.get(id=article_id)
+    article = get_object_or_404(Article, id=article_id)
+    # article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.image = request.FILES.get('image')
-        article.save()
-        return redirect('articles:detail', article.id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article.title = form.cleaned_data.get('title')
+            article.content = form.cleaned_data.get('content')
+            article.save()
+            return redirect('articles:detail', article.id)
     else:
-        context = {
-            'article':article,
-        }
-        return render(request, 'update.html', context)
+        form = ArticleForm(initial=article.__dict__)
+        return render(request, 'update.html', {'form':form})
+
+# def update(request, article_id):
+#     article = Article.objects.get(id=article_id)
+#     if request.method == "POST":
+#         article.title = request.POST.get('title')
+#         article.content = request.POST.get('content')
+#         article.image = request.FILES.get('image')
+#         article.save()
+#         return redirect('articles:detail', article.id)
+#     else:
+#         context = {
+#             'article':article,
+#         }
+#         return render(request, 'update.html', context)
 
 def delete(request, article_id):
-    article = Article.objects.get(id=article_id)
-    article.delete()
-    return redirect('articles:index')
+    if request.method == "POST":
+        article = get_object_or_404(Article, id=article_id)
+        # article = Article.objects.get(id=article_id)
+        article.delete()
+        return redirect('articles:index')
+    else:
+        return redirect('articles:index')
     
 def comment_create(request, article_id):
     # Comment.objects.create(
