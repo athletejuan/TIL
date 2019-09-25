@@ -1,10 +1,22 @@
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    image = ProcessedImageField(
+        upload_to = '',                             # 저장 위치
+        processors = [ResizeToFill(200, 300)],      # 처리할 작업 목록
+        format = 'JPEG',                            # 저장 포멧
+        options = {'quality':90},                   # 옵션(이미지 품질 수치)
+    )
+    # image = models.ImageField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-pk']
 
     def __str__(self):
         return f'{self.id}: {self.title}'
@@ -16,3 +28,6 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     # models.OneToOne()
     # models.ManyToMany()
+
+    class Meta:
+        ordering = ['-pk']

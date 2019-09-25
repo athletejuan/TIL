@@ -6,20 +6,28 @@
 </div>
 <div>
   내용: {{ article.content }}<br>
-  작성시간: {{ article.created_at }}
+  이미지:
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% else %}
+    <img src="/media/noimages.jpg" alt="no_image">
+  {% endif %}
+  수정시간: {{ article.updated_at }}
 <hr>
-<h4>Comments</h4>
-<form action="/articles/{{article.id}}/create_comment/">
+<h4>Comments {% if comments %}/ {{ comments|length }}개의 댓글이 있습니다. {% endif %}</h4>
+<form action="/articles/{{ article.id }}/comments/create/">
   <input type="text" name='content'>
   <input type="submit" value='댓글입력'>
 </form>
 {% for comment in comments %}
-  <p>{{ comment.content }}</p>
+  <p>{{ comment.content }} - <a href="/articles/{{ article.id }}/comments/{{ comment.id }}/delete/"><button>댓글 삭제</button></a></p>
+{% empty %}
+  <p>아직 댓글이 없습니다.</p>
 {% endfor %}
 </div>
 <div>
   <a href="/articles/"><button>목록</button></a>
-  <a href="/articles/{{article.id}}/edit"><button>수정</button></a>
+  <a href="/articles/{{article.id}}/edit/"><button>수정</button></a>
   <a href="/articles/{{article.id}}/delete/"><button>삭제</button></a>
 </div>
 {% endblock %}
