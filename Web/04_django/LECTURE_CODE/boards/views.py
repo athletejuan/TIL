@@ -73,7 +73,7 @@ def update(request, article_id):
     else:
         form = ArticleForm(instance=article)
         # form = ArticleForm(initial=article.__dict__)
-    return render(request, 'form.html', {'form':form}, {'article':article})
+        return render(request, 'form.html', {'form':form,'article':article})
 
 # def update(request, article_id):
 #     article = Article.objects.get(id=article_id)

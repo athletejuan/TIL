@@ -10,7 +10,7 @@
 </div>
 <!-- <h1 align=center>INDEX</h1> -->
 <!-- <a href="{% url 'articles:create' %}"><button class="btn btn-dark">새 글</button></a> -->
-<div>
+<div class="container">
     {% for article in articles %}
     <div>
         <a href="{% url 'articles:detail' article.id %}">No. {{ article.id }}: {{ article.title }}</a>    
