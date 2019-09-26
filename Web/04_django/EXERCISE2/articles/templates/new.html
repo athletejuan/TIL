@@ -3,16 +3,11 @@
 <h1 align=center>New</h1>
 <form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  <div>
-    제목: <input type="text" name="input_title">
-  </div>
-  <div>
-    내용: <textarea name="input_content" cols="30" rows="10"></textarea>
-  </div>
+  {{ form.as_p }}
     이미지: <input type="file" name="image" accept="image/*">
   <div>
     <button type="submit">입력</button>
-    <a href="/articles/"><button>작성취소</button></a>
   </div>
 </form>
+<a href="{% url 'articles:index' %}"><button>작성취소</button></a>
 {% endblock %}

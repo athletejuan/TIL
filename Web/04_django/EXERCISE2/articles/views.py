@@ -1,16 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article, Comment
+from .forms import ArticleForm
 
 def new(request):
     if request.method == "POST":
-        article = Article()
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.image = request.FILES.get('image')
-        article.save()
-        return redirect('articles:detail', article.id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            image = form.cleaned_data.get('image')
+            article = Article.objects.create(title=title, content=content)
+            return redirect('articles:detail', article.id)
     else:
-        return render(request, 'new.html')
+        form = ArticleForm()
+        return render(request, 'new.html', {'form':form})
 
 # def create(request):
 #     article = Article()
@@ -34,16 +37,21 @@ def detail(request, article_id):
     })
 
 def edit(request, article_id):
-    article = Article.objects.get(id=article_id)
+    article = get_object_or_404(Article, id=article_id)
+    # article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.image = request.FILES.get('image')
-        article.save()
-        return redirect('articles:detail', article_id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article.title = form.cleaned_data.get('title')
+            article.content = form.cleaned_data.get('content')
+            article.image = form.cleaned_data.get('image')
+            article.save()
+            return redirect('articles:detail', article_id)
     else:
+        form = ArticleForm()
         return render(request, 'edit.html', {
-            'article':article
+            'form':form,
+            'article':article,
         })
 
 def delete(request, article_id):
