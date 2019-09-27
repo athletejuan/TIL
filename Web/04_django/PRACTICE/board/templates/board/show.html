@@ -1,0 +1,17 @@
+{% extends 'board/base.html' %}
+{% block title %}SHOW{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Show me the Article</h1>
+    <hr>
+    <h3>{{ article.id }}. {{ article.title }}</h3>
+    <p>내용: {{ article.content }}</p>
+    <p>작성시간: {{ article.created }}</p>
+    <p>수정시간: {{ article.updated }}</p>
+</div>
+<div class="container">
+    <a href="/board/"><button>목록</button></a>
+    <a href="/board/{{ article.id }}/edit/"><button>수정</button></a>
+    <a href="/board/{{ article.id }}/delete/"><button>삭제</button></a>
+</div>
+{% endblock %}

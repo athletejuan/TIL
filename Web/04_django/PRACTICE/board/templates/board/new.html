@@ -1,16 +1,18 @@
 {% extends 'board/base.html' %}
-{% block title %} New Article {% endblock title %}
+{% block title %} NEW {% endblock title %}
 {% block body %}
 <h1>글을 쓰자</h1>
-<form action="/board/articles/create/">
+<form action="" method="POST">
+    {% csrf_token %}
     <div>
-        <input type="text" name="input_title">
+        제목: <input type="text" name="input_title">
     </div>
     <div>
-        <textarea name="input_content" id="" cols="30" rows="10"></textarea>
+        내용: <textarea name="input_content" id="" cols="30" rows="10"></textarea>
     </div>
     <div>
         <input type="submit">
     </div>
 </form>
+<a href="/board/"><button>목록보기</button></a>
 {% endblock body %}

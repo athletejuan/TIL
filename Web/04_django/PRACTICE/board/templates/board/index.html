@@ -1,15 +1,15 @@
 {% extends 'board/base.html' %}
-{% block title%} Board Main {% endblock %}
+{% block title%} MAIN{% endblock %}
 {% block body %}
 <h1> Board Index </h1>
-<div>
-<a href="board/articles/new"/>새 글</a>
+<div class="container">
+<a href="new/"><button>새 글</button></a>
 </div>
-<div>
+<div class="container">
 <ul>
     {% for article in articles %}
         <li>
-            <a href="board/articles/{{article.id}}/">{{article.title}}</a>
+            <a href="{{article.id}}/">No.{{ article.id }}. {{article.title}}</a>
         </li>
     {% endfor %}
 </ul>
