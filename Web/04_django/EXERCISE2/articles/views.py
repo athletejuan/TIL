@@ -6,14 +6,15 @@ def new(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data.get('title')
-            content = form.cleaned_data.get('content')
-            image = form.cleaned_data.get('image')
-            article = Article.objects.create(title=title, content=content)
+            article = form.save()
+            # title = form.cleaned_data.get('title')
+            # content = form.cleaned_data.get('content')
+            # image = form.cleaned_data.get('image')
+            # article = Article.objects.create(title=title, content=content)
             return redirect('articles:detail', article.id)
     else:
         form = ArticleForm()
-        return render(request, 'new.html', {'form':form})
+        return render(request, 'form.html', {'form':form})
 
 # def create(request):
 #     article = Article()
@@ -40,16 +41,17 @@ def edit(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     # article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, instance=Article)
         if form.is_valid():
-            article.title = form.cleaned_data.get('title')
-            article.content = form.cleaned_data.get('content')
-            article.image = form.cleaned_data.get('image')
-            article.save()
+            article = form.save()
+            # article.title = form.cleaned_data.get('title')
+            # article.content = form.cleaned_data.get('content')
+            # article.image = form.cleaned_data.get('image')
+            # article.save()
             return redirect('articles:detail', article_id)
     else:
-        form = ArticleForm()
-        return render(request, 'edit.html', {
+        form = ArticleForm(instance=article)
+        return render(request, 'form.html', {
             'form':form,
             'article':article,
         })

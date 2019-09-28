@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if request.resolver_match.url_name == "new" %}
+        <h1 class="display-4">New</h1>
+        <p class="lead">Create a New Article</p>
+        {% else %}
+        <h1 class="display-4">Edit</h1>
+        <p class="lead">Edit your Article</p>
+        {% endif %}
+    </div>
+</div>
+<div class='container'>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    이미지: <input type="file" name="image" accept="image/*"> <br>
+    {% bootstrap_button "등록" button_type='submit' button_class='btn btn-warning' %}
+    <!-- {{ form.as_p }} -->
+    <!-- <div>
+        <button type="submit">입력</button>
+    </div> -->
+</form>
+{% if request.resolver_match.url_name == 'new' %}
+<a href="{% url 'articles:index' %}"><button class='btn btn-warning' >작성취소</button></a>
+{% else %}
+<a href="{% url 'articles:detail' article.id %}"><button class='btn btn-warning'>수정취소</button></a>
+{% endif %}
+</div>
+{% endblock %}
