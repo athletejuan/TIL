@@ -16,10 +16,11 @@ lotto = sorted(random.sample(nums, 6))
 myfortune = [3, 15, 19, 23, 34, 45]
 print(myfortune)
 
-# match = set(winner)&set(myfortune)
-match = set(winner)&set(lotto)
+match = set(winner)&set(myfortune)
+# match = set(winner)&set(lotto)
 
 cnt = len(match)
+print(cnt)
 
 if cnt == 6:
     print('대박! 1등')
