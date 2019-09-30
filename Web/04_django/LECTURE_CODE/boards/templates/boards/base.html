@@ -12,6 +12,21 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <div class="container">
+        {% if user.is_authenticated %}
+        <h1>Hello, {{ user.username }}</h1>
+        <form action="{% url 'accounts:logout' %}" method="POST">
+            {% csrf_token %}                
+            <input class="btn btn-light btn-lg" type="submit" value="logout">
+        </form>
+        {% else %}
+            <h1>
+                <a class="btn btn-dark btn-lg" href="{% url 'accounts:login' %}" role="button">LogIn</a>
+                <a class="btn btn-dark btn-lg" href="{% url 'accounts:signup' %}" rolr="button">SignUp</a>
+            </h1>
+        {% endif %}
+        <hr>
+    </div>
     {% block body %}
     {% endblock %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

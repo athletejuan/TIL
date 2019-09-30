@@ -1,12 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'boards/base.html' %}
 {% block title %}INDEX{% endblock %}
 {% block body %}
 <div class="jumbotron">
-    <h1 class="display-4">Juan's BOARD</h1>
-    <p class="lead">This is My Board</p>
-    <hr class="my-4">
-    <p>Whatever you want to say</p>
-    <a class="btn btn-primary btn-lg" href="{% url 'articles:create' %}" role="button">새 글</a>
+    <div class="container">
+        <h1 class="display-4">Juan's BOARD</h1>
+        <p class="lead">This is My Board</p>
+        <hr class="my-4">
+        <p>Whatever you want to say</p>
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{% url 'articles:create' %}" role="button">새 글</a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}" role="button">Log In</a>
+        {% endif %}
+    </div>
 </div>
 <!-- <h1 align=center>INDEX</h1> -->
 <!-- <a href="{% url 'articles:create' %}"><button class="btn btn-dark">새 글</button></a> -->

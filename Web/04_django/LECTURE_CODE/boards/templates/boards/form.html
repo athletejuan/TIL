@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'boards/base.html' %}
 {% load bootstrap4 %}
 
 {% block title %}CREATE{% endblock %}
@@ -19,9 +19,9 @@
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
+        이미지: <input type="file" name="image" accept="image/*"> <br>
         {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
         <!-- {{ form.as_p }} -->
-        <input type="file" name="image" accept="image/*">
         <!-- <div>
             <input type="submit" value="등록" class="btn btn-dark">
         </div> -->

@@ -5,7 +5,7 @@ from .forms import ArticleForm
 def index(request):
     articles = Article.objects.order_by('-pk')
     context = {'articles':articles}
-    return render(request, 'index.html', context)
+    return render(request, 'boards/index.html', context)
 
 # def new(request):
 #     return render(request, 'new.html')
@@ -21,7 +21,7 @@ def create(request):
             return redirect('articles:detail', article.id)
     else:
         form = ArticleForm()
-        return render(request, 'form.html', {'form':form})
+        return render(request, 'boards/form.html', {'form':form})
 
 # def create(request):
 #     if request.method == "POST":
@@ -51,7 +51,7 @@ def detail(request, article_id):
         'article':article,
         'comments':comments,
     }
-    return render(request, 'detail.html', context)
+    return render(request, 'boards/detail.html', context)
 
 # def edit(request, article_id):
 #     article = Article.objects.get(id=article_id)
@@ -73,7 +73,7 @@ def update(request, article_id):
     else:
         form = ArticleForm(instance=article)
         # form = ArticleForm(initial=article.__dict__)
-        return render(request, 'form.html', {'form':form,'article':article})
+        return render(request, 'boards/form.html', {'form':form,'article':article})
 
 # def update(request, article_id):
 #     article = Article.objects.get(id=article_id)

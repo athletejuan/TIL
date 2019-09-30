@@ -17,6 +17,10 @@ class ArticleForm(forms.ModelForm):
             'placeholder':'Enter the content',
         })
     )
+    # image = forms.ImageField(
+    #     label="이미지",
+    #     widget=forms.FileInput()
+    # )
 
     class Meta:
         model = Article
