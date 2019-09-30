@@ -7,7 +7,7 @@ def new(request):
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
         article.save()
-        return redirect(f'/board/{article.id}/')
+        return redirect('board:detail', article.id)
     else:
         return render(request, 'new.html')
 
@@ -36,7 +36,7 @@ def edit(request, article_id):
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
         article.save()
-        return redirect('/board/')
+        return redirect('board:detail', article.id)
     else:
         return render(request, 'edit.html', {
             'article':article
@@ -45,4 +45,4 @@ def edit(request, article_id):
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
-    return redirect('/board/')
+    return redirect('board:index')

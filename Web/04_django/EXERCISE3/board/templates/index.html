@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block title %} INDEX {% endblock %}
 {% block body %}
-<h1 align=center>INDEX</h1>
-<div>
-    <a href="/board/new/">새 글</a>
+<div class="jumbotron">
+    <div class='container'>
+        <h1 class="display-4">BBOARD!</h1>
+        <p class="lead">Index of this board</p>
+        <hr class="my-4">
+        <p>HTML / CSS</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'board:new' %}" role="button">New Art</a>
+    </div>
 </div>
 <div>
-    <ul>
-        {% for article in articles %}
-        <li>
-            <a href="/board/{{article.id}}/">No.{{ article.id }}: {{ article.title }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class='container'>
+        <ul>
+            {% for article in articles %}
+            <li>
+                <a href="{% url 'board:detail' article.id %}">No.{{ article.id }}: {{ article.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
