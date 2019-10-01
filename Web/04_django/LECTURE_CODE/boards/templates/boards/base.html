@@ -15,9 +15,15 @@
     <div class="container">
         {% if user.is_authenticated %}
         <h1>Hello, {{ user.username }}</h1>
-        <form action="{% url 'accounts:logout' %}" method="POST">
+        <a class="btn btn-light btn-lg" href="{% url 'accounts:edit' %}" role="button">Edit Account</a>
+
+        <form action="{% url 'accounts:logout' %}" method="POST" style='display:inline'>
             {% csrf_token %}                
             <input class="btn btn-light btn-lg" type="submit" value="logout">
+        </form>
+        <form action="{% url 'accounts:delete' %}" method='POST' style='display:inline'>
+            {% csrf_token %}
+            <input class="btn btn-dark btn-lg" type="submit" value="Quit">
         </form>
         {% else %}
             <h1>
