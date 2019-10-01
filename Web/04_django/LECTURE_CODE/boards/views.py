@@ -16,7 +16,9 @@ def create(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article = form.save()
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()
             # title = form.cleaned_data.get('title')
             # content = form.cleaned_data.get('content')
             # article = Article.objects.create(title=title, content=content)
@@ -64,19 +66,22 @@ def detail(request, article_id):
 @login_required
 def update(request, article_id):
     article = get_object_or_404(Article, id=article_id)
+    if article.user == request.user:
     # article = Article.objects.get(id=article_id)
-    if request.method == "POST":
-        form = ArticleForm(request.POST, instance=article)
-        if form.is_valid():
-            article = form.save()
-            # article.title = form.cleaned_data.get('title')
-            # article.content = form.cleaned_data.get('content')
-            # article.save()
-            return redirect('articles:detail', article.id)
+        if request.method == "POST":
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                article = form.save()
+                # article.title = form.cleaned_data.get('title')
+                # article.content = form.cleaned_data.get('content')
+                # article.save()
+                return redirect('articles:detail', article.id)
+        else:
+            form = ArticleForm(instance=article)
     else:
-        form = ArticleForm(instance=article)
+        return redirect('articles:index')
         # form = ArticleForm(initial=article.__dict__)
-        return render(request, 'boards/form.html', {'form':form,'article':article})
+    return render(request, 'boards/form.html', {'form':form,'article':article})
 
 # def update(request, article_id):
 #     article = Article.objects.get(id=article_id)
@@ -93,11 +98,14 @@ def update(request, article_id):
 #         return render(request, 'update.html', context)
 
 def delete(request, article_id):
-    if request.method == "POST":
-        article = get_object_or_404(Article, id=article_id)
-        # article = Article.objects.get(id=article_id)
-        article.delete()
-        return redirect('articles:index')
+    article = get_object_or_404(Article, id=article_id)
+    if article.user == request.user:
+        if request.method == "POST":
+            # article = Article.objects.get(id=article_id)
+            article.delete()
+            return redirect('articles:index')
+        else:
+            return redirect('articles:detail', article.id)
     else:
         return redirect('articles:index')
     
