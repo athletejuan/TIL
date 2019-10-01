@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'articles/base.html' %}
 {% block body %}
-<form action="/articles/create/" method='GET'>
+<h1 class='text-center'>NEW</h1>
+<form action="" method='POST' class='container'>
+  {% csrf_token %}
   <div>
     제목: <input type="text" name="input_title">
   </div>

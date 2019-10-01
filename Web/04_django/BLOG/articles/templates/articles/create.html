@@ -1,0 +1,11 @@
+{% extends 'articles/base.html' %}
+{% block body %}
+<div class='container'>
+  <h1>성공적으로 글이 작성되었습니다.</h1>
+  제목: {{ article.title }}
+  내용: {{ article.content }}
+  작성시간: {{ article.created_at }}
+  <!-- 수정시간: {{ article.updated_at }} -->
+</div>
+{% endblock %}
+</html>

@@ -1,0 +1,10 @@
+{% extends 'articles/base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<h1 class='text-center'>Sign Up</h1>
+<form action="" method='POST' class='container'>
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% bootstrap_button "등록" button_type='submit' button_class='btn btn-success' %}
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'articles/base.html' %}
+{% block body %}
+<h1 class='text-center'>Detail</h1>
+<div class='container'>
+    <p><b>No.{{ article.id }} - {{ article.title }}</b></p>
+    <p>내용: {{ article.content }}</p>
+    <p>작성: {{ article.created_at }}</p>
+    <p>수정: {{ article.updated_at }}</p>
+
+    <a href="{% url 'articles:index' %}">목록</a>
+    {% if article.user == request.user %}
+    <form action="{% url 'articles:delete' article.id %}" method='POST'>
+        <input type="submit" value='삭제'>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

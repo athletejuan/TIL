@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from datetime import datetime
 from .models import Article
-
-blogs = []
+from django.contrib.auth.decorators import login_required
 
 # class Article:
 #     def __init__(self, title, content, created_at):
@@ -16,17 +14,28 @@ blogs = []
 def index(request):    
     # 지금까지 작성된 글을 보여줌    
     articles = Article.objects.all()
-    return render(request, 'index.html', {
+    return render(request, 'articles/index.html', {
     'articles': articles,
     })
-
+    
+@login_required
 def new(request):
-    return render(request, 'new.html')
+    if request.method == 'POST':
+        article = Article()
+        article.title = request.POST.get('input_title')
+        article.content = request.POST.get('input_content')
+        article.img_url = request.POST.get('img_url')
+        article.user = request.user
+        article.save()
+        return redirect('articles:index')
+    else:
+        return render(request, 'articles/new.html')
 
-def create(request):
-    article = Article()
-    article.title = request.GET.get('input_title')
-    article.content = request.GET.get('input_content')
-    article.img_url = request.GET.get('img_url')
-    article.save()
-    return redirect('/')
+def detail(request, article_id):
+    article = Article.objects.get(id=article_id)
+    return render(request, 'articles/detail.html', {'article':article})
+
+def delete(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.delete()
+    return redirect('articles:index')
