@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Article, Comment
 from .forms import ArticleForm
 
@@ -10,6 +11,7 @@ def index(request):
 # def new(request):
 #     return render(request, 'new.html')
 
+@login_required
 def create(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
@@ -59,6 +61,7 @@ def detail(request, article_id):
 #         'article':article,
 #     })
 
+@login_required
 def update(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     # article = Article.objects.get(id=article_id)

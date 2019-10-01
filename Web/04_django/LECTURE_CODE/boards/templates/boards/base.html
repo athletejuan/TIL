@@ -16,7 +16,7 @@
         {% if user.is_authenticated %}
         <h1>Hello, {{ user.username }}</h1>
         <a class="btn btn-light btn-lg" href="{% url 'accounts:edit' %}" role="button">Edit Account</a>
-
+        <a class="btn btn-light btn-lg" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
         <form action="{% url 'accounts:logout' %}" method="POST" style='display:inline'>
             {% csrf_token %}                
             <input class="btn btn-light btn-lg" type="submit" value="logout">

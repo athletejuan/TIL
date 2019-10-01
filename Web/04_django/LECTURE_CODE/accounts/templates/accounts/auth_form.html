@@ -1,0 +1,21 @@
+{% extends 'boards/base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Password{% endblock %}
+{% block body %}
+{% if request.resolver_match.url_name == 'signup' %}
+<h1 class="text-center">Sign Up</h1>
+{% elif request.resolver_match.url_name == 'login' %}
+<h1 class="text-center">Log In</h1>
+{% elif request.resolver_match.url_name == 'change_password' %}
+<h1 class="text-center">Change Password</h1>
+{% else %}
+<h1 class="text-center">Edit Account</h1>
+{% endif %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
+</form>
+
+{% endblock %}
