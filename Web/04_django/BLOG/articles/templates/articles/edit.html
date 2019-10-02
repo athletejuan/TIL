@@ -2,13 +2,16 @@
 {% block body %}
 <h1 class='text-center'>Edit</h1>
 <hr>
-<form action="" method='POST' class="container">
+<form action="" method='POST' class="container" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title" value='{{ article.title }}'>
     </div>
     <div>
         내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
+    </div>
+    <div>
+        이미지: <input type="file" name='image' accept="image/*">
     </div>
     <div>
         <button type="submit" class='btn btn-warning'>수정</button>

@@ -1,10 +1,15 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 {% block body %}
 <h1 class='text-center'>Detail</h1>
 <div class='container'>
     <h3><b>No.{{ article.id }} - {{ article.title }}</b></h3><br>
     <p>내용: {{ article.content }}</p>
-    <p>이미지: <img src="{{ article.img_url }}" alt=""></p>
+    {% if article.image_url %}
+    <p>이미지: <img src="{{ article.image_url.url }}" alt="{{ article.image_url }}"></p>
+    {% else %}
+    <p>이미지: <img src="/media/noimages.jpg" alt="no_image"></p>
+    {% endif %}
     <p>작성: {{ article.created_at }}</p>
     <p>수정: {{ article.updated_at }}</p>
     <hr>

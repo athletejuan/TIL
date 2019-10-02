@@ -24,7 +24,7 @@ def new(request):
         article = Article()
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
-        article.img_url = request.POST.get('img_url')
+        article.image_url = request.FILES.get('image')
         article.user = request.user
         article.save()
         return redirect('articles:index')
@@ -36,11 +36,14 @@ def detail(request, article_id):
     comments = article.comment_set.order_by('-id')
     return render(request, 'articles/detail.html', {'article':article, 'comments':comments})
 
+@login_required
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == 'POST':
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
+        article.image_url = request.FILES.get('image')
+        article.user = request.user
         article.save()
         return redirect('articles:detail', article.id)
     else:

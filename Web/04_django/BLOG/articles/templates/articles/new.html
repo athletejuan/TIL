@@ -1,7 +1,8 @@
 {% extends 'articles/base.html' %}
 {% block body %}
 <h1 class='text-center'>NEW</h1>
-<form action="" method='POST' class='container'>
+<hr>
+<form action="" method='POST' class='container' enctype="multipart/form-data">
   {% csrf_token %}
   <div>
     제목: <input type="text" name="input_title"><br>
@@ -10,7 +11,7 @@
     내용: <textarea name="input_content" cols="30" rows="10"></textarea><br>
   </div>
   <div>
-    이미지: <input type="text" name="img_url">
+    이미지: <input type="file" name="image" accept="image/*">
   </div>
   <div>
     <button type='submit' class='btn btn-warning'>입력</button>

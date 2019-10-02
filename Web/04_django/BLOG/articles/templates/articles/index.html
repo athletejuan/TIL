@@ -1,7 +1,9 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 {% block body %}
 <div class='container'>
   <h1 class="text-center">INDEX</h1>
+  <img src="{% static 'hphk.png' %}" alt="hphk">
   <div>
     {% if user.is_authenticated %}
     <a href="/articles/new/" class='btn btn-warning btn-lg'>새 글</a>
