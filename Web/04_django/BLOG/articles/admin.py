@@ -1,5 +1,5 @@
 from django.contrib import admin
-from articles.models import Article 
+from .models import Article, Comment
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = [
@@ -7,3 +7,9 @@ class ArticleAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Article, ArticleAdmin)
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = [
+        'content', 'created_at', 'updated_at',
+    ]
+admin.site.register(Comment, CommentAdmin)

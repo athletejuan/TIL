@@ -1,0 +1,18 @@
+{% extends 'articles/base.html' %}
+{% block body %}
+<h1 class='text-center'>Edit</h1>
+<hr>
+<form action="" method='POST' class="container">
+    {% csrf_token %}
+    <div>
+        제목: <input type="text" name="input_title" value='{{ article.title }}'>
+    </div>
+    <div>
+        내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
+    </div>
+    <div>
+        <button type="submit" class='btn btn-warning'>수정</button>
+        <a href="{% url 'articles:detail' article.id %}" class='btn btn-warning'>돌아가기</a>
+    </div>
+</form>
+{% endblock %}

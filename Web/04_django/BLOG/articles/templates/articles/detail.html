@@ -2,15 +2,33 @@
 {% block body %}
 <h1 class='text-center'>Detail</h1>
 <div class='container'>
-    <p><b>No.{{ article.id }} - {{ article.title }}</b></p>
+    <h3><b>No.{{ article.id }} - {{ article.title }}</b></h3><br>
     <p>내용: {{ article.content }}</p>
+    <p>이미지: <img src="{{ article.img_url }}" alt=""></p>
     <p>작성: {{ article.created_at }}</p>
     <p>수정: {{ article.updated_at }}</p>
-
-    <a href="{% url 'articles:index' %}">목록</a>
+    <hr>
+    <form action="{% url 'articles:comments_create' article.id %}" method='POST'>
+        {% csrf_token %}
+        댓글 달기: <input type="text" name="content">
+        <input type="submit" value="댓글 입력">
+    </form>
+    <hr>
+    <p><b>댓글 목록</b></p>
+    {% for comment in comments %}
+        <li>{{ comment.content }}</li>
+        <form action="{% url 'articles:comments_delete' article.id comment.id %}" method='POST' style='display: inline;'>
+            {% csrf_token %}
+            <button class='btn btn-danger btn-sm'>댓글 삭제</button>
+        </form>
+    {% endfor %}
+        <hr>
+    <a href="{% url 'articles:index' %}"><button class="btn btn-success btn-sm">목록</button></a>
     {% if article.user == request.user %}
-    <form action="{% url 'articles:delete' article.id %}" method='POST'>
-        <input type="submit" value='삭제'>
+    <a href="{% url 'articles:edit' article.id %}" style="display: inline"><button class="btn btn-success btn-sm">수정</button></a>
+    <form action="{% url 'articles:delete' article.id %}" method='POST' style="display: inline">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger btn-sm" value='삭제'>
     </form>
     {% endif %}
 </div>

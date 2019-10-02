@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Article
+from .models import Article, Comment
 from django.contrib.auth.decorators import login_required
 
 # class Article:
@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
     
 def index(request):    
     # 지금까지 작성된 글을 보여줌    
-    articles = Article.objects.all()
+    articles = Article.objects.order_by('-pk')
     return render(request, 'articles/index.html', {
     'articles': articles,
     })
@@ -33,9 +33,41 @@ def new(request):
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
-    return render(request, 'articles/detail.html', {'article':article})
+    comments = article.comment_set.order_by('-id')
+    return render(request, 'articles/detail.html', {'article':article, 'comments':comments})
+
+def edit(request, article_id):
+    article = Article.objects.get(id=article_id)
+    if request.method == 'POST':
+        article.title = request.POST.get('input_title')
+        article.content = request.POST.get('input_content')
+        article.save()
+        return redirect('articles:detail', article.id)
+    else:
+        return render(request, 'articles/edit.html', {'article':article})
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
     return redirect('articles:index')
+
+def comments_create(request, article_id):
+    article = Article.objects.get(id=article_id)
+    if request.method == 'POST':
+        comment = Comment()
+        # form에서 보낸 댓글 정보를 저장한다
+        comment.content = request.POST.get('content')
+        comment.article = article
+        comment.save()
+        return redirect('articles:detail', article.id)
+    else:
+        return redirect('articles:detail', article.id)
+
+def comments_delete(request, article_id, comment_id):
+    if request.method == 'POST':
+        # article = Article.objects.get(id=article_id)
+        comment = Comment.objects.get(id=comment_id)
+        comment.delete()
+        return redirect('articles:detail', article_id)
+    else:
+        return redirect('articles:detail', article_id)

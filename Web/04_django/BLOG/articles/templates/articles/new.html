@@ -4,16 +4,17 @@
 <form action="" method='POST' class='container'>
   {% csrf_token %}
   <div>
-    제목: <input type="text" name="input_title">
+    제목: <input type="text" name="input_title"><br>
   </div>
   <div>
-    내용: <textarea name="input_content" cols="30" rows="10"></textarea>
+    내용: <textarea name="input_content" cols="30" rows="10"></textarea><br>
   </div>
   <div>
     이미지: <input type="text" name="img_url">
   </div>
   <div>
-    <button type='submit'>입력</button>
+    <button type='submit' class='btn btn-warning'>입력</button>
+    <a href="{% url 'articles:index' %}" class='btn btn-warning'>목록</a>
   </div>
 </form>
 {% endblock %}
