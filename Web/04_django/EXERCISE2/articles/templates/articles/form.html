@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'articles/base.html' %}
 {% load bootstrap4 %}
 
 {% block body %}
@@ -14,10 +14,10 @@
     </div>
 </div>
 <div class='container'>
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" style='display: inline;'>
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
-    이미지: <input type="file" name="image" accept="image/*"> <br>
+    이미지: <input type="file" name="image" accept="image/*"> <hr>
     {% bootstrap_button "등록" button_type='submit' button_class='btn btn-warning' %}
     <!-- {{ form.as_p }} -->
     <!-- <div>
@@ -25,9 +25,9 @@
     </div> -->
 </form>
 {% if request.resolver_match.url_name == 'new' %}
-<a href="{% url 'articles:index' %}"><button class='btn btn-warning' >작성취소</button></a>
+<a href="{% url 'articles:index' %}" style='display: inline;'><button class='btn btn-warning'>작성취소</button></a>
 {% else %}
-<a href="{% url 'articles:detail' article.id %}"><button class='btn btn-warning'>수정취소</button></a>
+<a href="{% url 'articles:detail' article.id %}" style='display: inline;'><button class='btn btn-warning'>수정취소</button></a>
 {% endif %}
 </div>
 {% endblock %}

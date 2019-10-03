@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article, Comment
 from .forms import ArticleForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def new(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article = form.save()
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()
             # title = form.cleaned_data.get('title')
             # content = form.cleaned_data.get('content')
             # image = form.cleaned_data.get('image')
@@ -14,7 +18,7 @@ def new(request):
             return redirect('articles:detail', article.id)
     else:
         form = ArticleForm()
-        return render(request, 'form.html', {'form':form})
+        return render(request, 'articles/form.html', {'form':form})
 
 # def create(request):
 #     article = Article()
@@ -25,41 +29,52 @@ def new(request):
 
 def index(request):
     articles = Article.objects.all()
-    return render(request, 'index.html', {
+    return render(request, 'articles/index.html', {
         'articles':articles,
     })
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
     comments = article.comment_set.all()
-    return render(request, 'detail.html', {
+    return render(request, 'articles/detail.html', {
         'article':article,
         'comments':comments,
     })
 
+@login_required
 def edit(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     # article = Article.objects.get(id=article_id)
-    if request.method == "POST":
-        form = ArticleForm(request.POST, instance=Article)
-        if form.is_valid():
-            article = form.save()
-            # article.title = form.cleaned_data.get('title')
-            # article.content = form.cleaned_data.get('content')
-            # article.image = form.cleaned_data.get('image')
-            # article.save()
-            return redirect('articles:detail', article_id)
+    if article.user == request.user:
+        if request.method == "POST":
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                article = form.save()
+                # article.title = form.cleaned_data.get('title')
+                # article.content = form.cleaned_data.get('content')
+                # article.image = form.cleaned_data.get('image')
+                # article.save()
+                return redirect('articles:detail', article_id)
+        else:
+            form = ArticleForm(instance=article)
     else:
-        form = ArticleForm(instance=article)
-        return render(request, 'form.html', {
-            'form':form,
-            'article':article,
-        })
+        return redirect('articles:index')
+    return render(request, 'articles/form.html', {
+        'form':form,
+        'article':article,
+    })
 
 def delete(request, article_id):
-    article = Article.objects.get(id=article_id)
-    article.delete()
-    return redirect('articles:index')
+    # article = Article.objects.get(id=article_id)
+    article = get_object_or_404(Article, id=article_id)
+    if request.user == article.user:
+        if request.method=='POST':
+            article.delete()
+            return redirect('articles:index')
+        # else:
+        #     return redirect('articles:detail', article.id)
+    else:
+        return redirect('articles:index')
 
 def comment_create(request, article_id):
     Comment.objects.create(
