@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article, Comment
+from .forms import ArticleForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
 # class Article:
@@ -21,15 +22,23 @@ def index(request):
 @login_required
 def new(request):
     if request.method == 'POST':
-        article = Article()
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.image_url = request.FILES.get('image')
-        article.user = request.user
-        article.save()
-        return redirect('articles:index')
+        form = ArticleForm(request.POST) # form 객체에 ArticleForm의 형태로 받아온 정보를 입력
+        if form.is_valid():     # ArticleForm을 통해 받아온 정보가 형식에 맞는지(유효한지) 확인
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            image_url = request.FILES.get('image')
+            user = request.user
+            article = Article.objects.create(title=title, content=content, image_url=image_url, user=user)
+        # article = Article()
+        # article.title = request.POST.get('input_title')
+        # article.content = request.POST.get('input_content')
+        # article.image_url = request.FILES.get('image')
+        # article.user = request.user
+        # article.save()
+            return redirect('articles:detail', article.id)
     else:
-        return render(request, 'articles/new.html')
+        form = ArticleForm()
+        return render(request, 'articles/new.html', {'form':form})
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -38,16 +47,25 @@ def detail(request, article_id):
 
 @login_required
 def edit(request, article_id):
-    article = Article.objects.get(id=article_id)
+    article = get_object_or_404(Article, id=article_id)
+    # article = Article.objects.get(id=article_id)
     if request.method == 'POST':
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.image_url = request.FILES.get('image')
-        article.user = request.user
-        article.save()
-        return redirect('articles:detail', article.id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article.title = form.cleaned_data.get('title')
+            article.content = form.cleaned_data.get('content')
+            article.image_url = request.FILES.get('image')
+            article.user = request.user
+            article.save()
+        # article.title = request.POST.get('input_title')
+        # article.content = request.POST.get('input_content')
+        # article.image_url = request.FILES.get('image')
+        # article.user = request.user
+        # article.save()
+            return redirect('articles:detail', article.id)
     else:
-        return render(request, 'articles/edit.html', {'article':article})
+        form = ArticleForm(initial=article.__dict__)
+    return render(request, 'articles/edit.html', {'form':form, 'article':article}) # image를 form에서 받아오지 않아서인지(?) 'article' 인자가 필요함.
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
