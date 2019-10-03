@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
 
+app_name = 'articles'
+
 urlpatterns = [
-    path('articles/', views.index),
-    path('articles/new/', views.new),
-    path('articles/create/', views.create),
-    path('articles/<int:article_id>/', views.show),
-    path('articles/<int:article_id>/delete/', views.delete),    
+    path('', views.index, name='index'),
+    path('new/', views.new, name='new'),
+    # path('create/', views.create),
+    path('<int:article_id>/', views.show, name='show'),
+    path('<int:article_id>/delete/', views.delete, name='delete'),    
 ]

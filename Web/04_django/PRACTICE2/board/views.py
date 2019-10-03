@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Article
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def new(request):
     return render(request, 'board/new.html')
 
@@ -22,7 +24,7 @@ def show(request, article_id):
     return render(request, 'board/show.html', {
         'article': article,
     })
-
+@login_required
 def edit(request):
     return render(request, 'board/edit.html')
 
