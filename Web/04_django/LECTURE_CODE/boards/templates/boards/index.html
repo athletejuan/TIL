@@ -19,10 +19,22 @@
 <div class="container">
     {% for article in articles %}
     <div>
-        <a href="{% url 'articles:detail' article.id %}">No. {{ article.id }}: {{ article.title }}</a>
-        <p><b>writer: {{ article.user }}</b></p>
-        <p>작성시간: {{ article.created_at }} | <a href="{% url 'articles:delete' article.id %}"><button class="btn btn-light">삭제</button></a></p>
+        <a href="{% url 'articles:detail' article.id %}" style='display:inline'>No. {{ article.id }}: {{ article.title }}</a>
+        <p style='display:inline'> | <b>writer: {{ article.user }}</b></p><br>
+        <p style='display:inline'>작성시간: {{ article.created_at }} | </p>
+        {% if user == article.user %}
+        <form action="{% url 'articles:update' article.id %}" method="POST" style="display:inline">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-light" value="수정">
+        </form>
+        <form action="{% url 'articles:delete' article.id %}" method="POST" style="display:inline">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-light" value="삭제">
+        </form>
+        <!-- <a href="{% url 'articles:delete' article.id %}"><button class="btn btn-light">삭제</button></a></p> -->
         <!-- <a href="{% url 'articles:update' article.id %}"><button class="btn btn-light">수정</button></a> -->
+        {% endif %}
+        {% include 'boards/_article.html' %}
         <hr>
     </div>
     {% endfor %}

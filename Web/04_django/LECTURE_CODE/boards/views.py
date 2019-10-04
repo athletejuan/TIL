@@ -17,6 +17,7 @@ def create(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save(commit=False)
+            article.image = request.FILES.get('image')
             article.user = request.user
             article.save()
             # title = form.cleaned_data.get('title')
@@ -71,7 +72,10 @@ def update(request, article_id):
         if request.method == "POST":
             form = ArticleForm(request.POST, instance=article)
             if form.is_valid():
-                article = form.save()
+                article = form.save(commit=False)
+                article.image = request.FILES.get('image')
+                article.user = request.user
+                article.save()
                 # article.title = form.cleaned_data.get('title')
                 # article.content = form.cleaned_data.get('content')
                 # article.save()
@@ -127,3 +131,13 @@ def comment_delete(request, article_id, comment_id):
     comment = Comment.objects.get(id=comment_id)
     comment.delete()
     return redirect('articles:detail', article.id)
+
+@login_required
+def like(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    user = request.user
+    if article.like_users.filter(id=user.id).exists(): # 좋아요를 누른 사람이 이미 좋아요 한 경우
+        article.like_users.remove(user) # 좋아요 취소
+    else:
+        article.like_users.add(user)
+    return redirect('article:index')
