@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Todo
 import requests
 from decouple import config
@@ -13,12 +14,14 @@ def index(request):
 # def new(request):
 #     return render(request, 'todos/new.html')
 
+@login_required
 def create(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         due_date = request.POST.get('due-date')
+        user = request.user
 
-        Todo.objects.create(title=title, due_date=due_date)
+        Todo.objects.create(title=title, due_date=due_date, user=user)
 
         base = 'https://api.telegram.org'
         token = config('TOKEN')
@@ -43,15 +46,18 @@ def create(request):
 #     }
 #     return render(request, 'todos/edit.html', context)
 
+@login_required
 def update(request, pk):
     # todo = Todo.objects.get(id=pk)
     todo = get_object_or_404(Todo, id=pk)
     if request.method == 'POST':
         title = request.POST.get('title')
         due_date = request.POST.get('due-date')
+        user = request.user
         
         todo.title = title
         todo.due_date = due_date
+        todo.user = user
         todo.save()
         return redirect('todos:index')
     else:

@@ -1,0 +1,11 @@
+{% extends 'todos/base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<h1 class='text-center'>회원가입</h1>
+<hr>
+<form action="" method='POST' class='container'>
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizon' %}
+    {% bootstrap_button "등록" button_type='submit' button_class='btn btn-warning' %}
+</form>
+{% endblock %}

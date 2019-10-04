@@ -1,11 +1,11 @@
 {% extends 'todos/base.html' %}
 
 {% block body %}
-<h1> INDEX </h1>
-
+<h1 class='text-center'> INDEX </h1>
+<div class='container'>
     {% for todo in todos %}
-        <li>{{ todo.due_date }} : {{ todo.title }}</li>
-        <a href="{% url 'todos:update' todo.id %}">수정</a>
-        <a href="{% url 'todos:delete' todo.id %}">삭제</a>
+        <li>{{ todo.due_date }} : {{ todo.title }} | 
+            {% if request.user == todo.user %}<a href="{% url 'todos:update' todo.id %}">수정</a> | <a href="{% url 'todos:delete' todo.id %}">삭제</a>{% endif %}</li>    
     {% endfor %}
+</div>
 {% endblock %}
