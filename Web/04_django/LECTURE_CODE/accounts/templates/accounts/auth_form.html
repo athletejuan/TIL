@@ -5,8 +5,6 @@
 {% block body %}
 {% if request.resolver_match.url_name == 'signup' %}
 <h1 class="text-center">Sign Up</h1>
-{% elif request.resolver_match.url_name == 'login' %}
-<h1 class="text-center">Log In</h1>
 {% elif request.resolver_match.url_name == 'change_password' %}
 <h1 class="text-center">Change Password</h1>
 {% else %}

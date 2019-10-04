@@ -29,4 +29,5 @@ class Comment(models.Model):
     content = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # 1 대 N 의 관계
     article = models.ForeignKey(Article, on_delete=models.CASCADE)

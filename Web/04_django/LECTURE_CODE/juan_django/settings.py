@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
+# 'allauth.account.auth_backends.AuthenticationBackend',
+) # For Social Login
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,8 +44,17 @@ INSTALLED_APPS = [
     'boards',
     'accounts',
 
+    'django.contrib.sites', # For Social Login
+    'allauth',  # For Social Login
+    'allauth.account',  # For Social Login
+    'allauth.socialaccount',    # For Social Login
+    'allauth.socialaccount.providers.kakao',    # For Social Login
+    
     'bootstrap4',
 ]
+
+SITE_ID = 1 # Default Site ID
+LOGIN_REDIRECT_URL = 'articles:index'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,3 +143,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS=[os.path.join(BASE_DIR, 'boards', 'assets')]
+
+# AbstactUser 를 import 하기 위해서 지정해야 한다.
+AUTH_USER_MODEL = 'accounts.User'

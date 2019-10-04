@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Article, Comment
-from .forms import ArticleForm
+from .forms import ArticleForm, CommentForm
+from django.contrib.auth import get_user_model
+from django.views.decorators.http import require_POST
 
 def index(request):
     articles = Article.objects.order_by('-pk')
@@ -50,11 +52,15 @@ def create(request):
 
 def detail(request, article_id):
     article = get_object_or_404(Article, id=article_id)
+    person = get_object_or_404(get_user_model(), id=article.user.id)
     # article = Article.objects.get(id=article_id)
     comments = article.comment_set.order_by('-pk')
+    comment_form = CommentForm()
     context = {
         'article':article,
         'comments':comments,
+        'comment_form':comment_form,
+        'person':person,
     }
     return render(request, 'boards/detail.html', context)
 
@@ -112,7 +118,9 @@ def delete(request, article_id):
             return redirect('articles:detail', article.id)
     else:
         return redirect('articles:index')
-    
+
+@login_required
+@require_POST   # POST 요청이 아닌 요청이 들어오면 404에러를 보여준다
 def comment_create(request, article_id):
     # Comment.objects.create(
     #     content = request.GET.get('content'),
@@ -126,6 +134,8 @@ def comment_create(request, article_id):
     comment.save()
     return redirect('articles:detail', article.id)
 
+@login_required
+@require_POST
 def comment_delete(request, article_id, comment_id):
     article = Article.objects.get(id=article_id)
     comment = Comment.objects.get(id=comment_id)
@@ -140,4 +150,16 @@ def like(request, article_id):
         article.like_users.remove(user) # 좋아요 취소
     else:
         article.like_users.add(user)
-    return redirect('article:index')
+    return redirect('articles:index')
+
+# 팔로우 : 특정 대상을 팔로우하는 경우 그 대상의 소식을 만날 수 있습니다.
+# 팔로워 : 나 또는 특정 대상을 팔로우하는 사람
+# 팔로잉 : 나 또는 특정 대상이 팔로우하는 사람
+@login_required
+def follow(request, article_id, user_id):
+    person = get_object_or_404(get_user_model(), id=user_id)
+    if request.user in person.followers.all():
+        person.followers.remove(request.user)
+    else:
+        person.followers.add(request.user)
+    return redirect('articles:detail', article_id)
