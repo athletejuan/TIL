@@ -88,3 +88,13 @@ def comment_delete(request, article_id, comment_id):
     comment = Comment.objects.get(id=comment_id)
     comment.delete()
     return redirect('articles:detail', article.id)
+
+@login_required
+def like(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    user = request.user
+    if article.like_users.filter(id=user.id).exists(): # 해당 게시글을 좋아요 한 유저의 목록 중 해당 유저의 아이디가 존재할 시
+        article.like_users.remove(user)  # 좋아요 취소
+    else:
+        article.like_users.add(user) # 좋아요 추가
+    return redirect('articles:index')

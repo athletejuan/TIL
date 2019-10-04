@@ -27,6 +27,7 @@
         </form>
         <!-- <a href="{% url 'articles:delete' article.id %}" style='display:inline'><button class='btn btn-warning'>삭제</button></a> -->
         {% endif %}
+        {% include 'articles/_article.html' %}
         <hr>
       </li>
     {% endfor %}

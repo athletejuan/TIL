@@ -11,7 +11,7 @@
 <h1 class='text-center'>Change Password</h1>
 {% endif %}
 <hr>
-<form action=""method="POST">
+<form action=""method="POST" class='container'>
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
     {% bootstrap_button "등록" button_type='submit' button_class='btn btn-warning' %}
