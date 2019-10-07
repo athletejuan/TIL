@@ -9,6 +9,22 @@
     <p>작성시간: {{ article.created }}</p>
     <p>수정시간: {{ article.updated }}</p>
 </div>
+<hr>
+<div class='container'>
+    <form action="{% url 'board:comment_create' article.id %}">
+        댓글: <input type="text" name="content">
+        <input type="submit" value="입력">
+    </form>
+    <h3>댓글 목록</h3>
+        {% for comment in comments %}
+            <li>No {{ comment.id}}. {{ comment.content }}</li>
+            <form action="{% url 'board:comment_delete' article.id comment.id %}" method='POST'>
+                {% csrf_token %}
+                <button type='submit'>삭제</button>
+            </form>
+        {% endfor %}
+</div>
+<hr>
 <div class="container">
     <a href="{% url 'board:index' %}"><button>목록</button></a>
     <a href="{% url 'board:edit' article.id %}"><button>수정</button></a>
