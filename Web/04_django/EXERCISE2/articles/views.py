@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def new(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.user = request.user
@@ -47,7 +47,7 @@ def edit(request, article_id):
     # article = Article.objects.get(id=article_id)
     if article.user == request.user:
         if request.method == "POST":
-            form = ArticleForm(request.POST, instance=article)
+            form = ArticleForm(request.POST, request.FILES, instance=article)
             if form.is_valid():
                 article = form.save()
                 # article.title = form.cleaned_data.get('title')
