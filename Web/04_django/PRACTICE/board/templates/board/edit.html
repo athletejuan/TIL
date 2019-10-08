@@ -10,7 +10,9 @@
     <div>
         내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
     </div>
+    {% if article.image %}
     기존 이미지: <p><img src="{{ article.image.url }}" alt="{{ article.image }}"></p>
+    {% endif %}
     수정 이미지: <input type="file" name='image' accept="image/*">
     <div>
         <input type="submit">

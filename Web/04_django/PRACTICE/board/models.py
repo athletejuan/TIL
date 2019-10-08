@@ -12,9 +12,9 @@ class Article(models.Model):
     image = ProcessedImageField(
         # upload_to = 'board/images',             # 저장위치
         upload_to = board_image_path,           # 저장위치
-        processors = [ResizeToFill(300, 200)],  # 처리할 작업 목록
+        processors = [ResizeToFill(300, 200)],  # 처리할 작업 목록[Resize Image(width 300px, height 200px)]
         format = 'png',                         # 저장 포멧
-        options = {'quality':90}                # 옵션(이미지 품질 수치) -> 원본의 90% 품질
+        options = {'quality':90},               # 옵션(이미지 품질 수치) -> 원본의 90% 품질
     )
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
