@@ -19,7 +19,7 @@
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
-        이미지: <input type="file" name="image" accept="image/*"> <br>
+        <!-- 이미지: <input type="file" name="image" accept="image/*"> <br> -->
         {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
         <!-- {{ form.as_p }} -->
         <!-- <div>

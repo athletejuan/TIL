@@ -1,10 +1,23 @@
 from django.db import models
 from django.conf import settings
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill, Thumbnail
+
+def articles_image_path(instance, filename):
+    return f'articles/user.{instance.user.pk}/images/{filename}'
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    image = models.ImageField(blank=True)
+    # image = models.ImageField(blank=True)         # 기본 이미지 업로드
+    image = ProcessedImageField(
+        upload_to = articles_image_path,            # 저장 위치
+        # upload_to = '',                           # 저장 위치(/media/)
+        # processors = [ResizeToFill(300, 200)],      # 처리할 작업 목록[이미지 사이즈 조정(가로300px, 세로200px)]
+        processors = [Thumbnail(100, 100)],       # 처리할 작업 목록[Thumbnail 사이즈(가로100px, 세로100px)]
+        format = 'png',                             # 저장 포멧
+        options = {'quality':90},                   # 옵션(이미지 품질 수치)
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

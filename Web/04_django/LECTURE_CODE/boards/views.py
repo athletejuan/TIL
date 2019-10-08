@@ -16,10 +16,10 @@ def index(request):
 @login_required
 def create(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES) # image 업로드를 위해 request.FILES 추가, update 함수에도.
         if form.is_valid():
             article = form.save(commit=False)
-            article.image = request.FILES.get('image')
+            # article.image = request.FILES.get('image')
             article.user = request.user
             article.save()
             # title = form.cleaned_data.get('title')
@@ -76,10 +76,10 @@ def update(request, article_id):
     if article.user == request.user:
     # article = Article.objects.get(id=article_id)
         if request.method == "POST":
-            form = ArticleForm(request.POST, instance=article)
+            form = ArticleForm(request.POST, request.FILES, instance=article)   # request.FILES 추가
             if form.is_valid():
                 article = form.save(commit=False)
-                article.image = request.FILES.get('image')
+                # article.image = request.FILES.get('image')
                 article.user = request.user
                 article.save()
                 # article.title = form.cleaned_data.get('title')

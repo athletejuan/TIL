@@ -6,11 +6,12 @@
 {% block body %}
 <h1 class="text-center">Log In</h1>
 <div class='container'>
-    <form action="" method="POST" class='container' style='display:inline'>
+    <form action="" method="POST" style='display:inline'>
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
-        {% bootstrap_button "로그인" button_type='submit' button_class='btn btn-dark' %}
+        {% bootstrap_button "Log In" button_type='submit' button_class='btn btn-dark' %}
     </form>
-    <a class="btn btn-warning" href="{% provider_login_url 'kakao' method='oauth2' %}" style='display: inline;'>카카오 로그인</a>
+    <a class="btn btn-warning" href="{% provider_login_url 'kakao' method='oauth2' %}" style='display: inline;'>Kakao Log In</a>
+    <a href="{% url 'articles:index' %}"><button class='btn btn-light'>Cancel</button></a>
 </div>
 {% endblock %}
