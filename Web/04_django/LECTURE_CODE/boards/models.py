@@ -13,8 +13,8 @@ class Article(models.Model):
     image = ProcessedImageField(
         upload_to = articles_image_path,            # 저장 위치
         # upload_to = '',                           # 저장 위치(/media/)
-        # processors = [ResizeToFill(300, 200)],      # 처리할 작업 목록[이미지 사이즈 조정(가로300px, 세로200px)]
-        processors = [Thumbnail(100, 100)],       # 처리할 작업 목록[Thumbnail 사이즈(가로100px, 세로100px)]
+        processors = [ResizeToFill(300, 200)],      # 처리할 작업 목록[이미지 사이즈 조정(가로300px, 세로200px)]
+        # processors = [Thumbnail(100, 100)],       # 처리할 작업 목록[Thumbnail 사이즈(가로100px, 세로100px)]
         format = 'png',                             # 저장 포멧
         options = {'quality':90},                   # 옵션(이미지 품질 수치)
     )

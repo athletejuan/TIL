@@ -120,7 +120,7 @@ def delete(request, article_id):
         return redirect('articles:index')
 
 @login_required
-@require_POST   # POST 요청이 아닌 요청이 들어오면 404에러를 보여준다
+@require_POST   # POST 요청이 아닌 요청이 들어오면 405에러를 보여준다
 def comment_create(request, article_id):
     # Comment.objects.create(
     #     content = request.GET.get('content'),
@@ -128,14 +128,21 @@ def comment_create(request, article_id):
     # )
     # return redirect('articles:detail', article_id)
     article = Article.objects.get(id=article_id)
-    comment = Comment()
-    comment.content = request.GET.get('content')
-    comment.article = Article.objects.get(id=article_id)
-    comment.save()
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.article = Article.objects.get(id=article_id)
+        comment.user = request.user
+        comment.save()
+    # comment = Comment()
+    # comment.content = request.POST.get('content')
+    # comment.article = Article.objects.get(id=article_id)
+    # comment.user = request.user
+    # comment.save()
     return redirect('articles:detail', article.id)
 
 @login_required
-@require_POST
+# @require_POST     # request.user가 comment.user인 경우에만 삭제 버튼이 보이게 하고 이 버튼은 GET요청으로 보내도록 함(댓글과 삭제버튼 a태그로 한줄표시하려고)
 def comment_delete(request, article_id, comment_id):
     article = Article.objects.get(id=article_id)
     comment = Comment.objects.get(id=comment_id)

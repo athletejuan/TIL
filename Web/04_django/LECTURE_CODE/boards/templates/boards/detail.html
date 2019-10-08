@@ -20,14 +20,21 @@
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
     <h4>Comment {% if comments %}/ {{ comments | length }}개의 댓글{% endif %}</h4>
-    <form action="{% url 'articles:comment_create' article.id %}">
+    {% if user.is_authenticated %}
+    <form action="{% url 'articles:comment_create' article.id %}" method="POST">
+        {% csrf_token %}
         Comment: <input type="text" name="content">
         <input type="submit" value="입력" class="btn btn-dark">
     </form>
+    {% else %}
+    <div class='text-center'>
+        <a href="{% url 'accounts:login' %}"><button class="btn btn-warning">댓글을 쓰려면 로그인 해주세요</button></a>
+    </div>
+    {% endif %}
     {% if comments %}
         <br>
         {% for comment in comments %}
-            <p>{{ comment.content }} - <a href="{% url 'articles:comment_delete' article.id comment.id %}"><button class="btn btn-light">삭제</button></a></p>            
+            <ol><p>{{ comment.content }} {% if user == comment.user %} - <a href="{% url 'articles:comment_delete' article.id comment.id %}"><button class="btn btn-light">삭제</button></a>{% endif %}</p></ol>
         {% endfor %}
     {% else %}
         <br>
