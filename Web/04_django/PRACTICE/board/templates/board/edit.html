@@ -2,7 +2,7 @@
 {% block title %} EDIT {% endblock title %}
 {% block body %}
 <h1>글 수정하기</h1>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title" value="{{ article.title }}">
@@ -10,6 +10,8 @@
     <div>
         내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
     </div>
+    기존 이미지: <p><img src="{{ article.image.url }}" alt="{{ article.image }}"></p>
+    수정 이미지: <input type="file" name='image' accept="image/*">
     <div>
         <input type="submit">
     </div>

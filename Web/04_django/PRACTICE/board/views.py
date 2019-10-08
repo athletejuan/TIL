@@ -15,6 +15,7 @@ def new(request):
         article = Article()
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect('board:show', article.id)
     else:
@@ -33,6 +34,7 @@ def edit(request, article_id):
     if request.method == "POST":
         article.title = request.POST.get('input_title')
         article.content = request.POST.get('input_content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect('board:show', article_id)
     else:

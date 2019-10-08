@@ -6,6 +6,11 @@
     <hr>
     <h3>{{ article.id }}. {{ article.title }}</h3>
     <p>내용: {{ article.content }}</p>
+    {% if article.image %}
+    <p>이미지: <img src="{{ article.image.url }}" alt="{{ article.image }}"></p>
+    {% else %}
+    <p>이미지: <img src="/media/noimages.jpg" alt="no_image"></p>
+    {% endif %}
     <p>작성시간: {{ article.created }}</p>
     <p>수정시간: {{ article.updated }}</p>
 </div>

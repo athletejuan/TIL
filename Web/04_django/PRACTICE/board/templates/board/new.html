@@ -2,7 +2,7 @@
 {% block title %} NEW {% endblock title %}
 {% block body %}
 <h1>글을 쓰자</h1>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
         제목: <input type="text" name="input_title">
@@ -10,6 +10,7 @@
     <div>
         내용: <textarea name="input_content" id="" cols="30" rows="10"></textarea>
     </div>
+    이미지: <input type="file" name='image' accept="image/*">
     <div>
         <input type="submit">
     </div>
