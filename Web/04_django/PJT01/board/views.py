@@ -15,7 +15,7 @@ def index(request):
 @login_required()
 def create(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         # embed() # embed를 쓰고 실행하면 여기에서 동작이 멈춤
         if form.is_valid():     # 유효성 검사
             article = form.save(commit=False)
@@ -70,7 +70,7 @@ def update(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if article.user == request.user:    # 작성한 유저와 삭제요청을 한 유저가 같으면 조건문 실행
         if request.method == 'POST':
-            form = ArticleForm(request.POST, instance=article)   # model form 을 사용하기 위해 instance 추가
+            form = ArticleForm(request.POST, request.FILES, instance=article)   # model form 을 사용하기 위해 instance 추가
             if form.is_valid():
                 form.save()
                 return redirect('board:detail', article.id)
@@ -88,7 +88,7 @@ def update(request, article_id):
     })
 
 @login_required()
-@require_POST   # POST 요청이 아닌 요청이 들어오면 404 에러가 뜬다.
+@require_POST   # POST 요청이 아닌 요청이 들어오면 405 에러가 뜬다.
 def comments_create(request, article_id):
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():

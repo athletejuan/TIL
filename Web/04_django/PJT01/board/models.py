@@ -1,9 +1,21 @@
 from django.db import models
 from django.conf import settings
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
+def articles_image_path(instance, filename):
+    return f'articles/user_{instance.user.id}/images/{filename}'
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    # image = models.ImageField(blank=True)
+    image = ProcessedImageField(
+        upload_to = articles_image_path,
+        processors = [ResizeToFill(300, 200)],
+        format = 'png',
+        options = {'quality':90},
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

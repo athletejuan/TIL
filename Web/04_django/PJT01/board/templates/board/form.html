@@ -4,13 +4,13 @@
 {% block body %}
 
 {% if request.resolver_match.url_name == 'create' %}
-    <h1 align="center">Create</h1>
+    <h1 class='text-center'>Create</h1>
 {% else %}
-    <h1 align="center">Update</h1>
+    <h1 class='text-center'>Update</h1>
 {% endif %}
 <hr>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
     {% bootstrap_button "글작성" button_type='submit' button_class='btn-primary' %}
