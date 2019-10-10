@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<h1 class='text-center'>로그인</h1>
+<hr>
+<div class='container'>
+    <form action="{% url 'accounts:login' %}" method='POST'>
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "로그인" button_type='submit' button_class='btn btn-dark' %}
+    </form>
+</div>
+{% endblock %}

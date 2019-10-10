@@ -4,7 +4,7 @@ import random
 import datetime
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'pages/index.html')
 
 def home(request):
     # return HttpResponse('HoMePAge')
@@ -20,21 +20,21 @@ def home(request):
         'number': 10,
         'datetime': datetime,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'pages/home.html', context)
 
 def lotto(request):
     lotto = sorted(random.sample(range(1,46), 6))
     context = {'lotto':lotto,
         'number': 10
     }
-    return render(request, 'lotto.html', context)
+    return render(request, 'pages/lotto.html', context)
 
 def cube(request, num):
     cube = num ** 3
     context = {
         'cube':cube,
     }
-    return render(request, 'cube.html', context)
+    return render(request, 'pages/cube.html', context)
 
 def match(request):
     chemi = random.randint(50, 100)
@@ -47,6 +47,4 @@ def match(request):
         'chemi': chemi,
         'test': test,
     }
-    return render(request, 'match.html', context)
-
-# Create your views here.
+    return render(request, 'pages/match.html', context)
