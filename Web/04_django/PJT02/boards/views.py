@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Article
+from .models import Article, Comment
 from .forms import ArticleForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -36,9 +36,11 @@ def new(request):
 def detail(request, article_id):
     # article = Article.objects.get(id=article_id)
     article = get_object_or_404(Article, id=article_id)
+    comments = article.comment_set.order_by('-pk')
     person = get_object_or_404(get_user_model(), id=article.user.id)
     return render(request, 'boards/detail.html', {
         'article':article,
+        'comments':comments,
         'person':person,
     })
 
@@ -76,3 +78,22 @@ def delete(request, article_id):
             return redirect(f'/boards/{article.id}/')
     else:
         return redirect('/boards/')
+
+def comment_create(request, article_id):
+    if request.method == 'POST':
+        comment = Comment()
+        content = request.POST.get('content')
+        article = Article.objects.get(id=article_id)
+        user = request.user
+        Comment.objects.create(content=content, article=article, user=user)
+        return redirect('boards:detail', article_id)
+    else:
+        return redirect('boards:detail', article_id)
+
+def comment_delete(request, article_id, comment_id):
+    # if request.method == 'POST':
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('boards:detail', article_id)
+    # else:
+    #     return redirect('boards:detail', article_id)

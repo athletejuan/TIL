@@ -1,26 +1,43 @@
 {% extends 'boards/base.html' %}
 {% block title %} DETAIL {% endblock %}
 {% block body %}
-<h1>DETAIL</h1>
-<div>
-    <p> No.{{ article.id }}</p>
-    <p> 제목: {{ article.title }} </p>
-    <p> 내용: {{ article.content }}</p>
-    <p> 작성시간: {{ article.created_at }}</p>
-    <p> 수정시간: {{ article.updated_at }}</p>
-</div>
-<hr>
-<div>
-    <form action="/boards/{{ article.id }}/delete/" method="POST">
+<h1 class="text-center">DETAIL</h1>
+<div class="container">
+    <div>
+        <p> No.{{ article.id }}</p>
+        <p> 제목: {{ article.title }} </p>
+        <p> 내용: {{ article.content }}</p>
+        <p> 작성시간: {{ article.created_at }}</p>
+        <p> 수정시간: {{ article.updated_at }}</p>
+    </div>
+    <hr>
+    <h3>Comments | {% if comments %}{{ comments.count }}개의 댓글이 있습니다.{% endif %}</h3>
+    <form action="{% url 'boards:comment_create' article.id %}" method="POST">
         {% csrf_token %}
-        <a href="/boards/"><input type="button" value="메인페이지"></a>
-        {% if user == article.user %}
-            <a href="/boards/{{ article.id }}/edit/"><input type="button" value="수정"></a>
-            <input type="submit" value="삭제">
-        {% endif %}
+        댓글 입력: <input type="text" name="content"> <input type="submit" value="입력">
     </form>
+    <hr>
+    {% if comments %}
+    <br>
+        {% for comment in comments %}
+        <li>{{ comment.content }} {% if user == comment.user %} | <form action="{% url 'boards:comment_delete' article.id comment.id %}" style='display: inline;'> <input type="submit" value="삭제" class="btn btn-danger btn btn-sm"> </form> {% endif %} </li>
+        {% endfor %}
+    {% else %}
+    <br>
+    No Comments..
+    {% endif %}
+    <hr>
+    <div>
+        <form action="/boards/{{ article.id }}/delete/" method="POST">
+            {% csrf_token %}
+            <a href="/boards/"><input type="button" value="메인페이지"></a>
+            {% if user == article.user %}
+                <a href="/boards/{{ article.id }}/edit/"><input type="button" value="수정"></a>
+                <input type="submit" value="삭제">
+            {% endif %}
+        </form>
+    </div>
 </div>
-
 <!-- <div>
     <a href="/boards/">메인페이지</a>
 </div>
