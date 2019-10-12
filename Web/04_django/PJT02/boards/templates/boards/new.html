@@ -5,9 +5,10 @@
 {% block body %}
 <h1 class="text-center">NEW</h1>
 <div class="container">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "입력" button_type="submit" button_class="btn btn-primary" %}
         <!-- <div>
             제목: <input type="text" name="input_title">
         </div>
@@ -15,7 +16,7 @@
             내용: <textarea name="input_content" id="" cols="30" rows="10"></textarea>
         </div> -->
         <!-- <div> -->
-        <button type="submit">입력</button>
+        <!-- <button type="submit">입력</button> -->
         <a href="/boards/" class="btn btn-primary">메인페이지</a>
         <!-- </div> -->
     </form>

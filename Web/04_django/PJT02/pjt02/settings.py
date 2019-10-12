@@ -26,6 +26,7 @@ AUTHENTICATION_BACKENDS = (
 INSTALLED_APPS = [
     'accounts',
     'boards',
+    'imagekit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,6 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'boards','assets', 'images')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # AbstractUser를 import하기 위해서 지정해야 한다.
 AUTH_USER_MODEL = 'accounts.User'

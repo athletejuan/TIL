@@ -14,7 +14,7 @@ def index(request):
 @login_required()
 def new(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.user = request.user
@@ -49,7 +49,7 @@ def edit(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if article.user == request.user:
         if request.method == 'POST':
-            form = ArticleForm(request.POST, instance=article)
+            form = ArticleForm(request.POST, request.FILES, instance=article)
             if form.is_valid():
                 form.save()
             # article = Article.objects.get(id=article_id)

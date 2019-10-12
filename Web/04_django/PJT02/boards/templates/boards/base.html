@@ -1,19 +1,17 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
     {% bootstrap_css %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <div class="container">
+            <img src="{% static 'logo-hangul.png' %}" width=300px alt="ㅎㅍㅎㅋ">
         {% if user.is_authenticated %}
-            <h1>안녕하세요, {{ user.username }} 님</h1>
-            <hr>
             <form action="/accounts/logout/" method="POST" style='display: inline;'>
                 {% csrf_token %}
                 <input type="submit" class='btn btn-info'value="로그아웃">        
@@ -24,6 +22,8 @@
                 {% csrf_token %}
                 <input type="submit" class='btn btn-danger' value="회원탈퇴">
             </form>
+            <h1>안녕하세요, {{ user.username }} 님</h1>
+            <hr>
         {% else %}
             <a href="/accounts/login/" class='btn btn-info'>로그인</a>
             <a href="/accounts/signup/" class='btn btn-info'>회원가입</a>

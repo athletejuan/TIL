@@ -7,6 +7,11 @@
         <p> No.{{ article.id }}</p>
         <p> 제목: {{ article.title }} </p>
         <p> 내용: {{ article.content }}</p>
+        {% if article.image %}
+        이미지: <img src="{{ article.image.url }}" alt="{{ article.image }}">
+        {% else %}
+        이미지: <img src="/media/noimage.png" alt="no_image">
+        {% endif %}
         <p> 작성시간: {{ article.created_at }}</p>
         <p> 수정시간: {{ article.updated_at }}</p>
     </div>
