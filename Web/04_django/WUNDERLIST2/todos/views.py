@@ -6,7 +6,7 @@ def index(request):
     context = {
         'todos':todos
     }
-    return render(request, 'index.html', context)
+    return render(request, 'todos/index.html', context)
 
 # def new(request):
 #     return render(request, 'new.html')
@@ -19,7 +19,7 @@ def create(request):
         Todo.objects.create(title=title, due_date=due_date)
         return redirect('todos:index')
     else:
-        return render(request, 'new.html')
+        return render(request, 'todos/new.html')
 
 # def edit(request, pk):
 #     todo = Todo.objects.get(id=pk)
@@ -39,7 +39,7 @@ def update(request, pk):
         return redirect('todos:index')
     else:
         todo = Todo.objects.get(id=pk)
-        return render(request, 'edit.html', {
+        return render(request, 'todos/edit.html', {
             'todo':todo
         })
 

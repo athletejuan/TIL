@@ -1,0 +1,14 @@
+{% extends 'todos/base.html' %}
+{% load bootstrap4 %}
+{% block title %}SignUp{% endblock %}
+{% block body %}
+<h1 class='text-center'>회원가입</h1>
+<hr>
+<div class='container'>
+    <form action="{% url 'accounts:signup' %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button '입력' button_type='submit' button_class='btn btn-primary' %}
+    </form>
+</div>
+{% endblock %}
