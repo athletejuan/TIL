@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from django.views.decorators.http import require_POST
 
 @login_required
 def new(request):
@@ -8,6 +10,7 @@ def new(request):
         article = Article()
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.user = request.user
         article.save()
         return redirect('articles:show', article.id)
     else:
@@ -21,8 +24,10 @@ def index(request):
 
 def show(request, article_id):
     article = Article.objects.get(id=article_id)
+    person = get_object_or_404(get_user_model(), id=article.user.id)
     return render(request, 'board/show.html', {
         'article': article,
+        'person': person,
     })
 @login_required
 def edit(request, article_id):
@@ -48,3 +53,12 @@ def like(request, article_id):
     else:
         article.like_users.add(user)
     return redirect('articles:index')
+
+@login_required
+def follow(request, article_id, user_id):
+    person = get_object_or_404(get_user_model(), id=user_id)
+    if request.user in person.followers.all():
+        person.followers.remove(request.user)
+    else:
+        person.followers.add(request.user)
+    return redirect('articles:show', article_id)

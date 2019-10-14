@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
+# 'allauth.account.auth_backends.AuthenticationBackend',
+) # For Social Login
+
 INSTALLED_APPS = [
     'django_extensions',
     'django.contrib.admin',
@@ -41,8 +45,17 @@ INSTALLED_APPS = [
     'board',
     'accounts',
 
+    'django.contrib.sites', # For Social Login
+    'allauth',  # For Social Login
+    'allauth.account',  # For Social Login
+    'allauth.socialaccount',    # For Social Login
+    'allauth.socialaccount.providers.kakao',    # For Social Login
+    
     'bootstrap4'
 ]
+
+SITE_ID = 1 # Default Site ID
+LOGIN_REDIRECT_URL = 'articles:index'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,3 +136,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'accounts.User'

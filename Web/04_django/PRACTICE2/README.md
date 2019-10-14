@@ -3,10 +3,10 @@
 ## board
 CRUD Basic
 
-## Accounts
-Instagram Like
+## accounts
+Instagram Like, Follow
 
 ## Not Yet
-Comment
-ModelForm
+Comment \n
+ModelForm \n
 Image Upload(ResizeImage)
