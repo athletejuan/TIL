@@ -1,0 +1,16 @@
+<div class='card-body'>
+    <a href="{% url 'articles:like' article.id %}" class='card-link'>
+        {% if user.is_authenticated %}
+            {% if user in article.like_users.all %}
+            <button class='btn btn-danger'>LIKE!</button>
+            {% else %}
+            <button class='border border-danger text-danger rounded-lg'>LIKE?</button>
+            {% endif %}
+        {% else %}
+        <form action="{% url 'accounts:login' %}">
+            <button type='submit' class='border border-danger text-danger rounded-lg'>LOGIN!</button>
+        </form>
+        {% endif %}
+    </a>
+    <p class='card-text'><b>{{ article.like_users.count }}명이 이 글을 좋아합니다.</b></p>
+</div>

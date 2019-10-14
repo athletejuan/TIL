@@ -10,12 +10,13 @@ def signup(request):
         return redirect('articles:index')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        user = form.save()
-        auth_login(request, user)
-        return redirect('articles:index')
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('articles:index')
     else:
         form = UserCreationForm()
-        return render(request, 'accounts/auth_form.html', {'form':form})
+    return render(request, 'accounts/auth_form.html', {'form':form})
 
 def login(request):
     if request.user.is_authenticated:
@@ -26,8 +27,8 @@ def login(request):
             auth_login(request, form.get_user())
             return redirect('articles:index')
     else:
-        form = AuthenticationForm(request)
-        return render(request, 'accounts/auth_form.html', {'form':form})
+        form = AuthenticationForm()
+    return render(request, 'accounts/auth_form.html', {'form':form})
 
 def logout(request):
     if request.method == 'POST':
