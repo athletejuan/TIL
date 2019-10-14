@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block title %} NEW {% endblock %}
 {% block body %}
 <h1 class='text-center'>NEW</h1>
 <div class='container'>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <div>
-            <input type="submit" value="등록" class="btn btn-dark">
-        </div>
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
     </form>
 </div>
 {% endblock %}

@@ -4,20 +4,18 @@ from .forms import ArticleForm
 
 def new(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            title = form.cleaned_data.get('title')
-            content = form.cleaned_data.get('content')
-            image = request.FILES.get('image')
-            article = Article.objects.create(title=title, content=content, image=image)
+            article = form.save()
         # article = Article()
         # article.title = request.POST.get('input_title')
         # article.content = request.POST.get('input_content')
+        # article.image = request.FILES.get('image)
         # article.save()
             return redirect('board:detail', article.id)
     else:
         form = ArticleForm()
-        return render(request, 'new.html', {'form':form})
+        return render(request, 'form.html', {'form':form})
 
 # def create(request):
 #     article = Article()
@@ -41,19 +39,16 @@ def detail(request, article_id):
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
-            article.title = form.cleaned_data.get('title')
-            article.content = form.cleaned_data.get('content')
-            article.image = request.FILES.get('image')
-            article.save()
+            form.save()
         # article.title = request.POST.get('input_title')
         # article.content = request.POST.get('input_content')
         # article.save()
             return redirect('board:detail', article.id)
     else:
-        form = ArticleForm(initial=article.__dict__)
-        return render(request, 'edit.html', {
+        form = ArticleForm(instance=article)
+        return render(request, 'form.html', {
             'form':form,
             'article':article,
         })

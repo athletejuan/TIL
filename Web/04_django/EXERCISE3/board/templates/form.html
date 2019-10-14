@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block title %} EDIT {% endblock %}
+{% block title %} Article {% endblock %}
 {% block body %}
-<h1 class='text-center' >EDIT</h1>
+{% if request.resolver_match.url_name == 'new' %}
+<h1 class='text-center'>NEW</h1>
+{% else %}
+<h1 class='text-center'>EDIT</h1>
+{% endif %}
 <div class='container'>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
