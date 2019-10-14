@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
 {% block title %} EDIT {% endblock %}
 {% block body %}
-<h1 align=center >EDIT</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    <div class='container'>
+<h1 class='text-center' >EDIT</h1>
+<div class='container'>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
         <div>
-            제목: <input type="text" name="input_title" value="{{ article.title }}">
+            <input type="submit" value="등록" class="btn btn-dark">
         </div>
-        <div>
-            내용: <textarea name="input_content" id="" cols="30" rows="10">{{ article.content }}</textarea>
-        </div>
-        <div>
-            <button type="submit">입력</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 {% endblock %}

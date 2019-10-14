@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block title %} DETAIL {% endblock %}
 {% block body %}
-<h2 align=center>DETAIL</h2>
+<h2 class='text-center'>DETAIL</h2>
 <div class='container'>
-    <h4>{{ article.title }}</h4> <br>
-    {{ article.content }} <br>
-    {{ article.created_at }} <br>
+    <h4>제목: {{ article.title }}</h4> <br>
+    내용: {{ article.content }} <br>
+    작성: {{ article.created_at }} <br>
+    수정: {{ article.updated_at }}
     <div>
         <a href="{% url 'board:index' %}">목록</a>
         <a href="{% url 'board:edit' article.id %}">수정</a>

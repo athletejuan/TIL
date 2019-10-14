@@ -1,15 +1,23 @@
 from django.shortcuts import render, redirect
 from .models import Article
+from .forms import ArticleForm
 
 def new(request):
     if request.method == "POST":
-        article = Article()
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.save()
-        return redirect('board:detail', article.id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            image = request.FILES.get('image')
+            article = Article.objects.create(title=title, content=content, image=image)
+        # article = Article()
+        # article.title = request.POST.get('input_title')
+        # article.content = request.POST.get('input_content')
+        # article.save()
+            return redirect('board:detail', article.id)
     else:
-        return render(request, 'new.html')
+        form = ArticleForm()
+        return render(request, 'new.html', {'form':form})
 
 # def create(request):
 #     article = Article()
@@ -19,7 +27,7 @@ def new(request):
 #     return redirect(f'/board/{article.id}/')
 
 def index(request):
-    articles = Article.objects.all()
+    articles = Article.objects.order_by('-id')
     return render(request, 'index.html', {
         'articles':articles,
     })
@@ -33,13 +41,21 @@ def detail(request, article_id):
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.save()
-        return redirect('board:detail', article.id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article.title = form.cleaned_data.get('title')
+            article.content = form.cleaned_data.get('content')
+            article.image = request.FILES.get('image')
+            article.save()
+        # article.title = request.POST.get('input_title')
+        # article.content = request.POST.get('input_content')
+        # article.save()
+            return redirect('board:detail', article.id)
     else:
+        form = ArticleForm(initial=article.__dict__)
         return render(request, 'edit.html', {
-            'article':article
+            'form':form,
+            'article':article,
         })
 
 def delete(request, article_id):
