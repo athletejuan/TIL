@@ -7,6 +7,6 @@ CRUD Basic
 Instagram Like, Follow
 
 ## Not Yet
-Comment \n
-ModelForm \n
-Image Upload(ResizeImage)
+- Comment 
+- ModelForm 
+- Image Upload(ResizeImage)
