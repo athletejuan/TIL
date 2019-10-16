@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% for menu in my_list %}
+        {% if forloop.first %}
+            <p>No.{{ forloop.counter }} - {{ menu }} + hot pepper</p>
+        {% elif forloop.last %}
+            <p>No.{{ forloop.counter }} - {{ menu }} + soy sauce</p>
+        {% else %}
+            <p>No.{{ forloop.counter }} - {{ menu }}</p>
+        {% endif %}
+    {% endfor %}
+    {% for message in messages %}
+        {% if message|length > 5 %}
+            <p>5자 이내의 단어를 사용해주세요</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

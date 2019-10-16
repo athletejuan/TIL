@@ -48,3 +48,10 @@ def match(request):
         'test': test,
     }
     return render(request, 'pages/match.html', context)
+
+def dtl(request):
+    my_list = ['짜장면','탕수육','짬뽕','양장피']
+    messages = ['apple','banana','cocumber','mango','watermelon','kiwi']
+    empty_list = []
+
+    return render(request, 'pages/dtl.html', {'my_list':my_list, 'messages':messages, 'empty_list':empty_list})
