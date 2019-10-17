@@ -55,3 +55,6 @@ def dtl(request):
     empty_list = []
 
     return render(request, 'pages/dtl.html', {'my_list':my_list, 'messages':messages, 'empty_list':empty_list})
+
+def static_example(request):
+    return render(request, 'pages/static_example.html')

@@ -10,4 +10,5 @@ urlpatterns = [
     path('cube/<int:num>/', views.cube, name='cube'),
     path('match/', views.match, name='match'),
     path('dtl/', views.dtl, name='dtl'),
+    path('static_example/', views.static_example, name='static_example'),
 ]
