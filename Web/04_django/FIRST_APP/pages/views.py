@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+import requests
+from bs4 import BeautifulSoup as bs
 import random
 import datetime
 
@@ -25,7 +27,7 @@ def home(request):
 def lotto(request):
     lotto = sorted(random.sample(range(1,46), 6))
     context = {'lotto':lotto,
-        'number': 10
+        'number': 11
     }
     return render(request, 'pages/lotto.html', context)
 
@@ -58,3 +60,14 @@ def dtl(request):
 
 def static_example(request):
     return render(request, 'pages/static_example.html')
+
+def bootstrap_example(request):
+    return render(request, 'pages/bootstrap_example.html')
+
+def exchange(request):
+    url = 'https://finance.naver.com/marketindex/'
+    res = requests.get(url).text
+    soup = bs(res, 'html.parser')
+    ex = soup.select_one('#exchangeList > li.on > a.head.usd > div > span.value')
+    print(f'원/달러 환율은: {ex.text}원 입니다.')
+    return render(request, 'pages/ex.html', {'ex':ex.text})

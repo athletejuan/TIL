@@ -25,7 +25,9 @@
 
   <h1>DTL 조건문</h1>
   {% if number > 10 %}
-    <p>이건 0보다 커</p>
+    <p>{{ number }}, 이건 10보다 커</p>
+  {% else %}
+    <p>{{ number }}, 이건 10보다 크지 않아</p>
   {% endif %}
 </body>
 </html>

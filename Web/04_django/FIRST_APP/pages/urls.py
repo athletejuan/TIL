@@ -11,4 +11,6 @@ urlpatterns = [
     path('match/', views.match, name='match'),
     path('dtl/', views.dtl, name='dtl'),
     path('static_example/', views.static_example, name='static_example'),
+    path('bootstrap_example/', views.bootstrap_example, name='bootstrap_example'),
+    path('exchange/', views.exchange, name='exchange'),
 ]
