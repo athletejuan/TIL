@@ -4,7 +4,7 @@ from decouple import config
 base = 'https://api.telegram.org'
 token = config('TOKEN')
 
-url = f'{base}/{token}/getUpdates'
+url = f'{base}/bot{token}/getUpdates'
 
 res = requests.get(url)
 data = res.json()
@@ -13,7 +13,7 @@ data = res.json()
 chat_id = data['result'][0]['message']['chat']['id']
 text = "remember this"
 
-url = f'{base}/{token}/sendMessage?chat_id={chat_id}&text={text}'
+url = f'{base}/bot{token}/sendMessage?chat_id={chat_id}&text={text}'
 
 # requests.get(url)
 
@@ -26,5 +26,5 @@ receivers = set(senders)
 text = "REMEMBER"
 
 for i in receivers:
-    url = f'{base}/{token}/sendMessage?chat_id={chat_id}&text={text}'
+    url = f'{base}/bot{token}/sendMessage?chat_id={chat_id}&text={text}'
 requests.get(url)
