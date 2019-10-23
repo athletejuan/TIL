@@ -18,12 +18,13 @@ requests.get(url)
 
 # 메시지 보낸 모든 사람에게 답장보내기(중복 제거)
 senders = []
-for i in data['result']:
-    senders.append(i['message']['chat']['id'])
+for sender in data['result']:
+    senders.append(sender['message']['chat']['id'])
 
 receivers = set(senders)
 text = "Good Job!"
 
-for i in receivers:
-    url = f'{base}/bot{token}/sendMessage?chat_id={i}&text={text}'
+for receiver in receivers:
+    url = f'{base}/bot{token}/sendMessage?chat_id={receiver}&text={text}'
     requests.get(url)
+return '전송완료'
