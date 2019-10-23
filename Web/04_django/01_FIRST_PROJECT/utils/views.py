@@ -2,8 +2,8 @@ from django.shortcuts import render, HttpResponse
 import random
 
 def cube(request, num):
-    r = num**3
-    context = {'result':r}
+    nums = num**3
+    context = {'nums':nums}
     return render(request, 'cube.html', context)
 
 def check_int(request, num):
@@ -16,5 +16,5 @@ def check_int(request, num):
 
 def pick_lotto(request):
     return render(request, 'pick_lotto.html', {
-        'lucky_numbers': random.sample(range(1,46),6)
+        'lucky_numbers': sorted(random.sample(range(1,46),6))
     })
