@@ -16,6 +16,7 @@
             <p>No.{{ forloop.counter }} - {{ menu }}</p>
         {% endif %}
     {% endfor %}
+    {{ select }}
     {% for message in messages %}
         {% if message|length > 5 %}
             <p>5자 이내의 단어를 사용해주세요</p>

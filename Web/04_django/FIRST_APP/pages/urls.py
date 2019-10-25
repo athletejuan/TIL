@@ -13,4 +13,5 @@ urlpatterns = [
     path('static_example/', views.static_example, name='static_example'),
     path('bootstrap_example/', views.bootstrap_example, name='bootstrap_example'),
     path('exchange/', views.exchange, name='exchange'),
+    path('kospi/', views.kospi, name='kospi'),
 ]
