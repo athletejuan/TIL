@@ -14,4 +14,7 @@ urlpatterns = [
     path('bootstrap_example/', views.bootstrap_example, name='bootstrap_example'),
     path('exchange/', views.exchange, name='exchange'),
     path('kospi/', views.kospi, name='kospi'),
+    path('template_language/', views.template_language, name='template_language'),
+    path('image/', views.image, name='image'),
+    path('ispal/<word>/', views.ispal, name='ispal'),
 ]

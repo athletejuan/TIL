@@ -56,7 +56,6 @@ def dtl(request):
     select = random.choice(my_list)
     messages = ['apple','banana','cocumber','mango','watermelon','kiwi']
     empty_list = []
-
     return render(request, 'pages/dtl.html', {'my_list':my_list, 'select':select, 'messages':messages, 'empty_list':empty_list})
 
 def static_example(request):
@@ -70,7 +69,7 @@ def exchange(request):
     res = requests.get(url).text
     soup = bs(res, 'html.parser')
     ex = soup.select_one('#content > div.NE\=a\:t1k > div._tracklist_mytrack.tracklist_table.tracklist_type1 > table')
-    print(f'원/달러 환율은: {ex.text}원 입니다.')
+    # print(f'원/달러 환율은: {ex.text}원 입니다.')
     return render(request, 'pages/ex.html', {'ex':ex.text})
 
 def kospi(request):
@@ -80,3 +79,32 @@ def kospi(request):
     kospi = soup.select_one('#KOSPI_now')
     # print(f'원/달러 환율은: {kospi.text}원 입니다.')
     return render(request, 'pages/kospi.html', {'kospi':kospi.text})
+
+# 10.28 Django review
+
+def template_language(request):
+    menus = ['짜장면', '탕수육', '짬뽕', '양장피']
+    my_sentence = 'Life is short, you need python'
+    messages = ['apple', 'banana', 'cucumber', 'mango']
+    datetimenow = datetime.now()
+    empty_list = []
+    context = {
+        'menus': menus,
+        'my_sentence': my_sentence,
+        'messages': messages,
+        'empty_list': empty_list,
+        'datetimenow': datetimenow,
+    }
+    return render(request, 'template_language.html', context)
+
+def image(request):
+    return render(request, 'pages/image.html')
+
+def ispal(request, word):
+    if word == word[::-1]:
+        result = True
+    else:
+        result = False
+    context = {'word': word, 'result': result}
+    return render(request, 'pages/ispal.html', context)
+
