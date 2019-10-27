@@ -17,4 +17,6 @@ urlpatterns = [
     path('template_language/', views.template_language, name='template_language'),
     path('image/', views.image, name='image'),
     path('ispal/<word>/', views.ispal, name='ispal'),
+    path('word/', views.word, name='word'),
+    path('palin/', views.palin, name='palin'),
 ]

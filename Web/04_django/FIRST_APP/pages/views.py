@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import requests
 from bs4 import BeautifulSoup as bs
 import random
-import datetime
+from datetime import datetime
 
 def index(request):
     return render(request, 'pages/index.html')
@@ -83,19 +83,19 @@ def kospi(request):
 # 10.28 Django review
 
 def template_language(request):
-    menus = ['짜장면', '탕수육', '짬뽕', '양장피']
+    menus = ['아메리카노', '카페라떼', '마키아또', '루이보스', '프라푸치노']
     my_sentence = 'Life is short, you need python'
-    messages = ['apple', 'banana', 'cucumber', 'mango']
-    datetimenow = datetime.now()
+    cafe = ['starbucks', 'coffeebean', 'hollys', 'ediya']
+    datetimenow = datetime.now()    # from datetime import datetime 
     empty_list = []
     context = {
         'menus': menus,
         'my_sentence': my_sentence,
-        'messages': messages,
+        'cafe': cafe,
         'empty_list': empty_list,
         'datetimenow': datetimenow,
     }
-    return render(request, 'template_language.html', context)
+    return render(request, 'pages/template_language.html', context)
 
 def image(request):
     return render(request, 'pages/image.html')
@@ -108,3 +108,13 @@ def ispal(request, word):
     context = {'word': word, 'result': result}
     return render(request, 'pages/ispal.html', context)
 
+def word(request):
+    return render(request, 'pages/word.html')
+
+def palin(request):
+    ispalin = request.GET.get('word')
+    if ispalin == ispalin[::-1]:
+        result = True
+    else:
+        result = False
+    return render(request, 'pages/palin.html', {'ispalin':ispalin, 'result':result})
