@@ -1,0 +1,115 @@
+<h3>1. 반복문</h3>
+{% for menu in menus %}
+<p>{{ menu }}</p>
+{% endfor %}
+<hr>
+
+<!-- {{ forloop }}DTL for 문 안에 자동으로 생기는 객체 -->
+{% for menu in menus %}
+<p>{{ forloop.counter }} {{ menu }}</p>
+{% endfor %}
+<hr>
+
+{% for user in empty_list %}
+<p>{{ user }}</p>
+{% empty %}
+<!-- empty: for 태그 안에 optional 하게 있음. 빈리스트일 때 출력됨 -->
+<p>현재 가입한 유저가 없습니다.</p>
+{% endfor %}
+<hr>
+
+
+<h3>2. 조건문</h3>
+{% if '아메리카노' in menus %}
+<p>아메리카노는 얼어죽어도 '아아' 지</p>
+{% endif %}
+<hr>
+
+{% for menu in menus %}
+  <!--for 태그가 반복한 횟수를 출력함 - index가 1부터 시작(0부터는 counter0)-->
+  {{ forloop.counter }}번째 도는중..
+  <!--forloop.first를 하면 이 for문이 첫번째로 도는거면 True(참)이 된다.-->
+  {% if forloop.first %}
+  <p>아이스 + 아메리카노</p>
+  {% else %}
+  <p>{{ menu }}</p>
+  {% endif %}
+{% endfor %}
+<hr>
+
+
+<h3>3. length filter 활용</h3>
+{% for cafe in cafes %}
+  {% if cafe|length > 6 %}
+  <p>{{ cafe }}, 글자가 너무 길어요.</p>
+  {% else %}
+  <p>{{ cafe }}, {{ cafe|length }}</p>
+  {% endif %}
+{% endfor%}
+<hr>
+
+
+<h3>4. lorem ipsum</h3>
+{% lorem %}
+<hr>
+{% lorem 3 w %}
+<hr>
+{% lorem 4 w random %}
+<hr>
+{% lorem 2 p %}
+<hr>
+
+
+<!-- w = word -->
+<!-- p = paragraph -->
+<!-- random = 무작위 -->
+
+<h3>5. 글자수 제한(truncate)</h3>
+<p>{{ my_sentence|truncatewords:3 }}</p> <!-- 단어 단위로 제한 -->
+<p>{{ my_sentence|truncatechars:3 }}</p> <!-- 문자 단위로 제한(3번째는 포함x) -->
+<p>{{ my_sentence|truncatechars:10 }}</p> <!-- 문자 단위로 제한(10번째는 포함x) -->
+<hr>
+
+
+<!-- title: 단어를 대문자로 시작하고 나머지는 소문자로 만들어 문자열 제목으로 변환 -->
+<!-- capfirst: 값의 첫 번째 문자를 대문자로 바꾼다. (단, 첫번째 문자는 반드시 '문자'여야 한다) -->
+<!-- random: 주어진 리스트에서 요소를 랜덤하게 뽑아냄. -->
+
+<h3>6. 글자 관련 필터</h3>
+<p>{{ 'abc'|length }}</p>
+<p>{{ 'ABC'|lower }}</p>
+<p>{{ my_sentence|title }}</p>
+<p>{{ 'abc def'|capfirst }}</p>
+<p>{{ menus|random }}</p>
+<hr>
+
+
+<h3>7. 연산</h3>
+<p>{{ 4|add:6 }}</p>
+<hr>
+
+
+<!-- add - addition -->
+<!-- sub - subtraction -->
+<!-- mul - multiplication -->
+<!-- div - division -->
+<!-- abs - absolute value -->
+
+<h3>8. 날짜표현</h3>
+{{ datetimenow }}<br>       
+{% now "DATETIME_FORMAT" %}<br>  
+{% now "SHORT_DATETIME_FORMAT" %}<br> 
+{% now "DATE_FORMAT" %}<br>  
+{% now "SHORT_DATE_FORMAT" %} 
+<hr>
+{% now "Y년 m월 d일 (D) h:i" %} 
+<hr>
+{% now "Y" as current_year %}
+Copyright {{ current_year }}
+<hr>
+{{ datetimenow|date:"SHORT_DATE_FORMAT" }} 
+<hr>
+
+
+<h3>9. 기타</h3>
+{{ 'google.com'|urlize }}

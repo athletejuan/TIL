@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% for lotto in lotto_nums %}
+        <p>{{ lotto }}</p>
+    {% endfor %}
+    <hr>
+    <p>3등 당첨을 위해 반복한 횟수: {{ cnt }}</p>
+    <p>로또 추천번호: {{ lotto_nums }}</p>
+    <p>지난 로또번호: {{ winner }}</p>
+    <hr>
+</body>
+</html>
