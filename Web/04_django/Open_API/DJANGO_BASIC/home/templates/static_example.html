@@ -1,19 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'stylesheets/style.css' %}" type="text/css">
     <title>Document</title>
 </head>
 <body>
-    {% for lotto in my_lotto %}
-        <p>{{ lotto }}</p>
-    {% endfor %}
-    <hr>
-    <p>3등 당첨을 위해 반복한 횟수: {{ cnt }}</p>
-    <p>로또 추천번호: {{ my_lotto }}</p>
-    <p>지난 로또번호: {{ winner }}</p>
-    <hr>
+    <h1>STATIC 파일 실습</h1>
+    <img src="{% static 'images/logo-hangul.png' %}" alt="">
 </body>
 </html>

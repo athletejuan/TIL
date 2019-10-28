@@ -7,13 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    {% for lotto in my_lotto %}
-        <p>{{ lotto }}</p>
-    {% endfor %}
-    <hr>
-    <p>3등 당첨을 위해 반복한 횟수: {{ cnt }}</p>
-    <p>로또 추천번호: {{ my_lotto }}</p>
-    <p>지난 로또번호: {{ winner }}</p>
-    <hr>
+    <form action="/home/catch/">
+        던질 것: <input type="text" name="message">
+        <!-- 하나 더: <input type="text" name="message2"> -->
+        <input type="submit">
+    </form>
 </body>
 </html>

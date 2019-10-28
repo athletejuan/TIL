@@ -7,13 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    {% for lotto in my_lotto %}
-        <p>{{ lotto }}</p>
-    {% endfor %}
-    <hr>
-    <p>3등 당첨을 위해 반복한 횟수: {{ cnt }}</p>
-    <p>로또 추천번호: {{ my_lotto }}</p>
-    <p>지난 로또번호: {{ winner }}</p>
-    <hr>
+    <form action="/home/user_create/" method="POST">
+        <!-- {% csrf_token %} -->
+        이름: <input type="text" name="name"> <br>
+        비밀번호: <input type="password" name="pwd"> <br>
+        <input type="submit">
+    </form>
 </body>
 </html>
