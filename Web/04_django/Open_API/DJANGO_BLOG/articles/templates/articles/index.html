@@ -1,0 +1,14 @@
+{% extends 'articles/base.html' %}
+
+{% block body %}
+    <h1 class='text-center'>BOARD</h1>
+    <a href="/articles/new/">[새 글 작성하기]</a>
+    <hr>
+    {% for article in articles %}
+        <p>글 번호: {{ article.id }}</p>
+        <p>글 제목: {{ article.title }}</p>
+        <!-- <p>글 내용: {{ article.content }}</p> -->
+        <a href="/articles/{{ article.id }}">[글 상세보기]</a>
+        <hr>
+    {% endfor %}
+{% endblock %}
