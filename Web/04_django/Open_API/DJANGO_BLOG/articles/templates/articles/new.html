@@ -3,10 +3,11 @@
 {% block body %}
 <h1 class='text-center'>NEW</h1>
 <hr>
-<form action="/articles/create/" method="POST">
+<form action="" method="POST">
     {% csrf_token %}
     제목: <input type="text" name='title'> <br>
     내용: <textarea name="content" id="" cols="30" rows="10"></textarea> <br>
     <input type="submit">
 </form>
+<a href="{% url 'articles:index' %}">[돌아가기]</a>
 {% endblock %}
