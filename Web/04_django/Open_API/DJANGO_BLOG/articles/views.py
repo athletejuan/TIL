@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Article
 
 def index(request):
@@ -33,3 +33,19 @@ def create(request):
 def detail(request, id):
     article = Article.objects.get(pk=id)
     return render(request, 'articles/detail.html', {'article':article})
+
+def delete(request, id):
+    article = Article.objects.get(pk=id)
+    article.delete()
+    return redirect('/articles/')
+
+def edit(request, id):
+    article = Article.objects.get(pk=id)
+    return render(request, 'articles/edit.html', {'article':article})
+
+def update(request, id):
+    article = Article.objects.get(pk=id)
+    article.title = request.POST.get('title')
+    article.content = request.POST.get('content')
+    article.save()
+    return redirect(f'/articles/{article.id}/')

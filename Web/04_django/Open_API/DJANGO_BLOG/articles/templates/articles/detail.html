@@ -9,5 +9,7 @@
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
+    <a href="/articles/{{ article.id }}/edit/">[글 수정]</a> <br>
+    <a href="/articles/{{ article.id }}/delete/">[글 삭제]</a> <br>
     <a href="/articles/">[목록으로 돌아가기]</a>
 {% endblock %}
