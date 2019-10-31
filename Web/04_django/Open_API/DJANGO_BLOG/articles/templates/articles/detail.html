@@ -9,18 +9,18 @@
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
-    <form action="{% url 'articles:update' article.id %}" style="display:inline">
+    <!-- <form action="{% url 'articles:update' article.id %}" style="display:inline">
         <button class="btn btn-primary">수정</button>
-    </form>
-    <!-- <a href="{% url 'articles:update' article.id %}">[글 수정]</a> <br> -->
+    </form> -->
+    <a href="{% url 'articles:update' article.id %}" class="btn btn-primary" style="display:inline">수정</a>
     <form action="{% url 'articles:delete' article.id %}" onclick="return confirm('R U SURE..??')" method="POST" style="display:inline">
         {% csrf_token %}
         <!-- <input type="submit" value="삭제"> -->
-        <button class="btn btn-danger">삭제</button>
+        <button class="btn btn-danger btn-sm">삭제</button>
     </form>
     <!-- <a href="{% url 'articles:delete' article.id %}" onclick="return confirm('R U SURE..??')">[글 삭제]</a> <br> -->
-    <form action="{% url 'articles:index' %}" style="display:inline">
+    <!-- <form action="{% url 'articles:index' %}" style="display:inline">
         <button class="btn btn-info">목록</button>
-    </form>
-    <!-- <a href="{% url 'articles:index' %}">[목록으로 돌아가기]</a> -->
+    </form> -->
+    <a href="{% url 'articles:index' %}" class="btn btn-info" style="display:inline">목록</a>
 {% endblock %}

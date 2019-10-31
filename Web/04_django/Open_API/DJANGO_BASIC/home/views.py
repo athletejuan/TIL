@@ -111,7 +111,7 @@ def catch(request):
     return render(request, 'home/catch.html', context)
 
 def word(request):
-    return render(request, 'word.html')
+    return render(request, 'home/word.html')
 
 def palin(request):
     drome = request.GET.get('input_word')
