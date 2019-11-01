@@ -1,9 +1,10 @@
 {% extends 'movies/base.html' %}
 {% block body %}
 <h1 class='text-center'>MOVIE INDEX</h1>
-<a href="/movies/new/">[새 영화 등록]</a>
+<a href="{% url 'movies:create' %}">[새 영화 등록]</a>
 <hr>
 {% for movie in movies %}
-    <h3><a href="/movies/{{ movie.pk }}/">{{ movie.title }}</a>: {{ movie.score }}</h3>
+    <p>No.{{ movie.pk }}: <a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a>({{ movie.title_en }})</p>
+    <hr>
 {% endfor %}
 {% endblock %}

@@ -12,7 +12,11 @@
     <p>포스터: {{ movie.poster_url }}</p>
     <p>소개: {{ movie.description }}</p>
     <hr>
-<a href="/movies/{{ movie.pk }}/edit/"><button class='btn btn-info'>수정</button></a>
-<a href="/movies/{{ movie.pk }}/delete/" onclick="return confirm('R U Sure..??')"><button class='btn btn-danger'>삭제</button></a>
-<a href="/movies/"><button class='btn btn-primary'>목록</button></a>
+<a href="{% url 'movies:update' movie.pk %}" style="display: inline"><button class='btn btn-info'>수정</button></a>
+<form action="{% url 'movies:delete' movie.pk %}" style="display: inline" method="POST">
+    {% csrf_token %}
+    <button class='btn btn-danger' onclick="return confirm('R U Sure..??')">삭제</button>
+</form>
+<!-- <a href="/movies/{{ movie.pk }}/delete/" onclick="return confirm('R U Sure..??')"><button class='btn btn-danger'>삭제</button></a> -->
+<a href="{% url 'movies:index' %}" style="display: inline"><button class='btn btn-primary'>목록</button></a>
 {% endblock %}
