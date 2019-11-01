@@ -1,0 +1,18 @@
+{% extends 'movies/base.html' %}
+{% block body %}
+<h1 class='text-center'>{{ movie.title }}</h1>
+<hr>
+    <p>제목: {{ movie.title }}</p>
+    <p>영문: {{ movie.title_en }}</p>
+    <p>관객: {{ movie.audience }}</p>
+    <p>개봉: {{ movie.open_date }}</p>
+    <p>장르: {{ movie.genre }}</p>
+    <p>등급: {{ movie.watch_grade }}</p>
+    <p>평점: {{ movie.score }}</p>
+    <p>포스터: {{ movie.poster_url }}</p>
+    <p>소개: {{ movie.description }}</p>
+    <hr>
+<a href="/movies/{{ movie.pk }}/edit/"><button class='btn btn-info'>수정</button></a>
+<a href="/movies/{{ movie.pk }}/delete/" onclick="return confirm('R U Sure..??')"><button class='btn btn-danger'>삭제</button></a>
+<a href="/movies/"><button class='btn btn-primary'>목록</button></a>
+{% endblock %}

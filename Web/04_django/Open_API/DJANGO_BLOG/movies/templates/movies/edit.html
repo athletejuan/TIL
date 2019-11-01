@@ -1,0 +1,19 @@
+{% extends 'movies/base.html' %}
+{% block body %}
+<h1 class='text-center'>NEW MOVIE</h1>
+<hr>
+<div class='container'>
+    <form action="/movies/{{ movie.pk }}/update/">
+        영화명: <input type="text" name="title" value="{{ movie.title }}"> <br>
+        영화명(영문): <input type="text" name="title_en" value="{{ movie.title_en }}"> <br>
+        누적 관객수:<input type="number" name="audience" value="{{ movie.audience }}"> <br>
+        개봉일: <input type="date" name="open_date" value="{{ movie.open_date }}"> <br>
+        장르: <input type="text" name="genre" value="{{ movie.genre }}"> <br>
+        관람등급: <input type="text" name="watch_grade" value="{{ movie.watch_grade }}"> <br>
+        평점: <input type="number" name="score" value="{{ movie.score }}"> <br>
+        포스터 이미지 URL: <input type="text" name="poster_url" value="{{ movie.poster_url }}"> <br>
+        영화소개: <textarea name="description" id="" cols="30" rows="10">{{ movie.description }}</textarea> <br>
+        <input type="submit" value="입력">
+    </form>
+</div>
+{% endblock %}
