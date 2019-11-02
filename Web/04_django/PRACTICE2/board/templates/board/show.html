@@ -1,11 +1,32 @@
 {% extends 'board/base.html' %}
 {% block title %}Article: {{ article.title }}{% endblock %}
 {% block body %}
-<h1>{{ article.title }}</h1>
+<h1 class="text-center">{{ article.title }}</h1>
 <p>
     {{ article.content }}
 </p>
 <hr>
+<div class="container">
+    <form action="{% url 'articles:comment_create' article.id %}" method="POST">
+        {% csrf_token %}
+        댓글 입력: <input type="text" name="content">
+        <input type="submit" value="입력">
+    </form>
+    <hr>
+    <h3>댓글 목록 | 현재 댓글수: {{ comments|length }}</h3>
+    {% for comment in comments %}
+        <li class='container'>
+            {{ comment.content }}
+            <form action="{% url 'articles:comment_delete' article.id comment.id %}" class="container" style="display:inline" onclick="return confirm('R U Sure..??')" method="POST">
+                {% csrf_token %}
+                <button class='btn btn-danger btn-sm'>삭제</button>
+            </form>
+        </li>
+    {% empty %}
+        <p>아직 댓글이 없습니다..ㅠㅠ</p>
+    {% endfor %}
+<hr>
+</div>
 {% include 'board/_follow.html' %}
 <div>
     <a href="/board/">
