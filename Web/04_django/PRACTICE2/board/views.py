@@ -48,18 +48,22 @@ def delete(request, article_id):
     article.delete()
     return redirect ('articles:index')
 
-
+@login_required
 def comment_create(request, article_id):
     article = Article.objects.get(pk=article_id)
     if request.method == 'POST':
         comment = Comment()
         comment.content = request.POST.get('content')
-        comment.article = article
+        comment.article = article   # article 객체 자체를 넣는다.
+        # 이 작업을 해줘야 해당 생성된 comment 객체 안에 article 이라는 글을 넣을 수 있다.
+        # 또는 comment.article_id = article.pk 처럼 pk 값을 직접 외래키 컬럼에 넣어 줄 수도 있다.
+        # 여기서는 article 에 1번 게시글이 저장되어 있으니 1번 게시물을 comment 객체가 참조할 수 있도록 넣어준다.
         comment.save()
         return redirect('articles:show', article.id)
     else:
         return redirect('articles:show', article.id)
 
+@login_required
 def comment_delete(request, article_id, comment_id):
     if request.method == 'POST':
         comment = Comment.objects.get(pk=comment_id)
