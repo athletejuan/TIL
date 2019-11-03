@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'board',
     'accounts',
-
+    'imagekit',
+    
     'django.contrib.sites', # For Social Login
     'allauth',  # For Social Login
     'allauth.account',  # For Social Login

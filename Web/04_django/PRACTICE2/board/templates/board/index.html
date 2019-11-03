@@ -14,18 +14,18 @@
         {% endif %}
     </div>
 
-    <!-- <img src="{% static 'back2.png' %}" alt="happyhacking"> -->
-    <img src="{% static 'black-square.png' %}" alt="hphk">
+    <!-- <img src="{% static 'back2.png' %}" alt="happyhacking" width="300px"> -->
+    <img src="{% static 'black-square.png' %}" alt="hphk" width="300px">
 
     <div class='container'>
-    <ol>
+    <ul>
         {% for article in articles %}        
             <li>
                 <a href="{% url 'articles:show' article.id %}">{{article.title}}</a>
                 {% include 'board/_like.html' %}
             </li>        
         {% endfor %}
-    </ol>
+    </ul>
     </div>
 </div>
 {% endblock %}
