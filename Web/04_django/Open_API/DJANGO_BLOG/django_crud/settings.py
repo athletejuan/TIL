@@ -110,4 +110,9 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'  # 웹 페이지에서 사용할 정적 파일의 최상위 URL 경로(실제 파일이 위치한 디렉토리 아님)
+
+STATICFILES_DIRS = [ # 정적 파일이 위치한 경로
+    os.path.join(BASE_DIR, 'django_crud','assets','images'), # 쉼표(,)를 빠뜨리게 되면 에러가 난다. djang_crud/assets/images/ 로 가서 정적 파일이 있는지 찾는다.
+    # 일반적으로 공용으로 사용되는 정적파일들을 assets 폴더에 놓는 경우가 많다.(ex. bootstrap)
+]

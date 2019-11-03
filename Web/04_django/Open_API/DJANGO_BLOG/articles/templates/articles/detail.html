@@ -9,6 +9,27 @@
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
+    <form action="{% url 'articles:comment_create' article.id %}" method="POST">
+        {% csrf_token %}
+        댓글 입력: <input type="text" name='content'>
+        <input type="submit" value="입력">
+    </form>
+    <hr>
+    <h3>댓글 목록 | 현재 댓글수: {{ comments|length }}</h3><br>
+    {% for comment in comments %}
+    <ul>
+        <li>
+            {{ comment.content }}
+            <form action="{% url 'articles:comment_delete' article.id comment.id %}" style="display:inline" onclick="return confirm('R U Sure..??')" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-warning btn-sm">삭제</button>
+            </form>
+        </li>
+    </ul>
+    {% empty %}
+    <p>댓글이 아직 없습니다..</p>
+    {% endfor %}
+    <hr>
     <!-- <form action="{% url 'articles:update' article.id %}" style="display:inline">
         <button class="btn btn-primary">수정</button>
     </form> -->
