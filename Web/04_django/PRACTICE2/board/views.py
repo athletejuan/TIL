@@ -10,6 +10,7 @@ def new(request):
         article = Article()
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
         article.user = request.user
         article.save()
         return redirect('articles:show', article.id)
@@ -38,6 +39,8 @@ def edit(request, article_id):
     if request.method == 'POST':
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
+        article.user = request.user
         article.save()
         return redirect('articles:show', article.id)
     else:

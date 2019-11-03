@@ -3,7 +3,7 @@ from board.models import Article, Comment
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = [
-        'id','title','created_at','updated_at'
+        'id','title','content','image','created_at','updated_at'
     ]
 
 admin.site.register(Article, ArticleAdmin)

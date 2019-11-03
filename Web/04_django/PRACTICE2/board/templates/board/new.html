@@ -3,17 +3,12 @@
 {% block body %}
 <h1 class='text-center'>글을 씁시다</h1>
 <div class='container'>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div>
-            제목: <input type="text" name="title">
-        </div>
-        <div>
-            내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div>
-            <input type="submit">
-        </div>
+        제목: <input type="text" name="title"><br>
+        내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
+        이미지: <input type="file" name='image' accept="image/*"><br>
+        <input type="submit">
     </form>
 </div>
 {% endblock %}

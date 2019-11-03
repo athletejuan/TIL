@@ -1,10 +1,17 @@
 {% extends 'board/base.html' %}
+{% load static %}
 {% block title %}Article: {{ article.title }}{% endblock %}
 {% block body %}
 <h1 class="text-center">{{ article.title }}</h1>
 <p>
     {{ article.content }}
 </p>
+<hr>
+{% if article.image %}
+<img src="{{ article.image.url }}" alt="{{ article.image }}">
+{% else %}
+<img src="{% static 'noimage.png' %}" alt="no_image">
+{% endif %}
 <hr>
 <div class="container">
     <form action="{% url 'articles:comment_create' article.id %}" method="POST">
@@ -29,13 +36,8 @@
 </div>
 {% include 'board/_follow.html' %}
 <div>
-    <a href="/board/">
-        <button>목록</button>
-    </a>
-</div>
-<div>
-    <a href="/board/{{ article.id }}/delete/">
-        <button>삭제</button>
-    </a>
+    <a href="/board/{{ article.id }}/edit/"><button>수정</button></a>
+    <a href="/board/{{ article.id }}/delete/"><button>삭제</button></a>    
+    <a href="/board/"><button>목록</button></a>
 </div>
 {% endblock %}
