@@ -5,8 +5,8 @@ def index(request):
     movies = Movie.objects.order_by('-pk')
     return render(request, 'movies/index.html', {'movies':movies})
 
-def new(request):
-    return render(request, 'movies/new.html')
+# def new(request):
+#     return render(request, 'movies/new.html')
 
 def create(request):
     if request.method == 'POST':
