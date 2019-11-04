@@ -1,12 +1,19 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 
 {% block body %}
 <h1 class='text-center'>EDIT</h1>
 <hr>
-<form action="" method="POST">
+{% if article.image %}
+기존 이미지: <img src="{{ article.image.url }}" alt="{{ article.image }}" width='200px'>
+{% else %}
+기존 이미지: <img src="{% static 'noimage.png' %}" alt="no_image">
+{% endif %}
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     제목: <input type="text" name='title' value='{{ article.title }}'> <br>
     내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea> <br>
-    <input type="submit">
+    이미지: <input type="file" name="image" accept="image/*"> <br>
+    <button class="btn btn-success">수정</button>
 </form>
 {% endblock %}

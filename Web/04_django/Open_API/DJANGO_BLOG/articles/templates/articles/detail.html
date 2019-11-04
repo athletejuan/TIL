@@ -1,4 +1,5 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 
 {% block body %}
     <h1 class='text-center'>DETAIL</h1>
@@ -6,6 +7,11 @@
     <hr>
     <p>제목: {{ article.title }}</p>
     <p>내용: {{ article.content }}</p>
+    {% if article.image %}
+    <p>이미지: <img src="{{ article.image.url }}" alt="{{ article.image }}" width="200px"></p>
+    {% else %}
+    <p>이미지: <img src="{% static 'noimage.png' %}" alt="no_image"></p>
+    {% endif %}
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>

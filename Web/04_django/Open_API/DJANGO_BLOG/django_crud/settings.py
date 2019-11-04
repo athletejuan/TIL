@@ -116,3 +116,5 @@ STATICFILES_DIRS = [ # 정적 파일이 위치한 경로
     os.path.join(BASE_DIR, 'django_crud','assets','images'), # 쉼표(,)를 빠뜨리게 되면 에러가 난다. djang_crud/assets/images/ 로 가서 정적 파일이 있는지 찾는다.
     # 일반적으로 공용으로 사용되는 정적파일들을 assets 폴더에 놓는 경우가 많다.(ex. bootstrap)
 ]
+MEDIA_URL = '/media/'   # STATIC_URL과 비슷. 업로드 된 파일의 주소(URL)를 만들어 줌 (실제 이미지 파일이 업로드 된 디렉토리를 의미하는 것은 아님)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')   # STATICFILES_DIRS 동일. 정적 파일의 업로드가 끝나면 파일이 어디에 저장될지를 설정하는 경로
