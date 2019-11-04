@@ -3,11 +3,18 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill, Thumbnail
 from django.conf import settings
 
+def articles_image_path(instance, filename):
+    return f'articles/{instance.pk}번 글/images/{filename}'
+    # 경로: MEDIA_ROOT/articles/{instance.pk}번 글/images/{filename}
+    # instance --> 파라미터 instance는 Article 모델의 객체를 의미한다.
+    # filename --> 업로드한 이미지 파일의 이름 
+
 class Article(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     image = ProcessedImageField(
-        upload_to='articles/images',        # 저장위치(MEDIA_ROOT/articles/images)
+        # upload_to='articles/images',        # 저장위치(MEDIA_ROOT/articles/images)
+        upload_to=articles_image_path,
         processors=[ResizeToFill(300,200)], # 처리할 작업 목록
         format='png',                       # 저장 포맷
         options={'quality': 90},            # 추가 옵션들
@@ -19,7 +26,7 @@ class Article(models.Model):
     
     class Meta:
         ordering = ['-pk']
-        
+
     def __str__(self):
         return f'{self.id}. {self.title}'
 
