@@ -5,6 +5,9 @@
 ### MacBook ###
 .DS_Store
 
+### VSCode ###
+.vscode
+
 ### Django ###
 *.log
 *.pot
