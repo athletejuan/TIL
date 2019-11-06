@@ -1,0 +1,14 @@
+{% extends 'movies/base.html' %}
+{% block body %}
+<h1 class='text-center'>EDIT</h1>
+<hr>
+<form action="" method="POST" style="display:inline">
+    {% csrf_token %}
+    제목  : <input type="text" name="title" value="{{ movie.title }}"><br>
+    관객  : <input type="number" name="audience" value="{{ movie.audience }}"><br>
+    포스터: <input type="text" name="poster_url" value="{{ movie.poster_url }}"><br>
+    소개  : <textarea name="description" id="" cols="30" rows="10">{{ movie.description }}</textarea><br>
+    <button class='btn btn-info'>수정</button>
+</form>
+<a href="{% url 'movies:index' %}"><button class='btn btn-secondary' style="display:inline">목록보기</button></a>
+{% endblock %}
