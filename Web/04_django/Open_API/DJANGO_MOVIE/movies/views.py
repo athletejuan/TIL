@@ -30,7 +30,7 @@ def delete(request, movie_pk):
     else:
         return redirect('movies:detail', movie.pk)
 
-def new(request, movie_pk):
+def score_new(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
     if request.method == 'POST':
         score = Score()

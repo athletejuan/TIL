@@ -16,7 +16,7 @@
     <button class='btn btn-danger'>삭제</button>
 </form>
 <hr>
-<form action="{% url 'movies:new' movie.pk %}" method="POST">
+<form action="{% url 'movies:score_new' movie.pk %}" method="POST">
     {% csrf_token %}
     한줄 평: <input type="text" name="content">
     평점: <input type="number" min="0" max="10" name="score">
