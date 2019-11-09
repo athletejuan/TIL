@@ -1,0 +1,12 @@
+{% extends 'articles/base.html' %}
+{% block body %}
+<h1 class='text-center'>INDEX</h1>
+<a href="{% url 'articles:create' %}"><button class='btn btn-warning'>새 글</button></a><br>
+<hr>
+{% for article in articles %}
+    <ul>
+        <li>No. {{ article.id }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></li>
+    </ul>
+{% endfor %}
+<hr>
+{% endblock %}
