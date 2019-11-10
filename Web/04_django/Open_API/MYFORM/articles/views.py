@@ -17,7 +17,7 @@ def create(request):
             return redirect('articles:detail', article.id)
     else:
         form = ArticleForm()
-        return render(request, 'articles/new.html', {'form':form})
+        return render(request, 'articles/form.html', {'form':form})
     #     article = Article()
     #     article.title = request.POST.get('title')
     #     article.content = request.POST.get('content')
@@ -54,4 +54,4 @@ def update(request, article_id):
     else:
         form = ArticleForm(instance=article)
         # form = ArticleForm(initial=article.__dict__)
-    return render(request, 'articles/new.html', {'form':form})
+    return render(request, 'articles/form.html', {'form':form, 'article':article})

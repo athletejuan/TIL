@@ -1,7 +1,11 @@
 {% extends 'articles/base.html' %}
 {% load static %}
 {% block body %}
-<h1 class='text-center'>NEW</h1>
+{% if request.resolver_match.url_name == 'create' %}
+    <h1 class='text-center'>NEW</h1>
+{% else %}
+    <h1 class='text-center'>EDIT</h1>
+{% endif %}
 <hr>
 <form action="" method="POST" enctype="multipart/form-data" style="display:inline">
     {% csrf_token %}
@@ -12,5 +16,9 @@
     <input type="submit" value="입력"> -->
     <button class="btn btn-info">입력</button>
 </form>
-<a href="{% url 'articles:index' %}" style="display:inline"><button class='btn btn-warning'>목록으로 돌아가기</button></a>
+{% if request.resolver_match.url_name == 'create' %}
+    <a href="{% url 'articles:index' %}" style="display:inline"><button class='btn btn-warning'>목록으로 돌아가기</button></a>
+{% else %}
+    <a href="{% url 'articles:detail' article.id %}" style="display:inline"><button class='btn btn-warning'>뒤로가기</button></a>
+{% endif %}
 {% endblock %}
