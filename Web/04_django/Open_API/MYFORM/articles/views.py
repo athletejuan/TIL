@@ -10,9 +10,10 @@ def create(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data.get('title')
-            content = form.cleaned_data.get('content')
-            article = Article.objects.create(title=title, content=content)
+            article = form.save()
+            # title = form.cleaned_data.get('title')
+            # content = form.cleaned_data.get('content')
+            # article = Article.objects.create(title=title, content=content)
             return redirect('articles:detail', article.id)
     else:
         form = ArticleForm()
@@ -43,12 +44,14 @@ def update(request, article_id):
     # article = Article.objects.get(pk=article_id)
     article = get_object_or_404(Article, pk=article_id)
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
-            article.title = form.cleaned_data.get('title')
-            article.content = form.cleaned_data.get('content')
-            article.save()
+            article = form.save()
+            # article.title = form.cleaned_data.get('title')
+            # article.content = form.cleaned_data.get('content')
+            # article.save()
             return redirect('articles:detail', article.id)
     else:
-        form = ArticleForm(initial=article.__dict__)
+        form = ArticleForm(instance=article)
+        # form = ArticleForm(initial=article.__dict__)
     return render(request, 'articles/new.html', {'form':form})
