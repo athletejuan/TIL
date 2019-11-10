@@ -1,24 +1,37 @@
 {% extends 'articles/base.html' %}
-{% load static %}
+{% load bootstrap4 %}
 {% block body %}
-{% if request.resolver_match.url_name == 'create' %}
-    <h1 class='text-center'>NEW</h1>
-{% else %}
-    <h1 class='text-center'>EDIT</h1>
-{% endif %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if request.resolver_match.url_name == 'create' %}
+            <h1 class='text-center'>NEW</h1>
+            <p class="lead">Create your Article</p>
+        {% else %}
+            <h1 class='text-center'>EDIT</h1>
+            <p class="lead">Edit yout Article</p>
+        {% endif %}
+        <!-- <h1 class="display-4">Fluid jumbotron</h1> -->
+        <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+    </div>
+</div>
+
 <hr>
-<form action="" method="POST" enctype="multipart/form-data" style="display:inline">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <!-- 제목: <input type="text" name='title'><br>
-    내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
-    이미지: <input type="file" name='image' accept="images/*"><br>
-    <input type="submit" value="입력"> -->
-    <button class="btn btn-info">입력</button>
-</form>
-{% if request.resolver_match.url_name == 'create' %}
-    <a href="{% url 'articles:index' %}" style="display:inline"><button class='btn btn-warning'>목록으로 돌아가기</button></a>
-{% else %}
-    <a href="{% url 'articles:detail' article.id %}" style="display:inline"><button class='btn btn-warning'>뒤로가기</button></a>
-{% endif %}
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data" style="display:inline">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
+        <!-- {{ form.as_p }} -->
+        <!-- 제목: <input type="text" name='title'><br>
+        내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
+        이미지: <input type="file" name='image' accept="images/*"><br>
+        <input type="submit" value="입력"> -->
+        <!-- <button class="btn btn-info">입력</button> -->
+    </form>
+    {% if request.resolver_match.url_name == 'create' %}
+        <a href="{% url 'articles:index' %}" style="display:inline"><button class='btn btn-warning'>목록으로 돌아가기</button></a>
+    {% else %}
+        <a href="{% url 'articles:detail' article.id %}" style="display:inline"><button class='btn btn-warning'>뒤로가기</button></a>
+    {% endif %}
+</div>
 {% endblock %}

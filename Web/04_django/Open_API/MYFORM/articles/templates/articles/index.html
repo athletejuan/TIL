@@ -1,7 +1,14 @@
 {% extends 'articles/base.html' %}
 {% block body %}
-<h1 class='text-center'>INDEX</h1>
-<a href="{% url 'articles:create' %}"><button class='btn btn-warning'>새 글</button></a><br>
+<div class="jumbotron">
+    <h1 class="display-4">Juan's BLOG</h1>
+    <p class="lead">This is My Blog</p>
+    <hr class="my-4">
+    <p>Whatever you want to say</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'articles:create' %}" role="button">New Article</a>
+</div>
+<!-- <h1 class='text-center'>INDEX</h1> -->
+<!-- <a href="{% url 'articles:create' %}"><button class='btn btn-warning'>새 글</button></a><br> -->
 <hr>
 {% for article in articles %}
     <ul>
