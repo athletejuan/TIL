@@ -3,12 +3,14 @@
 {% block body %}
 <h1 class='text-center'>NEW</h1>
 <hr>
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" style="display:inline">
     {% csrf_token %}
-    제목: <input type="text" name='title'><br>
+    {{ form.as_p }}
+    <!-- 제목: <input type="text" name='title'><br>
     내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
     이미지: <input type="file" name='image' accept="images/*"><br>
-    <input type="submit" value="입력">
+    <input type="submit" value="입력"> -->
+    <button class="btn btn-info">입력</button>
 </form>
-<a href="{% url 'articles:index' %}"><button class='btn btn-danger'>목록으로 돌아가기</button></a>
+<a href="{% url 'articles:index' %}" style="display:inline"><button class='btn btn-warning'>목록으로 돌아가기</button></a>
 {% endblock %}

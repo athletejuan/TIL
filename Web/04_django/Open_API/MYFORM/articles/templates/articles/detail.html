@@ -14,7 +14,7 @@
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
 </div>
-<a href="{% url 'articles:index' %}"><button class='btn btn-danger'>목록</button></a>
+<a href="#"><button class='btn btn-danger'>삭제</button></a>
 <a href="#"><button class='btn btn-warning'>수정</button></a>
-<a href="#"><button class='btn btn-primary'>삭제</button></a>
+<a href="{% url 'articles:index' %}"><button class='btn btn-success'>목록</button></a>
 {% endblock %}
