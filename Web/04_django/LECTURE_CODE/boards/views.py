@@ -107,6 +107,7 @@ def update(request, article_id):
 #         }
 #         return render(request, 'update.html', context)
 
+@require_POST   # POST 요청이 아닌 요청이 들어오면 405에러를 보여준다
 def delete(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     if article.user == request.user:
@@ -114,8 +115,8 @@ def delete(request, article_id):
             # article = Article.objects.get(id=article_id)
             article.delete()
             return redirect('articles:index')
-        else:
-            return redirect('articles:detail', article.id)
+        # else:
+        #     return redirect('articles:detail', article.id)
     else:
         return redirect('articles:index')
 
