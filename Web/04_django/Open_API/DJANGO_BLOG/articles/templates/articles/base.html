@@ -11,6 +11,20 @@
 </head>
 <body>
     <div class="container">
+        {% if user.is_authenticated %}
+        <h1>Hello! {{ user.username }}!</h1>
+        <form action="{% url 'accounts:logout' %}" method='POST' style='display:inline'>
+            {% csrf_token %}
+            <button class='btn btn-success btn-sm'>로그아웃</button>
+        </form>
+        <form action="{% url 'accounts:quit' %}" method='POST' style='display:inline'>
+            {% csrf_token %}
+            <button class='btn btn-secondary btn-sm'>회원탈퇴</button>
+        </form>
+        {% else %}
+        <a href="{% url 'accounts:signup' %}"><button class='btn btn-success btn-sm'>회원가입</button></a>
+        <a href="{% url 'accounts:login' %}"><button class='btn btn-success btn-sm'>로그인</button></a>
+        {% endif %}
         {% block body %}
         {% endblock %}
     </div>

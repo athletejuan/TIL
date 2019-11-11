@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
+    'accounts',
     'jobs.apps.JobsConfig',
     'movies',
     'django.contrib.admin',

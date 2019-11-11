@@ -3,7 +3,11 @@
 
 {% block body %}
     <h1 class='text-center'>BOARD</h1>
+    {% if user.is_authenticated %}
     <a href="{% url 'articles:create' %}">[새 글 작성하기]</a>
+    {% else %}
+    <a href="{% url 'accounts:login' %}">[새 글 작성을 위해 로그인해주세요]</a>
+    {% endif %}
     <img src="{% static 'logo-hangul.png' %}" alt="ㅎㅍㅎㅋ" width='300px'>
     <hr>
     {% for article in articles %}
