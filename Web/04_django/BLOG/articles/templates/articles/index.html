@@ -2,15 +2,26 @@
 {% load static %}
 {% block body %}
 <div class='container'>
-  <h1 class="text-center">INDEX</h1>
-  <img src="{% static 'hphk.png' %}" alt="hphk">
-  <div>
+  <div class="jumbotron">
+    <img src="{% static 'logo-hangul-no-background.png' %}" alt="hphk" width='300px' style='display:inline'>
+    <h1 class="display-4" style='display:inline'>Juan's BLOG</h1>
+    <hr class="my-4">
+    <p>Whatever you want to say</p>
+    {% if user.is_authenticated %}
+      <a class="btn btn-primary btn-lg" href="{% url 'articles:new' %}" role="button">New Article</a>
+    {% else %}
+      <a href="{% url 'accounts:login' %}"><button class='btn btn-primary btn-lg'>로그인하세요</button></a>
+    {% endif %}
+  </div>
+  <!-- <h1 class="text-center">INDEX</h1> -->
+  <!-- <img src="{% static 'hphk.png' %}" alt="hphk"> -->
+  <!-- <div>
     {% if user.is_authenticated %}
     <a href="/articles/new/" class='btn btn-warning btn-lg'>새 글</a>
     {% else %}
     <a href="{% url 'accounts:login' %}"><button class='btn btn-primary btn-lg'>로그인하세요</button></a>
     {% endif %}
-  </div>
+  </div> -->
   <hr>
   <div>
     <ul>

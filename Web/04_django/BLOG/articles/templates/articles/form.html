@@ -1,6 +1,17 @@
 {% extends 'articles/base.html' %}
+{% load bootstrap4 %}
 {% block body %}
-<h1 class='text-center'>NEW</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if request.resolver_match.url_name == 'new' %}
+            <h1 class='text-center'>NEW</h1>
+            <p class="lead">Create your Article</p>
+        {% else %}
+            <h1 class='text-center'>EDIT</h1>
+            <p class="lead">Edit yout Article</p>
+        {% endif %}
+    </div>
+</div>
 <hr>
 <form action="" method='POST' class='container' enctype="multipart/form-data">
   {% csrf_token %}
