@@ -23,7 +23,8 @@
     {% if user.is_authenticated %}
     <form action="{% url 'articles:comment_create' article.id %}" method="POST">
         {% csrf_token %}
-        Comment: <input type="text" name="content">
+        {{ comment_form }}
+        <!-- Comment: <input type="text" name="content"> -->
         <input type="submit" value="입력" class="btn btn-dark">
     </form>
     {% else %}
@@ -34,7 +35,7 @@
     {% if comments %}
         <br>
         {% for comment in comments %}
-            <ol><p>{{ comment.content }} {% if user == comment.user %} - <a href="{% url 'articles:comment_delete' article.id comment.id %}"><button class="btn btn-light">삭제</button></a>{% endif %}</p></ol>
+            <ul><li>댓글 {{ forloop.revcounter }}: {{ comment.content }} {% if user == comment.user %} - <a href="{% url 'articles:comment_delete' article.id comment.id %}"><button class="btn btn-light">삭제</button></a>{% endif %}</li></ul>
         {% endfor %}
     {% else %}
         <br>

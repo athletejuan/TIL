@@ -128,10 +128,10 @@ def comment_create(request, article_id):
     # )
     # return redirect('articles:detail', article_id)
     article = Article.objects.get(id=article_id)
-    form = CommentForm(request.POST)
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.article = Article.objects.get(id=article_id)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.article = article
         comment.user = request.user
         comment.save()
     # comment = Comment()
