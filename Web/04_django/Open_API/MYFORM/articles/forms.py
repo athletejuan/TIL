@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article, Comment
 
 class ArticleForm(forms.ModelForm):
     class Meta:
@@ -23,3 +23,9 @@ class ArticleForm(forms.ModelForm):
 #             'placeholder':'Enter the content',
 #         })
 #     )
+
+class CommentForm(forms.ModelForm):
+    # content = forms.CharField()
+    class Meta:
+        model = Comment
+        fields = ['content',]
