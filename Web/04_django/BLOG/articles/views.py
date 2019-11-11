@@ -44,7 +44,8 @@ def new(request):
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
     comments = article.comment_set.order_by('-id')
-    return render(request, 'articles/detail.html', {'article':article, 'comments':comments})
+    comment_form = CommentForm()
+    return render(request, 'articles/detail.html', {'article':article, 'comments':comments, 'comment_form':comment_form})
 
 @login_required
 def edit(request, article_id):
@@ -77,11 +78,15 @@ def delete(request, article_id):
 def comments_create(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == 'POST':
-        comment = Comment()
-        # form에서 보낸 댓글 정보를 저장한다
-        comment.content = request.POST.get('content')
-        comment.article = article
-        comment.save()
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            content = comment_form.cleaned_data.get('content')
+            comment = Comment.objects.create(content=content, article=article)
+        # comment = Comment()
+        # # form에서 보낸 댓글 정보를 저장한다
+        # comment.content = request.POST.get('content')
+        # comment.article = article
+        # comment.save()
     return redirect('articles:detail', article.id)
     # else:
     #     return redirect('articles:detail', article.id)

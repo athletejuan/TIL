@@ -22,6 +22,13 @@ class ArticleForm(forms.Form):
         fields = ['title','content',]
 
 class CommentForm(forms.Form):
+    content = forms.CharField(
+        label='댓글입력 ',
+        widget=forms.TextInput(attrs={
+            'placeholder': "What's your comment?"
+        })
+    )
+
     class Meta:
         model = Comment
         fields = ['content',]

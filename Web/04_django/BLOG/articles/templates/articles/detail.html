@@ -15,20 +15,23 @@
     <hr>
     <form action="{% url 'articles:comments_create' article.id %}" method='POST'>
         {% csrf_token %}
-        댓글 달기: <input type="text" name="content">
-        <input type="submit" value="댓글 입력">
+        {{ comment_form }}
+        <button class='btn btn-warning btn-sm'>입력</button>
+        <!-- 댓글 달기: <input type="text" name="content"> -->
+        <!-- <input type="submit" value="입력"> -->
     </form>
     <hr>
     <p><b>댓글 목록</b></p>
     {% for comment in comments %}
-        <li>{{ comment.content }}</li>
+        <li>{{ comment.content }}
         <form action="{% url 'articles:comments_delete' article.id comment.id %}" method='POST' style='display: inline;'>
             {% csrf_token %}
             <button class='btn btn-danger btn-sm'>댓글 삭제</button>
         </form>
+        </li><br>
     {% endfor %}
         <hr>
-    <a href="{% url 'articles:index' %}"><button class="btn btn-success btn-sm">목록</button></a>
+    <a href="{% url 'articles:index' %}"><button class="btn btn-success btn-lg">목록</button></a>
     {% if article.user == request.user %}
     <a href="{% url 'articles:edit' article.id %}" style="display: inline"><button class="btn btn-success btn-sm">수정</button></a>
     <form action="{% url 'articles:delete' article.id %}" method='POST' style="display: inline">
