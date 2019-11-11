@@ -62,7 +62,7 @@ def update(request, article_id):
 
 @require_POST
 def comment_create(request, article_id):
-    article = Article.objects.get(pk=article_id)
+    article = get_object_or_404(Article, pk=article_id)
     # if request.method == "POST":
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
@@ -80,7 +80,7 @@ def comment_create(request, article_id):
 @require_POST
 def comment_delete(request, article_id, comment_id):
     # if request.method == "POST":
-    comment = Comment.objects.get(pk=comment_id)
+    # comment = Comment.objects.get(pk=comment_id)
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
     return redirect('articles:detail', article_id)
