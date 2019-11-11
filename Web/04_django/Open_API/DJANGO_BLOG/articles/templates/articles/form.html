@@ -1,0 +1,25 @@
+{% extends 'articles/base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+{% if request.resolver_match.url_name == 'create' %}
+<h1 class='text-center'>NEW</h1>
+{% else %}
+<h1 class='text-center'>EDIT</h1>
+{% endif %}
+<hr>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% bootstrap_button "등록" button_class='btn btn-dark' %}
+    <!-- 제목: <input type="text" name='title'> <br>
+    내용: <textarea name="content" id="" cols="30" rows="10"></textarea> <br>
+    이미지: <input type="file" name='image' accept="image/*"> <br> -->
+    <!-- <button class="btn btn-success">작성</button> -->
+</form>
+{% if request.resolver_match.url_name == 'create' %}
+<a href="{% url 'articles:index' %}">[돌아가기]</a>
+{% else %}
+<a href="{% url 'articles:detail' article.id %}">[돌아가기]</a>
+{% endif %}
+{% endblock %}

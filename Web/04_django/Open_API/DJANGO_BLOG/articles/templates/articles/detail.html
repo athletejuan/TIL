@@ -1,5 +1,6 @@
 {% extends 'articles/base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block body %}
     <h1 class='text-center'>DETAIL</h1>
@@ -17,15 +18,17 @@
     <hr>
     <form action="{% url 'articles:comment_create' article.id %}" method="POST">
         {% csrf_token %}
-        댓글 입력: <input type="text" name='content'>
-        <input type="submit" value="입력">
+        {% bootstrap_form comment_form layout='horizontal' %}
+        {% bootstrap_button "등록" button_class='btn btn-primary' %}
+        <!-- 댓글 입력: <input type="text" name='content'> -->
+        <!-- <input type="submit" value="입력"> -->
     </form>
     <hr>
     <h3>댓글 목록 | 현재 댓글수: {{ comments|length }}</h3><br>
     {% for comment in comments %}
     <ul>
         <li>
-            {{ comment.content }}
+            댓글 {{ forloop.revcounter }}: {{ comment.content }}
             <form action="{% url 'articles:comment_delete' article.id comment.id %}" style="display:inline" onclick="return confirm('R U Sure..??')" method="POST">
                 {% csrf_token %}
                 <button class="btn btn-warning btn-sm">삭제</button>
