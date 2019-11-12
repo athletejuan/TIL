@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     # articles = Article.objects.all()
@@ -12,11 +13,14 @@ def index(request):
 # def new(request):
 #     return render(request, 'articles/new.html')
 
+@login_required
 def create(request):
     if request.method == "POST":
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            article = form.save()
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()
             return redirect('articles:detail', article.id)
         # 1.
         # title = request.POST.get('title')
@@ -49,12 +53,14 @@ def detail(request, article_id):
     comment_form = CommentForm()
     return render(request, 'articles/detail.html', {'article':article, 'comments':comments, 'comment_form':comment_form})
 
+@login_required
 @require_POST
 def delete(request, article_id):
     # article = Article.objects.get(pk=article_id)
     article = get_object_or_404(Article, pk=article_id)
+    if article.user == request.user:
     # if request.method == "POST":
-    article.delete()
+        article.delete()
     return redirect('articles:index')
     # else:
     #     return redirect('articles:detail', article.id)
@@ -64,23 +70,28 @@ def delete(request, article_id):
 #     article = Article.objects.get(pk=id)
 #     return render(request, 'articles/edit.html', {'article':article})
 
+@login_required
 def update(request, article_id):
     # article = Article.objects.get(pk=article_id)
     article = get_object_or_404(Article, pk=article_id)
-    if request.method == "POST":
-        form = ArticleForm(request.POST, request.FILES, instance=article)
-        if form.is_valid():
-            article = form.save()
-            return redirect('articles:detail', article.id)
-        # article.title = request.POST.get('title')
-        # article.content = request.POST.get('content')
-        # article.image = request.FILES.get('image')
-        # article.save()
-        # return redirect('articles:detail', article.id)
+    if article.user == request.user:
+        if request.method == "POST":
+            form = ArticleForm(request.POST, request.FILES, instance=article)
+            if form.is_valid():
+                article = form.save()
+                return redirect('articles:detail', article.id)
+            # article.title = request.POST.get('title')
+            # article.content = request.POST.get('content')
+            # article.image = request.FILES.get('image')
+            # article.save()
+            # return redirect('articles:detail', article.id)
+        else:
+            form = ArticleForm(instance=article)
     else:
-        form = ArticleForm(instance=article)
-        return render(request, 'articles/form.html', {'form':form, 'article':article})
+        return redirect('articles:index')
+    return render(request, 'articles/form.html', {'form':form, 'article':article})
 
+@login_required
 @require_POST
 def comment_create(request, article_id):
     # article = Article.objects.get(pk=article_id)
@@ -97,6 +108,7 @@ def comment_create(request, article_id):
     # comment.save()
         return redirect('articles:detail', article.id)
     
+@login_required
 @require_POST
 def comment_delete(request, article_id, comment_id):
     # if request.method == "POST":

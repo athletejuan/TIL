@@ -11,6 +11,7 @@
     <img src="{% static 'logo-hangul.png' %}" alt="ㅎㅍㅎㅋ" width='300px'>
     <hr>
     {% for article in articles %}
+        <p><b>작성자: {{ article.user }}</b></p>
         <p>글 번호: {{ article.id }}</p>
         <p>글 제목: {{ article.title }}</p>
         <!-- <p>글 내용: {{ article.content }}</p> -->

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 # from imagekit.models import ProcessedImageField
 # from imagekit.processors import ResizeToFill, Thumbnail
 
@@ -14,6 +15,7 @@ class Article(models.Model):
     # )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.id}번 글 - {self.title} : {self.content}'

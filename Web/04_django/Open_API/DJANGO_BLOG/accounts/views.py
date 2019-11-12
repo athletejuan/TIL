@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
 from .forms import UserCustomChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash    # 비밀번호 변경시 session_auth_hash 정보를 update
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 
@@ -55,7 +55,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)
+            update_session_auth_hash(request, user)    # 비밀번호 변경 후 기존 로그인된 계정 정보와 일치하지않아서 자동로그아웃되지 않도록 session_auth_hash 정보를 update 해줌
             return redirect('articles:index')
     else:
         form = PasswordChangeForm(request.user)
