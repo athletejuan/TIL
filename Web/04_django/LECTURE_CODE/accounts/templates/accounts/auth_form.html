@@ -1,7 +1,6 @@
 {% extends 'boards/base.html' %}
 {% load bootstrap4 %}
 
-{% block title %}Password{% endblock %}
 {% block body %}
 {% if request.resolver_match.url_name == 'signup' %}
 <h1 class="text-center">Sign Up</h1>
@@ -10,10 +9,12 @@
 {% else %}
 <h1 class="text-center">Edit Account</h1>
 {% endif %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form layout='horizontal' %}
-    {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
-</form>
-
+<div class="container">
+    <form action="" method="POST" style='display:inline'>
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
+    </form>
+    <a href="{% url 'articles:index' %}" style='display:inline'><button class='btn btn-info'>목록보기</button></a>
+</div>
 {% endblock %}

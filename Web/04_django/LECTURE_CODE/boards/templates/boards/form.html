@@ -1,35 +1,36 @@
 {% extends 'boards/base.html' %}
 {% load bootstrap4 %}
 
-{% block title %}CREATE{% endblock %}
 {% block body %}
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        {% if request.resolver_match.url_name == "create" %}
-        <h1 class="display-4">CREATE</h1>
-        <p class="lead">Create a New Article</p>
-        {% else %}
-        <h1 class="display-4">EDIT</h1>
-        <p class="lead">Edit your Article</p>
-        {% endif %}
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            {% if request.resolver_match.url_name == "create" %}
+            <h1 class="display-4">CREATE</h1>
+            <p class="lead">Create a New Article</p>
+            {% else %}
+            <h1 class="display-4">EDIT</h1>
+            <p class="lead">Edit your Article</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 <!-- <h1 align=center>CREATE</h1> -->
 <div class="container">
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data" style='display:inline'>
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
         <!-- 이미지: <input type="file" name="image" accept="image/*"> <br> -->
-        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-dark' %}
+        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-primary' %}
         <!-- {{ form.as_p }} -->
         <!-- <div>
             <input type="submit" value="등록" class="btn btn-dark">
         </div> -->
     </form>
     {% if request.resolver_match.url_name == "create" %}
-        <a href="{% url 'articles:index' %}"><button class="btn btn-dark">목록으로</button></a>
+        <a href="{% url 'articles:index' %}" style='display:inline'><button class="btn btn-dark">목록으로</button></a>
     {% else %}
-        <a href="{% url 'articles:detail' article.id %}"><button class="btn btn-dark">수정취소</button></a>
+        <a href="{% url 'articles:detail' article.id %}" style='display:inline'><button class="btn btn-dark">수정취소</button></a>
     {% endif %}
 </div>
 {% endblock %}

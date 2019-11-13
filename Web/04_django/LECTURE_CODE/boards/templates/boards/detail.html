@@ -1,10 +1,13 @@
 {% extends 'boards/base.html' %}
+{% load bootstrap4 %}
 {% block title %}DETAIL{% endblock %}
 {% block body %}
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">DETAIL</h1>
-        <p class="lead">This is Article</p>
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">DETAIL</h1>
+            <p class="lead">This is Article</p>
+        </div>
     </div>
 </div>
 <!-- <h1 align=center>DETAIL</h1> -->
@@ -23,9 +26,11 @@
     {% if user.is_authenticated %}
     <form action="{% url 'articles:comment_create' article.id %}" method="POST">
         {% csrf_token %}
-        {{ comment_form }}
+        {% bootstrap_form comment_form layout='horizontal' %}
+        {% bootstrap_button "입력" button_class='btn btn-dark' %}
+        <!-- {{ comment_form }} -->
         <!-- Comment: <input type="text" name="content"> -->
-        <input type="submit" value="입력" class="btn btn-dark">
+        <!-- <input type="submit" value="입력" class="btn btn-dark"> -->
     </form>
     {% else %}
     <div class='text-center'>

@@ -1,12 +1,12 @@
 {% extends 'boards/base.html' %}
 {% block title %}INDEX{% endblock %}
 {% block body %}
-<div class="jumbotron">
-    <div class="container">
-        <h1 class="display-4">Juan's BOARD</h1>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Juan's BLOG</h1>
         <p class="lead">This is My Board</p>
         <hr class="my-4">
-        <p>Whatever you want to say</p>
+        <p class='font-italic'>Whatever you want to say</p>
         {% if user.is_authenticated %}
         <a class="btn btn-primary btn-lg" href="{% url 'articles:create' %}" role="button">새 글</a>
         {% else %}
