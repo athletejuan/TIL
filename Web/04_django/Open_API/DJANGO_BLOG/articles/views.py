@@ -101,6 +101,7 @@ def comment_create(request, article_id):
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
         comment.article = article
+        comment.user = request.user
         comment.save()
     # comment = Comment()
     # comment.content = request.POST.get('content')
@@ -112,6 +113,8 @@ def comment_create(request, article_id):
 @require_POST
 def comment_delete(request, article_id, comment_id):
     # if request.method == "POST":
-    comment = Comment.objects.get(pk=comment_id)
-    comment.delete()
+    # comment = Comment.objects.get(pk=comment_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user == comment.user:
+        comment.delete()
     return redirect('articles:detail', article_id)

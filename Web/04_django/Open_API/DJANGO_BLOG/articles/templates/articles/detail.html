@@ -17,6 +17,8 @@
     <p>작성시간: {{ article.created_at }}</p>
     <p>수정시간: {{ article.updated_at }}</p>
     <hr>
+    <h3>댓글 작성</h3>
+    {% if user.is_authenticated %}
     <form action="{% url 'articles:comment_create' article.id %}" method="POST">
         {% csrf_token %}
         {% bootstrap_form comment_form layout='horizontal' %}
@@ -24,16 +26,23 @@
         <!-- 댓글 입력: <input type="text" name='content'> -->
         <!-- <input type="submit" value="입력"> -->
     </form>
+    {% else %}
+    <div class="text-center">
+        <a href="{% url 'accounts:login' %}"><button class='btn btn-warning'>댓글을 작성하려면 로그인 해주세요</button></a>
+    </div>
+    {% endif %}
     <hr>
     <h3>댓글 목록 | 현재 댓글수: {{ comments|length }}</h3><br>
     {% for comment in comments %}
     <ul>
         <li>
             댓글 {{ forloop.revcounter }}: {{ comment.content }}
+            {% if user == comment.user %}
             <form action="{% url 'articles:comment_delete' article.id comment.id %}" style="display:inline" onclick="return confirm('R U Sure..??')" method="POST">
                 {% csrf_token %}
                 <button class="btn btn-warning btn-sm">삭제</button>
             </form>
+            {% endif %}
         </li>
     </ul>
     {% empty %}
@@ -44,16 +53,16 @@
         <button class="btn btn-primary">수정</button>
     </form> -->
     {% if article.user == request.user %}
-    <a href="{% url 'articles:update' article.id %}" class="btn btn-primary" style="display:inline">수정</a>
     <form action="{% url 'articles:delete' article.id %}" onclick="return confirm('R U SURE..??')" method="POST" style="display:inline">
         {% csrf_token %}
         <!-- <input type="submit" value="삭제"> -->
-        <button class="btn btn-danger btn-sm">삭제</button>
+        <button class="btn btn-dark">삭제</button>
     </form>
+    <a href="{% url 'articles:update' article.id %}" class="btn btn-dark" style="display:inline">수정</a>
     {% endif %}
     <!-- <a href="{% url 'articles:delete' article.id %}" onclick="return confirm('R U SURE..??')">[글 삭제]</a> <br> -->
     <!-- <form action="{% url 'articles:index' %}" style="display:inline">
         <button class="btn btn-info">목록</button>
     </form> -->
-    <a href="{% url 'articles:index' %}" class="btn btn-info" style="display:inline">목록</a>
+    <a href="{% url 'articles:index' %}" class="btn btn-dark" style="display:inline">목록</a>
 {% endblock %}
