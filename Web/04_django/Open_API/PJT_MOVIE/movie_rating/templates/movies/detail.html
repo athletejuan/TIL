@@ -1,0 +1,41 @@
+{% extends 'movies/base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<h1 class='text-center'>Movie's Detail</h1>
+<hr>
+<div class="container">
+    <h3 class='text-center'>제목: {{ movie.title }} - 평점: {{ score_div }}점</h3>
+    <p class='text-right'>작성시간: {{ movie.created_at }} / 수정시간: {{ movie.updated_at }}</p>
+    <ul>
+        <li><img src="{{ movie.poster.url }}" alt="{{ movie.poster }}" class='col align-self-center' width='200px'></li><br>
+        <li><b>영화 소개:</b> {{ movie.description }}</li><br>
+        <li><b>작성자:</b> {{ movie.user }}</li>
+    </ul>
+    <hr>
+    <h3>평점</h3>
+    <form action="{% url 'movies:rating_create' movie.id %}" method='POST'>
+        {% csrf_token %}
+        {% bootstrap_form rating_form layout='horizontal' %}
+        {% bootstrap_button "입력" button_class='btn btn-secondary btn-sm' %}
+    </form>
+    <hr>
+    <h3>평점 목록 | 평점 갯수 {{ ratings|length }}</h3>
+    {% for rating in ratings %}
+        <ul>
+            <li>No. {{ forloop.revcounter }}: {{ rating.content }} / {{ rating.score }} - 
+                <form action="{% url 'movies:rating_delete' movie.id rating.id %}" method='POST' style='display:inline'>
+                    {% csrf_token %}
+                    <button class='btn btn-dark btn-sm'>삭제</button>
+                </form>
+            </li>
+        </ul>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'movies:edit' movie.id %}" style='display:inline'><button class='btn btn-warning'>수정</button></a>
+    <form action="{% url 'movies:delete' movie.id %}" method='POST' style='display:inline'>
+        {% csrf_token %}
+        <button class='btn btn-warning'>삭제</button>
+    </form>
+    <a href="{% url 'movies:index' %}" style='display:inline'><button class='btn btn-warning'>목록</button></a>
+</div>
+{% endblock %}

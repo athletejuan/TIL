@@ -1,0 +1,16 @@
+{% extends 'movies/base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<h1 class='text-center'>MOVIEs</h1>
+<a href="{% url 'movies:new' %}"><button class='btn btn-light border-dark'>새 글</button></a>
+<hr>
+{% for movie in movies %}
+<div class="container">
+    <ul>
+        <li><b>제목: <a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a> - 평점: {{ score_div }}점</b></li>
+        <p>작성시간: {{ movie.created_at }} / 수정시간: {{ movie.updated_at }}</p>
+        <hr>
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}
