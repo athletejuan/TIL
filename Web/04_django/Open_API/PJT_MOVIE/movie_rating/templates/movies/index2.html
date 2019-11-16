@@ -8,11 +8,11 @@
 <a href="{% url 'accounts:login' %}"><button class='btn btn-light border-dark'>영화 정보 입력을 위해 로그인 해주세요</button></a>
 {% endif %}
 <hr>
-{% for movie, score in movie_score %}
+{% for movie in movies %}
 <div class="container">
     <ul>
-        <li><b>제목: <a href="{% url 'movies:detail' movie.pk %}">{{ movie }}</a> - 평점: {{ movie_score[movie] }}점</b></li>
-        <!-- <p class='text-right'>작성시간: {{ movie.created_at }} / 수정시간: {{ movie.updated_at }}</p> -->
+        <li><b>제목: <a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a> - 평점: {% for score in scores %}{{ score }}점{% endfor %}</b></li>
+        <p class='text-right'>작성시간: {{ movie.created_at }} / 수정시간: {{ movie.updated_at }}</p>
         <hr>
     </ul>
 </div>
