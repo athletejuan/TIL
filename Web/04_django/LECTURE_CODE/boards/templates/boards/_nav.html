@@ -7,6 +7,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
+            <form action="{% url 'accounts:profile' user.username %}" method="POST" style='display:inline'>
+                {% csrf_token %}
+                <input class="nav-item nav-link border-0 bg-transparent" type="submit" value="/ Profile">
+            </form>
             <a class="nav-item nav-link" href="{% url 'accounts:edit' %}">/ Edit Account <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="{% url 'accounts:change_password' %}">/ Change Password</a>
             <form action="{% url 'accounts:logout' %}" method="POST" style='display:inline'>

@@ -20,7 +20,11 @@
     {% for article in articles %}
     <div>
         <a href="{% url 'articles:detail' article.id %}" style='display:inline'>No. {{ article.id }}: {{ article.title }}</a>
-        <p style='display:inline'> | <b>writer: {{ article.user }}</b></p><br>
+        <!-- <p style='display:inline'> | <b>writer: {{ article.user }}</b></p><br> -->
+        <form action="{% url 'accounts:profile' article.user %}" method="POST" style="display:inline">
+            {% csrf_token %}
+            | writer: <input type="submit" class="btn btn-light" value="{{ article.user }}">
+        </form><br>
         <p style='display:inline'>작성시간: {{ article.created_at }} | </p>
         {% if user == article.user %}
         <a href="{% url 'articles:update' article.id %}"><button class="btn btn-light">수정</button></a>
