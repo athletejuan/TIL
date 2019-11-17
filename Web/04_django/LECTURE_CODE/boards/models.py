@@ -17,6 +17,7 @@ class Article(models.Model):
         # processors = [Thumbnail(100, 100)],       # 처리할 작업 목록[Thumbnail 사이즈(가로100px, 세로100px)]
         format = 'png',                             # 저장 포멧
         options = {'quality':90},                   # 옵션(이미지 품질 수치)
+        blank = True,                               # 빈 값 허용
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
