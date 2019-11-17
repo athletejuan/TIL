@@ -118,3 +118,16 @@ def comment_delete(request, article_id, comment_id):
     if request.user == comment.user:
         comment.delete()
     return redirect('articles:detail', article_id)
+
+@login_required
+def like(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    user = request.user    # 요청을 보낸 유저
+    # 해당 게시글에 좋아요를 누른 사람들 중에서 user.id(현재 접속유저의 id)를 가진 user가 존재하면
+    if article.like_users.filter(pk=user.id).exists():
+        # user를 삭제한다 (좋아요 취소)
+        article.like_users.remove(user)
+    else:
+        # user가 존재하지 않는다면 user를 추가한다 (좋아요)
+        article.like_users.add(user)
+    return redirect('articles:index')

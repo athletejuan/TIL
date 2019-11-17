@@ -6,7 +6,7 @@ from django.conf import settings
 class Article(models.Model):
     title = models.CharField(max_length=10)
     content = models.TextField()
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True)   # Win7에서는 ProcessedImageField Upload 불가
     # image = ProcessedImageField(
     #     upload_to = 'articles/images',      # 저장위치(MEDIA_ROOT/articles/images)
     #     processors = ResizeToFill(200,300), # 처리할 작업 목록
@@ -16,6 +16,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles', blank=True)
 
     def __str__(self):
         return f'{self.id}번 글 - {self.title} : {self.content}'

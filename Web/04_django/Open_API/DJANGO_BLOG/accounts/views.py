@@ -28,7 +28,7 @@ def login(request):
             return redirect('articles:index')
     else:
         form = AuthenticationForm()
-        return render(request, 'accounts/auth_form.html', {'form':form})
+    return render(request, 'accounts/auth_form.html', {'form':form})
 
 def logout(request):
     if request.method == 'POST':
@@ -48,7 +48,7 @@ def edit(request):
             return redirect('articles:index')
     else:
         form = UserCustomChangeForm(instance=request.user)
-        return render(request, 'accounts/auth_form.html', {'form':form})
+    return render(request, 'accounts/auth_form.html', {'form':form})
 
 def change_password(request):
     if request.method == 'POST':
@@ -59,4 +59,4 @@ def change_password(request):
             return redirect('articles:index')
     else:
         form = PasswordChangeForm(request.user)
-        return render(request, 'accounts/auth_form.html', {'form':form})
+    return render(request, 'accounts/auth_form.html', {'form':form})
