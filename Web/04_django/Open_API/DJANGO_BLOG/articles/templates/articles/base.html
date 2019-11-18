@@ -12,8 +12,13 @@
 </head>
 <body>
     <div class="container">
-        {% if user.is_authenticated %}
+        {% include 'articles/_nav.html' %}
+        <!-- {% if user.is_authenticated %}
         <h1>Hello! {{ user.username }}!</h1>
+        <form action="{% url 'accounts:profile' user.username %}" method='POST' style='display:inline'>
+            {% csrf_token %}
+            <button class='btn btn-info btn-sm'>프로필</button>
+        </form>
         <a href="{% url 'accounts:edit' %}"><button class='btn btn-success btn-sm'>회원정보 수정</button></a>
         <a href="{% url 'accounts:change_password' %}"><button class='btn btn-success btn-sm'>비밀번호 변경</button></a>
         <form action="{% url 'accounts:logout' %}" method='POST' style='display:inline'>
@@ -28,7 +33,7 @@
         <h1>Hello! Stranger~</h1>
         <a href="{% url 'accounts:signup' %}"><button class='btn btn-success btn-sm'>회원가입</button></a>
         <a href="{% url 'accounts:login' %}"><button class='btn btn-success btn-sm'>로그인</button></a>
-        {% endif %}
+        {% endif %} -->
         {% block body %}
         {% endblock %}
     </div>

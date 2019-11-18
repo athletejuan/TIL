@@ -18,6 +18,9 @@ class Article(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles', blank=True)
 
+    class Meta:
+        ordering = ['-pk']
+        
     def __str__(self):
         return f'{self.id}번 글 - {self.title} : {self.content}'
 
