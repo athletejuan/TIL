@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -33,7 +32,15 @@ INSTALLED_APPS = [
     'bootstrap4',
 
     'django_extensions',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.kakao',
 ]
+
+SITE_ID = 1 # 사이트 아이디 기본값
+LOGIN_REDIRECT_URL = 'articles:index'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

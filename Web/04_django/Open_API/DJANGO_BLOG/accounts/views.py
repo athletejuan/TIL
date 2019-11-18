@@ -29,7 +29,7 @@ def login(request):
             return redirect('articles:index')
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/auth_form.html', {'form':form})
+    return render(request, 'accounts/login.html', {'form':form})
 
 def logout(request):
     if request.method == 'POST':

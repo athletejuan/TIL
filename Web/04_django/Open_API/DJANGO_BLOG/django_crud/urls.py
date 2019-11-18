@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),    # url 은 반드시 기존 accounts 주소보다 하단에 있도록 한다.
     path('movies/', include('movies.urls')),
     path('jobs/', include('jobs.urls')),
     path('articles/', include('articles.urls')),
