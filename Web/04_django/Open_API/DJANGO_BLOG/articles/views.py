@@ -3,6 +3,7 @@ from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 
 def index(request):
     # articles = Article.objects.all()
@@ -51,7 +52,8 @@ def detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     comments = article.comment_set.all()
     comment_form = CommentForm()
-    return render(request, 'articles/detail.html', {'article':article, 'comments':comments, 'comment_form':comment_form})
+    person = get_object_or_404(get_user_model(), pk=article.user_id)
+    return render(request, 'articles/detail.html', {'article':article, 'comments':comments, 'comment_form':comment_form, 'person':person})
 
 @login_required
 @require_POST
@@ -131,3 +133,16 @@ def like(request, article_id):
         # user가 존재하지 않는다면 user를 추가한다 (좋아요)
         article.like_users.add(user)
     return redirect('articles:index')
+
+@login_required
+def follow(request, article_id, user_id):
+    # 게시글 유저
+    you = get_object_or_404(get_user_model(), pk=user_id)
+    # 접속 유저
+    me = request.user
+    if you != me:
+        if you.followers.filter(pk=me.pk).exists():
+            you.followers.remove(me)
+        else:
+            you.followers.add(me)
+    return redirect('articles:detail', article_id)

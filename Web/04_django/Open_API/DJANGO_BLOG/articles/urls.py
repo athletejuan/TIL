@@ -4,6 +4,7 @@ from . import views
 app_name = 'articles'
 
 urlpatterns = [
+    path('<int:article_id>/follow/<int:user_id>/', views.follow, name='follow'),
     path('<int:article_id>/like/', views.like, name='like'),
     path('<int:article_id>/comments/<int:comment_id>/delete/', views.comment_delete, name='comment_delete'),
     path('<int:article_id>/comments/', views.comment_create, name='comment_create'),

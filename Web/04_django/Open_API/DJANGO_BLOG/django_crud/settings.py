@@ -121,3 +121,5 @@ STATICFILES_DIRS = [ # 정적 파일이 위치한 경로
 ]
 MEDIA_URL = '/media/'   # STATIC_URL과 비슷. 업로드 된 파일의 주소(URL)를 만들어 줌 (실제 이미지 파일이 업로드 된 디렉토리를 의미하는 것은 아님)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')   # STATICFILES_DIRS 동일. 정적 파일의 업로드가 끝나면 파일이 어디에 저장될지를 설정하는 경로
+
+AUTH_USER_MODEL = 'accounts.User'
