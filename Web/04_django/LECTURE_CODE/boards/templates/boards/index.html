@@ -4,7 +4,6 @@
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">Juan's BLOG</h1>
-        <p class="lead">This is My Board</p>
         <hr class="my-4">
         <p class='font-italic'>Whatever you want to say</p>
         {% if user.is_authenticated %}
@@ -13,6 +12,7 @@
         <a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}" role="button">Log In</a>
         {% endif %}
     </div>
+    <p class="lead text-right">Copyright 2019. Juan. All rights reserved.</p>
 </div>
 <!-- <h1 align=center>INDEX</h1> -->
 <!-- <a href="{% url 'articles:create' %}"><button class="btn btn-dark">새 글</button></a> -->
@@ -23,7 +23,7 @@
         <!-- <p style='display:inline'> | <b>writer: {{ article.user }}</b></p><br> -->
         <form action="{% url 'accounts:profile' article.user %}" method="POST" style="display:inline">
             {% csrf_token %}
-            | writer: <input type="submit" class="btn btn-light" value="{{ article.user }}">
+            | writer: <input type="submit" class="border-0 bg-transparent font-weight-bold" value="{{ article.user }}">
         </form><br>
         <p style='display:inline'>작성시간: {{ article.created_at }} | </p>
         {% if user == article.user %}

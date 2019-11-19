@@ -30,9 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-# 'allauth.account.auth_backends.AuthenticationBackend',
-) # For Social Login
+# AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
+# # 'allauth.account.auth_backends.AuthenticationBackend',
+# ) # For Social Login
 
 INSTALLED_APPS = [
     'django.contrib.admin',

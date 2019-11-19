@@ -5,6 +5,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.user.is_authenticated:
@@ -62,8 +63,9 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/auth_form.html', {'form':form})
 
+@login_required
 def profile(request, username):
-    person = get_object_or_404(get_user_model(), username=username)
+    person = get_object_or_404(get_user_model(), username=username)    
     if request.method == 'POST':
         return render(request, 'accounts/profile.html', {'person':person})
     else:

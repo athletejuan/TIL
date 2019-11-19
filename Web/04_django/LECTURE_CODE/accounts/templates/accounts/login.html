@@ -11,7 +11,7 @@
         {% bootstrap_form form layout='horizontal' %}
         {% bootstrap_button "Log In" button_type='submit' button_class='btn btn-dark' %}
     </form>
-    <a class="btn btn-warning" href="{% provider_login_url 'kakao' method='oauth2' %}" style='display: inline;'>Kakao Log In</a>
-    <a href="{% url 'articles:index' %}"><button class='btn btn-light'>Cancel</button></a>
+    <a href="{% provider_login_url 'kakao' %}"><button class='btn btn-warning'>Kakao Log In</button></a>
+    <a href="{% url 'articles:index' %}"><button class='btn btn-dark'>Cancel</button></a>
 </div>
 {% endblock %}
