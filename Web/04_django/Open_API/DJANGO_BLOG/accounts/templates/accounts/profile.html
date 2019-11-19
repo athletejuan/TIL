@@ -1,6 +1,14 @@
 {% extends 'articles/base.html' %}
 {% block body %}
-<h1 class="text-center">{{ person.username }}'s Profile</h1>
+<div class="container">
+    <div class="jumbotron text-center text-white bg-dark">
+        <h1 class="text-center">{{ person.username }}'s Profile</h1>
+        <p class="lead">
+            팔로잉 : {{ person.followings.all | length }} /
+            팔로워 : {{ person.followers.all | length }}
+        </p>
+    </div>
+</div>
 <hr>
 <h3 class="text-center">{{ person.username }}이 작성한 글</h3>
 

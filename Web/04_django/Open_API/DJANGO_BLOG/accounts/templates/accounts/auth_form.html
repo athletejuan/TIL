@@ -8,9 +8,10 @@
 {% else %}
 <h1 class='text-center'>비밀번호 변경</h1>
 {% endif %}
-<form action="" method="POST">
+<form action="" method="POST" style='display:inline'>
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
-    {% bootstrap_button "입력" button_class='btn btn-success btn-sm' %}
+    {% bootstrap_button "입력" button_class='btn btn-success' %}
 </form>
+<a href="{% url 'articles:index' %}"><button class='btn btn-dark'>취소</button></a>
 {% endblock %}
