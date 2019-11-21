@@ -49,14 +49,16 @@
     <hr>
     {% include 'boards/_profile.html' %}
     <hr>
-    <a href="{% url 'articles:index' %}"><button class="btn btn-info">목록</button></a>
-    {% if user == article.user %}
-    <a href="{% url 'articles:update' article.id %}"><button class="btn btn-info">수정</button></a>
-    <form action="{% url 'articles:delete' article.id %}" method="POST" style='display:inline'>
-        {% csrf_token %}
-        <button class="btn btn-info">삭제</button>
-    </form>
-    {% endif %}
+    <div class='mb-5'>
+        <a href="{% url 'articles:index' %}"><button class="btn btn-info">목록</button></a>
+        {% if user == article.user %}
+        <a href="{% url 'articles:update' article.id %}"><button class="btn btn-info">수정</button></a>
+        <form action="{% url 'articles:delete' article.id %}" method="POST" style='display:inline'>
+            {% csrf_token %}
+            <button class="btn btn-info">삭제</button>
+        </form>
+        {% endif %}
+    </div>
     <!-- <a href="{% url 'articles:delete' article.id %}"><button class="btn btn-info">삭제</button></a> -->
 </div>
 {% endblock %}
