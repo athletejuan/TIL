@@ -4,6 +4,7 @@
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">Juan's BLOG</h1>
+        <p class="lead">HAPPY HACKING LIFE</p>
         <hr class="my-4">
         <p class='font-italic'>Whatever you want to say</p>
         {% if user.is_authenticated %}
@@ -12,7 +13,6 @@
         <a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}" role="button">Log In</a>
         {% endif %}
     </div>
-    <p class="lead text-right">Copyright 2019. Juan. All rights reserved.</p>
 </div>
 <!-- <h1 align=center>INDEX</h1> -->
 <!-- <a href="{% url 'articles:create' %}"><button class="btn btn-dark">새 글</button></a> -->
