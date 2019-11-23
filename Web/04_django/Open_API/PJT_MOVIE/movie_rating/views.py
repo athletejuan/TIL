@@ -11,16 +11,16 @@ def index(request):
         ratings = movie.rating_set.all()
         if ratings:
             score_sum = 0
-            # scores = []
+            # score = []
             for rating in ratings:
                 score_sum += rating.score
-            scores = score_sum / len(ratings)
-            movie_score[movie.title] = scores
-            # scores.append(score_sum / len(ratings))
+            score = score_sum / len(ratings)
+            movie_score[movie.title] = score
+            # score.append(score_sum / len(ratings))
         else:
             movie_score[movie.title] = 0
-            # scores.append(0)
-    # return render(request, 'movies/index.html', {'movies':movies, 'scores':scores})
+            # score.append(0)
+    # return render(request, 'movies/index.html', {'movies':movies, 'score':score})
     return render(request, 'movies/index.html', {'movie_score':movie_score})
 
 @login_required
