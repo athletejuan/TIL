@@ -2,6 +2,7 @@ import random
 from bs4 import BeautifulSoup
 from datetime import datetime
 from flask import Flask
+import requests
 app = Flask(__name__)
 
 # 1. 주문을 받는 방식(어떻게)
@@ -53,7 +54,11 @@ def lunch():
 # 3. /kospi => kospi 지수 출력
 @app.route("/kospi")
 def kospi():
-    return 
+    url = 'https://finance.naver.com/sise/'
+    res = requests.get(url).text
+    soup = BeautifulSoup(res, 'html.parser')
+    kospi = soup.select_one('#KOSPI_now')
+    return str(kospi)
 
 # newyear
 @app.route("/newyear")
