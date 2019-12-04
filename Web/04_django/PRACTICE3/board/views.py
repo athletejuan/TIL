@@ -9,7 +9,7 @@ def create(request):
     article.title = request.GET.get('input_title')
     article.content = request.GET.get('input_content')
     article.save()
-    return redirect(f'/board/articles/{article.id}/')
+    return redirect(f'/board/{article.id}/')
 
 def index(request):
     articles = Article.objects.all()
@@ -23,10 +23,21 @@ def show(request, article_id):
         'article':article,
     })
 
-def edit(request):
-    return render(request, 'board/edit.html')
+def edit(request, article_id):
+    article = Article.objects.get(pk=article_id)
+    context = {
+        'article':article,
+    }
+    return render(request, 'board/edit.html', context)
+
+def update(request, article_id):
+    article = Article.objects.get(pk=article_id)
+    article.title = request.GET.get('input_title')
+    article.content = request.GET.get('input_content')
+    article.save()
+    return redirect(f'/board/{article.id}/')
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
-    return redirect ('/board/articles/')
+    return redirect ('/board/')

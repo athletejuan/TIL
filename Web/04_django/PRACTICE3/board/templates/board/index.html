@@ -3,13 +3,13 @@
 {% block body %}
 <h1>Main Board</h1>
 <div>
-<a href="/board/articles/new/">New article</a>
+<a href="/board/new/">New article</a>
 </div>
 <div>
 <ul>
     {% for article in articles %}
         <li>
-            <a href="/board/articles/{{ article.id }}">{{ article.title }}</a>
+            <a href="/board/{{ article.id }}">{{ article.title }}</a>
         </li>
     {% endfor %}
 </ul>
