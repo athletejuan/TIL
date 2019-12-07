@@ -128,5 +128,51 @@ def isbirth():
         result = False
     return render_template('isitbirth.html', result=result)
 
+@app.route('/lotto_check')
+def lotto_check():
+    return render_template('lotto_check.html')
+
+@app.route('/lotto_result')
+def lotto_result():
+    num = request.args.get('num')
+    # numbers = request.args.get('numbers')
+    url = f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={num}'
+    lotto = requests.get(url).json()
+    
+    winner = []
+    # 당첨번호 6개 가져오기
+    for i in range(1,7):
+        winner.append(lotto[f'drwtNo{i}'])
+    
+    bonus = lotto['bnusNo']
+
+    # 내 번호 리스트로 만들기
+    numbers = []
+    for num in request.args.get('numbers').split():
+        numbers.append(int(num))
+    
+    if len(numbers) == 6:
+        match = 0
+        for num in numbers:
+            if num in winner:
+                match += 1
+        # match = len(set(winner) & set(numbers))
+        if match == 6:
+            result = ('1등 당첨')
+        elif match == 5:
+            if lotto['bnusNo'] in numbers:
+                result =('2등 당첨')
+            else:
+                result =('3등 당첨')
+        elif match == 4:
+            result =('4등 당첨')
+        elif match == 3:
+            result =('5등 당첨')
+        else:
+            result =('BBomb')
+    else:
+        result = '번호가 6개가 아닙니다.'
+    return render_template('lotto_result.html', winner=winner, bonus=bonus, numbers=numbers, result=result)
+
 if __name__=='__main__':
     app.run(debug=True)
