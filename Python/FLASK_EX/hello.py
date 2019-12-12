@@ -47,17 +47,75 @@ def cube(number):
     # 사용자가 입력한 숫자를 받아서
     # 세제곱 후 cube.html파일을 통해 응답
 
-
 @app.route('/lunch/<int:people>')
 def lunch(people):
     menu = ['짜장면','짬뽕','볶음밥','고추잡채밥','마파두부밥']
     order = random.sample(menu, people)
     return str(order)
 
+@app.route('/lotto')
+def lotto():
+    res = requests.get(f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=888')
+    lotto = res.json()
+
+    # 당첨번호 6개만 가져오기
+    winner = []
+    for i in range(1, 7):
+        winner.append(lotto[f'drwtNo{i}'])
+
+    # 랜덤 로또번호 리스트 만들기
+    numbers = sorted(random.sample(range(1,46),6))
+        
+    matched = 0
+    for num in numbers:
+        if num in winner:
+            matched += 1
+
+    # matched = len(set(winner) & set(numbers))
+    cnt = 0
+    while matched < 4:
+        numbers = sorted(random.sample(range(1,46),6))
+        matched = 0
+        for num in numbers:
+            if num in winner:
+                matched += 1
+        cnt += 1
+        print(f'{cnt}번째 구입한 로또번호')
+        print(winner)
+        print(numbers)
+        if matched == 6:
+            print('1등입니다!!!')
+        elif matched == 5:
+            if lotto['bnusNo'] in numbers: # 보너스 번호 확인
+                print('2등입니다!!')
+            else:
+                print('3등입니다!')
+        elif matched == 4:
+            print('4등입니다.')
+        elif matched == 3:
+            print('5등입니다..')
+        else:
+            print('꽝입니다..')
+    return '', 200
+
 @app.route('/movie')
 def movie():
     movies = ['겨울왕국2','머니게임','백두산','블랙위도우']
     return render_template('movie.html', movies=movies)
+
+@app.route('/menu')
+def menu():
+    list = ["20층","짜장면","김밥","타코"]
+    dict = {
+        "20층":'http://mblogthumb2.phinf.naver.net/MjAxOTA0MjNfMjMw/MDAxNTU2MDAwMzY5NDA5.S5bjJfRukZcs_VFvFu67K0qppWGmC3zSXrDTPGKJiosg.4zRFCwlzT82cl3RYYqEAiV5fhgcAFtwR8Z0S24kV3msg.JPEG.ha00kim/IMG_20190423_124048605.jpg?type=w800',
+        "짜장면":'http://recipe1.ezmember.co.kr/cache/recipe/2016/07/02/40c4f639ca973d9acccecdf7cbe0cbc41.jpg',
+        "김밥":'http://www.nongsaro.go.kr/ps/img/interabang/num207/headerImg.jpg',
+        "타코":'https://storage.googleapis.com/cbmpress/uploads/sites/2/2017/04/Taco-Bell.png'
+    }
+    pick = random.choice(list)
+    url = dict[pick]
+    return render_template("menu.html", pick=pick, url=url)
+
 
 @app.route('/ping')
 def ping():

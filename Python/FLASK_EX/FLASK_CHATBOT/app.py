@@ -42,11 +42,17 @@ def telegram():
             data = {'source':'ko', 'target':'en', 'text':text[4:]}
             papago_res = requests.post('https://openapi.naver.com/v1/papago/n2mt', headers=headers, data=data)
             text = papago_res.json().get('message').get('result').get('translatedText')
+        elif text[0:4] == '/영한 ':
+            headers = {'X-Naver-Client-Id': naver_client_id, 'X-Naver-Client-Secret': naver_client_secret}
+            data = {'source':'en', 'target':'ko', 'text':text[4:]}
+            papago_res = requests.post('https://openapi.naver.com/v1/papago/n2mt', headers=headers, data=data)
+            text = papago_res.json().get('message').get('result').get('translatedText')
         elif text[0:4] == '/한불 ':
             headers = {'X-Naver-Client-Id': naver_client_id, 'X-Naver-Client-Secret': naver_client_secret}
             data = {'source':'ko', 'target':'fr', 'text':text[4:]}
             papago_res = requests.post('https://openapi.naver.com/v1/papago/n2mt', headers=headers, data=data)
             text = papago_res.json().get('message').get('result').get('translatedText')
+        # 로또
         elif text == '로또추천':
             text = sorted(random.sample(range(1,46),6))
         elif text[:4] == '로또확인':
