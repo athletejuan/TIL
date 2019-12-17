@@ -38,11 +38,23 @@ def telegram():
         text = from_telegram.get('message').get('text')
         # CFR
         if from_telegram.get('message').get('photo') is not None:
-            url = "https://openapi.naver.com/v1/vision/celebrity"
-            files = {'image': open('YOUR_FILE_NAME', 'rb')}
-            headers = {'X-Naver-Client-Id': naver_client_id, 'X-Naver-Client-Secret': naver_client_secret}
-            cfr_res = requests.post(url, files=files, headers=headers)
-            text = cfr_res.text
+            file_id = from_telegram.get('message').get('photo')[-1].get('file_id')
+            file_res = requests.get(f'{api_url}/bot{token}/getFile?file_id={file_id}')
+            file_path = file_res.json().get('result').get('file_path')
+            file_url = f'{api_url}/file/bot{token}/{file_path}'
+            
+            real_file_res = requests.get(file_url, stream=True)
+            headers={'X-Naver-Client-Id': naver_client_id, 'X-Naver-Client-Secret': naver_client_secret}
+
+            clova_res = requests.post('https://openapi.naver.com/v1/vision/celebrity', headers=headers, files={'image':real_file_res.raw.read()})
+            print(clova_res.json())
+
+            if clova_res.json().get('info').get('faceCount'):
+                print(clova_res.json().get('faces'))
+                celebrity = clova_res.json().get('faces')[0].get('celebrity')
+                text = f"{celebrity.get('value')} - {celebrity.get('confidence')*100}% 확신"
+            else:
+                text = "인식된 사람이 없습니다."
         # 파파고 번역
         else:
             if text[0:4] == '/한영 ':
