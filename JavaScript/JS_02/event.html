@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>EventListener</h1>
+  <button>Click Me</button>
+
+  <script>
+    const button = document.querySelector('button')
+
+    //1. click event
+    button.onclick = function () {
+      console.log("You clicked me")
+    }
+    
+    //2. click event 오버 라이드
+    button.onclick = function () {
+      console.log("You clicked me again!")
+    }
+  </script>
+</body>
+</html>

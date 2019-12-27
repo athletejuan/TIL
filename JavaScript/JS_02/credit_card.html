@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Events</title>
+</head>
+<body>
+  <form id="signup-form" action="/NOOOO" method="get">
+    <input type="text" placeholder="credit card" id="credit-card">
+    <label>
+      I agree to use this credit card.
+      <input type="checkbox" id="terms">
+    </label>
+    <select name="" id="programming-language">
+      <option value="python">Python</option>
+      <option value="javascript">Javascript</option>
+      <option value="go">Go</option>
+    </select>
+    <input type="submit">
+  </form>
+  <script>
+    const form = document.querySelector('#signup-form')
+    const creditCardInput = document.querySelector('#credit-card')
+    const termsCheckbox = document.querySelector('#terms')
+    const languageSelect = document.querySelector('#programming-language')
+    form.addEventListener('submit', function(event) {
+    event.preventDefault()
+    console.dir(event)
+    console.log(event.target)
+    console.log('creditCard: ', creditCardInput.value)
+    console.log('terms: ', termsCheckbox.checked)
+    console.log('languageSelect: ', languageSelect.value)
+  })
+  </script>
+</body>
+</html>
