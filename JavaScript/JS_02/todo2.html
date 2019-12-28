@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo2</title>
+</head>
+<body>
+    <div id="todo">
+        <input class="user-input" type="text">
+        <p class="user-output"></p>
+    </div>
+    <script>
+        const userInput = document.querySelector('.user-input')
+        const userOutput = document.querySelector('.user-output')
+        userInput.addEventListener('keypress', function(){
+            userOutput.innerText = userInput.value
+        })
+    </script>
+</body>
+</html>
