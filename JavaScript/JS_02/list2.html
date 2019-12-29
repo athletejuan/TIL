@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Todo List</title>
+    <title>Todo List2</title>
 </head>
 <body>
-    <div id="todo">
+    <div id='Todo'>
         <input type="text">
         <input type="submit">
     </div>
     <script>
-        const todo = document.querySelector('#todo')
+        const todo = document.querySelector('#Todo')
         const inputs = document.querySelectorAll('input')
         const userInput = inputs[0]
         const submitBtn = inputs[1]
@@ -21,12 +21,20 @@
             const newTask = document.createElement('p')
             const checkBtn = document.createElement('input')
             checkBtn.type = 'checkbox'
+            checkBtn.addEventListener('click', function(){
+                if (newTask.style.textDecoration == 'line-through'){
+                    newTask.style.textDecoration = 'none'
+                } else {
+                    newTask.style.textDecoration = 'line-through'
+                }
+            })
             const removeBtn = document.createElement('button')
             removeBtn.innerText = 'x'
             removeBtn.addEventListener('click', function(){
                 todo.removeChild(newTask)
             })
             newTask.innerText = userInput.value
+            userInput.value = ''
             newTask.append(checkBtn)
             newTask.append(removeBtn)
             todo.append(newTask)
