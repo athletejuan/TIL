@@ -8,15 +8,20 @@
 </head>
 <body>
     <div id='Todo'>
-        <input type="text">
+        <input class='user-input' type="text">
         <input type="submit">
+        <p class='user-output'></p>
     </div>
     <script>
         const todo = document.querySelector('#Todo')
         const inputs = document.querySelectorAll('input')
         const userInput = inputs[0]
         const submitBtn = inputs[1]
-
+        const userOutput = document.querySelector('.user-output')
+        userInput.addEventListener('keypress', function(){
+            userOutput.innerText = userInput.value
+        })
+    
         submitBtn.addEventListener('click', function(){
             const newTask = document.createElement('p')
             const checkBtn = document.createElement('input')
