@@ -1,4 +1,6 @@
 {% extends 'board/base.html' %}
+{% load bootstrap4 %}
+
 {% block title %}SHOW{% endblock %}
 {% block body %}
 <div class="container">
@@ -16,10 +18,15 @@
 </div>
 <hr>
 <div class='container'>
-    <form action="{% url 'board:comment_create' article.id %}">
-        댓글: <input type="text" name="content">
-        <input type="submit" value="입력">
+    <h4>Comment {% if comments %}/ {{ comments | length }}개의 댓글{% endif %}</h4><br>
+    <form action="{% url 'board:comment_create' article.id %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form comment_form layout='horizontal' %}
+        {% bootstrap_button "댓글입력" button_class='btn btn-info' %}
+        <!-- 댓글: <input type="text" name="content">
+        <input type="submit" value="입력"> -->
     </form>
+    <hr>
     <h3>댓글 목록</h3>
         {% for comment in comments %}
             <li>No {{ comment.id}}. {{ comment.content }}</li>

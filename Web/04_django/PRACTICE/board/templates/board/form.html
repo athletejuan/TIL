@@ -1,0 +1,25 @@
+{% extends 'board/base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+<div class="container">
+    {% if request.resolver_match.url_name == 'new' %}
+    <h1 class='text-center'>New Article</h1>
+    {% else %}
+    <h1 class='text-center'>Edit Article</h1>
+    {% endif %}
+    <hr>
+</div>
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_button "등록" button_type='submit' button_class='btn btn-primary' %}
+    </form>
+    {% if request.resolver_match.url_name == 'new' %}
+    <a href="{% url 'board:index' %}"><button class='btn btn-primary'>Main</button></a>
+    {% else %}
+    <a href="{% url 'board:show' article.id %}"><button class='btn btn-primary'>Back</button></a>
+    {% endif %}
+</div>
+{% endblock %}

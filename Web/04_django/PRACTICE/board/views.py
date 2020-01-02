@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
+from .forms import ArticleForm, CommentForm
 
 def index(request):
     articles = Article.objects.all()
@@ -12,33 +13,52 @@ def index(request):
 
 def new(request):
     if request.method == "POST":
-        article = Article()
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.image = request.FILES.get('image')
-        article.save()
-        return redirect('board:show', article.id)
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save()
+            return redirect('board:show', article.id)
     else:
-        return render(request, 'board/new.html')
+        form = ArticleForm()
+        return render(request, 'board/form.html', {'form':form})
+        
+    # if request.method == "POST":
+    #     article = Article()
+    #     article.title = request.POST.get('input_title')
+    #     article.content = request.POST.get('input_content')
+    #     article.image = request.FILES.get('image')
+    #     article.save()
+    #     return redirect('board:show', article.id)
+    # else:
+    #     return render(request, 'board/new.html')
 
 def show(request, article_id):
     article = Article.objects.get(id=article_id)   
     comments = article.comment_set.order_by('-pk') 
+    comment_form = CommentForm()
     return render(request, 'board/show.html', {
     'article':article,
-    'comments':comments
+    'comments':comments,
+    'comment_form':comment_form,
     })
 
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article.title = request.POST.get('input_title')
-        article.content = request.POST.get('input_content')
-        article.image = request.FILES.get('image')
-        article.save()
-        return redirect('board:show', article_id)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
+        if form.is_valid():
+            article = form.save()
+            return redirect('board:show', article_id)
     else:
-        return render(request, 'board/edit.html', {'article':article})
+        form = ArticleForm(instance=article)
+        return render(request, 'board/form.html', {'form':form, 'article':article})
+    # if request.method == "POST":
+    #     article.title = request.POST.get('input_title')
+    #     article.content = request.POST.get('input_content')
+    #     article.image = request.FILES.get('image')
+    #     article.save()
+    #     return redirect('board:show', article_id)
+    # else:
+    #     return render(request, 'board/edit.html', {'article':article})
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -47,10 +67,15 @@ def delete(request, article_id):
 
 def comment_create(request, article_id):
     article = Article.objects.get(id=article_id)
-    comment = Comment()
-    comment.content = request.GET.get('content')
-    comment.article = article
-    comment.save()
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.article = article
+        comment.save()
+    # comment = Comment()
+    # comment.content = request.GET.get('content')
+    # comment.article = article
+    # comment.save()
     return redirect('board:show', article.id)
 
 def comment_delete(request, article_id, comment_id):
