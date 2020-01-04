@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 def index(request):
     articles = Article.objects.all()
@@ -89,8 +90,19 @@ def comment_delete(request, article_id, comment_id):
 @login_required
 def like(request, article_id):
     article = Article.objects.get(id=article_id)
-    if request.user in article.like_users.all():
-        article.like_users.remove(request.user)
+    user = request.user
+    if article.like_users.filter(id=user.id).exists():
+        article.like_users.remove(user)
+        liked = False
     else:
-        article.like_users.add(request.user)
-    return redirect('board:index')
+        article.like_users.add(user)
+        liked = True
+    context = {'liked': liked,}
+    # Json 객체로 응답
+    return JsonResponse(context)
+
+    # if request.user in article.like_users.all():
+    #     article.like_users.remove(request.user)
+    # else:
+    #     article.like_users.add(request.user)
+    # return redirect('board:index')

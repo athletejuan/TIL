@@ -1,9 +1,10 @@
 <div class='card-body'>
-    <a href="{% url 'board:like' article.id %}" class='card-link'>
+    <h5 class='card-title'>{{ article.pk }}번 글 제목: {{ article.title }}</h5>
+    <p class='card-text'>
         {% if user in article.like_users.all %}
-        <i class='fas fa-heart fa-lg' style="color:crimson"></i>
+        <i class='fas fa-heart fa-lg like-button' style="color:crimson" data-id='{{ article.pk }}'></i>
         {% else %}
-        <i class='far fa-heart fa-lg' style="color:black"></i>
+        <i class='far fa-heart fa-lg like-button' style="color:black" data-id='{{ article.pk }}'></i>
         {% endif %}
-    </a>
+    </p>
 </div>

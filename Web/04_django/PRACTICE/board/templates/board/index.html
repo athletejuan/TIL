@@ -20,4 +20,31 @@
     </ul>
     </div>
 </div>
+<script>
+// 1. 각 게시글 별로 좋아요 버튼이 있으니 All
+const likeButtons = document.querySelectorAll('.like-button')
+
+// 2. forEach 사용해서 각각의 좋아요(button)를 클릭했을 때
+likeButtons.forEach(button => {
+    button.addEventListener('click', function(event){
+        console.log(event) // 디버깅용 -> event.target.classList, event.target.dataset.id 같이 보기
+        // 1. event.target.dataset.id의 value는 data-id의 값이 들어있어 variable routing으로 쓰임
+        const articleId = event.target.dataset.id
+
+        // 2. 해당 상세 게시글의 좋아요 요청을 보낸다.
+        axios.get(`/board/${articleId}/like/`)
+            
+            // 3. 응답을 확인한다.
+            .then(response => {
+                if (response.data.liked) {
+                    event.target.style.color = 'crimson'
+                } else {
+                    event.target.style.color = 'black'
+                }                
+                // console.log(response)
+                })
+            .catch(error => console.log(error))
+    })
+})
+</script>
 {% endblock %}
