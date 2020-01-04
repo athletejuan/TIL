@@ -1,0 +1,9 @@
+<div class='card-body'>
+    <a href="{% url 'board:like' article.id %}" class='card-link'>
+        {% if user in article.like_users.all %}
+        <i class='fas fa-heart fa-lg' style="color:crimson"></i>
+        {% else %}
+        <i class='far fa-heart fa-lg' style="color:black"></i>
+        {% endif %}
+    </a>
+</div>

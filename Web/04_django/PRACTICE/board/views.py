@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     articles = Article.objects.all()
@@ -84,3 +85,12 @@ def comment_delete(request, article_id, comment_id):
         comment = Comment.objects.get(id=comment_id)
         comment.delete()
     return redirect('board:show', article_id)
+
+@login_required
+def like(request, article_id):
+    article = Article.objects.get(id=article_id)
+    if request.user in article.like_users.all():
+        article.like_users.remove(request.user)
+    else:
+        article.like_users.add(request.user)
+    return redirect('board:index')

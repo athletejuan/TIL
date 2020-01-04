@@ -7,13 +7,14 @@
     <img src="{% static 'back2.png' %}" width="300px" alt="happyhacking">
     <hr>
     <div class="container">
-    <a href="{% url 'board:new' %}"><button>새 글</button></a>
+    <a href="{% url 'board:new' %}"><button class='btn btn-primary'>새 글</button></a><br>
     </div>
     <div class="container">
     <ul>
         {% for article in articles %}
             <li>
-                <a href="{% url 'board:show' article.id %}">No.{{ article.id }}. {{article.title}}</a>
+                No.{{ article.id }}.<a href="{% url 'board:show' article.id %}">{{article.title}}</a> | 작성자: {{ article.user }}
+                {% include 'board/_article.html' %}
             </li>
         {% endfor %}
     </ul>
