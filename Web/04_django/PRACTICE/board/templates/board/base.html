@@ -11,20 +11,20 @@
     <div class='container'>
     {% if user.is_authenticated %}
     <h1>Welcome! {{ user.username }}!!</h1>
-    <a href="{% url 'accounts:edit' %}"><button class='btn btn-warning'>회원정보 변경</button></a>
-    <a href="{% url 'accounts:change_password' %}"><button class='btn btn-warning'>비밀번호 변경</button></a>
-    <form action="{% url 'accounts:logout' %}" method='POST'>
+    <a href="{% url 'accounts:edit' %}"><button class='btn btn-warning btn-sm'>회원정보 수정</button></a>
+    <a href="{% url 'accounts:change_password' %}"><button class='btn btn-warning btn-sm'>비밀번호 변경</button></a>
+    <form action="{% url 'accounts:logout' %}" method='POST' style='display:inline'>
         {% csrf_token %}
-        <button class='btn btn-warning'>로그아웃</button>
+        <button class='btn btn-warning btn-sm'>로그아웃</button>
     </form>
-    <form action="{% url 'accounts:quit' %}" method='POST'>
+    <form action="{% url 'accounts:quit' %}" method='POST' style='display:inline'>
         {% csrf_token %}
-        <button class='btn btn-warning'>회원탈퇴</button>
+        <button class='btn btn-warning btn-sm'>회원탈퇴</button>
     </form>
     {% else %}
     <h1>Hello! Stranger~!!</h1>
-    <a href="{% url 'accounts:signup' %}"><button class='btn btn-warning'>회원가입</button></a>
-    <a href="{% url 'accounts:login' %}"><button class='btn btn-warning'>로그인</button></a>
+    <a href="{% url 'accounts:signup' %}"><button class='btn btn-warning btn-sm'>회원가입</button></a>
+    <a href="{% url 'accounts:login' %}"><button class='btn btn-warning btn-sm'>로그인</button></a>
     {% endif %}
     </div>
     {% block body %}
