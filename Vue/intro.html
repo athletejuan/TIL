@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    .searchBar{
+        width: 200px;
+    }
+    .searchResult{
+        border: 1px solid black;
+        padding: 12px;
+        cursor: pointer;
+    }
+    .searchResult:hover {
+        background: rgba(0, 0, 0, 0.5)
+    }
+    </style>
+    <title>Vue Practice</title>
+    <div id='app'>
+        <h1>Todo List</h1>
+
+        <div class=searchBar>
+            <input v-on:keydown="searching($event)" class='userInput' type="text">
+            <input v-on:click="addTodo()" type="submit">
+            <div v-on:click="showTask(result.task)" class="searchResult" v-for="result in searchResult" v-if="isTyping" class='search'>
+                {{ index }} {{ result.task }}
+            </div>
+        </div>
+        <div v-for="todo, index in todoList">
+            {{ todo.id }} {{ todo.task }}
+            <button @click="deleteTodo(index)">&#x2718</button>
+        </div>
+    </div>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+          el: '#app',
+          mounted() {
+            document.addEventListener('click', () => {
+                this.hideSearchResult()
+            })
+          },
+          data: {
+              searchResult: [],
+              isTyping: false,
+              message: '안녕하세요',
+              todoList: [
+                  {id: 1, task: 'study'},
+                  {id: 2, task: 'workout'},
+                  {id: 3, task: 'work'},
+              ]
+          },
+          methods: {
+              addTodo(){
+                const userInput = document.querySelector('.userInput').value
+                const newTodo = { id: this.todoList.length + 1, task: userInput }
+                this.todoList.push(newTodo)
+              },
+              deleteTodo(index){
+                  this.todoList.splice(index, 1)
+                  this.todoList.forEach((todo, index) => {
+                      todo.id = index+1
+                  })
+              },
+              searching(event){
+                  this.isTyping = true
+                  const userInput = event.target.value
+                  const result = this.todoList.filter(todo => {
+                      if(userInput && todo.task.indexOf(userInput) !== -1){
+                          return todo
+                      }
+                  })
+                  console.log(result)
+                  this.searchResult = result
+              },
+              hideSearchResult(){
+                  this.isTyping = false
+                  console.log(this.isTyping)
+              },
+              showTask(task){
+                  alert(task)
+              }
+          },
+          computed: {
+          },
+      })
+    </script>
+</body>
+</html>
