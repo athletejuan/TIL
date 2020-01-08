@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
@@ -56,6 +56,63 @@ def lunch(people):
 def movie():
     movies = ['겨울왕국2','백두산','머니게임','포드vs페라리']
     return render_template('movie.html', movies=movies)
+
+@app.route('/ping')
+def ping():
+    return render_template('ping.html')
+
+@app.route('/pong')
+def pong():
+    age = request.args.get('age')
+    return render_template('pong.html', age=age)
+
+@app.route('/naver')
+def naver():
+    return render_template('naver.html')
+
+@app.route('/google')
+def google():
+    return render_template('google.html')
+
+@app.route('/vonvon')
+def vonvon():
+    return render_template('vonvon.html')
+
+@app.route('/godmademe')
+def godmademe():
+    name = request.args.get('name')
+    flist = ['잘생김','못생김','어중간한']
+    slist = ['재력','체력','지능','센스','개념']
+    tlist = ['허세','식욕','물욕','성욕']
+
+    first = random.choice(flist)
+    second = random.choice(slist)
+    third = random.choice(tlist)
+    return render_template('godmademe.html', name=name, first=first, second=second, third=third)
+
+import requests
+
+@app.route('/ascii')
+def ascii():
+    return render_template('ascii.html')
+
+@app.route('/art')
+def arg():
+    word = request.args.get('word')
+    font_list = requests.get(f'http://artii.herokuapp.com/fonts_list').text
+    fonts = font_list.split('\n')
+    font = random.choice(fonts)
+    result = requests.get(f'http://artii.herokuapp.com/make?text={word}&font={font}').text
+    return render_template('art.html', result=result)
+
+@app.route('/isitbirth')
+def isitbirth():
+    today = datetime.now()
+    if today.month == 6 and today.day == 27:
+        result = True
+    else:
+        result = False
+    return render_template('isitbirth.html', result=result)
 
 if __name__=='__main__':
     app.run(debug=True)
