@@ -114,5 +114,32 @@ def isitbirth():
         result = False
     return render_template('isitbirth.html', result=result)
 
+from bs4 import BeautifulSoup
+# from decouple import config
+
+@app.route('/dust')
+def dust():
+    api_key = '###'
+    url = f'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey={api_key}&numOfRows=40&pageNo=1&startPage=3&sidoName=서울&ver=1.6'
+
+    today = datetime.now()
+    response = requests.get(url).text
+    data = BeautifulSoup(response, 'xml')
+    location = data('item')[27]
+
+    dust = int(location.pm10Value.text)
+    station = location.stationName.text
+
+    if 150 < dust:
+        dust_rate = '매우 나쁨'
+    elif 80 < dust <= 150:
+        dust_rate = '나쁨'
+    elif 30 < dust <= 80:
+        dust_rate = '보통'
+    else:
+        dust_rate = '좋음'
+
+    return render_template('dust.html', today=today, dust_rate=dust_rate, station=station)
+
 if __name__=='__main__':
     app.run(debug=True)
