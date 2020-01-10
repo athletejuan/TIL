@@ -1,6 +1,6 @@
-import os
+import os   # python으로 운영체제(operating system)에 접근하기 위한 모듈
 
-os.chdir('/Users/Juan/GIT/TIL/Python/FileRename')
+os.chdir('/Users/Juan/GIT/TIL/Python/FileRename')   # 작업 경로 변경
 
 filenames = os.listdir('.')    # 현재 경로('.')안에 있는 파일들을 리스트에 담기
 
