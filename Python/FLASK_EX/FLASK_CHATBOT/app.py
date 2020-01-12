@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import requests
 from decouple import config
+import html    # for Google translate API
 from pprint import pprint as pp
 app = Flask(__name__)
 
@@ -43,6 +44,7 @@ def telegram():
             papago_response = requests.post(
                 'https://openapi.naver.com/v1/papago/n2mt', headers=headers, data=data
             )
+            pp(papago_response.json())
             text = papago_response.json().get('message').get('result').get('translatedText')
         elif text[0:4] == '/영한 ':
             headers = {
@@ -84,6 +86,15 @@ def telegram():
             )
             pp(papago_response.json())
             text = papago_response.json().get('message').get('result').get('translatedText')
+        elif text[0:4] == '/번역 ':
+            key = config('GOOGLE_API_KEY')
+            api_url = 'https://translation.googleapis.com/language/translate/v2'
+            data = {'q':text[4:], 'source':'ko', 'target':'en'}
+            # response = requests.post(f'{api_url}?key={key}', data).json()    # single quote(')를 만나면서 내용이 끝나버리는 문제 발생
+            response = requests.post(f'{api_url}?key={key}&format=text', data).json()   # 구글 API에서 넘어오는 데이터의 format 자체를 HTML 코드가 아닌 text 형태로 받도록(-> 쿼리 스트링에 넣는다)
+            text = response.get('data').get('translations')[0].get('translatedText')
+            # text = html.unescape(response.get('data').get('translations')[0].get('translatedText'))   # single quote가 HTML 코드로 변환된(escaping 되어있는) 상태로 값이 넘어오는데 이를 정상적인 문자열로 unescape한 메시지를 전송
+            
         requests.get(f'{app_url}/sendMessage?chat_id={chat_id}&text={text}')
     return '', 200
 
