@@ -106,3 +106,5 @@ def like(request, article_id):
     # else:
     #     article.like_users.add(request.user)
     # return redirect('board:index')
+
+    # return render(request, 'board/index.html')
