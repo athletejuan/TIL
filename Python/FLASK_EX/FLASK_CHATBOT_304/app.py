@@ -6,11 +6,11 @@ from datetime import datetime
 from pprint import pprint as pp
 app = Flask(__name__)
 
-token = '794763224:AAHsF9_3G9MQfG7TE2l7G3Wv5-ujheNgMNM'
-chat_id = '726311985'
-naver_client_id = 'ihxOtgNNHI87BQLGhW7P'
-naver_client_secret = '3YnaaCITSb'
-api_key = 'mbsr22ZxsnSdYzgWL6ZEXF8zchZReHHj06FVrZEaYhzLx14roDMN0DLdr%2FCNzC4K5i1s3UmmeNZ3VEvoGtg0%2BQ%3D%3D'
+token = '###'
+chat_id = '###'
+naver_client_id = '###'
+naver_client_secret = '###'
+api_key = '###'
 app_url = f'https://api.telegram.org/bot{token}'
 
 @app.route('/')
