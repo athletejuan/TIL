@@ -1,6 +1,6 @@
 import requests
 
-token = '794763224:AAHsF9_3G9MQfG7TE2l7G3Wv5-ujheNgMNM'
+token = '###'
 app_url = f'https://api.telegram.org/bot{token}'
 # ngrok_url = 'https://5931ab47.ngrok.io'
 pythonanywhere_url = 'https://juan.pythonanywhere.com'
