@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request
 import requests
+import random
+from bs4 import BeautifulSoup as bs
+from datetime import datetime
 from pprint import pprint as pp
 app = Flask(__name__)
 
-token = '###'
-chat_id = '###'
-naver_client_id = '###'
-naver_client_secret = '###'
+token = '794763224:AAHsF9_3G9MQfG7TE2l7G3Wv5-ujheNgMNM'
+chat_id = '726311985'
+naver_client_id = 'ihxOtgNNHI87BQLGhW7P'
+naver_client_secret = '3YnaaCITSb'
+api_key = 'mbsr22ZxsnSdYzgWL6ZEXF8zchZReHHj06FVrZEaYhzLx14roDMN0DLdr%2FCNzC4K5i1s3UmmeNZ3VEvoGtg0%2BQ%3D%3D'
 app_url = f'https://api.telegram.org/bot{token}'
 
 @app.route('/')
@@ -47,6 +51,29 @@ def telegram():
             )
             # pp(papago_response.json())
             text = papago_response.json().get('message').get('result').get('translatedText')
+        elif text == '미세먼지':
+            api_url = f'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey={api_key}&numOfRows=40&pageNo=1&startPage=3&sidoName=서울&ver=1.6'
+            today = datetime.now()
+            response = requests.get(api_url).text
+            data = bs(response, 'xml')
+            station = data('item')[27]
+
+            dust = int(station.pm10Value.text)
+            location = station.stationName.text
+
+            if dust > 150:
+                dust_rate = '매우 나쁨'
+            elif dust > 80:
+                dust_rate = '나쁨'
+            elif dust > 30:
+                dust_rate = '보통'
+            else:
+                dust_rate = '좋음'
+
+            text = f'{today.month}월 {today.day}일 {today.hour}시, {location} 미세먼지 {dust_rate} 입니다.'
+
+        elif text == '로또':
+            text = sorted(random.sample(range(1,46),6))
         requests.get(f'{app_url}/sendMessage?chat_id={chat_id}&text={text}')
 
     return '', 200
