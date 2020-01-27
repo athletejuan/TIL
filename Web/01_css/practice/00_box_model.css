@@ -1,0 +1,53 @@
+.big_box {
+    height: 500px;
+    width: 500px;
+    border: solid 5px;
+}
+.small_box {
+    height: 100px;
+    width: 100px;
+}
+
+#rosybrown {
+    background-color: rosybrown;
+}
+
+#orange {
+    position: relative;
+    background-color: orange;
+    left: 100px;
+}
+
+#forestgreen {
+    position: relative;
+    background-color: forestgreen;
+    left: 200px;
+}
+
+#midnightblue {
+    position: relative;
+    background-color: midnightblue;
+    left: 400px;
+    top: 100px;
+}
+
+#slategray {
+    position: fixed;
+    background-color: slategray;
+    right: 0px;
+    bottom: 0px;
+}
+
+#pink {
+    position: relative;
+    background-color: pink;
+    left: 200px;
+    top: -400px;
+}
+
+#chocolate {
+    position: relative;
+    background-color: chocolate;
+    left: 300px;
+    top: -200px;
+}
