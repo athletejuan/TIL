@@ -6,29 +6,29 @@ for test_case in range(1, T+1):
     if 0 < int(temp[1]) < 8:
         if int(temp[1])%2:
             if 0 < int(temp[2]) < 32:
-                print('/'.join(temp))
+                print(f"#{test_case} {'/'.join(temp)}")
             else:
-                print(-1)
+                print(f"#{test_case} -1")
         elif int(temp[1])==2:
             if 0 < int(temp[2]) < 29:
-                print('/'.join(temp))
+                print(f"#{test_case} {'/'.join(temp)}")
             else:
-                print(-1)
+                print(f"#{test_case} -1")
         else:
             if 0 < int(temp[2]) < 31:
-                print('/'.join(temp))
+                print(f"#{test_case} {'/'.join(temp)}")
             else:
-                print(-1)
+                print(f"#{test_case} -1")
     elif 7 < int(temp[1]) < 13:
         if int(temp[1])%2:
             if 0 < int(temp[2]) < 31:
-                print('/'.join(temp))
+                print(f"#{test_case} {'/'.join(temp)}")
             else:
-                print(-1)
+                print(f"#{test_case} -1")
         else:
             if 0 < int(temp[2]) < 32:
-                print('/'.join(temp))
+                print(f"#{test_case} {'/'.join(temp)}")
             else:
-                print(-1)
+                print(f"#{test_case} -1")
     else:
-        print(-1)
+        print(f"#{test_case} -1")

@@ -6,4 +6,4 @@ for test_case in range(1, T+1):
     for i in map(int, number.split()):
         if i%2:
             odd_sum += i
-    print(odd_sum)
+    print(f'#{test_case} {odd_sum}')
