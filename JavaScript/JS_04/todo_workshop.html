@@ -2,19 +2,31 @@
   <h1>Todo List</h1>
   <hr>
   <div id="todo">
-    <input type="text">
-    <input type="submit" value="입력">
+    <input type="text" id="userinput">
+    <input type="submit" value="입력" id="submit_button">
   </div>
   <hr>
   <ul id="todo_list"></ul>
   <script>
     const todo = document.querySelector('#todo')
-    const inputs = document.querySelectorAll('input')
-    const userinput = inputs[0]
-    const sub_but = inputs[1]
-
+    // const inputs = document.querySelectorAll('input')
+    const userinput = document.querySelector('#userinput')
+    const sub_but = document.querySelector('#submit_button')
     const todo_list = document.querySelector('#todo_list')
+    
+    // submit_button click
     sub_but.addEventListener('click', function(){
+      newTodo()
+    })
+    // text_input press_enterkey
+    userinput.addEventListener('keydown', function(){
+      if (window.event.keyCode == 13){
+        newTodo()
+      }
+    })
+
+    // common code
+    const newTodo = function(){
       const todo_title = userinput.value
       userinput.value = ''
       const newli = document.createElement('li')
@@ -36,31 +48,6 @@
       deleteButton.addEventListener('click', function(){
         newli.remove()
       })
-    })
-    userinput.addEventListener('keydown', function enterkey(){
-      if (window.event.keyCode == 13){
-        const todo_title = userinput.value
-        userinput.value = ''
-        const newli = document.createElement('li')
-        newli.innerText = todo_title
-        todo_list.append(newli)        
-        const checkbtn = document.createElement('input')
-        checkbtn.type = 'checkbox'
-        checkbtn.addEventListener('click', function(){
-          if (newli.style.textDecoration == 'line-through'){
-            newli.style.textDecoration = 'none'
-          } else {
-            newli.style.textDecoration = 'line-through'
-          }
-        })
-        newli.append(checkbtn)
-        const deleteButton = document.createElement('Button')
-        deleteButton.innerText = 'x'
-        newli.append(deleteButton)
-        deleteButton.addEventListener('click', function(){
-          newli.remove()
-        })
-      }
-    })
+    }
   </script>
 </body>
