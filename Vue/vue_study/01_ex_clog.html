@@ -1,0 +1,35 @@
+<body>
+  <div id="app">
+    <button v-on:click="getDogImage">멍멍</button>
+    <br>
+    <img v-bind:src="image" />
+    <img v-bind:src="image2" />
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        image: '',
+        image2: '',
+      },
+      methods: {
+        getDogImage: function(){
+          const URL = 'https://dog.ceo/api/breed/eskimo/images/random'
+          axios.get(URL)
+            .then(response => {
+              this.image = response.data.message
+            })
+          const URL2 = 'https://dog.ceo/api/breed/terrier/yorkshire/images/random'
+          axios.get(URL2)
+            .then(response => {
+              this.image2 = response.data.message
+            })
+        }
+      }
+    })
+  </script>
+</body>
