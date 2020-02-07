@@ -39,7 +39,7 @@
         },
         // removeTodo 특정 todo를 삭제해야 하기 때문에 클릭시에 todo의 id를 인자로 넘겨받음
         removeTodo: function(todoID){
-          this.todos != this.todos.filter(todo=>{
+          this.todos = this.todos.filter(todo=>{
             return todo.id !== todoID
           })
         }
