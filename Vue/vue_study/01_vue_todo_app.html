@@ -1,42 +1,142 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+<head>
+  <style>
+    .completed{
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
 <div id="app">
+  <select v-model="status">
+    <option value="all" selected>all</option>
+    <option value="active">active</option>
+    <option value="completed">completed</option>
+  </select>
+  <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
+    Styling Test
+  </div>
   <!-- {{ todos }} -->
-  <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)">
-    {{ todo.content }}
+  <!-- Key는 CSS 속성, Value에는 JS로 된 표현식 -->
+  <!-- <li v-for="todo in todosByStatus()" v-bind:class="{completed: todo.completed}" v-bind:key="todo.id"></li> -->
+  <li v-for="todo in computedTodosByStatus" v-bind:class="{completed: todo.completed}" v-bind:key="todo.id">
+    <input type="checkbox" v-model="todo.completed">
+    <span>{{ todo.content }}</span>
   </li>
-  <li v-else v-on:click="check(todo)">[완료!]</li>
+  <!-- <li v-else v-on:click="check(todo)">[완료!]</li> -->
+  <div>
+    <input type="text" v-model="newTodo" v-on:keydown.enter="addTodo">
+    <button v-on:click = "addTodo">+</button>
+  </div>
+  <footer>
+    <button v-on:click="clearCompleted">Clear Completed</button>
+  </footer>
 </div>
 
 
 <script>
+const STORAGE_KEY = 'vue-todos' // 임의로 지정 가능함.
+  const todoStorage = {
+    fetch: function(){
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+      // 또는 return JSON.parse(localStorage.getItem(STORAGE_KEY) || [])
+    },
+    save: function (todos){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+    }
+  }
 const app = new Vue({
   el: '#app',
   data: {
+    activeColor: 'red',
+    fontSize: 30,
     todos: [
       {
+        id: 1,
         content: '점심 메뉴 고민하기',
         completed: true,
       },
       {
+        id: 2,
         content: '사다리 타기',
         completed: false,
       },
       {
+        id: 3,
         content: '약속의 2시 낮잠자기',
         completed: false,
       },
       {
+        id: 4,
         content: '야자하기',
         completed: false,
       },
-    ]
+    ],
+    newTodo: '',
+    status: 'all',
   },
   methods: {
     check: function(todo){
       // todo.completed = true
       todo.completed = !todo.completed
+    },
+    addTodo: function(){
+      // console.log(this.newTodo)
+      this.todos.push({
+        id: Date.now(),  // 추가
+        content: this.newTodo,
+        completed: false,
+      })
+      this.newTodo = ''
+    },
+    clearCompleted: function(){
+      const notCompletedTodos = this.todos.filter((todo) => {
+        // todo는 todos 내의 object들
+        return !todo.completed // completed가 false인 object만 모아서 배열로 return
+      })
+      this.todos = notCompletedTodos
+    },
+    todosByStatus: function(){
+      // 진행중인 일(완료되지 않은 일)
+      if (this.status === 'active'){
+        return this.todos.filter((todo) => {
+          return !todo.completed
+        })
+      }
+      // 완료된 일
+      if (this.status === 'completed'){
+        return this.todos.filter((todo) => {
+          return todo.completed
+        })
+      }
+      return this.todos
+    },
+  },
+  computed: {
+    computedTodosByStatus: function(){
+      if (this.status === 'active'){
+        return this.todos.filter((todo) => {
+          return !todo.completed
+        })
+      }
+      if (this.status === 'completed'){
+        return this.todos.filter((todo) => {
+          return todo.completed
+        })
+      }
+      return this.todos
+    }
+  },
+  watch: {
+    todos: {
+      handler: function (todos) {
+        todoStorage.save(todos)
+      },
+      deep: true,
     }
   }
 })
 </script>
+</body>
