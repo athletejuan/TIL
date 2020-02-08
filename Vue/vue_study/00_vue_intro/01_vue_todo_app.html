@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .completed{
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
+      Juan's Todo List
+    </div>
+    <!-- <li v-for="todo in todos" v-if=!todo.completed v-on:click="todo.completed=true"> -->
+    <!-- <li v-for="todo in todos" v-if=!todo.completed v-on:click="check(todo)"> -->
+    <li v-for="todo in todos" v-bind:class="{completed: todo.completed}">
+      <input type="checkbox" v-model="todo.completed">
+      {{ todo.content }}
+      <!-- {{ todo.completed }} -->
+    </li>
+    <!-- <li v-else v-on:click="check(todo)">[완료!]</li> -->
+    <div>
+      <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    </div>
+    <footer>
+      <button v-on:click="clearCompleted">Clear Completed</button>
+    </footer>
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        activeColor: 'crimson',
+        fontSize: 30,
+        todos: [
+          {
+          content: '점심메뉴 고민하기',
+          completed: true
+          },
+          {
+            content: '사다리타기',
+            completed: false
+          },
+          {
+            content: '낮잠자기',
+            completed: false
+          },
+          {
+            content: '야자하기',
+            completed: false
+          }
+        ],
+        newTodo: '',
+      },
+      methods:{
+        check: function(todo){
+          // todo.completed = true
+          todo.completed = !todo.completed
+        },
+        addTodo: function(){
+          this.todos.push({
+            content: this.newTodo,
+            completed: false
+          })
+          this.newTodo = ''
+        },
+        clearCompleted: function(){
+          const notCompletedTodos = this.todos.filter((todo) => {
+            // todo는 todos 내의 object들
+            return !todo.completed  // completed가 false인 object만 모아서 배열로 return
+          })
+          this.todos = notCompletedTodos
+        },
+      }
+    })
+  </script>
+</body>
+</html>
