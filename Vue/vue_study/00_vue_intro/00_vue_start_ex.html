@@ -1,0 +1,28 @@
+<body>
+    <input id="js-input" type="text">
+    <p id="js-p"></p>
+  
+    <div id="app">
+      <input id="vue-input" type="text" v-model="message">
+      <p id="vue-p">{{message}}</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // javascript
+      const input = document.querySelector('input')
+      input.addEventListener('keydown', function(e) {
+        const value = e.target.value
+        document.querySelector('p').innerText = value
+      })
+      
+      // Vue.js
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: '',
+        },
+      })
+    </script>
+  </body>
+  
