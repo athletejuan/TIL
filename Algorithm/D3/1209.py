@@ -1,4 +1,5 @@
-for test_case in range(1, 11):
+for t in range(1, 11):
+    test_case = input()
     sum_list = []
     total = []
     count1 = 0
@@ -27,5 +28,4 @@ for test_case in range(1, 11):
                 cross2.append(num)
                 count2 += 99
     sum_list.append(sum(cross2))
-    print(sorted(sum_list))
-    print(f'#{test_case} {sorted(sum_list)[-1]}')
+    print(f'#{test_case} {max(sum_list)}')
