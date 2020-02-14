@@ -1,0 +1,48 @@
+<body>
+  <h1>Juan's Todo List</h1>
+  <hr>
+  <div id="todo">
+    <input type="text" id="userInput">
+    <input type="submit" id="submit_btn">
+  </div>
+  <hr>
+  <ul id="todo_list"></ul>
+  <script>
+    const todo = document.querySelector('#todo')
+    const userInput = document.querySelector('#userInput')
+    const submit_btn = document.querySelector('#submit_btn')
+    const todo_list = document.querySelector('#todo_list')
+
+    submit_btn.addEventListener('click', function(){
+      newTodo()
+    })
+    userInput.addEventListener('keydown', function(){
+      if (window.event.keyCode == 13){
+        newTodo()
+      }
+    })
+    const newTodo = function(){
+      const todo_title = userInput.value
+      userInput.value = ''
+      const newli = document.createElement('li')
+      newli.innerText = todo_title
+      todo_list.append(newli)
+      const checkbtn = document.createElement('input')
+      checkbtn.type = 'checkbox'
+      checkbtn.addEventListener('click', function(){
+        if (newli.style.textDecoration == 'line-through'){
+          newli.style.textDecoration = 'none'
+        } else {
+          newli.style.textDecoration = 'line-through'
+        }
+      })
+      newli.append(checkbtn)
+      const removeBtn = document.createElement('button')
+      removeBtn.innerText = 'x'
+      removeBtn.addEventListener('click', function(){
+        newli.remove()
+      })
+      newli.append(removeBtn)
+    }
+  </script>
+</body>
