@@ -147,3 +147,4 @@ package-lock.json
 
 .vscode/
 *.txt
+*.csv
