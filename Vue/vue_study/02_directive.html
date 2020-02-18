@@ -1,0 +1,41 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+  <div id="app">
+    <li v-if = "!todo.completed" v-for = "todo in todos" v-on:click = "check(todo)">
+      {{ todo.content}}
+    </li>
+    <li v-else v-on:click = "check(todo)">[완료!]</li>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [
+        {
+          content: "내일 할일",
+          completed: true,
+        },
+        {
+          content: "늦잠자기",
+          completed: false,
+        },
+        {
+          content: "운동하기",
+          completed: false,
+        },
+        {
+          content: "맥주한잔",
+          completed: false,
+        }
+      ]
+    },
+    methods: {
+      check: function(todo){
+        todo.completed = !todo.completed
+      }
+    }
+  })
+  </script>
+</body>

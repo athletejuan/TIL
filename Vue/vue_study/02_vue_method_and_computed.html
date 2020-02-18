@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="visible = !visible">Toggle</button>
+    <ul v-if="visible">
+      <li>dateMethod: {{ dateMethod }}</li>
+      <li>dateComputed: {{ dateComputed }}</li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const STORAGE_KEY = 'vue-todos' // 임의로 지정 가능함.
+    const todoStorage = {
+      fetch: function(){
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+        // 또는 return JSON.parse(localStorage.getItem(STORAGE_KEY) || [])
+      },
+      save: function (todos){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: todoStorage.fetch(),
+        visible: true,
+      },
+      methods: {
+        dateMethod: function(){
+          return new Date()
+        }
+      },
+      computed: {
+        dateComputed: function(){
+          return new Date()
+        }
+      },
+      watch: {
+        todos: {
+          handler: function (todos) {
+            todoStorage.save(todos)
+          },
+          deep: true,
+        }
+      }
+    })
+  </script>
+</body>
+</html>
