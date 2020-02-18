@@ -1,0 +1,46 @@
+<body>
+  <h1>Juan's Todo List 4</h1>
+  <hr>
+  <div id="todo">
+    <input type="text" id="userinput">
+    <input type="submit" id="submitbtn">
+  </div>
+  <ul id="todo_list"></ul>
+  <script>
+    const userInput = document.querySelector('#userinput')
+    const submitBtn = document.querySelector('#submitbtn')
+    const todo_list = document.querySelector('#todo_list')
+
+    submitBtn.addEventListener('click', function(){
+      newTodo()
+    })
+    userInput.addEventListener('keydown', function(){
+      if (window.event.keyCode == 13) {
+        newTodo()
+      }
+    })
+    const newTodo = function(){
+      const todo_title = userInput.value
+      userInput.value = ''
+      const newli = document.createElement('li')
+      newli.innerText = todo_title
+      todo_list.append(newli)
+      const checkBtn = document.createElement('input')
+      checkBtn.type = 'checkbox'
+      checkBtn.addEventListener('click', function(){
+        if (newli.style.textDecoration == 'line-through') {
+          newli.style.textDecoration = 'none'
+        } else {
+          newli.style.textDecoration = 'line-through'
+        }
+      })
+      newli.append(checkBtn)
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'x'
+      deleteBtn.addEventListener('click', function(){
+        newli.remove()
+      })
+      newli.append(deleteBtn)
+    }
+  </script>
+</body>
