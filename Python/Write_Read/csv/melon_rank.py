@@ -25,18 +25,17 @@ response = requests.get(melon_url, headers=headers).text
 
 data = BeautifulSoup(response, 'html.parser')
 songs = data.select('#lst50')
+# pprint(songs)
 
 result_list = []
-# pprint(songs)
 for song in songs:
     rank = song.select_one('td:nth-child(2) > div > span.rank').text
     title = song.select_one('td:nth-child(6) > div > div > div.ellipsis.rank01 > span > a').text
-    # artist = song.select_one('td:nth-child(6) > div > div > div.ellipsis.rank02 > a').text
+    artist = song.select_one('td:nth-child(6) > div > div > div.ellipsis.rank02 > a').text
     # 가수가 여러명인 경우 select로 list 형태로 받아오는 방법
-    artists = song.select('td:nth-child(6) > div > div > div.ellipsis.rank02 > a')
-    # print(f'{rank}위: {name} / {artist}')
-    # item = {'rank': rank, 'title': title, 'artist': artist}
-    item = {'rank': rank, 'title': title, 'artist': ','.join([artist.text for artist in artists])}
+    # artists = song.select('td:nth-child(6) > div > div > div.ellipsis.rank02 > a')
+    item = {'rank': rank, 'title': title, 'artist': artist}
+    # item = {'rank': rank, 'title': title, 'artist': ','.join([artist.text for artist in artists])}
     result_list.append(item)
 
 with open('melon_rank.csv', 'w', encoding='utf-8', newline='') as csvfile:
