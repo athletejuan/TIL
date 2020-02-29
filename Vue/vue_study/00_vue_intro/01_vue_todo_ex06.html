@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Todo</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .completed{
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">Juan's Todo List Remind</div>
+    <hr>
+    <!-- <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)"> -->
+    <li v-for="todo in todos" v-bind:class="{completed: todo.completed}">
+      <input type="checkbox" v-model="todo.completed">
+      {{ todo.content }}
+    </li>
+  <!-- <li v-else v-on:click="check(todo)">[완료!]</li> -->
+  <div>
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+  </div>
+    <button v-on:click="clearCompleted">Clear Completed</button>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        activeColor: 'green',
+        fontSize: 30,
+        todos: [
+        {
+          content: '점심메뉴 고민하기',
+          completed: true
+        },
+        {
+          content: '사다리타기',
+          completed: false
+        },
+        {
+          content: '약속의 2시 낮잠',
+          completed: false
+        },
+        {
+          content: '야자타임',
+          completed: false
+        }
+      ],
+      newTodo: ''
+    },
+    methods: {
+      check: function(todo){
+        todo.completed = !todo.completed
+      },
+      addTodo: function(){
+        this.todos.push({
+          content: this.newTodo,
+          completed: false
+        })
+        this.newTodo = ''
+      },
+      clearCompleted: function(){
+        const notCompletedTodo = this.todos.filter((todo) => {
+          return !todo.completed
+        })
+        this.todos = notCompletedTodo
+      }
+      }
+    })
+  </script>
+</body>
+</html>
