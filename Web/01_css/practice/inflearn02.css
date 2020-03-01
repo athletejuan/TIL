@@ -1,0 +1,96 @@
+.gray {
+  color: gray;
+}
+.pick {
+  display: block;
+  margin: 10px 200px;
+}
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  width: 300px;
+  margin: 5px;
+}
+.card {
+  display: block;
+  width: 100%;
+  height: 400px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgb(0,0,0,.2)
+}
+.upside {
+  width: 100%;
+  height: 50%;
+}
+#up_img {
+  width: 300px;
+  height: 200px;
+}
+.downside {
+  display: block;
+  height: 50%;
+  margin: 10px;
+}
+.pick_title {
+  margin: 0 10px 100px 10px;
+  /* margin-bottom: 4.2rem; */
+  font-weight: bold;
+  font-size: 18px;
+  box-sizing: inherit;
+}
+.title {
+  margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.score {
+  display: inline-block;
+  width: 49%;
+}
+.fa-star {
+  display: inline;
+  color: khaki;
+}
+.star_user {
+  display: inline;
+  font-size: 5px;
+}
+.learn_user {
+  display: block;
+  margin: 10px;
+}
+.price {
+  display: inline-block;
+  width: 49%;
+  margin-left: auto;
+}
+.fa-won-sign {
+  display: inline-block;
+  margin-left: 63px;
+  text-align: right;
+}
+.now_price {
+  display: inline;
+  font-size: 16px;
+  color: royalblue;
+  text-align: right;
+  font-weight: bold;
+}
+.now_free {
+  display: block;
+  font-size: 16px;
+  color: royalblue;
+  text-align: right;
+  font-weight: bold;
+  margin: 5px;
+}
+.who {
+  display: block;
+  font-size: 16px;
+  margin: 5px 0;
+  text-align: right;
+  right: 0;
+}
