@@ -1,103 +1,141 @@
 #gray {
   color: gray;
-  font-size: 12px;
+}
+#white-bold {
+  color: aliceblue;
+  font-weight: bold;
+}
+.road_map {
+  margin: 10px 250px 250px 250px;
 }
 .container {
-  margin: 20px;
+  display: block;
+  width: 100%;
+  height: 300px;
 }
 .border {
-  display: flex;
+  display: inline-block;
   background-color: rgb(235, 235, 235);
-  border: 1px solid gray;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgb(0,0,0,.2);
   padding: 10px;
   width: 45%;
+  margin: 10px;
 }
 .sec01 {
   width: 90%;
+  display: inline-block;
   margin-right: auto;
-  display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-/* .sec02 {
-  width: 80%;
-  margin-right: auto;
-  display: block;
-} */
 h3 {
   margin: 2px 5px;
   text-overflow: ellipsis; 
   overflow: hidden;
 }
 p {
-  margin: 5px;
+  margin: 5px 0;
 }
-.sm {
+#se {
+  margin: 15px 0;
+}
+#sm {
+  margin: 10px 0;
   font-size: 15px;
 }
 .lg {
+  width: 100%;
   font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.lg_con {
+  width: 100%;
+  margin: 10px 0;
+  font-size: 18px;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
 }
 .newtab {
-  margin: auto;
-  /* position: fixed; */
-  display: inline;
+  display: inline-block;
+  /* width: 10%; */
+  margin-left: auto;
 }
 i {
   margin: 5px;
 }
-
+.icon {
+  font-size: 3em;
+}
+.sec00 {
+  display: block;
+  margin: 10px 15%;
+}
 .card {
-  display: flex;
-  margin: 10px 100px;
+  display: block;
+  width: 100%;
 }
 .sm_card {
-  flex: 1;
-  width: 16.67%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px 10px;
+  width: 14.6%;
+  /* 16.6% 로 나눌 수 없는 이유? */
+  display: inline-block;
+  margin: 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgb(0,0,0,.2);
+}
+.link {
+  width: 100%;
+  height: 100%;
+  color: black;
+  margin: 10px;
+  text-decoration: none;
 }
 .sm_info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1; 
+  display: block;
+  text-align: center;
 }
 .lg_card {
-  flex: 1;
-  width: 33.33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px 10px;
+  display: inline-block;
+  width: 31.3%;
+  /* 33.3% 로 나눌 수 없는 이유? */
+  margin: 10px 0;
+  padding: 0 10px;
 }
 .lg_info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1; 
+  width: 100%;
+  display: block;
 }
-
-#foot_info {
-  display: inline;
-  /* display: flex;
-  flex-direction: column; */
+#lg_img {
+  width: 100%;
+  height: 200px;
+}
+#foot {
+  background-color: slateblue;
+  display: block;
   position: fixed;
+  width: 100vw;
+  height: 230px;
   bottom: 0;
+}
+.foot_info {
+  background-color: slateblue;
+  display: block;
   margin: 10px 200px;
+  padding: 20px;
+  color: aliceblue;
 }
 .foot_head {
   display: inline;
 }
-a {
-  margin: 10px 10px;
-}
 .info {
-  /* display: flex;
-  flex-direction: column; */
   display: block;
   margin: 20px 0;
 }
