@@ -54,7 +54,7 @@ inline 요소 안에 block 요소 포함 불가.
     inline의 한줄표시 + block의 margin, padding, width, height
     content 너비만큼 가로폭
     display: inline-block인 요소들 뒤에 공백은 space(4px)
-    상하여백: marginrhk line height로 가능
+    상하여백: margin과 line height로 가능
 */
 
 .ib {
