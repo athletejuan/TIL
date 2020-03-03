@@ -1,3 +1,6 @@
+.base {
+  margin: 0;
+}
 #gray {
   color: gray;
 }
@@ -83,8 +86,9 @@ i {
   width: 100%;
 }
 .sm_card {
+  position: relative;
   width: 14.6%;
-  /* 16.6% 로 나눌 수 없는 이유? */
+  height: 120px;
   display: inline-block;
   margin: 10px;
   box-sizing: border-box;
@@ -99,13 +103,16 @@ i {
   text-decoration: none;
 }
 .sm_info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: block;
   text-align: center;
 }
 .lg_card {
   display: inline-block;
   width: 31.3%;
-  /* 33.3% 로 나눌 수 없는 이유? */
   margin: 10px 0;
   padding: 0 10px;
 }
@@ -127,8 +134,8 @@ i {
 }
 .foot_info {
   background-color: slateblue;
-  display: block;
-  margin: 10px 200px;
+  display: inline-block;
+  margin-left: 200px;
   padding: 20px;
   color: aliceblue;
 }
@@ -136,10 +143,47 @@ i {
   display: inline;
 }
 .info {
-  display: block;
-  margin: 20px 0;
+  display: inline-block;
+  width: 80%;
+  margin: 0;
 }
 #logo {
   width: 80px; 
-  margin-right: 10px;
+  margin: 10px 0 0 10px;
+}
+.question {
+  position: relative;
+  display: inline-block;
+  width: 15%;
+  height: 80px;
+  margin-top: 80px;
+}
+.alink {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.btn {
+  position: absolute;
+  display: inline-block;
+  background-color: aliceblue;
+  color: midnightblue;
+  text-align: center;
+  width: 200px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgb(0,0,0,.2);
+}
+.v-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+.bold {
+  font-weight: bold;
 }
