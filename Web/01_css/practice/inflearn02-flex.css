@@ -1,0 +1,144 @@
+.gray {
+  color: gray;
+}
+.pick {
+  position: relative;
+  display: block;
+  margin: 10px 200px;
+}
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  width: 300px;
+  margin: 5px;
+}
+.big_title {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+.card {
+  display: block;
+  width: 100%;
+  height: 400px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgb(0,0,0,.2)
+}
+.upside {
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+#up_img {
+  width: 300px;
+  height: 200px;
+}
+.discount {
+  position: absolute;
+  background-color: orangered;
+  right: 0;
+  top: 10px;
+  width: 180px;
+  height: 40px;
+  box-sizing: border-box;
+  border: ridge 2px aliceblue;
+}
+.fa-arrow-alt-circle-down {
+  display: inline-block;
+  margin: 0 0 0 5px;
+  color: aliceblue;
+}
+.discount > p {
+  display: inline-block;
+  color: aliceblue;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.downside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 45%;
+  margin: 10px;
+}
+p.title {
+  display: flex;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 15px auto 10px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  width: 100%
+}
+.info > div {
+  margin-top: 5px;
+  display: flex;
+  width: 100%;
+}
+/* .info01 {
+  display: flex;
+  width: 100%;
+} */
+.past {
+  margin: 0 0 0 auto;
+}
+#ago {
+  display: inline;
+  color: gray;
+  margin: 0;
+}
+.ago_price {
+  display: inline;
+  font-size: 15px;
+  color: gray;
+  font-weight: bold;
+  text-decoration: line-through;
+  margin-left: auto;
+}
+/* .info02 {
+  display: flex;
+  width: 100%
+} */
+.stars {
+  margin: 0 auto 0 0;
+}
+.fa-star {
+  display: inline;
+  color: khaki;
+}
+.star_user {
+  display: inline;
+  font-size: 5px;
+}
+.now {
+  margin: 0 0 0 auto;
+}
+.now_price {
+  display: inline;
+  font-size: 18px;
+  color: royalblue;
+  font-weight: bold;
+  margin-left: auto;
+}
+/* .info03 {
+  display: flex;
+  width: 100%
+} */
+.learn_user {
+  margin: 0 auto 0 0;
+}
+#fa-won-sign {
+  display: inline;
+  color: royalblue;
+  margin: 0;
+}
+#who {
+  font-size: 16px;
+  margin: 0 0 0 auto;
+}
