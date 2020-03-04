@@ -1,4 +1,4 @@
-# HPHK 1Day1CSS
+# 1Day1CSS
 
 ## Git Branch Process
 
