@@ -20,7 +20,8 @@
 }
 .card {
   display: block;
-  width: 100%;
+  position: relative;
+  width: 300px;
   height: 400px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -81,10 +82,6 @@ p.title {
   display: flex;
   width: 100%;
 }
-/* .info01 {
-  display: flex;
-  width: 100%;
-} */
 .past {
   margin: 0 0 0 auto;
 }
@@ -101,10 +98,6 @@ p.title {
   text-decoration: line-through;
   margin-left: auto;
 }
-/* .info02 {
-  display: flex;
-  width: 100%
-} */
 .stars {
   margin: 0 auto 0 0;
 }
@@ -126,10 +119,6 @@ p.title {
   font-weight: bold;
   margin-left: auto;
 }
-/* .info03 {
-  display: flex;
-  width: 100%
-} */
 .learn_user {
   margin: 0 auto 0 0;
 }
@@ -141,4 +130,49 @@ p.title {
 #who {
   font-size: 16px;
   margin: 0 0 0 auto;
+}
+.darkness {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  background-color: black;
+  opacity: 0;
+  transition: all .2s linear;
+}
+.add_info {
+  padding: 20px;
+  margin: 0 0 auto 0;
+}
+.add_info > p {
+  margin: 10px 10px;
+  color: aliceblue;
+}
+.add_title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.add_content {
+  font-size: 16px;
+}
+.category {
+  font-size: 16px;
+}
+.category > i {
+  margin-right: 5px;
+  color: powderblue;
+}
+.addition {
+  margin: auto 0 0 auto;
+}
+.addition > i {
+  display: block;
+  margin: 20px 20px;
+  color: aliceblue;
+}
+.card:hover .darkness {
+  opacity: .8;
 }
