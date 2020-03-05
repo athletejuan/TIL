@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}New{% endblock %}
+{% block body %}
+  <h1>New Article</h1>
+  <hr>
+  <form action="/articles/create/">
+    제목: <input type="text" name="title"><br>
+    내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+    <button>작성</button>
+  </form>
+{% endblock %}
+</html>
