@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="container">
-  <h1>Juan's Board Remind</h1>
+  <h1>Juan's Django Remind</h1>
   <hr>
-  <a href="new/">새 글</a>
+  <a class="btn btn-primary" href="create/">새 글</a>
   <hr>
   <ul>
     {% for article in articles %}
     <li>
-      {{ article.title }}
-      <a href="/articles/{{ article.id }}/">상세보기</a>
+      <a href="/articles/{{ article.id }}/">{{ article.title }}</a>
     </li>
     {% endfor %}
   </ul>

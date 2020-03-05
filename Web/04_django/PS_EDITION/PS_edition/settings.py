@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'bootstrap4',
+    'django_wysiwyg',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -109,3 +111,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DJANGO_WYSIWYG_MEDIA_URL = '/media/'
+DJANGO_WYSIWYG_MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"

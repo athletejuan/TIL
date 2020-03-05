@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
+{% load wysiwyg %}
+{% wysiwyg_setup %}
 {% block title %}New{% endblock %}
 {% block body %}
+<div class="container">
   <h1>New Article</h1>
   <hr>
-  <form action="/articles/create/">
+  <form action="/articles/create/" style="display: inline">
     제목: <input type="text" name="title"><br>
-    내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
-    <button>작성</button>
+    내용: <textarea name="content" id="wys_area" cols="30" rows="10"></textarea>
+    <button class="btn btn-secondary">작성</button>
   </form>
+  <a class="btn btn-info" href="/articles/">목록으로</a>
+</div>
+{% wysiwyg_editor "wys_area" %}
 {% endblock %}
 </html>

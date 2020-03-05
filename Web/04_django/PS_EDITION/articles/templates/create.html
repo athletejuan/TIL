@@ -1,4 +1,24 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load wysiwyg %}
+{% wysiwyg_setup %}
+{% block title %}New{% endblock %}
+{% block body %}
+<div class="container">
+  <h1>New Article</h1>
+  <hr>
+  <form action="" style="display: inline" method="POST">
+    {% csrf_token %}
+    제목: <input type="text" name="title"><br>
+    내용: <textarea name="content" id="wys_area" cols="30" rows="10"></textarea>
+    <button class="btn btn-secondary">작성</button>
+  </form>
+  <a class="btn btn-info" href="/articles/">목록으로</a>
+</div>
+{% wysiwyg_editor "wys_area" %}
+{% endblock %}
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,4 +31,4 @@
   <hr>
   <a href="/articles/">목록으로</a>
 </body>
-</html>
+</html> -->
