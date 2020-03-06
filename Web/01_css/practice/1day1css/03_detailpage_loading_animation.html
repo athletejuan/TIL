@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/eb4e6c57f5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="detail">
+    <div class="title">
+      <div class="attr">
+        <h1>Title: </h1>
+      </div>
+      <div class="subject">
+        <h1>Juan's Pic</h1>
+      </div>
+      <div class="profile">
+        <img class="main" src="https://avatars3.githubusercontent.com/u/48536433?s=96&v=4" alt="">
+        <p class="name">Juan</p>
+      </div>
+    </div>
+    <div class="content">
+      <img src="https://picsum.photos/800/600?random=12" alt="">
+      <textarea cols="30" rows="10">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum est dolorem sint. Ipsam hic, et impedit pariatur repellendus sit nesciunt possimus quasi commodi veniam necessitatibus, quia molestiae, dolorum molestias illo!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repellat maiores tenetur dolore hic! Nobis perferendis ipsam quaerat tenetur enim consequatur possimus repellat veniam delectus dolorem ipsum, cumque illo neque!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore est deserunt ipsum enim, veniam modi voluptates saepe eveniet optio error dolorum quam quas, nihil architecto ducimus. Similique facilis veniam consequatur.
+      </textarea>
+    </div>
+    <div class="addition">
+      <div class="reaction">
+        <a href="#">
+          <i class="far fa-heart"></i>
+          <div class="like">
+            <i class="fas fa-heart"></i>
+          </div>
+        </a><span>15</span>
+        <i class="far fa-comments"></i><span>6,027</span>
+      </div>
+      <div class="when">
+        <span>작성시간: 2020.03.05 15:33</span>
+        <span> / </span>
+        <span>수정시간: 2020.03.06 03:33</span>
+      </div>
+    </div>
+    <div class="edit">
+      <div class="btn">
+        <a class="link" href=""></a>
+        <p>EDIT</p>
+      </div>
+      <div class="btn">
+        <a class="link" href=""></a>
+        <p>DELETE</p>
+      </div>
+    </div>
+  </div>
+  <div id="ani" class="rotating"><i class="fab fa-apple fa-3x"></i></div>
+  <script>
+    const detail = document.getElementById('detail');
+    detail.style.display = 'none';
+    setTimeout(function () {
+      const rotating = document.querySelector('.rotating');
+      detail.style.display = ''
+      rotating.remove()
+    // Spinner 숨기고, 게시글 상세 페이지 보여주기
+    }, 2000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+#detail {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 80%;
+  margin: 30px auto 0 auto;
+}
+.title {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin: auto 0;
+}
+.attr {
+  margin: auto 0;
+}
+.subject {
+  margin: auto 0;
+  width: 100%;
+  padding-left: 10px;
+}
+.profile {
+  margin: 0 0 0 auto;
+}
+.profile > img {
+  display: block;
+  border-radius: 50%;
+}
+.name {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+}
+.title > h1 {
+  font-size: 30px;
+  margin: auto 0;
+}
+.content {
+  display: flex;
+}
+.content > img {
+  width: 50%;
+}
+.content > textarea {
+  width: 50%;
+  font-size: 20px;
+  padding: 10px;
+}
+.addition {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.fa-heart {
+  color: crimson;
+  font-size: 1.2rem;
+}
+.fa-comments {
+  color: royalblue;
+  font-size: 1.2rem;
+}
+.reaction {
+  position: relative;
+  width: 50%;
+  margin: 0;
+}
+.reaction > span {
+  font-size: 20px;
+  margin: 0 10px;
+}
+.when {
+  width: 50%;
+  text-align: right;
+}
+.when > span {
+  margin: 2px 0;
+}
+.like {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all .2s linear;
+}
+a {
+  text-decoration: none;
+} 
+a:hover .like {
+  opacity: 1;
+}
+.edit {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 10px 0;
+}
+.btn {
+  position: relative;
+  background-color: royalblue;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: groove 3px black;
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+}
+.link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.btn > p {
+  font-size: 20px;
+  color: aliceblue;
+  font-weight: bold;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+#ani {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+.rotating {
+  animation: rotating 1.5s linear infinite;
+}
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
