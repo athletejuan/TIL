@@ -66,7 +66,6 @@
   margin: 10px;
 }
 p.title {
-  display: flex;
   font-weight: bold;
   font-size: 18px;
   margin: 10px 15px auto 10px;
