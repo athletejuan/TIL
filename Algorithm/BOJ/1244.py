@@ -34,12 +34,3 @@ if len(s_li) > 20:
         print(' '.join(s_li[:20]))
         s_li = s_li[20:]
 print(' '.join(s_li))
-
-
-
-# while light[num[1]-k-1] == light[num[1]+k-1] and (num[1]-k) > 0 and (num[1]+k-1) < L:
-#     if light[num[1]-k-1]:
-#         light[num[1]-k-1] = light[num[1]+k-1] = 0
-#     else:
-#         light[num[1]-k-1] = light[num[1]+k-1] = 1
-#     k += 1
