@@ -7,16 +7,13 @@ body {
 .nav {
   background-color: antiquewhite;
   display: block;
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100vw;
   height: 60px;
   z-index: 10;
 }
 .fa-h-square {
-  /* position: absolute;
-  top: 50%;
-  transform: translate(0, -50%); */
   display: inline-block;
   font-size: 20px;
   margin: auto 0 auto 30px;
@@ -57,7 +54,6 @@ body {
   width: 100vw;
   height: 500px;
   text-align: center;
-  margin-top: 60px;
 }
 .jumbo_img {
   position: absolute;
