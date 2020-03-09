@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+}
+.shophome {
+  position: relative;
+  width: 100vw;
+}
+.nav {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+.homebtn {
+  display: inline-block;
+  margin: 20px 0px 20px 30px;
+}
+.homebtn > p {
+  display: inline;
+  /* margin-left: 30px; */
+  font-size: 20px;
+  font-weight: bold;
+}
+.custom {
+  display: inline-block;
+}
+.custom > p {
+  display: inline-block;
+  font-family: Helvetica, sans-serif;
+  /* margin: 0 30px 0 0; */
+  margin-right: 30px;
+  height: 100%;
+  font-size: 13px;
+  font-weight: bold;
+}
