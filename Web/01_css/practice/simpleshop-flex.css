@@ -3,13 +3,15 @@ body {
 }
 .shophome {
   position: relative;
-  width: 100vw;
+  width: 60vw;
+  margin: 0 20%;
 }
 .nav {
-  position: absolute;
+  position: sticky;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
   width: 100%;
   top: 0;
   z-index: 10;
@@ -35,4 +37,66 @@ body {
   height: 100%;
   font-size: 13px;
   font-weight: bold;
+}
+.main {
+  width: 100%;
+  height: 350px;
+  margin: 0;
+}
+.main > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.products {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+.products > h2 {
+  display: block;
+  width: 100%;
+  font-family: Helvetica, sans-serif;
+  font-size: 24px;
+  color: #545454;
+  font-weight: bold;
+  margin: 60px auto;
+  text-align: center;
+}
+.product {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 800px;
+}
+.item {
+  position: relative;
+  margin: 0 10px 80px;
+}
+.item > a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.item > img {
+  margin: 0 0 20px;
+  width: 225px;
+  height: 225px;
+}
+.item > p {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 4px 0 0;
+  text-align: center;
+}
+.sns {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto 80px;
+}
+.sns > i {
+  margin: 0 20px;
 }
