@@ -1,0 +1,8 @@
+<h1>Hello Corona19</h1>
+
+{% for article in articles %}
+<ul>
+  <li>No.{{ article.id }}: <a href="/articles/{{ article.id }}/">{{ article.title }}</a></li>
+</ul>
+{% endfor %}
+<a href="/articles/create/">새 글</a>

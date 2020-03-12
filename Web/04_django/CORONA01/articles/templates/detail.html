@@ -1,0 +1,11 @@
+<h1>Article's Detail</h1>
+<hr>
+<p>No.{{ article.id }}</p>
+<p>제목: {{ article.title }}</p>
+<p>내용: {{ article.content }}</p>
+<p>작성: {{ article.created_at }}</p>
+<p>수정: {{ article.updated_at }}</p>
+<hr>
+<a href="/articles/">목록으로</a>
+<a href="/articles/{{ article.id }}/update/">수정</a>
+<a href="/articles/{{ article.id }}/delete/">삭제</a>

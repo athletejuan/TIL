@@ -1,0 +1,12 @@
+<!-- <h1>새 글이 성공적으로 작성되었습니다</h1> -->
+
+<h1>New Article</h1>
+<hr>
+<form action="" method="POST">
+  {% csrf_token %}
+  제목: <input type="text" name="title"><br>
+  내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+  <input type="submit" value="제출">
+</form>
+
+<a href="/articles/">목록으로</a>
