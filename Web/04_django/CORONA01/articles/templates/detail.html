@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Corona19{% endblock %}
+{% block body %}
 <h1>Article's Detail</h1>
 <hr>
 <p>No.{{ article.id }}</p>
@@ -6,6 +9,35 @@
 <p>작성: {{ article.created_at }}</p>
 <p>수정: {{ article.updated_at }}</p>
 <hr>
-<a href="/articles/">목록으로</a>
+<form action="{% url 'articles:comments_create' article.id %}" method="POST">
+  {% csrf_token %}
+  댓글 입력: <input type="text" name="content">
+  <input type="submit">
+</form>
+<p><b>댓글 목록 / 현재 댓글 개수: {{ comments | length }}</b></p>
+{% for comment in comments %}
+<ul>
+  <li style="display: inline">{{ comment.content }}</li>
+  <form action="{% url 'articles:comments_delete' article.id comment.id %}" method="POST" style="display: inline">
+    {% csrf_token %}
+    <button>삭제</button>
+  </form>
+</ul>
+{% empty %}
+  <p><b>댓글이 없어요..ㅠㅠ</b></p>
+{% endfor %}
+<hr>
+<a href="{% url 'articles:index' %}">목록으로</a>
+<!-- <form action="{% url 'articles:update' article.id %}" method="POST">
+  <button>수정</button>
+</form> -->
+<a href="{% url 'articles:update' article.id %}">수정</a>
+<form action="{% url 'articles:delete' article.id %}" method="POST">
+  <button>삭제</button>
+</form>
+<!-- <a href="{% url 'articles:delete' article.id %}">삭제</a> -->
+
+<!-- <a href="/articles/">목록으로</a>
 <a href="/articles/{{ article.id }}/update/">수정</a>
-<a href="/articles/{{ article.id }}/delete/">삭제</a>
+<a href="/articles/{{ article.id }}/delete/">삭제</a> -->
+{% endblock %}

@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Corona19{% endblock %}
+{% block body %}
+
 <!-- <h1>새 글이 성공적으로 작성되었습니다</h1> -->
 
 <h1>New Article</h1>
@@ -9,4 +13,5 @@
   <input type="submit" value="제출">
 </form>
 
-<a href="/articles/">목록으로</a>
+<a href="{% url 'articles:index' %}">목록으로</a>
+{% endblock %}
