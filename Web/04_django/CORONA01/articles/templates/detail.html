@@ -6,6 +6,11 @@
 <p>No.{{ article.id }}</p>
 <p>제목: {{ article.title }}</p>
 <p>내용: {{ article.content }}</p>
+{% if article.image %}
+<img src="{{ article.image.url }}" alt="{{ article.image }}">
+{% endif %}
+
+
 <p>작성: {{ article.created_at }}</p>
 <p>수정: {{ article.updated_at }}</p>
 <hr>

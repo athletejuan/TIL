@@ -13,6 +13,7 @@ def create(request):
         article = Article()
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect('articles:detail', article.id)
     else:
@@ -32,6 +33,7 @@ def update(request, article_id):
     if request.method == "POST":
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect('articles:detail', article.id)
     else:

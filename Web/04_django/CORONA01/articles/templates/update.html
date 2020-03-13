@@ -2,14 +2,17 @@
 {% block title %}Corona19{% endblock %}
 {% block body %}
 <h1>Edit Article</h1>
+<p><b>기존 사진</b></p>
+<img src="{{ article.image.url }}" alt="{{ article.image }}">
 <hr>
 <!-- <form action="/articles/{{ article.id }}/update/"> -->
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   제목: <input type="text" name="title" value='{{ article.title }}''><br>
-  내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea>
+  내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea><br>
+  <input type="file" name="image" accept="image/*">
   <input type="submit" value="제출">
 </form>
-
+<hr>
 <a href="{% url 'articles:detail' article.id %}">취소</a>
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Corona19{% endblock %}
+{% load static %}
 {% block body %}
 <h1>Hello F*cking Corona19</h1>
-
+<img src="{% static 'logo-hangul-white.png' %}" alt="hphk" width="300px">
 {% for article in articles %}
 <ul>
   <li>No.{{ article.id }}: <a href="{% url 'articles:detail' article.id %}">{{ article.title }}</a></li>

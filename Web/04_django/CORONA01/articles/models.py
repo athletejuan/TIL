@@ -1,8 +1,21 @@
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
+def article_image_path(instance, filename):
+    return f'articles/{instance.id}번글/images/{filename}'
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    # image = models.ImageField(blank=True)
+    image = ProcessedImageField(
+        # upload_to = 'articles/images',              # 저장 위치
+        upload_to = 'article_image_path',
+        processors = [ResizeToFill(300, 200)],      # 처리할 작업 목록
+        format = 'JPEG',                            # 저장 포맷
+        options = {'quality': 90},                  # 옵션(이미지 품질 수치) -> 원본의 90% 정도의 품질
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
