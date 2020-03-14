@@ -13,9 +13,10 @@ def create(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data.get('title')
-            content = form.cleaned_data.get('content')
-            article = Article.objects.create(title=title, content=content)
+            article = form.save()
+            # title = form.cleaned_data.get('title')
+            # content = form.cleaned_data.get('content')
+            # article = Article.objects.create(title=title, content=content)
             return redirect('articles:detail', article.id)
         # article = Article()
         # article.title = request.POST.get('title')
@@ -26,7 +27,8 @@ def create(request):
     else:
         form = ArticleForm()
         # return render(request, 'create.html')
-    return render(request, 'create.html', {'form':form})
+    # return render(request, 'create.html', {'form':form})
+    return render(request, 'form.html', {'form':form})
 
 def detail(request, article_id):
     # article = Article.objects.get(id=article_id)
@@ -41,20 +43,23 @@ def detail(request, article_id):
 def update(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
-            article.title = form.cleaned_data.get('title')
-            article.content = form.cleaned_data.get('content')
-            article.save()
+            article = form.save()
+            # article.title = form.cleaned_data.get('title')
+            # article.content = form.cleaned_data.get('content')
+            # article.save()
         # article.title = request.POST.get('title')
         # article.content = request.POST.get('content')
         # article.image = request.FILES.get('image')
         # article.save()
             return redirect('articles:detail', article.id)
     else:
-        form = ArticleForm(initial=article.__dict__)
+        form = ArticleForm(instance=article)
+        # form = ArticleForm(initial=article.__dict__)
         # return render(request, 'update.html', {'article':article})
-    return render(request, 'create.html', {'form':form})
+    # return render(request, 'create.html', {'form':form})
+    return render(request, 'form.html', {'form':form})
 
 def delete(request, article_id):
     # article = Article.objects.get(id=article_id)

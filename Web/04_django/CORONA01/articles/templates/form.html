@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Corona19{% endblock %}
+{% block body %}
+
+<h1>New Article</h1>
+<hr>
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="제출">
+</form>
+<hr>
+<a href="{% url 'articles:index' %}">목록으로</a>
+{% endblock %}
