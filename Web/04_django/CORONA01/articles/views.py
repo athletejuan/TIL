@@ -11,7 +11,7 @@ def index(request):
 
 def create(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save()
             # title = form.cleaned_data.get('title')
@@ -43,7 +43,7 @@ def detail(request, article_id):
 def update(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        form = ArticleForm(request.POST, instance=article)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             article = form.save()
             # article.title = form.cleaned_data.get('title')
@@ -59,7 +59,7 @@ def update(request, article_id):
         # form = ArticleForm(initial=article.__dict__)
         # return render(request, 'update.html', {'article':article})
     # return render(request, 'create.html', {'form':form})
-    return render(request, 'form.html', {'form':form})
+    return render(request, 'form.html', {'form':form, 'article':article})
 
 def delete(request, article_id):
     # article = Article.objects.get(id=article_id)

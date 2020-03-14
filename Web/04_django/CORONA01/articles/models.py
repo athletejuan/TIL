@@ -11,7 +11,7 @@ class Article(models.Model):
     # image = models.ImageField(blank=True)
     image = ProcessedImageField(
         # upload_to = 'articles/images',              # 저장 위치
-        upload_to = 'article_image_path',
+        upload_to = article_image_path,
         processors = [ResizeToFill(300, 200)],      # 처리할 작업 목록
         format = 'JPEG',                            # 저장 포맷
         options = {'quality': 90},                  # 옵션(이미지 품질 수치) -> 원본의 90% 정도의 품질

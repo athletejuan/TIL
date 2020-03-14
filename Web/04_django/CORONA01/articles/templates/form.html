@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}Corona19{% endblock %}
 {% block body %}
-
-<h1>New Article</h1>
+{% load bootstrap4 %}
+{% if request.resolver_match.url_name == 'create' %}
+  <h1>New Article</h1>
+{% else %}
+  <h1>Edit Article</h1>
+{% endif %}
 <hr>
 <form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="제출">
+  {% bootstrap_form form layout='horizontal' %}
+  {% bootstrap_button "등록" button_class='btn btn-primary'%}
+  <!-- <input type="submit" value="제출"> -->
 </form>
 <hr>
+{% if request.resolver_match.url_name == 'create' %}
 <a href="{% url 'articles:index' %}">목록으로</a>
+{% else %}
+<a href="{% url 'articles:detail' article.id %}">뒤로가기</a>
+{% endif %}
 {% endblock %}
