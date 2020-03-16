@@ -10,8 +10,30 @@
 <body>
   {% load bootstrap4 %}
   <div class='container'>
-  {% block body %}
-  {% endblock %}
+    
+
+    {% if user.is_authenticated %}
+    <h1>Hello! {{ user.username }}</h1>
+    <a class="btn btn-success btn-sm" href="{% url 'accounts:edit' %}">회원정보 수정</a>
+    <a class="btn btn-success btn-sm" href="{% url 'accounts:change_password' %}">비밀번호 변경</a>
+    <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline">
+      {% csrf_token %}
+      {% bootstrap_button "로그아웃" button_class="btn btn-success btn-sm" %}
+    </form>
+    <form action="{% url 'accounts:delete' %}" method="POST" style="display: inline">
+      {% csrf_token %}
+      {% bootstrap_button "회원탈퇴" button_class="btn btn-success btn-sm" %}
+    </form>
+    {% else %}
+    <h1>Hello! Stranger!</h1>
+    <h1>
+      <a class="btn btn-success btn-sm" href="{% url 'accounts:login' %}">로그인</a>
+      <a class="btn btn-success btn-sm" href="{% url 'accounts:signup' %}">회원가입</a>
+    </h1>
+    {% endif %}
+    <hr>
+    {% block body %}
+    {% endblock %}
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

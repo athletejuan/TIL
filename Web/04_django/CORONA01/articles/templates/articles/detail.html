@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'articles/base.html' %}
 {% block title %}Corona19{% endblock %}
 {% block body %}
 <h1>Article's Detail</h1>
@@ -9,7 +9,6 @@
 {% if article.image %}
 <img src="{{ article.image.url }}" alt="{{ article.image }}">
 {% endif %}
-
 
 <p>작성: {{ article.created_at }}</p>
 <p>수정: {{ article.updated_at }}</p>
@@ -32,14 +31,16 @@
   <p><b>댓글이 없어요..ㅠㅠ</b></p>
 {% endfor %}
 <hr>
-<a href="{% url 'articles:index' %}">목록으로</a>
+<a class="btn btn-info" href="{% url 'articles:index' %}">목록</a>
 <!-- <form action="{% url 'articles:update' article.id %}" method="POST">
   <button>수정</button>
 </form> -->
-<a href="{% url 'articles:update' article.id %}">수정</a>
-<form action="{% url 'articles:delete' article.id %}" method="POST">
-  <button>삭제</button>
-</form>
+{% if user == article.user %}
+  <a class="btn btn-warning" href="{% url 'articles:update' article.id %}">수정</a>
+  <form action="{% url 'articles:delete' article.id %}" method="POST" style="display: inline">
+    <button class="btn btn-danger">삭제</button>
+  </form>
+{% endif %}
 <!-- <a href="{% url 'articles:delete' article.id %}">삭제</a> -->
 
 <!-- <a href="/articles/">목록으로</a>
