@@ -100,3 +100,14 @@ def comments_delete(request, article_id, comment_id):
         return redirect('articles:detail', article_id)
     else:
         return redirect('articles:detail', article_id)
+
+@login_required
+def like(request, article_id):
+    article = get_object_or_404(Article, id=article_id) # article_id에 해당하는 특정 게시물
+    user = request.user # 요청을 보낸 유저
+
+    if article.like_users.filter(id=user.id).exists():  # 이미 좋아요를 누른 상태
+        article.like_users.remove(user)                 # 좋아요 취소
+    else:
+        article.like_users.add(user)                    # 좋아요 추가
+    return redirect('articles:index')
