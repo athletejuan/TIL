@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .completed{
+      text-decoration: line-through;
+      opacity: .6;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-bind:style="{color: titleColor, fontSize: fontSize + 'px'}">Juan's Vue Todo</div>
+    <hr>
+    <!-- <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)"> -->
+    <li v-for="todo in todos" v-bind:class="{completed: todo.completed}">
+      <input type="checkbox" v-model="todo.completed">
+      {{ todo.content }}
+    </li>
+    <!-- <li v-else v-on:click="check(todo)">[완료!]</li> -->
+    <div>
+      <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    </div>
+    <div> 
+      <input type="submit" value="Clear Completed" v-on:click="clearCompleted">
+    </div>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        titleColor: 'olive',
+        fontSize: 30,
+        todos: [
+          {
+            content: '점심메뉴 고민하기',
+            completed: true
+          },
+          {
+            content: '사다리타기',
+            completed: false
+          },
+          {
+            content: '약속의 2시 낮잠',
+            completed: false
+          },
+          {
+            content: '야자타임',
+            completed: false
+          }
+        ],
+        newTodo: ''
+      },
+      methods: {
+        // check: function(todo){
+        //   todo.completed = !todo.completed
+        // },
+        addTodo: function(){
+          this.todos.push({
+            content: this.newTodo,
+            completed: false
+          })
+          this.newTodo = ''
+        },
+        clearCompleted: function(){
+          const notComletedTodo = this.todos.filter((todo) => {
+            return !todo.completed
+          })
+          this.todos = notComletedTodo
+        }
+      }
+    })
+  </script>
+</body>
+</html>
