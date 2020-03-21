@@ -1,0 +1,9 @@
+<h1>Juan's Board</h1>
+
+<a href="new/">새 글</a>
+<hr>
+{% for article in articles %}
+<ul>
+  <li>No.{{ article.id }} - <a href="/articles/{{ article.id }}/">{{ article.title }}</a> | <a href="/articles/{{ article.id }}/delete/"><button>삭제</button></a></li>
+</ul>
+{% endfor %}
