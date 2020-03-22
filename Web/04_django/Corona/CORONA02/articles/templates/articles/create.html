@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'articles/base.html' %}
 {% block body %}
 <h1>New Article</h1>
 <hr>
@@ -8,6 +8,7 @@
   내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
   <input type="submit" value="입력">
 </form>
+<a href="{% url 'articles:index' %}"><button>목록보기</button></a>
 {% endblock %}
 
 <!-- <h1>글이 성공적으로 작성되었습니다.</h1>

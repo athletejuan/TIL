@@ -3,7 +3,7 @@ from .models import Article
 
 def index(request):
     articles = Article.objects.all()[::-1]
-    return render(request, 'index.html', {'articles':articles})
+    return render(request, 'articles/index.html', {'articles':articles})
 
 # def new(request):
 #     return render(request, 'new.html')
@@ -15,32 +15,31 @@ def create(request):
         article.content = request.POST.get('content')
         article.save()
         # return render(request, 'create.html', {'article':article})
-        return redirect(f'/articles/{ article.id }/')
+        return redirect('articles:detail', article.id)
     else:
-        return render(request, 'create.html')
+        return render(request, 'articles/create.html')
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
-    return render(request, 'detail.html', {'article':article})
+    return render(request, 'articles/detail.html', {'article':article})
 
 # def edit(request, article_id):
 #     article = Article.objects.get(id=article_id)
 #     return render(request, 'edit.html', {'article':article})
 
 def update(request, article_id):
+    article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article = Article.objects.get(id=article_id)
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
         article.save()
         # return render(request, 'update.html', {'article':article})
-        return redirect(f'/articles/{ article.id }/')
+        return redirect('articles:detail', article.id)
     else:
-        article = Article.objects.get(id=article_id)
-        return render(request, 'edit.html', {'article':article})
+        return render(request, 'articles/edit.html', {'article':article})
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
         article.delete()
-    return redirect('/articles/')
+    return redirect('articles:index')

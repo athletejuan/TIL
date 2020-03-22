@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'articles/base.html' %}
 {% block body %}
 <h1>Juan's Board</h1>
 
-<a href="create/">새 글</a>
+<a href="{% url 'articles:create' %}">새 글</a>
 <hr>
 {% for article in articles %}
 <ul>
   <!-- <li>No.{{ article.id }} - <a href="/articles/{{ article.id }}/">{{ article.title }}</a> | <a href="/articles/{{ article.id }}/delete/"><button>삭제</button></a></li> -->
-  <li>No.{{ article.id }} - <a href="/articles/{{ article.id }}/">{{ article.title }}</a> | 
-    <form action="/articles/{{ article.id }}/delete/" method = "POST" style="display: inline">
+  <li>No.{{ article.id }} - <a href="{% url 'articles:detail' article.id %}">{{ article.title }}</a> | 
+    <form action="{% url 'articles:delete' article.id %}" method = "POST" style="display: inline">
       {% csrf_token %}
       <button>삭제</button>
     </form>

@@ -1,0 +1,16 @@
+{% extends 'articles/base.html' %}
+{% block body %}
+<h1>No.{{ article.id }} - {{ article.title }}</h1>
+<hr>
+<p>내용: {{ article.content }}</p>
+<p>작성: {{ article.created_at }}</p>
+<p>수정: {{ article.updated_at }}</p>
+<hr>
+<a href="{% url 'articles:index' %}">목록</a>
+<a href="{% url 'articles:update' article.id %}">수정</a>
+<!-- <a href="{/articles/{{ article.id }}/delete/}">삭제</a> -->
+<form action="{% url 'articles:delete' article.id %}" method="POST">
+  {% csrf_token %}
+  <button>삭제</button>
+</form>
+{% endblock %}
