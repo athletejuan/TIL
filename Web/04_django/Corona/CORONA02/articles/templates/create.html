@@ -1,3 +1,15 @@
-<h1>글이 성공적으로 작성되었습니다.</h1>
+{% extends 'base.html' %}
+{% block body %}
+<h1>New Article</h1>
 <hr>
-<a href="/articles/{{ article.id }}/">게시글 보기</a>
+<form action="" method="POST">
+  {% csrf_token %}
+  제목: <input type="text" name="title"><br>
+  내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+  <input type="submit" value="입력">
+</form>
+{% endblock %}
+
+<!-- <h1>글이 성공적으로 작성되었습니다.</h1>
+<hr>
+<a href="/articles/{{ article.id }}/">게시글 보기</a> -->
