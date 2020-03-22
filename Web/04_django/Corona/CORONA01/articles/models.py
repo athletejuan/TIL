@@ -33,4 +33,4 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'<article(self.articld_id) : Comment({self.id})> - {self.content}'
+        return f'<article({self.articld_id}) : Comment({self.id})> - {self.content}'
