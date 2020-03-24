@@ -47,11 +47,11 @@ def delete(request, article_id):
 
 def comment_create(request, article_id):
     article = Article.objects.get(id=article_id)
-    # if request.method == "POST":
-    comment = Comment()
-    comment.content = request.GET.get('content')
-    comment.article = article
-    comment.save()
+    if request.method == "POST":
+        comment = Comment()
+        comment.content = request.POST.get('content')
+        comment.article = article
+        comment.save()
     return redirect('articles:detail', article.id)
 
 def comment_delete(request, article_id, comment_id):

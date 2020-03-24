@@ -6,7 +6,8 @@
 <p>작성: {{ article.created_at }}</p>
 <p>수정: {{ article.updated_at }}</p>
 <hr>
-<form action="{% url 'articles:comment_create' article.id %}">
+<form action="{% url 'articles:comment_create' article.id %}" method="POST">
+  {% csrf_token %}
   댓글 입력: <input type="text" name="content">
   <button class="btn btn-info btn-sm">입력</button>
 </form>
@@ -18,11 +19,11 @@
   </form></li>
 {% endfor %}
 <hr>
-<a href="{% url 'articles:index' %}">목록</a>
-<a href="{% url 'articles:update' article.id %}">수정</a>
+<a class="btn btn-info" href="{% url 'articles:index' %}">목록</a>
+<a class="btn btn-warning" href="{% url 'articles:update' article.id %}">수정</a>
 <!-- <a href="{/articles/{{ article.id }}/delete/}">삭제</a> -->
-<form action="{% url 'articles:delete' article.id %}" method="POST">
+<form action="{% url 'articles:delete' article.id %}" method="POST" style="display: inline;">
   {% csrf_token %}
-  <button>삭제</button>
+  <button class="btn btn-danger">삭제</button>
 </form>
 {% endblock %}
