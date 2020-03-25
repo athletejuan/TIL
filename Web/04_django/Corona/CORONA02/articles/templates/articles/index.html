@@ -1,7 +1,9 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 {% block body %}
 <h1>Juan's Board</h1>
 
+<img style="display: block" src="{% static 'animalcrossing.png' %}" alt="">
 <a href="{% url 'articles:create' %}">새 글</a>
 <hr>
 {% for article in articles %}

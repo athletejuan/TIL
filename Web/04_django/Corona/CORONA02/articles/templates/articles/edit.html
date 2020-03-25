@@ -2,11 +2,17 @@
 {% block body %}
 <h1>Edit Article</h1>
 <hr>
+{% if article.image %}
+<p>기존 이미지</p>
+<img src="{{ article.image.url }}" alt="{{ article.image }}">
+<hr>
+{% endif %}
 <!-- <form action="/articles/{{article.id}}/update/"> -->
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   제목: <input type="text" name="title" value="{{ article.title }}"><br>
-  내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea>
+  내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea><br>
+  이미지: <input type="file" name="image" accept="image/*">
   <input type="submit" value="입력">
 </form>
 <a href="{% url 'articles:detail' article.id %}"><button>수정취소</button></a>

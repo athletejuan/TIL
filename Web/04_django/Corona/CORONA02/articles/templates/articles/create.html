@@ -2,10 +2,11 @@
 {% block body %}
 <h1>New Article</h1>
 <hr>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   제목: <input type="text" name="title"><br>
-  내용: <textarea name="content" id="" cols="30" rows="10"></textarea>
+  내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
+  이미지: <input type="file" name="image" accept="image/*">
   <input type="submit" value="입력">
 </form>
 <a href="{% url 'articles:index' %}"><button>목록보기</button></a>
