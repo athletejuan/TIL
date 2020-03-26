@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
+from .forms import ArticleForm
 
 def index(request):
     articles = Article.objects.all()[::-1]
@@ -10,15 +11,22 @@ def index(request):
 
 def create(request):
     if request.method == "POST":
-        article = Article()
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.image = request.FILES.get('image')
-        article.save()
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            image = request.FILES.get('image')
+            article = Article.objects.create(title=title, content=content, image=image)
+        # article = Article
+        # article.title = request.POST.get('title')
+        # article.content = request.POST.get('content')
+        # article.image = request.FILES.get('image')
+        # article.save()
         # return render(request, 'create.html', {'article':article})
-        return redirect('articles:detail', article.id)
+            return redirect('articles:detail', article.id)
     else:
-        return render(request, 'articles/create.html')
+        form = ArticleForm()
+        return render(request, 'articles/form.html', {'form':form})
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -32,14 +40,21 @@ def detail(request, article_id):
 def update(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.image = request.FILES.get('image')
-        article.save()
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article.title = form.cleaned_data.get('title')
+            article.content = form.cleaned_data.get('content')
+            article.image = request.FILES.get('image')
+            article.save()
+        # article.title = request.POST.get('title')
+        # article.content = request.POST.get('content')
+        # article.image = request.FILES.get('image')
+        # article.save()
         # return render(request, 'update.html', {'article':article})
-        return redirect('articles:detail', article.id)
+            return redirect('articles:detail', article.id)
     else:
-        return render(request, 'articles/edit.html', {'article':article})
+        form = ArticleForm(initial=article.__dict__)
+        return render(request, 'articles/form.html', {'article':article, 'form':form})
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)

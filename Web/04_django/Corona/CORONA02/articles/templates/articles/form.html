@@ -1,6 +1,10 @@
 {% extends 'articles/base.html' %}
 {% block body %}
+{% if request.resolver_match.url_name == "create" %}
+<h1>New Article</h1>
+{% else %}
 <h1>Edit Article</h1>
+{% endif %}
 <hr>
 {% if article.image %}
 <p>기존 이미지</p>
@@ -16,5 +20,9 @@
   이미지: <input type="file" name="image" accept="image/*">
   <input type="submit" value="입력">
 </form>
+{% if request.resolver_match.url_name == "create" %}
+<a href="{% url 'articles:index' %}"><button>목록으로</button></a>
+{% else %}
 <a href="{% url 'articles:detail' article.id %}"><button>수정취소</button></a>
+{% endif %}
 {% endblock %}

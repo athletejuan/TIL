@@ -4,8 +4,9 @@
 <hr>
 <form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  제목: <input type="text" name="title"><br>
-  내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
+  {{ form.as_p}}
+  <!-- 제목: <input type="text" name="title"><br>
+  내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br> -->
   이미지: <input type="file" name="image" accept="image/*">
   <input type="submit" value="입력">
 </form>
