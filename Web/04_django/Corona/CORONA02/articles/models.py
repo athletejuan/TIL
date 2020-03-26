@@ -1,9 +1,18 @@
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    image = models.ImageField(blank=True)
+    # image = models.ImageField(blank=True)
+    image = ProcessedImageField(
+        upload_to = 'articles/images',
+        processors = [ResizeToFill(200, 300)],
+        format = 'JPEG',
+        options = {'quality': 90},
+        blank = True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
