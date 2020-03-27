@@ -1,10 +1,9 @@
 {% extends 'articles/base.html' %}
 {% load static %}
 {% block body %}
-<h1>Juan's Board</h1>
-
+<h1 style="display: inline">Juan's Board | </h1>
+<a href="{% url 'articles:create' %}" class="btn btn-success">새 글</a>
 <img style="display: block" src="{% static 'animalcrossing.png' %}" alt="">
-<a href="{% url 'articles:create' %}">새 글</a>
 <hr>
 {% for article in articles %}
 <ul>
@@ -12,7 +11,7 @@
   <li>No.{{ article.id }} - <a href="{% url 'articles:detail' article.id %}">{{ article.title }}</a> | 
     <form action="{% url 'articles:delete' article.id %}" method = "POST" style="display: inline">
       {% csrf_token %}
-      <button>삭제</button>
+      <button class="btn btn-danger btn-sm">삭제</button>
     </form>
   </li>
 </ul>

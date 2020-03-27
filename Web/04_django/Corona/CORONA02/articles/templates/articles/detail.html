@@ -11,11 +11,11 @@
 <hr>
 <form action="{% url 'articles:comment_create' article.id %}" method="POST">
   {% csrf_token %}
-  댓글 입력: <input type="text" name="content">
-  <button class="btn btn-info btn-sm">입력</button>
+  <!-- 댓글 입력: <input type="text" name="content"> -->
+  댓글 입력: {{ comment_form.as_p }} <button class="btn btn-secondary btn-sm">댓글 입력</button>
 </form>
 <hr>
-<p><b>댓글 목록 / 현재 댓글 개수: {{ comments | length }}</b></p>
+<p><b>댓글 목록 {% if comments %}/ 현재 댓글 개수: {{ comments | length }}{% endif %}</b></p>
 {% for comment in comments %}
   <li>{{ comment.content }} / <form action="{% url 'articles:comment_delete' article.id comment.id %}" style="display: inline" method="POST">
     {% csrf_token %}<button class="btn btn-warning btn-sm">삭제</button>
