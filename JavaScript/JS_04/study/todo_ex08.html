@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Juan's Todo List</h1>
+  <hr>
+  <input type="text" class="userInput">
+  <input type="submit" class="submitBtn">
+  <hr>
+  <ul class="todo_list"></ul>
+  <script>
+    const userInput = document.querySelector('.userInput')
+    const submitBtn = document.querySelector('.submitBtn')
+    const todo_list = document.querySelector('.todo_list')
+
+    userInput.addEventListener('keydown', function(){
+      if (window.event.keyCode == 13){
+        newTodo()
+      }
+    })
+    submitBtn.addEventListener('click', function(){
+      newTodo()
+    })
+
+    const newTodo = function(){ 
+      const newli = document.createElement('li')
+      newli.innerText = userInput.value
+      userInput.value = ''
+      todo_list.append(newli)
+
+      const checkBtn = document.createElement('input')
+      checkBtn.type = 'checkbox'
+      checkBtn.addEventListener('click', function(){
+        if (newli.style.textDecoration == 'line-through'){
+          newli.style.textDecoration = 'none'
+        } else {
+          newli.style.textDecoration = 'line-through'
+        }
+      })
+      newli.append(checkBtn)
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'x'
+      deleteBtn.addEventListener('click', function(){
+        newli.remove()
+      })
+      newli.append(deleteBtn)
+    }
+  </script>
+</body>
+</html>
