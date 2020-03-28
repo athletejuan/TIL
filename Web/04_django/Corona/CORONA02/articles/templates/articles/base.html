@@ -9,6 +9,25 @@
 </head>
 <body>
   <div class='container'>
+    <div class='hello' style="display: inline-block">
+      {% if user.is_authenticated %}
+      <h1 style="display: inline">Hello, {{ user.username }}!</h1>
+      <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline">
+        {% csrf_token %}
+        <button class="btn btn-dark mb-3">로그아웃</button>
+      </form>
+      <form action="{% url 'accounts:quit' %}" method="POST" style="display: inline">
+        {% csrf_token %}
+        <button class="btn btn-dark mb-3">회원탈퇴</button>
+      </form>
+      {% else %}
+      <h1 style="display: inline">Hello, Stranger!</h1>
+      <a class="btn btn-light mb-3" href="{% url 'accounts:signup' %}">회원가입</a>
+      <a class="btn btn-light mb-3" href="{% url 'accounts:login' %}">로그인</a>
+      {% endif %}
+    </div>
+    
+    <hr>
     {% block body %}
     {% endblock %}
   </div>

@@ -2,8 +2,8 @@
 {% load static %}
 {% block body %}
 <h1 style="display: inline">Juan's Board | </h1>
-<a href="{% url 'articles:create' %}" class="btn btn-success">새 글</a>
-<img style="display: block" src="{% static 'animalcrossing.png' %}" alt="">
+<a href="{% url 'articles:create' %}" class="btn btn-success mb-3">새 글</a>
+<img src="{% static 'animalcrossing.png' %}" alt="">
 <hr>
 {% for article in articles %}
 <ul>

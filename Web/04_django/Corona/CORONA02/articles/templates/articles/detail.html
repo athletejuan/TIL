@@ -18,7 +18,7 @@
 <p><b>댓글 목록 {% if comments %}/ 현재 댓글 개수: {{ comments | length }}{% endif %}</b></p>
 {% for comment in comments %}
   <li>{{ comment.content }} / <form action="{% url 'articles:comment_delete' article.id comment.id %}" style="display: inline" method="POST">
-    {% csrf_token %}<button class="btn btn-warning btn-sm">삭제</button>
+    {% csrf_token %}<button class="btn btn-warning btn-sm mb-1">삭제</button>
   </form></li>
 {% empty %}
   <p><b>첫 댓글을 남겨주세요!!</b></p>
