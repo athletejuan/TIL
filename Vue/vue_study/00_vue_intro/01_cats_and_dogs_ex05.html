@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Document</title>
+  <style>
+    .btn {
+      width: 100px;
+      height: 50px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input class="btn" type="submit" v-on:click="getDogsImage" value="BowWow">
+    <button class="btn" v-on:click="getCatsImage">Meow</button>
+    <br>
+    <img v-bind:src="dogImage" alt="" width="300px">
+    <img v-bind:src="catImage" alt="" width="300px">
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        dogImage: '',
+        catImage: '',
+      },
+      methods: {
+        getDogsImage: function(){
+          const dog_url = "https://dog.ceo/api/breeds/image/random"
+          axios.get(dog_url)
+          .then(response => {
+            this.dogImage = response.data.message
+          })
+        },
+        getCatsImage: function(){
+          const cat_url = "https://api.thecatapi.com/v1/images/search"
+          axios.get(cat_url)
+          .then(response => {
+            this.catImage = response.data[0].url
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
