@@ -9,21 +9,31 @@
 </head>
 <body>
   <div class='container'>
-    <div class='hello' style="display: inline-block">
+    <div class='d-flex justify-content-between'>
       {% if user.is_authenticated %}
-      <h1 style="display: inline">Hello, {{ user.username }}!</h1>
-      <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline">
-        {% csrf_token %}
-        <button class="btn btn-dark mb-3">로그아웃</button>
-      </form>
-      <form action="{% url 'accounts:quit' %}" method="POST" style="display: inline">
-        {% csrf_token %}
-        <button class="btn btn-dark mb-3">회원탈퇴</button>
-      </form>
+      <div>
+      <h1 class="mt-2" style="display: inline-block">Welcome, {{ user.username }}!</h1>
+      </div>
+      <div>
+        <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline">
+          {% csrf_token %}
+          <button class="btn btn-dark mt-3">로그아웃</button>
+        </form>
+        <a class="btn btn-dark mt-3" href="{% url 'accounts:edit' %}">회원정보 수정</a>
+        <a class="btn btn-dark mt-3" href="{% url 'accounts:change_password' %}">비밀번호 변경</a>
+        <form action="{% url 'accounts:quit' %}" method="POST" style="display: inline">
+          {% csrf_token %}
+          <button class="btn btn-dark mt-3">회원탈퇴</button>
+        </form>
+      </div>
       {% else %}
-      <h1 style="display: inline">Hello, Stranger!</h1>
-      <a class="btn btn-light mb-3" href="{% url 'accounts:signup' %}">회원가입</a>
-      <a class="btn btn-light mb-3" href="{% url 'accounts:login' %}">로그인</a>
+      <div>
+        <h1 class="mt-2" style="display: inline-block">Hello, Stranger!</h1>
+      </div>
+      <div>
+        <a class="btn btn-light mt-3" href="{% url 'accounts:signup' %}">회원가입</a>
+        <a class="btn btn-light mt-3" href="{% url 'accounts:login' %}">로그인</a>
+      </div>      
       {% endif %}
     </div>
     
