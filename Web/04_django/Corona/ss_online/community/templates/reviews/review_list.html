@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>INDEX</h1>
+  <hr>
+  <a href="/community/new_review/">리뷰 쓰기</a>
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <h3>No.{{ review.id }} - <a href="/community/{{ review.id }}/">{{ review.title }}</a> | 평점: {{ review.rank }}</h3>
+        <p>작성시간: {{ review.created_at }}</p>
+        <p>수정시간: {{ review.updated_at }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Review Detail</h1>
+  <hr>
+  <h2>No.{{ review.id }} - {{ review.title }}</h2>
+  <h5>내용: {{ review.content }}</h5>
+  <p>작성시간: {{ review.created_at }} / 수정시간: {{ review.updated_at }}</p>
+  <hr>
+  <a href="/community/">리뷰 목록보기</a>
+{% endblock %}

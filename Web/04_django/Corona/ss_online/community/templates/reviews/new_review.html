@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>New Review</h1>
+  <hr>
+  <form action="/community/review_create/" method="GET">
+    제목: <input type="text" name="title"><br>
+    내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
+    평점: <input type="number" name="rank"><br>
+    <input type="submit" value="작성완료">
+  </form>
+  <hr>
+  <a href="/community/">리뷰 목록보기</a>
+{% endblock %}
