@@ -18,7 +18,7 @@ def create(request):
             # content = form.cleaned_data.get('content')
             # image = request.FILES.get('image')
             # article = Article.objects.create(title=title, content=content, image=image)
-        # article = Article
+        # article = Article()
         # article.title = request.POST.get('title')
         # article.content = request.POST.get('content')
         # article.image = request.FILES.get('image')
