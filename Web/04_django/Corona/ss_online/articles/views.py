@@ -8,15 +8,18 @@ def index(request):
     }
     return render(request, 'articles/index.html', context)
 
-def new(request):
-    return render(request, 'articles/new.html')
+# def new(request):
+#     return render(request, 'articles/new.html')
 
 def create(request):
-    article = Article()
-    article.title = request.GET.get('title')
-    article.content = request.GET.get('content')
-    article.save()
-    return render(request, 'articles/create.html')
+    if request.method == "POST":
+        article = Article()
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
+        return redirect('articles:detail', article.id)
+    else:
+        return render(request, 'articles/new.html')
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -27,19 +30,25 @@ def detail(request, article_id):
 
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
-    context = {
-        'article':article
-    }
-    return render(request, 'articles/edit.html', context)
+    if request.method == "POST":
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
+        return redirect('articles:detail', article.id)
+    else:
+        context = {
+            'article':article
+        }
+        return render(request, 'articles/edit.html', context)
 
-def update(request, article_id):
-    article = Article.objects.get(id=article_id)
-    article.title = request.GET.get('title')
-    article.content = request.GET.get('content')
-    article.save()
-    return redirect(f'/articles/{ article.id }')
+# def update(request, article_id):
+#     article = Article.objects.get(id=article_id)
+#     article.title = request.GET.get('title')
+#     article.content = request.GET.get('content')
+#     article.save()
+#     return redirect(f'/articles/{ article.id }/')
 
 def delete(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
-    return redirect('/articles/')
+    return redirect('articles:index')

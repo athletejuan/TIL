@@ -6,7 +6,7 @@
   <p>내용: {{ article.content }}</p>
   <p>작성: {{ article.created_at }}</p>
   <p>수정: {{ article.updated_at }}</p>
-  <a href="/articles/{{ article.id }}/edit/">EDIT</a>
-  <a href="/articles/{{ article.id }}/delete/">DELETE</a><br>
-  <a href="/articles/">BACK</a>
+  <a href="{% url 'articles:update' article.id %}">EDIT</a>
+  <a href="{% url 'articles:delete' article.id %}">DELETE</a><br>
+  <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock %}

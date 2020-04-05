@@ -2,11 +2,12 @@
 {% block content %}
   <h1>글 작성</h1>
   <hr>
-  <form action="/articles/create/" method="GET">
+  <form action="" method="POST">
+    {% csrf_token %}
     제목: <input type="text" name="title"><br>
     내용: <textarea name="content" id="" cols="30" rows="10"></textarea><br>
     <input type="submit" value="작성">
   </form>
   <hr>
-  <a href="/articles/">BACK</a>
+  <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock %}
