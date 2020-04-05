@@ -7,6 +7,10 @@
   <p>작성: {{ article.created_at }}</p>
   <p>수정: {{ article.updated_at }}</p>
   <a href="{% url 'articles:update' article.id %}">EDIT</a>
+  <!-- <form action="{% url 'articles:delete' article.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="DELETE">
+  </form> -->
   <a href="{% url 'articles:delete' article.id %}">DELETE</a><br>
   <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock %}

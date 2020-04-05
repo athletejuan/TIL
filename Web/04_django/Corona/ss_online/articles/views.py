@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Article
+from .forms import ArticleForm
 
 def index(request):
     articles = Article.objects.all()
@@ -13,13 +14,18 @@ def index(request):
 
 def create(request):
     if request.method == "POST":
-        article = Article()
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.save()
-        return redirect('articles:detail', article.id)
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = form.save()
+            return redirect('articles:detail', article.id)
+        # article = Article()
+        # article.title = request.POST.get('title')
+        # article.content = request.POST.get('content')
+        # article.save()
+        # return redirect('articles:detail', article.id)
     else:
-        return render(request, 'articles/new.html')
+        form = ArticleForm()
+        return render(request, 'articles/new.html', {'form':form})
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -31,13 +37,19 @@ def detail(request, article_id):
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
     if request.method == "POST":
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.save()
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            article = form.save()
+            return redirect('articles:detail', article.id)
+        # article.title = request.POST.get('title')
+        # article.content = request.POST.get('content')
+        # article.save()
         return redirect('articles:detail', article.id)
     else:
+        form = ArticleForm(instance=article)
         context = {
-            'article':article
+            'article':article,
+            'form':form,
         }
         return render(request, 'articles/edit.html', context)
 
@@ -49,6 +61,7 @@ def edit(request, article_id):
 #     return redirect(f'/articles/{ article.id }/')
 
 def delete(request, article_id):
+    # if request.method == "POST":
     article = Article.objects.get(id=article_id)
     article.delete()
     return redirect('articles:index')

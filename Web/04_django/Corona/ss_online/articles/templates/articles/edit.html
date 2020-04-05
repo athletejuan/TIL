@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block content %}
   <h1>글 수정</h1>
   <hr>
   <form action="" method="POST">
     {% csrf_token %}
-    제목: <input type="text" name="title" value="{{ article.title }}"><br>
+    {% bootstrap_form form layout="horizontal" %}
+    {% bootstrap_button "수정" button_class="btn-primary" %}
+    <!-- {{ form.as_p }} -->
+    <!-- 제목: <input type="text" name="title" value="{{ article.title }}"><br>
     내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea><br>
-    <input type="submit" value="수정">
+    <input type="submit" value="수정"> -->
   </form>
   <hr>
   <a href="{% url 'articles:detail' article.id %}">BACK</a>
