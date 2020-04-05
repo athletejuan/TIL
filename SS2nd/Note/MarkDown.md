@@ -72,7 +72,13 @@ $ git push origin master
 
 
 
-![Octocat](./images/Octocat.jpg)
+![Octocat](images/Octocat.jpg)
+
+
+
+![logo-hangul](images/logo-hangul.png)
+
+
 
 ### 1.5 Link
 
