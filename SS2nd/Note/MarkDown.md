@@ -72,7 +72,7 @@ $ git push origin master
 
 
 
-![Octocat](/Users/juan/Downloads/Octocat.jpg)
+![Octocat](./images/Octocat.jpg)
 
 ### 1.5 Link
 
