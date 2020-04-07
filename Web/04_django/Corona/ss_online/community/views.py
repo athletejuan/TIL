@@ -20,7 +20,7 @@ def new_review(request):
         context = {
             'form':form
         }
-        return render(request, 'reviews/new_review.html', context)
+        return render(request, 'reviews/form.html', context)
 
 # def review_create(request):
 #     review = Review()
@@ -37,3 +37,24 @@ def review_detail(request, review_id):
         'review':review
     }
     return render(request, 'reviews/review_detail.html', context)
+
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            review = form.save()
+            return redirect('community:review_detail', review_id)
+    else:
+        form = ReviewForm(instance=review)
+    context = {
+        'review':review,
+        'form':form,
+    }
+    return render(request, 'reviews/form.html', context)
+
+def delete_review(request, review_id):
+    if request.method == "POST":
+        review = get_object_or_404(Review, id=review_id)
+        review.delete()
+    return redirect('community:review_list')
