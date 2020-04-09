@@ -52,6 +52,12 @@ console.log(me['phone number'])
 console.log(me.appleProducts)
 console.log(me.appleProducts.ipad)
 
+// Object to array
+const fruits_obj = {a: 'apple', b: 'banana'}
+console.log(Object.keys(fruits_obj))
+console.log(Object.values(fruits_obj))
+console.log(Object.entries(fruits_obj))
+
 let books = ['Learning JS', 'Eloquent JS']
 
 let comics = {
@@ -72,6 +78,9 @@ console.log(typeof bookShop)
 console.log(bookShop.books[0])
 
 // JSON -> Object
+// key-value의 형태로 JS Object와 유사한 모습으로 데이터를 표현하는 표기법
+// 모습만 비슷할 뿐, 실제로는 문자열 타입(String type)이다.
+// Object처럼 사용하기 위해서는 parsing(구문 분석) 작업이 필요하다.
 
 const jsonData = JSON.stringify({
     coffee: 'Americano',
