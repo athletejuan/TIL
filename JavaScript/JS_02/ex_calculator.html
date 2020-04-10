@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Calculator</title>
+</head>
+<body>
+
+  <label>입력한 숫자의 제곱값을 구해봅시다:
+    <input type="number" id="square-input" size="2">
+  </label>
+  <button id="square-button">Calculate</button>
+  <br><br>
+  
+  <p>거듭제곱값을 구해봅시다. </p>
+  <label>
+    밑:
+    <input type="number" id="base" size="2"> / 
+  </label>
+  <label>
+    지수:
+    <input type="number" id="power" size="2">
+  </label>
+  <button id="power-button">Calculate</button>
+  <br><br>
+
+  <p>텀블러의 용량을 알아봅시다.</p>
+  <label>밑면의 지름:
+    <input type="number" id="diameter" size="2">cm / 
+  </label>
+  <label>텀블러 높이:
+    <input type="number" id="height" size="2">cm
+  </label>
+  <button id="tumbler">Calculate</button>
+  <br><br>
+  
+  <p>정상가의 할인가격을 알아봅시다.</p>
+  <label>
+    정상가:
+    <input type="number" id="origin" size="2">원 / 
+  </label>
+  <label>
+    할인율:
+    <input type="number" id="discount" size="2">%
+  </label>
+  <button id="sale-button">Calculate</button>
+  <br><br>
+
+  <p>할인가의 원래정가를 알아봅시다.</p>
+  <label>
+    할인가:
+    <input type="number" id="sale" size="2">원 / 
+  </label>
+  <label>
+    할인율:
+    <input type="number" id="reverse" size="2">%
+  </label>
+  <button id="unsale-button">Calculate</button>
+  <br><br>
+
+  <h3>계산결과</h3>
+  <div id="solution"></div>
+</body>
+<script>
+  const square = document.querySelector('#square-input')
+  const sq_Btn = document.querySelector('#square-button')
+
+  sq_Btn.addEventListener('click', function(){
+    const sq_num = square.value**2
+    console.log(square.value + '을(를) 제곱한 결과는 ' + sq_num + ' 입니다.')
+    document.querySelector('#solution').innerHTML = sq_num
+  })
+
+  const baseInput = document.querySelector('#base')
+  const powerInput = document.querySelector('#power')
+  const pw_Btn = document.querySelector('#power-button')
+  
+  pw_Btn.addEventListener('click', function(){
+    const pw_Sol = baseInput.value ** powerInput.value
+    console.log(baseInput.value + ' 의 ' + powerInput.value + '제곱 값은 ' + pw_Sol + '입니다.')
+    document.querySelector('#solution').innerHTML = pw_Sol
+  })
+
+  const diameter = document.querySelector('#diameter')
+  const height = document.querySelector('#height')
+  const volume = document.querySelector('#tumbler')
+
+  volume.addEventListener('click', function(){
+    const tumblerVol = Math.PI * (diameter.value / 2) ** 2 * height.value
+    console.log('지름이 ' + diameter.value + 'cm이고 높이가 ' + height.value + 'cm인 텀블러의 부피는 ' + tumblerVol + 'ml입니다.')
+    document.querySelector('#solution').innerHTML = tumblerVol + 'ml'
+  })
+
+  const originPrice = document.querySelector('#origin')
+  const discRate = document.querySelector('#discount')
+  const saleBtn = document.querySelector('#sale-button')
+
+  saleBtn.addEventListener('click', function(){
+    const salePrice = originPrice.value * (100-discRate.value) / 100
+    console.log('정상가 ' + originPrice.value + '원 인 상품의 ' + discRate.value + '% 할인가는 ' + salePrice + '원 입니다.')
+    document.querySelector('#solution').innerHTML = salePrice + '원'
+  })
+
+  const salePrice = document.querySelector('#sale')
+  const reverseRate = document.querySelector('#reverse')
+  const unsaleBtn = document.querySelector('#unsale-button')
+
+  unsaleBtn.addEventListener('click', function(){
+    const unsalePrice = salePrice.value / (100 - reverseRate.value) * 100
+    console.log('할인가 ' + salePrice.value + '원 인 상품의 ' + reverseRate.value + '% 할인전 정상가는 ' + unsalePrice + '원 입니다.')
+    document.querySelector('#solution').innerHTML = unsalePrice + '원'
+  })
+</script>
+</html>
