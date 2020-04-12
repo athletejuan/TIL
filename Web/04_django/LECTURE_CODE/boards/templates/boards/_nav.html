@@ -1,7 +1,7 @@
 <div class="container">
     {% if user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'articles:index' %}">Welcome {{ user.username }}!</a>
+        <a class="navbar-brand" href="{% url 'articles:index' %}">Welcome {{ request.user.username }}!</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,27 +11,28 @@
                 {% csrf_token %}
                 <input class="nav-item nav-link border-0 bg-transparent" type="submit" value="/ Profile">
             </form>
-            <a class="nav-item nav-link" href="{% url 'accounts:edit' %}">/ Edit Account <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="{% url 'accounts:change_password' %}">/ Change Password</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:edit' user.pk %}">/ Edit Account <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{% url 'accounts:change_password' user.pk %}">/ Change Password</a>
             <form action="{% url 'accounts:logout' %}" method="POST" style='display:inline'>
                 {% csrf_token %}
                 <input class="nav-item nav-link border-0 bg-transparent" type="submit" value="/ Logout">
             </form>
-            <form action="{% url 'accounts:delete' %}" method='POST' style='display:inline'>
+            <form action="{% url 'accounts:delete' user.pk %}" method='POST' style='display:inline'>
                 {% csrf_token %}
                 <input class="nav-item nav-link border-0 bg-transparent" type="submit" value="/ Quit">
             </form>
+            <a class="nav-item nav-link" href="{% url 'accounts:index' %}">/ Users</a>
           </div>
         </div>
     </nav>
     <!-- <h1 style='display:inline'>Hello, {{ user.username }}</h1>
-    /<a class="btn btn-light btn-lg" href="{% url 'accounts:edit' %}" role="button">Edit Account</a>
-    /<a class="btn btn-light btn-lg" href="{% url 'accounts:change_password' %}" role="button">Change Password</a>
+    /<a class="btn btn-light btn-lg" href="{% url 'accounts:edit' user.pk %}" role="button">Edit Account</a>
+    /<a class="btn btn-light btn-lg" href="{% url 'accounts:change_password' user.pk %}" role="button">Change Password</a>
     /<form action="{% url 'accounts:logout' %}" method="POST" style='display:inline'>
         {% csrf_token %}
         <input class="btn btn-light btn-lg" type="submit" value="logout">
     </form>
-    /<form action="{% url 'accounts:delete' %}" method='POST' style='display:inline'>
+    /<form action="{% url 'accounts:delete' user.pk %}" method='POST' style='display:inline'>
         {% csrf_token %}
         <input class="btn btn-dark btn-lg" type="submit" value="Quit">
     </form> -->

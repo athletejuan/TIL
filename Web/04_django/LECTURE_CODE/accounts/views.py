@@ -7,6 +7,15 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
+User = get_user_model()
+
+def index(request):
+    users = User.objects.all()
+    context = {
+        'users':users
+    }
+    return render(request, 'accounts/index.html', context)
+
 def signup(request):
     if request.user.is_authenticated:
         return redirect('articles:index')
@@ -37,22 +46,25 @@ def logout(request):
         auth_logout(request)
     return redirect('articles:index')
 
-def delete(request):
+def delete(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     if request.method == "POST":
-        request.user.delete()
+        user.delete()
     return redirect('articles:index')
 
-def edit(request):
+def edit(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     if request.method == "POST":
-        form = UserCustomChangeForm(request.POST, instance=request.user)
+        form = UserCustomChangeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('articles:index')
+            return redirect('accounts:profile')
     else:
-        form = UserCustomChangeForm(instance=request.user)
+        form = UserCustomChangeForm(instance=user)
     return render(request, 'accounts/auth_form.html', {'form':form})
 
-def change_password(request):
+def change_password(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -65,9 +77,9 @@ def change_password(request):
 
 @login_required
 def profile(request, username):
-    person = get_object_or_404(get_user_model(), username=username)    
+    user = get_object_or_404(get_user_model(), username=username)    
     if request.method == 'POST':
-        return render(request, 'accounts/profile.html', {'person':person})
+        return render(request, 'accounts/profile.html', {'user':user})
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form':form})

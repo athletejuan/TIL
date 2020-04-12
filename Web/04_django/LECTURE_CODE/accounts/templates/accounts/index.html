@@ -1,0 +1,18 @@
+{% extends 'boards/base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+  <div class="container">
+    <h1>유저 목록</h1>
+    <hr>
+    {% for user in users %}
+      <h3>{{ user.pk }}번 유저</h3>
+      <h4>ID: {{ user.username }}</h4>
+      <form action="{% url 'accounts:profile' user.username %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-warning">Profile</button>
+      </form>
+      <!-- <a href="{% url 'accounts:profile' user.username %}">Profile</a> -->
+      <hr>
+    {% endfor %}
+  </div>  
+{% endblock %}

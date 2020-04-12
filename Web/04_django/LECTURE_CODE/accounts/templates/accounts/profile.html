@@ -2,16 +2,22 @@
 {% block body %}
 <div class="container">
   <div class="jumbotron text-center text-white bg-dark">
-      <h1 class="text-center">{{ person.username }}'s Profile</h1>
+      <h1 class="text-center">{{ user.username }}'s Profile</h1>
+      {% if user.email %}
+        <h3>e-mail: {{ user.email }}</h3>
+      {% else %}
+        <h3>e-mail: no-info</h3>
+      {% endif %}
+      <p>Administrator: {{ user.is_superuser }}</p>
       <p class="lead">
-          팔로잉 : {{ person.followings.all | length }}
-          팔로워 : {{ person.followers.all | length }}
+          팔로잉 : {{ user.followings.all | length }}
+          팔로워 : {{ user.followers.all | length }}
       </p>
   </div>
 <hr>
-<h3 class="text-center">{{ person.username }}이 작성한 글</h3>
+<h3 class="text-center">{{ user.username }}이 작성한 글</h3>
 <div class="row">
-  {% for article in person.article_set.all %}
+  {% for article in user.article_set.all %}
   <div class="col-4 my-2">
     <div class="card">
       <div class="card-body">
@@ -27,9 +33,9 @@
 
 <hr>
 
-<h3 class="text-center">{{ person.username }}이 작성한 댓글</h3>
+<h3 class="text-center">{{ user.username }}이 작성한 댓글</h3>
 <div class="row">
-  {% for comment in person.comment_set.all %}
+  {% for comment in user.comment_set.all %}
   <div class="col-12 my-2">
     <div class="card">
       <div class="card-body">
@@ -42,6 +48,15 @@
   </div>
   {% endfor %}
 </div>
-<a href="{% url 'articles:index' %}"><button class='btn btn-dark'>목록</button></a>
+<a href="{% url 'accounts:index' %}"><button class='btn btn-dark'>유저목록</button></a>
+{% if user == request.user %}
+<a href="{% url 'accounts:edit' user.pk %}"><button class='btn btn-dark'>회원정보 수정</button></a>
+<a href="{% url 'accounts:change_password' user.pk %}"><button class='btn btn-dark'>비밀번호 변경</button></a>
+<form action="{% url 'accounts:delete' user.pk %}" method="POST" style="display: inline">
+  {% csrf_token %}
+  <button class='btn btn-danger'>회원삭제</button>
+</form>
+{% endif %}
+<a href="{% url 'articles:index' %}"><button class='btn btn-dark'>메인페이지</button></a>
 </div>
 {% endblock %}
