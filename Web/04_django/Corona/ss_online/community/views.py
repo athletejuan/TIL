@@ -57,4 +57,4 @@ def delete_review(request, review_id):
     if request.method == "POST":
         review = get_object_or_404(Review, id=review_id)
         review.delete()
-    return redirect('community:review_list')
+        return redirect('community:review_list')
