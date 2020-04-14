@@ -36,7 +36,7 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('articles:index')
+            return redirect(request.GET.get('next') or 'articles:index')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form':form})
@@ -78,8 +78,8 @@ def change_password(request, user_pk):
 @login_required
 def profile(request, username):
     user = get_object_or_404(get_user_model(), username=username)    
-    if request.method == 'POST':
-        return render(request, 'accounts/profile.html', {'user':user})
-    else:
-        form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form':form})
+    # if request.method == 'POST':
+    return render(request, 'accounts/profile.html', {'user':user})
+    # else:
+    #     form = AuthenticationForm()
+    # return render(request, 'accounts/login.html', {'form':form})
