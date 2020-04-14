@@ -5,6 +5,7 @@
   {% for user in users %}
   <ul>
     <h3>회원이름: {{ user.username }}</h3>
+    <a href="{% url 'accounts:profile' user.pk %}">Profile</a>
   </ul>
   {% endfor %}
 {% endblock %}

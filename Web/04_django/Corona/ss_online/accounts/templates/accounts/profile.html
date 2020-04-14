@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>회원정보</h1>
+  <hr>
+  <h2>회원이름: {{ user.username }}</h2>
+  {% if user.email %}
+  <h3>이메일: {{ user.email }}</h3>
+  {% else %}
+  <h3>이메일: 이메일 정보가 없습니다.</h3>
+  {% endif %}
+{% endblock %}
