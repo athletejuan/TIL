@@ -5,10 +5,11 @@
 <title>Calculator</title>
 </head>
 <body>
+  <h1>My Calculator</h1>
   <label>입력한 숫자의 제곱값을 구해봅시다:
     <input type="number" id="square-input" size="2">
   </label>
-  <button id="square-button">Calculate</button><br>
+  <button id="square-button">Calculate</button><br><br>
   <label>입력한 지수만큼 거듭제곱값을 구해봅시다: </label>
   <div id="power-input" style="display: inline">
     <button id="power-number">지수</button>
@@ -16,16 +17,6 @@
   </div>
   <br><br>
 
-  <p>텀블러의 용량을 알아봅시다.</p>
-  <label>밑면의 지름:
-    <input type="number" id="diameter" size="2">cm / 
-  </label>
-  <label>텀블러 높이:
-    <input type="number" id="height" size="2">cm
-  </label>
-  <button id="tumbler">Calculate</button>
-  <br><br>
-  
   <p>정상가의 할인가격을 알아봅시다.</p>
   <label>
     정상가:
@@ -68,6 +59,14 @@
   power.addEventListener('click', function(){
     pw_num()
   })
+  power.addEventListener('mouseover', function(){
+    this.style.background = 'orange'
+    this.style.fontWeight = 'bold'
+  })
+  power.addEventListener('mouseout', function(){
+    this.style.background = ''
+    this.style.fontWeight = ''
+  })
   const pw_num = function(){
     const power_num = document.createElement('input')
     power_num.type = 'number'
@@ -82,24 +81,18 @@
   })
   }
   
-  const diameter = document.querySelector('#diameter')
-  const height = document.querySelector('#height')
-  const volume = document.querySelector('#tumbler')
-
-  volume.addEventListener('click', function(){
-    const tumblerVol = Math.PI * (diameter.value / 2) ** 2 * height.value
-    console.log('지름이 ' + diameter.value + 'cm이고 높이가 ' + height.value + 'cm인 텀블러의 부피는 ' + tumblerVol + 'ml입니다.')
-    document.querySelector('#solution').innerHTML = tumblerVol + 'ml'
-  })
-
   const originPrice = document.querySelector('#origin')
   const discRate = document.querySelector('#discount')
   const saleBtn = document.querySelector('#sale-button')
 
   saleBtn.addEventListener('click', function(){
+    if (discRate.value >= 100 ){
+      alert('100미만의 숫자를 입력해주세요.')
+    } else {
     const salePrice = originPrice.value * (100-discRate.value) / 100
     console.log('정상가 ' + originPrice.value + '원 인 상품의 ' + discRate.value + '% 할인가는 ' + salePrice + '원 입니다.')
     document.querySelector('#solution').innerHTML = salePrice + '원'
+    }
   })
 
   const salePrice = document.querySelector('#sale')
@@ -107,9 +100,18 @@
   const unsaleBtn = document.querySelector('#unsale-button')
 
   unsaleBtn.addEventListener('click', function(){
+    if (discRate.value >= 100 ){
+      alert('100미만의 숫자를 입력해주세요.')
+    } else {
     const unsalePrice = salePrice.value / (100 - reverseRate.value) * 100
     console.log('할인가 ' + salePrice.value + '원 인 상품의 ' + reverseRate.value + '% 할인전 정상가는 ' + unsalePrice + '원 입니다.')
     document.querySelector('#solution').innerHTML = unsalePrice + '원'
+    }
   })
+  const allBtn = document.querySelectorAll('button')
+  for (i = 0; i < allBtn.length; i++) {
+    allBtn[i].style.border = "2px solid black";
+    allBtn[i].style.borderRadius = '5px'
+  }
 </script>
 </html>
