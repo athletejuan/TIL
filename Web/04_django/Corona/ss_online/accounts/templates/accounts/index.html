@@ -8,4 +8,5 @@
     <a href="{% url 'accounts:profile' user.pk %}">Profile</a>
   </ul>
   {% endfor %}
+  <a class="btn btn-secondary btn-sm mt-2" href="{% url 'articles:index' %}">메인페이지</a>
 {% endblock %}

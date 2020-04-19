@@ -8,4 +8,14 @@
   {% else %}
   <h3>이메일: 이메일 정보가 없습니다.</h3>
   {% endif %}
+  {% if request.user == user %}
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:update' user.pk %}">회원정보수정</a>
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:change_password' user.pk %}">비밀번호변경</a>
+  <form action="{% url 'accounts:delete' %}" method="POST" style="display: inline">
+    {% csrf_token %}
+    <button class="btn btn-warning btn-sm">회원탈퇴</button>
+  </form>
+  {% endif %}
+  <br>
+  <a class="btn btn-secondary btn-sm mt-2" href="{% url 'accounts:index' %}">뒤로가기</a>
 {% endblock %}

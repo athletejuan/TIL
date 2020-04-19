@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from .forms import CustomUserChangeForm
 
 User = get_user_model()
 
@@ -46,9 +48,44 @@ def logout(request):
     auth_logout(request)
     return redirect('articles:index')
 
+@login_required
+@require_POST
+def delete(request):
+    request.user.delete()
+    return redirect('accounts:index')
+
 def profile(request, pk):
     user = get_object_or_404(User, pk=pk)
     context = {
         'user':user
     }
     return render(request, 'accounts/profile.html', context)
+
+def update(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile')
+    else:
+        form = CustomUserChangeForm(instance=user)
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/update.html', context)
+
+def change_password(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('accounts:index')
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/change_password.html', context)

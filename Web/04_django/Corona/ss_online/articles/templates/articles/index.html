@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
   {% if user.is_authenticated %}
-  Welcome! {{ user.username }}님!
-  <a href="{% url 'accounts:logout' %}">로그아웃</a>
-  <a href="{% url 'accounts:index' %}">전체회원정보</a>
+  <h1>Welcome! {{ user.username }}님!</h1>
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:logout' %}">로그아웃</a>
+  <!-- <a class="btn btn-warning btn-sm" href="{% url 'accounts:update' user.pk %}">회원정보 수정</a>
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:change_password' user.pk %}">비밀번호 변경</a> -->
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:index' %}">전체회원정보</a>
   {% else %}
-  Hello! Stranger!?
-  <a href="{% url 'accounts:signup' %}">회원가입</a>
-  <a href="{% url 'accounts:login' %}">로그인</a>
+  <h1>Hello! Stranger!?</h1>
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:signup' %}">회원가입</a>
+  <a class="btn btn-warning btn-sm" href="{% url 'accounts:login' %}">로그인</a>
   {% endif %}
+  <hr>
   <h1>게시글 모음</h1>
   <a href="{% url 'articles:create' %}">NEW</a>
   <div class="mt-4">
