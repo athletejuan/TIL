@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CAT.com</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>냥냥이 사진</h1>
+  <button id="cat">냥냥이 내놔</button>
+  <div class="meow"></div>
+  <script>
+    const getCatImage = () => {
+    axios.get('https://api.thecatapi.com/v1/images/search')
+      .then(response => {
+        const imgUrl = response.data[0].url
+        const imgTag = document.createElement('img')
+        imgTag.src = imgUrl
+        document.querySelector('.meow').append(imgTag)
+      })
+      .catch(error => console.log(error))
+    }
+    const catBtn = document.querySelector('#cat')
+    catBtn.addEventListener('click', getCatImage)
+  </script>
+</body>
+</html>
