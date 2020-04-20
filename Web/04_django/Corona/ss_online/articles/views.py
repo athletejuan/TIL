@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import Article
-from .forms import ArticleForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Article, Comment
+from .forms import ArticleForm, CommentForm
+from django.views.decorators.http import require_POST
 
 def index(request):
     articles = Article.objects.all()
@@ -29,8 +30,12 @@ def create(request):
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
+    comments = article.comment_set.order_by('-pk')
+    comment_form = CommentForm()
     context = {
-        'article':article
+        'article':article,
+        'comments':comments,
+        'comment_form':comment_form,
     }
     return render(request, 'articles/detail.html', context)
 
@@ -60,8 +65,32 @@ def edit(request, article_id):
 #     article.save()
 #     return redirect(f'/articles/{ article.id }/')
 
+@require_POST
 def delete(request, article_id):
     # if request.method == "POST":
     article = Article.objects.get(id=article_id)
     article.delete()
     return redirect('articles:index')
+
+def comments_create(request, article_id):
+    # article = Article.objects.get(id=article_id)
+    # Comment.objects.create(
+    #     content = request.POST.get('content'),
+    #     article = article
+    # )
+    # return redirect('articles:detail', article_id)
+    article = Article.objects.get(id=article_id)
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.article = article
+            comment.save()
+    return redirect('articles:detail', article_id)
+
+def comments_delete(request, article_id, comment_id):
+    # article = Article.objects.get(id=article_id)
+    if request.method == "POST":
+        comment = Comment.objects.get(id=comment_id)
+        comment.delete()
+    return redirect('articles:detail', article_id)

@@ -6,11 +6,34 @@
   <p>내용: {{ article.content }}</p>
   <p>작성: {{ article.created_at }}</p>
   <p>수정: {{ article.updated_at }}</p>
-  <a href="{% url 'articles:update' article.id %}">EDIT</a>
-  <!-- <form action="{% url 'articles:delete' article.id %}" method="POST">
+  <hr>
+  <form action="{% url 'articles:comments_create' article.id %}" method="POST">
     {% csrf_token %}
-    <input type="submit" value="DELETE">
-  </form> -->
-  <a href="{% url 'articles:delete' article.id %}">DELETE</a><br>
-  <a href="{% url 'articles:index' %}">BACK</a>
+    <!-- 댓글: <input type="text" name="content"> -->
+    {{ comment_form.as_p }}
+    <button class="btn btn-primary btn-sm">댓글입력</button>
+  </form>
+  <hr>
+  <h4>댓글 목록 - {% if comments %} {{ comments | length }}개의 댓글이 있습니다. {% endif %}</h4>
+  {% for comment in comments %}
+    <ul>
+      <li>{{ comment.content }} / 
+        <form action="{% url 'articles:comments_delete' article.id comment.id %}" method="POST" style="display: inline">
+          {% csrf_token %}
+          <button class="btn btn-danger btn-sm">댓글삭제</button>
+        </form>
+      </li>
+    </ul>
+  {% empty %}
+    <p>댓글이 아직없어유ㅠㅠㅠ</p>
+  {% endfor %}
+  <hr>
+  <a class="btn btn-warning btn-sm" href="{% url 'articles:update' article.id %}">EDIT</a>
+  <form action="{% url 'articles:delete' article.id %}" method="POST" style="display: inline">
+    {% csrf_token %}
+    <button class="btn btn-warning btn-sm">DELETE</button>
+  </form>
+  <br>
+  <!-- <a href="{% url 'articles:delete' article.id %}">DELETE</a><br> -->
+  <a class="btn btn-secondary btn-sm mt-2" href="{% url 'articles:index' %}">BACK</a>
 {% endblock %}
