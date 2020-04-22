@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <h1>Juan's Django Remind</h1>
+  <hr>
+  <a class="btn btn-primary" href="{% url 'articles:create' %}">새 글</a>
+  <hr>
+  <ul>
+    {% for article in articles %}
+    <li>
+      <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
+      {% include 'articles/_like.html' %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+<script>
+  const likeButtons = document.querySelectorAll('.like-button')
+  likeButtons.forEach(button => {
+    button.addEventListener('click', function(event){
+      console.log(event.target)
+    })
+  })
+</script>
+</html>
