@@ -19,7 +19,7 @@
       {% for article in articles %}
         <li>
           <h4>제목: {{ article.title }}</h4>
-          <p>내용: {{ article.content }}</p>
+          <p>작성자: {{ article.user }}</p>
           <a href="{% url 'articles:detail' article.id %}">DETAIL</a>
         </li>
         <hr>
