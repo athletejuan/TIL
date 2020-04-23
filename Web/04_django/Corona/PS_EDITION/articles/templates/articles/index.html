@@ -14,13 +14,24 @@
     {% endfor %}
   </ul>
 </div>
-{% endblock %}
 <script>
   const likeButtons = document.querySelectorAll('.like-button')
   likeButtons.forEach(button => {
     button.addEventListener('click', function(event){
-      console.log(event.target)
+      // console.log(event.target)
+      const articleId = event.target.dataset.id
+      axios.get(`/articles/${articleId}/like/`)
+        .then(response => {
+          // console.log(response)
+          if (response.data.liked){
+            event.target.style.color = 'crimson'
+          } else {
+            event.target.style.color = 'black'  
+          }
+        })
+        .catch(error => console.log(error))
     })
   })
 </script>
+{% endblock %}
 </html>

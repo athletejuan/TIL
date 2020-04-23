@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from .models import Article
 from .forms import ArticleForm
-
 
 def index(request):
     articles = Article.objects.all()[::-1]
@@ -38,6 +38,10 @@ def like(request, article_id):
     user = request.user
     if article.like_users.filter(id=user.id).exists():
         article.like_users.remove(user)
+        liked = False
     else:
         article.like_users.add(user)
-    return redirect('articles:index')
+        liked = True
+    context = {'liked':liked}
+    # return redirect('articles:index')
+    return JsonResponse(context)

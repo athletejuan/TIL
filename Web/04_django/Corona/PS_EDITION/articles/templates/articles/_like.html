@@ -1,7 +1,9 @@
 <div class="card-body">
   {% if user in article.like_users.all %}
     <i class='fas fa-heart fa-lg like-button' style='color:crimson' data-id="{{ article.pk }}"></i>
+    <input type="hidden" value="{{ article.pk }}" id="L{{ article.pk }}">
   {% else %}
-    <i class='far fa-heart fa-lg like-button' style='color:black' data-id="{{ article.pk }}"></i>
+    <i class='fas fa-heart fa-lg like-button' style='color:black' data-id="{{ article.pk }}"></i>
+    <input type="hidden" value="{{ article.pk }}" id="L{{ article.pk }}">
   {% endif %}
 </div>
