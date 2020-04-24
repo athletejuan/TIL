@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <li v-for="todo in todos">{{ todo.content }}</li>
+  </div>
+  <script>
+    const STORAGE_KEY = 'vue-todos'
+    const todoStorage = {
+      fetch: function(){
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+      },
+      save: function(){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [
+          {
+            id: 1,
+            content: 'breakfast',
+            completed: true
+          },
+          {
+            id: 2,
+            content: 'lunch',
+            completed: true,
+          },
+          {
+            id: 3,
+            content: 'dinner',
+            completed: false
+          },
+          {
+            id: 4,
+            content: 'night',
+            completed: false
+          }
+        ],
+        // todos: localStorage.fetch()
+      },
+      watch: {
+        todos: {
+          handler: function (todos) {
+            todoStorage.save(todos)
+          },
+          deep: true,
+        }
+      }
+    })
+  </script>
+</body>
+</html>

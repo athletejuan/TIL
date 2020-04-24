@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+  <style>
+    .completed{
+      text-decoration: line-through;
+      opacity: .6;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-bind:style="{color: activeColor, fontSize: fontSize+'px'}">
+      Vue TodoList
+    </div>
+    <hr>
+    <select v-model="status">
+      <option value="all" selected>all</option>
+      <option value="active">active</option>
+      <option value="completed">completed</option>
+    </select>
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    <button v-on:click="addTodo">+</button>
+    <!-- <li v-for='todo in todos' v-if='!todo.completed' v-on:click="check(todo)"> -->
+    <!-- <li v-for='todo in todos' v-bind:class="{completed: todo.completed}"> -->
+    <li v-for="todo in computedTodosByStatus" v-bind:class="{completed: todo.completed}" v-bind:key="todo.id">
+      <input type="checkbox" v-model="todo.completed">
+      <span>{{ todo.content }}</span>
+    </li>
+    <!-- <li v-else='todo.completed' v-on:click="check(todo)">[완료!]</li> -->
+    <button v-on:click="clearCompleted">ClearCompleted</button>
+  </div>
+  <script>
+    const STORAGE_KEY = 'vue-todos'
+    const todoStorage = {
+      fetch: function () {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+        // 또는 return JSON.parse(localStorage.getItem(STORAGE_KEY) || [])
+      },
+      save: function (todos) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      watch: {
+        todos: {
+          handler: function (todos) {
+            todoStorage.save(todos)
+          },
+          deep: true,
+        }
+      },
+      data: {
+        activeColor: 'green',
+        fontSize: 30,
+        todos: [
+          {
+            id: 1,
+            content: '점심',
+            completed: true
+          },
+          {
+            id: 2,
+            content: '저녁',
+            completed: true
+          },
+          {
+            id: 3,
+            content: '야식',
+            completed: false
+          },
+          {
+            id: 4,
+            content: '딥슬립',
+            completed: false
+          }
+        ],
+        newTodo: '',
+        status: 'all',
+        todos: todoStorage.fetch()
+      },
+      methods:{
+        check: function(todo){
+          todo.completed = !todo.completed
+        },
+        addTodo: function(){
+          this.todos.push({
+            id: Date.now(),
+            content: this.newTodo,
+            completed: false
+          })
+          this.newTodo = ''
+        },
+        clearCompleted: function(){
+          const notCompleted = this.todos.filter((todo) => {
+            return !todo.completed
+          })
+          this.todos = notCompleted
+        },
+        // todosByStatus: function(){
+        //   if (this.status === 'active'){
+        //     return this.todos.filter((todo) => {
+        //       return !todo.completed
+        //     })
+        //   }
+        //   if (this.status === 'completed'){
+        //     return this.todos.filter((todo) => {
+        //       return todo.completed
+        //     })
+        //   }
+        //   return this.todos
+        // },
+      },
+      computed: {
+        computedTodosByStatus: function(){
+          if (this.status === 'active'){
+            return this.todos.filter((todo)=>{
+              return !todo.completed
+            })
+          }
+          if (this.status === 'completed'){
+            return this.todos.filter((todo)=>{
+              return todo.completed
+            })
+          }
+          return this.todos
+        }
+      }
+    })
+  </script>
+</body>
+</html>
