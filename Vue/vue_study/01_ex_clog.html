@@ -1,3 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1>clog Image</h1>
+  <hr>
+  <div id="app">
+    <button @click="getDogImage">멍멍</button>
+    <hr>
+    <img :src="dog_image" alt="" width="300px">
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        dog_image: ''
+      },
+      methods: {
+        getDogImage: function(){
+          const dog_url = 'https://dog.ceo/api/breeds/image/random'
+          axios.get(dog_url)
+            .then(response => {
+              this.dog_image = response.data.message
+            })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
+
+
 <body>
   <div id="app">
     <button v-on:click="getDogImage">멍멍</button>
