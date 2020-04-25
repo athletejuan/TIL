@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1>MEOW.COM</h1>
+  <button class="getCatImage">Meow</button>
+  <hr>
+  <div class="catImage"></div>
+  <script>
+    const requestImage = function(){
+      axios.get('https://api.thecatapi.com/v1/images/search')
+      .then(response => {
+        imgUrl = response.data[0].url
+        imgTag = document.createElement('img')
+        imgTag.src = imgUrl
+        document.querySelector('.catImage').append(imgTag)
+      })
+    }
+    const getCatImage = document.querySelector('.getCatImage')
+    getCatImage.addEventListener('click', requestImage)
+  </script>
+</body>
+</html>
