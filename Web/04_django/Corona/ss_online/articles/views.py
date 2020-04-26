@@ -108,3 +108,12 @@ def comments_delete(request, article_id, comment_id):
             comment = Comment.objects.get(id=comment_id)
             comment.delete()
     return redirect('articles:detail', article_id)
+
+@login_required
+def like(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    if article.like_users.filter(id=request.user.id).exists():
+        article.like_users.remove(request.user)
+    else:
+        article.like_users.add(request.user)
+    return redirect('articles:index')

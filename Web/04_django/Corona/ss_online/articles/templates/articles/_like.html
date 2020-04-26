@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <a href="{% url 'articles:like' article.id %}" style="text-decoration:none">
+      {% if user in article.like_users.all %}
+        <i class="fas fa-heart" style="color:crimson"></i>
+      {% else %}
+        <i class="far fa-heart" style="color:black"></i>
+      {% endif %}
+    </a>
+    <p style='display: inline;'><b> - {{ article.like_users.count }}명이 이 게시글을 좋아합니다.</b></p>
+  </div>
+</div>
