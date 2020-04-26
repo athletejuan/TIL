@@ -2,6 +2,7 @@ from django.db.models import Q, Count
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, Comment
 from .forms import QuestionForm, CommentForm
+from django.views.decorators.http import require_POST
 
 def index(request):
     questions = Question.objects.order_by('-pk')
@@ -15,7 +16,7 @@ def create(request):
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save()
-            return redirect('eithers:index')
+            return redirect('eithers:detail', question.id)
     else:
         form = QuestionForm()
     context = {
@@ -23,7 +24,7 @@ def create(request):
     }
     return render(request, 'eithers/create.html', context)
 
-def detail(request, question_id):
+def detail(request, question_pk):
     result = Question.objects.annotate(
         total_count = Count('comment'),
         count_a = Count('comment', filter=Q(comment__pick=0)),
@@ -31,13 +32,13 @@ def detail(request, question_id):
         count_b = Count('comment', filter=Q(comment__pick=1)),
         # count_b=Count('comment', filter=Q(comment__pick=True)),
     )
-    question = get_object_or_404(result, id=question_id)
+    question = get_object_or_404(result, pk=question_pk)
     comments = question.comment_set.order_by('-pk')
     comment_form = CommentForm()
 
     if question.total_count:
-        a_part = round(question.count_a / question.total_count *100, 2)
-        b_part = round(question.count_b / question.total_count *100, 2)
+        a_part = round(question.count_a / question.total_count * 100, 2)
+        b_part = round(question.count_b / question.total_count * 100, 2)
     else:
         a_part, b_part = 0, 0
 
@@ -50,3 +51,12 @@ def detail(request, question_id):
     }
     return render(request, 'eithers/detail.html', context)
 
+@require_POST
+def comment_create(request, question_pk):
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.question_id = question_pk
+        comment.save()
+    return redirect('eithers:detail', question_pk)
+    

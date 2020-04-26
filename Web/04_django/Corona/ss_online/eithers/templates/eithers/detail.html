@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block content %}
 <h1>DETAIL</h1>
 <hr>
@@ -12,4 +13,24 @@
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ a_part }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{ a_part }} %</div>
   <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ b_part }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{ b_part }} %</div>
 </div>
+<hr>
+<form action="{% url 'eithers:comment_create' question.pk %}" method="POST">
+  {% csrf_token %}
+  {% bootstrap_form comment_form %}
+  <button class="btn btn-warning">의견등록</button>
+</form>
+<hr>
+{% for comment in comments %}
+  {% if comment.pick %}
+    <div class="text-danger">선택: {{ question.issue_b }}</div>
+    <div class="text-danger">의견: {{ comment.content }}</div>
+  {% else %}
+    <div class="text-primary">선택: {{ question.issue_a }}</div>
+    <div class="text-primary">의견: {{ comment.content }}</div>
+  {% endif %}
+  <hr>
+{% empty %}
+<h4>아직 의견이 없습니다.</h4>
+{% endfor %}
+<a href="{% url 'eithers:index' %}">BACK</a>
 {% endblock %}

@@ -6,5 +6,6 @@ app_name = 'eithers'
 urlpatterns = [
     path('', views.index, name='index'),
     path('create/', views.create, name='create'),
-    path('<int:question_id>/', views.detail, name='detail'),
+    path('<int:question_pk>/', views.detail, name='detail'),
+    path('<int:question_pk>/comments/', views.comment_create, name='comment_create'),
 ]
