@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'articles',
     'accounts',
     'community',
+    'eithers',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

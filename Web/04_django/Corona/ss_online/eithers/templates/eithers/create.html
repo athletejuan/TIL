@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h1>Issue Create</h1>
+  <hr>
+  <form action="{% url 'eithers:create' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="제출">
+  </form>
+  <a href="{% url 'eithers:index' %}">BACK</a>
+{% endblock %}

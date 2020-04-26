@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>DETAIL</h1>
+<hr>
+<h2 class="text-center">{{ question.title }}</h2>
+<div class="row justify-content-around">
+  <h3>{{ question.issue_a }}</h3>
+  <h3>{{ question.issue_b }}</h3>
+</div>
+
+<div class="progress " style="height: 30px;">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ a_part }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{ a_part }} %</div>
+  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ b_part }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{ b_part }} %</div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Eithers</h1>
+  <a href="{% url 'eithers:create' %}">New ISSUE</a>
+  <hr>
+  {% for question in questions %}
+    <ul>
+      <li>{{ question.id }}번 이슈</li>
+      <h4>{{ question.title }}</h4>
+      <a href="{% url 'eithers:detail' question.id %}">DETAIL</a>
+    </ul>
+  {% endfor %}
+{% endblock %}
