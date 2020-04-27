@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 User = get_user_model()
 
@@ -20,13 +20,13 @@ def signup(request):
     if request.user.is_authenticated:
         return render(request, 'articles/index.html')
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
             return redirect('articles:index')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     context = {
         'form':form
     }
@@ -59,14 +59,6 @@ def delete(request):
     request.user.delete()
     return redirect('accounts:index')
 
-@login_required
-def profile(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    context = {
-        'user':user
-    }
-    return render(request, 'accounts/profile.html', context)
-
 def update(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
@@ -95,3 +87,20 @@ def change_password(request, pk):
         'form':form
     }
     return render(request, 'accounts/change_password.html', context)
+
+@login_required
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    context = {
+        'user':user
+    }
+    return render(request, 'accounts/profile.html', context)
+
+@login_required
+def follow(request, username):
+    user = get_object_or_404(User, username=username)
+    if request.user in user.followers.all():
+        user.followers.remove(request.user)
+    else:
+        user.followers.add(request.user)
+    return redirect('accounts:profile', user.username)

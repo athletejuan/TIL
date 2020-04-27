@@ -9,8 +9,10 @@
   <h3>{{ article.title }}</h3>
   <p>작성자: {{ article.user }}</p>
   <p>내용: {{ article.content }}</p>
+  {% if article.image %}
   <p>이미지: <img src="{{ article.image.url }}" alt=""></p>
   <p>썸네일: <img src="{{ article.image_thumbnail.url }}" alt=""></p>
+  {% endif %}
   <p>작성: {{ article.created_at|date:"Y년 M d일 D" }} {{ article.created_at|time:"a H:i" }}</p>
   <p>수정: {{ article.updated_at|date:"Y년 M d일 D" }} {{ article.updated_at|time:"a H:i" }}</p>
   <hr>

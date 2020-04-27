@@ -2,6 +2,9 @@
   <a class="navbar-brand" href="{% url 'community:review_list' %}">Juan's Reviews</a>
   <a class="navbar-brand" href="{% url 'articles:index' %}">Juan's Articles</a>
   <a class="navbar-brand" href="{% url 'eithers:index' %}">Eithers</a>
+  {% if request.user.is_authenticated %}
+  <span class="text-warning font-weight-bold">Welcome! {{ user.username }}! </span>
+  {% endif %}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
