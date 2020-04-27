@@ -20,7 +20,7 @@ def index(request):
 def create(request):
     # if request.user.is_authenticated:
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.user = request.user
@@ -33,7 +33,7 @@ def create(request):
     # return redirect('articles:detail', article.id)
     else:
         form = ArticleForm()
-    return render(request, 'articles/new.html', {'form':form})
+    return render(request, 'articles/form.html', {'form':form})
 
 def detail(request, article_id):
     article = Article.objects.get(id=article_id)
@@ -52,7 +52,7 @@ def edit(request, article_id):
     # if request.user.is_authenticated:
     if request.user == article.user:
         if request.method == "POST":
-            form = ArticleForm(request.POST, instance=article)
+            form = ArticleForm(request.POST, request.FILES, instance=article)
             if form.is_valid():
                 article = form.save(commit=False)
                 article.user = request.user
@@ -74,7 +74,7 @@ def edit(request, article_id):
         'article':article,
         'form':form,
     }
-    return render(request, 'articles/edit.html', context)
+    return render(request, 'articles/form.html', context)
 
 # def update(request, article_id):
 #     article = Article.objects.get(id=article_id)
