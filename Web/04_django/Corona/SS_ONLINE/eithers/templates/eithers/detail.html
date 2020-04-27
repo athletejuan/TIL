@@ -4,7 +4,7 @@
 <h1>DETAIL</h1>
 <hr>
 <h2 class="text-center">{{ question.title }}</h2>
-<div class="row justify-content-around">
+<!-- <div class="row justify-content-around">
   <h3>{{ question.issue_a }}</h3>
   <h3>{{ question.issue_b }}</h3>
 </div>
@@ -12,6 +12,28 @@
 <div class="progress " style="height: 30px;">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ a_part }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{ a_part }} %</div>
   <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ b_part }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{ b_part }} %</div>
+</div> -->
+
+<div class="card-deck">
+  <div class="card text-white bg-primary">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body mt-5">
+      <h5 class="card-title text-center" style="font-size: 30px">{{ question.issue_a }}</h5>
+      <p class="card-text text-center mt-5 mb-1">{{ count_a }}명</p>
+      <p class="card-text text-center">{{ a_part }}%</p>
+    </div>
+  </div>
+  <div class="my-auto">
+    <span style="font-size:30px">VS</span>
+  </div>
+  <div class="card text-white bg-danger">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body mt-5">
+      <h5 class="card-title text-center" style="font-size: 30px">{{ question.issue_b }}</h5>
+      <p class="card-text text-center mt-5 mb-1">{{ count_b }}명</p>
+      <p class="card-text text-center">{{ b_part }}%</p>
+    </div>
+  </div>
 </div>
 <hr>
 <form action="{% url 'eithers:comment_create' question.pk %}" method="POST">

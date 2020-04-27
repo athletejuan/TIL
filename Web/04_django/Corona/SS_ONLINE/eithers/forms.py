@@ -7,14 +7,14 @@ class QuestionForm(forms.ModelForm):
         fields = '__all__'
 
 class CommentForm(forms.ModelForm):
-    PICK_A = False
-    PICK_B = True
-    PICKS = [
-        (PICK_A, 'A'),
-        (PICK_B, 'B'),
-    ]
-    pick = forms.ChoiceField(choices=PICKS, widget=forms.RadioSelect())
+    # PICK_A = False
+    # PICK_B = True
+    # PICKS = [
+    #     (PICK_A, 'A'),
+    #     (PICK_B, 'B'),
+    # ]
+    # pick = forms.ChoiceField(choices=PICKS, widget=forms.RadioSelect())
 
     class Meta:
         model = Comment
-        fields = ['pick', 'content',]
+        fields = ['selecting', 'content',]

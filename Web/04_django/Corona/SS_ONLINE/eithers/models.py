@@ -7,5 +7,10 @@ class Question(models.Model):
 
 class Comment(models.Model):
     pick = models.BooleanField()
+    SELECT = [
+        ['A', False],
+        ['B', True],
+    ]
     content = models.CharField(max_length=100)
+    selecting = models.CharField(max_length=50, choices=SELECT)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
