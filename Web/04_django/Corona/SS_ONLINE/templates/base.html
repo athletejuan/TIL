@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load bootstrap4 %}
 {% load static %}
 <html lang="en">
 <head>
@@ -13,25 +14,19 @@
   {% endblock %}
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'community:review_list' %}">Juan's Reviews</a>
-    <a class="navbar-brand" href="{% url 'articles:index' %}">Juan's Articles</a>
-    <a class="navbar-brand" href="{% url 'eithers:index' %}">Eithers</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <a class="nav-link" href="{% url 'community:new_review' %}">New Review</a>
-        <a class="nav-link" href="{% url 'articles:create' %}">New Articles</a>
-        <a class="nav-link" href="{% url 'eithers:create' %}">New ISSUE</a>
-      </ul>
-    </div>
-  </nav>
+  {% include '_nav.html' %}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
   <div class="container">
     {% block content %}
     {% endblock %}
   </div>
+  {% bootstrap_javascript jquery='full' %}
   <script src="{% static 'bootstrap.min.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -3,6 +3,8 @@ from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 def index(request):
     articles = Article.objects.order_by('-pk')
@@ -48,19 +50,26 @@ def detail(request, article_id):
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
     # if request.user.is_authenticated:
-    if request.method == "POST":
-        form = ArticleForm(request.POST, instance=article)
-        if form.is_valid():
-            article = form.save(commit=False)
-            article.user = request.user
-            article.save()
-            return redirect('articles:detail', article.id)
-    # article.title = request.POST.get('title')
-    # article.content = request.POST.get('content')
-    # article.save()
-    # return redirect('articles:detail', article.id)
+    if request.user == article.user:
+        if request.method == "POST":
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                article = form.save(commit=False)
+                article.user = request.user
+                article.save()
+                return redirect('articles:detail', article.id)
+        # article.title = request.POST.get('title')
+        # article.content = request.POST.get('content')
+        # article.save()
+        # return redirect('articles:detail', article.id)
+        else:
+            form = ArticleForm(instance=article)
     else:
-        form = ArticleForm(instance=article)
+        # error 메시지 보여주고 목록페이지로 이동
+        messages.warning(request, '본인 글만 수정 가능합니다.')
+        return redirect('articles:index')
+        # 403 Error code를 반환
+        # return HttpResponseForbidden()
     context = {
         'article':article,
         'form':form,
