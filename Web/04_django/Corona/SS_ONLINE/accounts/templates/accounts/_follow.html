@@ -6,12 +6,18 @@
     <a class="btn btn-warning mb-2" href="{% url 'accounts:follow' user.username %}">Follow</a>
   {% endif %}
 {% endif %}
-<h5 class="mt-3">팔로잉: {{ user.followings.all|length }}명</h5>
-{% for following in user.followings.all %}
-  <li>{{ following.username }}</li>
-{% endfor %}
-<h5>팔로워: {{ user.followers.all|length }}명</h5>
-{% for follower in user.followers.all %}
-  <li>{{ follower.username }}</li>
-{% endfor %}
+<!-- user.followings.all을 caching해서 사용, 데이터를 여러번 불러올 필요 없음 -->
+{% with user_following=user.followings.all %}
+  <h5 class="mt-3">팔로잉: {{ user_followings|length }}명</h5>
+  {% for following in user_followings %}
+    <li>{{ following.username }}</li>
+  {% endfor %}
+{% endwith %}
+<!-- user.followers.all을 caching해서 사용, 데이터를 여러번 불러올 필요 없음 -->
+{% with user_followers=user.followers.all %}
+  <h5>팔로워: {{ user_followers|length }}명</h5>
+  {% for follower in user_followers %}
+    <li>{{ follower.username }}</li>
+  {% endfor %}
+{% endwith %}
 <hr>
