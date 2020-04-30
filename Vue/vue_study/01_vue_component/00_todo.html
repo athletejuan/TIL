@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    <button v-on:click="addTodo">+</button>
+    <li v-for="todo in todos" v-bind:key="todo.id">
+      <span>{{ todo.content }}</span>
+      <button v-on:click="removeTodo(todo.id)">x</button>
+    </li>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [],
+        newTodo: '',
+      },
+      methods: {
+        addTodo: function(e){
+          // e.perventDefault()
+          // input에 value가 있는 경우 새로운 todo를 배열의 요소로 추가
+          if (this.newTodo.length != 0){
+            this.todos.push({
+              id: Date.now(),
+              content: this.newTodo,
+              completed: false,
+            })
+            this.newTodo = ''
+          }
+        },
+        // removeTodo 특정 todo를 삭제해야 하기 때문에 클릭시에 todo의 id를 인자로 넘겨받음
+        removeTodo: function(todoID){
+          this.todos = this.todos.filter(todo=>{
+            return todo.id !== todoID
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

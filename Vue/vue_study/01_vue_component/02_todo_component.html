@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .todo-list{
+      display: inline-block;
+      width: 33%;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Juan's Todo App</h1>
+      <todo-list category="취업준비"></todo-list>
+      <todo-list category="SSAFY"></todo-list>
+      <todo-list category="기타"></todo-list>
+  </div>
+  
+  <script>
+    Vue.component('todo-list', {
+      // <div class="todo-list">
+      template: `
+      <div class="todo-list">
+        <h2>{{ category }}</h2>
+        <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+        <button v-on:click="addTodo">+</button>
+        <li v-for="todo in todos" v-bind:key="todo.id">
+          <span>{{ todo.content }}</span>
+          <button v-on:click="removeTodo(todo.id)">x</button>
+        </li>
+      </div>
+      `,
+      props: {
+        'category': {
+          type: String,
+          required: true,
+          validator: function(value){
+            if (value.length < 5){
+              return true
+            } else {
+              return false
+            }
+          }
+        },
+      },
+      data: function(){ // 이 부분을 함수로 작성해서 return 값으로 만들어야 함!
+              return {
+                todos: [],
+                newTodo: '',
+              }
+            },
+      methods: {
+        addTodo: function(e){
+          if (this.newTodo.length != 0){
+            this.todos.push({
+              id: Date.now(),
+              content: this.newTodo,
+              completed: false,
+            })
+            this.newTodo = ''
+          }
+        },
+        removeTodo: function(todoID){
+          this.todos = this.todos.filter(todo=>{
+            return todo.id !== todoID
+          })
+        },
+      },
+    })
+  </script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+</html>
