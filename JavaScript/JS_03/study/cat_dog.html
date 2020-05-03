@@ -1,0 +1,93 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1>댕댕이 사진</h1>
+  <button class="getDogImage">멍멍</button>
+  <hr>
+  <div class="dogImage"></div>
+  <script>
+    const requestImage = function(){
+      axios.get('https://dog.ceo/api/breeds/image/random')
+      .then(response => {
+        const img_Url = response.data.message
+        const img_Tag = document.createElement('img')
+        img_Tag.src = img_Url
+        document.querySelector('.dogImage').append(img_Tag)
+      })
+    }
+    const getDogImage = document.querySelector('.getDogImage')
+    getDogImage.addEventListener('click', requestImage)
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <input type="submit" class="dog" value="bowwow">
+  <button class="cat">meow</button>
+  <hr>
+  <div class="catImage"></div>
+  <div class="dogImage"></div>
+  <script>
+    const getDogImage = function(){
+      axios.get('https://dog.ceo/api/breeds/image/random')
+        .then(response=>{
+          img_Url = response.data.message
+          img_Tag = document.createElement('img')
+          img_Tag.src = img_Url
+          document.querySelector('.dogImage').append(img_Tag)
+        })
+        .catch(error => console.log(error))
+      }
+    const dog = document.querySelector('.dog')
+    dog.addEventListener('click', getDogImage)
+
+    const getCatImage = function(){
+      axios.get('https://api.thecatapi.com/v1/images/search')
+        .then(response => {
+          img_Url2 = response.data[0].url
+          img_Tag2 = document.createElement('img')
+          img_Tag2.src = img_Url2
+          document.querySelector('.catImage').append(img_Tag2)
+        })
+        .catch(error => console.log(error))
+      }
+    const cat = document.querySelector('.cat')
+    cat.addEventListener('click', getCatImage)
+  </script>
+</body>
+</html>
+
+<!-- <body>
+  <button class="cat">meow</button>
+  <div class="catImage"></div>
+  <script>
+    const getCatImage = function(){
+      axios.get('https://api.thecatapi.com/v1/images/search')
+        .then(response => {
+          img_Url2 = response.data[0].url
+          img_Tag2 = document.createElement('img')
+          img_Tag2.src = img_Url2
+          document.querySelector('.catImage').append(img_Tag2)
+        })
+        .catch(error => console.log(error))
+      const cat = document.querySelector('.cat')
+      cat.addEventListener('click', getCatImage)
+    }
+  </script>
+</!-->
