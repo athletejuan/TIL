@@ -2,7 +2,7 @@
   <div v-if="video" class="col-lg-8">
     <div class="embed-responsive embed-responsive-16by9">
       <!-- iframe의 src를 computed와 bind -->
-      <iframe src="videoUrl" frameborder="0" class="embed-responsive-item"></iframe>
+      <iframe :src="videoUrl" frameborder="0" class="embed-responsive-item"></iframe>
     </div>
     <div class="details">
       <h4>{{ video.snippet.title }}</h4>
