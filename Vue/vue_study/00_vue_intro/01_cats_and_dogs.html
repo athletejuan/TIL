@@ -4,38 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cats & Dogs</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Document</title>
 </head>
 <body>
   <div id="app">
-    <button v-on:click="getDogImage">멍멍</button>
-    <button v-on:click="getCatImage">야옹</button>
+    <button @click="getDogImg">멍멍</button>
+    <button @click="getCatImg">야옹</button>
     <br>
-    <img v-bind:src="image" alt="" width="300px">
-    <img v-bind:src="image2" alt="" width="300px">
+    <img :src="dogImage" alt="" width="300px">
+    <img :src="catImage" alt="" width="300px">
   </div>
   <script>
     const app = new Vue({
-      el: "#app",
+      el: '#app',
       data: {
-        image: '',
-        image2: ''
+        dogImage: '',
+        catImage: '',
       },
       methods: {
-        getDogImage: function(){
-          const URL = "https://dog.ceo/api/breeds/image/random"
-          axios.get(URL)
+        getDogImg: function(){
+          dogUrl = 'https://dog.ceo/api/breeds/image/random'
+          axios.get(dogUrl)
             .then(response => {
-              this.image = response.data.message
+              this.dogImage = response.data.message
             })
         },
-        getCatImage: function(){
-          const URL = "https://api.thecatapi.com/v1/images/search"
-          axios.get(URL)
+        getCatImg: function(){
+          catUrl = 'https://api.thecatapi.com/v1/images/search'
+          axios.get(catUrl)
             .then(response => {
-              this.image2 = response.data[0].url
+              this.catImage = response.data[0].url
             })
         }
       }

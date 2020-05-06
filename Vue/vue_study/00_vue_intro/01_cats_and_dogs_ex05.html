@@ -18,7 +18,7 @@
 <body>
   <div id="app">
     <input class="btn" type="submit" v-on:click="getDogsImage" value="BowWow">
-    <button class="btn" v-on:click="getCatsImage">Meow</button>
+    <button v-on:click="getCatsImage">Meow</button>
     <br>
     <img v-bind:src="dogImage" alt="" width="300px">
     <img v-bind:src="catImage" alt="" width="300px">
