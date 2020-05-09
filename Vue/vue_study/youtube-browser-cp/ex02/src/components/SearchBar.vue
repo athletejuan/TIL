@@ -1,5 +1,8 @@
 <template>
-  <input @input="onInput" type="text">
+  <div>
+    <!-- enter 누를때만 검색 -->
+    <input @keyup.enter="onInput" type="text">
+  </div>
 </template>
 
 <script>

@@ -25,11 +25,11 @@ export default {
 </script>
 
 <style scoped>
-  .li {
+  li {
     display: flex;
     cursor: pointer;
   }
-  .li:hover {
+  li:hover {
     background-color: #eee;
   }
 </style>
