@@ -1,3 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <button class="getDogImg">멍멍</button>
+  <button class="getCatImg">야옹</button>
+  <img class="dogImage"></img>
+  <div class="catImage"></div>
+  <script>
+    const getDogImg = document.querySelector('.getDogImg')
+    getDogImg.addEventListener('click', function(){
+      axios.get('https://dog.ceo/api/breeds/image/random')
+      .then(response => {
+        const dog_Url = response.data.message
+        const dog_Tag = document.querySelector('.dogImage')
+        dog_Tag.src = dog_Url
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    })
+    const getCatImg = document.querySelector('.getCatImg')
+    getCatImg.addEventListener('click', function(){
+      axios.get('https://api.thecatapi.com/v1/images/search')
+        .then(response => {
+          const cat_Url = response.data[0].url
+          const cat_Tag = document.createElement('img')
+          cat_Tag.src = cat_Url
+          document.querySelector('.catImage').append(cat_Tag)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+  </script>
+</body>
+</html>
+
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +71,7 @@
   </script>
 </body>
 </html> -->
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +115,7 @@
     cat.addEventListener('click', getCatImage)
   </script>
 </body>
-</html>
+</html> -->
 
 <!-- <body>
   <button class="cat">meow</button>
