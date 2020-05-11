@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from rest_framework import viewsets
+from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ArtistSerializer, ArtistDetailSerializer, MusicSerializer, MusicDetailSerializer, CommentSerializer
@@ -32,24 +32,23 @@ def music_detail(request, music_pk):
 @api_view(['POST'])
 def music_comments(request, music_pk):
     music = Music.objects.get(pk=music_pk)
-    serializers = CommentSerializer(music, data=request.data)
+    serializers = CommentSerializer(data=request.data)
     if serializers.is_valid(raise_exception=True):
-        serializers.save()
+        serializers.save(music=music)
         return Response(serializers.data)
-
+        
 @api_view(['PUT','DELETE'])
-def music_edit(request, comment_pk):
+def comment_edit(request, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     # serializers = CommentSerializer(comment)
     if request.method == "PUT":
         serializers = CommentSerializer(comment, data=request.data)
         if serializers.is_valid(raise_exception=True):
             serializers.save()
-            return "성공적으로 수정 되었습니다."
+            return HttpResponse("성공적으로 수정 되었습니다.")
     else:
-        serializers = CommentSerializer(comment)
-        serializers.delete()
-        return "성공적으로 삭제 되었습니다."
+        comment.delete()
+        return HttpResponse("성공적으로 삭제 되었습니다.")
         
 
 
