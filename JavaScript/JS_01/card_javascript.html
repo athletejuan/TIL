@@ -22,6 +22,7 @@
     const main = document.createElement('div')
     const description = document.createElement('div')
     const mainImg = document.createElement('img')
+    mainImg.style.height = "300px"
     const des_title = document.createElement('h4')
     des_title.style.margin = ".5rem"
     des_title.innerText = "Lorem ipsum"
@@ -36,7 +37,7 @@
     des_btn.style.margin = "1rem"
     des_btn.style.backgroundColor = "blue"
     des_btn.style.color = "white"
-    mainImg.src = "https://picsum.photos/300/300?random=1"
+    mainImg.src = "https://picsum.photos/200/200?random=1"
     card.append(main.appendChild(mainImg))
     card.append(description.appendChild(des_title))
     card.append(description.appendChild(des_content))
@@ -49,3 +50,40 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<!-- <script>
+// 여기에 코드를 작성하시오.
+
+// 1. 기준으로 삼을 태그를 선택자로 가져오기
+let card = document.querySelector('.card')
+
+// 2. 카드를 기준으로 하위 항목들 추가해주기
+// 2-1. 이미지 태그 추가
+let cardImg = document.createElement('img')
+cardImg.src = 'https://picsum.photos/200/200?random=1'
+card.appendChild(cardImg)
+
+// 2-2. card-body 태그 만들기
+let cardBody = document.createElement('div')
+cardBody.classList.add('card-body')
+
+// 2-3. card-body 하위 태그들 만들기
+let cardTitle = document.createElement('h5')
+cardTitle.classList.add('card-title')
+cardTitle.innerText = 'Lorem ipsum dolor sit amet.'
+
+let cardText = document.createElement('p')
+cardText.classList.add('card-text')
+cardText.innerText = 'Lorem ipsum dolor sit amet.'
+
+let cardBtn = document.createElement('a')
+cardBtn.classList.add('btn', 'btn-primary', 'text-white')
+cardBtn.innerText = 'Go somewhere'
+
+cardBody.appendChild(cardTitle)
+cardBody.appendChild(cardText)
+cardBody.appendChild(cardBtn)
+
+// 2-4. card-body 태그를 card 태그에 추가하기
+card.appendChild(cardBody)
+</script> -->
