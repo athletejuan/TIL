@@ -22,6 +22,7 @@
     const main = document.createElement('div')
     const description = document.createElement('div')
     const mainImg = document.createElement('img')
+    mainImg.src = "https://picsum.photos/200/200?random=1"
     mainImg.style.height = "300px"
     const des_title = document.createElement('h4')
     des_title.style.margin = ".5rem"
@@ -32,12 +33,12 @@
     des_content.style.padding = ".5rem"
     des_content.style.marginBottom = "0"
     const des_btn = document.createElement('button')
-    des_btn.innerText = "Go someWhere"
+    des_btn.classList.add('btn', 'btn-primary', 'text-white')
+    des_btn.innerText = "Go somewhere"
     des_btn.style.width = "150px"
     des_btn.style.margin = "1rem"
-    des_btn.style.backgroundColor = "blue"
-    des_btn.style.color = "white"
-    mainImg.src = "https://picsum.photos/200/200?random=1"
+    // des_btn.style.backgroundColor = "blue"
+    // des_btn.style.color = "white"
     card.append(main.appendChild(mainImg))
     card.append(description.appendChild(des_title))
     card.append(description.appendChild(des_content))
