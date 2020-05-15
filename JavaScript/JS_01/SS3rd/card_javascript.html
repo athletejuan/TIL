@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>0512_workshop</title>
+</head>
+<body>
+  <h1 class="text-center mt-5">Card Component with Pure Javascript</h1>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <!-- Q. Javascript Hand Made Card -->
+      <div class="card"></div>
+    </div>
+  </div>
+
+  <script>
+    // 여기에 코드를 작성하시오.
+    const card = document.querySelector('.card')
+    const main = document.createElement('div')
+    const description = document.createElement('div')
+    const mainImg = document.createElement('img')
+    mainImg.src = "https://picsum.photos/200/200?random=1"
+    mainImg.style.height = "300px"
+    const des_title = document.createElement('h4')
+    des_title.style.margin = ".5rem"
+    des_title.innerText = "Lorem ipsum"
+    const des_content = document.createElement('p')
+    des_content.innerText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis accusamus recusandae alias sunt iusto at dolores minima quisquam excepturi incidunt."
+    des_content.style.width = "300px"
+    des_content.style.padding = ".5rem"
+    des_content.style.marginBottom = "0"
+    const des_btn = document.createElement('button')
+    des_btn.classList.add('btn', 'btn-primary', 'text-white')
+    des_btn.innerText = "Go somewhere"
+    des_btn.style.width = "150px"
+    des_btn.style.margin = "1rem"
+    // des_btn.style.backgroundColor = "blue"
+    // des_btn.style.color = "white"
+    card.append(main.appendChild(mainImg))
+    card.append(description.appendChild(des_title))
+    card.append(description.appendChild(des_content))
+    card.append(description.appendChild(des_btn))
+
+  </script>
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<!-- <script>
+// 여기에 코드를 작성하시오.
+
+// 1. 기준으로 삼을 태그를 선택자로 가져오기
+let card = document.querySelector('.card')
+
+// 2. 카드를 기준으로 하위 항목들 추가해주기
+// 2-1. 이미지 태그 추가
+let cardImg = document.createElement('img')
+cardImg.src = 'https://picsum.photos/200/200?random=1'
+card.appendChild(cardImg)
+
+// 2-2. card-body 태그 만들기
+let cardBody = document.createElement('div')
+cardBody.classList.add('card-body')
+
+// 2-3. card-body 하위 태그들 만들기
+let cardTitle = document.createElement('h5')
+cardTitle.classList.add('card-title')
+cardTitle.innerText = 'Lorem ipsum dolor sit amet.'
+
+let cardText = document.createElement('p')
+cardText.classList.add('card-text')
+cardText.innerText = 'Lorem ipsum dolor sit amet.'
+
+let cardBtn = document.createElement('a')
+cardBtn.classList.add('btn', 'btn-primary', 'text-white')
+cardBtn.innerText = 'Go somewhere'
+
+cardBody.appendChild(cardTitle)
+cardBody.appendChild(cardText)
+cardBody.appendChild(cardBtn)
+
+// 2-4. card-body 태그를 card 태그에 추가하기
+card.appendChild(cardBody)
+</script> -->
