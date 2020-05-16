@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0518 exercise & workshop</title>
+  <style>
+  #add-new-todo > label:after {
+    content: ": "
+  } 
+  </style>
+</head>
+<body>
+  <h2>Add New Todo</h2>
+  <p id="add-new-todo"></p>
+  <hr>
+
+  <h2>Todo List</h2>
+  <ul id="todo-list"></ul>
+  <hr>
+
+  <h2>Completed Tasks</h2>
+  <ul id='completed-tasks'></ul>
+  <hr>
+
+  <script>
+    const newTodo = document.querySelector('#add-new-todo')
+    const newLabel = document.createElement('label')
+    newLabel.innerText = 'Add New Todo'
+    
+    const newInput = document.createElement('input')
+    // newInput.type = "text"
+    // newInput.setAttribute('type', 'text')
+    const newBtn = document.createElement('button')
+    newBtn.innerText = 'Add'
+    const todoList = document.querySelector('#todo-list')
+    const completedList = document.querySelector('#completed-tasks')
+
+    newInput.addEventListener('keydown', function(){
+      if (window.event.keyCode == 13){
+        todoList.appendChild(addTodo(newInput.value))
+        newInput.value = ''
+      }
+    })
+    newBtn.addEventListener('click', () => {
+      if (newInput.value) {
+        // exercise 에서 작성한 함수를 수정
+        todoList.appendChild(addTodo(newInput.value))
+        // 작성하고 나면 input value초기화
+        newInput.value = ''
+      }
+    })
+    newTodo.append(newLabel, newInput, newBtn)
+
+    const addTodo = (labelName) => {
+      const newLi = document.createElement('li')
+
+      // completed - checkbox
+      const newCheck = document.createElement('input')
+      newCheck.type = 'checkbox'
+      // newCheck.setAttribute('type', 'checkbox')
+      newCheck.addEventListener('change', (event) => {
+        if (newLabel.style.textDecoration) {
+          newLabel.style.textDecoration = ''
+          todoList.appendChild(newLi)
+        } else {
+          newLabel.style.textDecoration = 'line-through'
+          completedList.appendChild(newLi)
+        }
+      })
+
+      const newLabel = document.createElement('label')
+      newLabel.innerText = `${labelName} `
+
+      const newInput = document.createElement('input')
+      // newInput.setAttribute('type', 'text')
+      newInput.addEventListener('keydown', function(){
+        if (window.event.keyCode == 13){
+          newLabel.innerText = newInput.value
+          newInput.value = ''
+        }
+      })
+
+      const editBtn = document.createElement('button')
+      editBtn.innerText = 'Edit'
+      editBtn.addEventListener('click', () => {
+        if (newInput.value) {
+          newLabel.innerText = newInput.value
+          newInput.value = ''
+        }
+      })
+      
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'Delete'
+      deleteBtn.addEventListener('click', () => {
+        newLi.remove()
+      })
+      
+      newLi.append(newCheck, newLabel, newInput, editBtn, deleteBtn)
+      return newLi
+    }
+  </script>
+</body>
+</html>
