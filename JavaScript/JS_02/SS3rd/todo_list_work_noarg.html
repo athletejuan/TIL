@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0518 exercise & workshop</title>
+  <style>
+    label:after {
+      content: ': ';
+    }
+  </style>
+</head>
+<body>
+  <h2>Add New Todo</h2>
+  <p></p>
+  <hr>
+
+  <h2>Todo List</h2>
+  <ul>
+    <li class="yet"></li>
+  </ul>
+  <hr>
+
+  <h2>Completed Tasks</h2>
+  <ul>
+    <li class="done"></li>
+  </ul>
+  <hr>
+
+  <script>
+    // 여기에 코드를 작성하시오.
+    const newTodo = document.querySelector('p')
+    const nowList = document.querySelector('.yet')
+    const doneList = document.querySelector('.done')
+
+    const newLabel = document.createElement('label')
+    newLabel.innerText = 'Add New Todo'
+
+    const newInput = document.createElement('input')
+    newInput.addEventListener('keydown', function(){
+      if (newInput.value && window.event.keyCode == 13) {
+        addTodo()
+      }
+    })
+    const addBtn = document.createElement('button')
+    addBtn.innerText = 'Add'
+    addBtn.addEventListener('click', function(){
+      if (newInput.value) {
+        addTodo()
+      }
+    })
+    newTodo.append(newLabel, newInput, addBtn)
+
+    const addTodo = function(){
+      const newLi = document.createElement('li')
+      const todoList = document.createElement('span')
+      todoList.innerText = newInput.value
+      newInput.value = ''
+
+      const checkBtn = document.createElement('input')
+      checkBtn.type = 'checkbox'
+      checkBtn.addEventListener('click', function(e){
+        if (!e.target.checked) {
+          todoList.style.textDecoration = ''
+          nowList.append(newLi)
+        } else {
+          todoList.style.textDecoration = 'line-through'
+          doneList.append(newLi)
+        }
+      })
+      const editInput = document.createElement('input')
+      editInput.addEventListener('keydown', function(){
+        if (editInput.value && window.event.keyCode == 13) {
+          todoList.innerText = editInput.value
+          editInput.value = ''
+        }
+      })
+      const editBtn = document.createElement('button')
+      editBtn.innerText = 'EDIT'
+      editBtn.addEventListener('click', function(){
+        if (editInput.value){
+          todoList.innerText = editInput.value
+          editInput.value = ''
+        }
+      })
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'DEL'
+      deleteBtn.addEventListener('click', function(){
+        newLi.remove()
+      })
+      newLi.append(checkBtn, todoList, editInput, editBtn, deleteBtn)
+      nowList.append(newLi)
+  }
+  </script>
+</body>
+</html>

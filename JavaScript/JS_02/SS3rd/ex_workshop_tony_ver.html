@@ -60,7 +60,7 @@
       newCheck.type = 'checkbox'
       // newCheck.setAttribute('type', 'checkbox')
       newCheck.addEventListener('change', (event) => {
-        if (newLabel.style.textDecoration) {
+        if (!event.target.checked) {
           newLabel.style.textDecoration = ''
           todoList.appendChild(newLi)
         } else {

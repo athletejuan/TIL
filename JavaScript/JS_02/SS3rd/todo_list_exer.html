@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0518 exercise & workshop</title>
+  <style>
+    label:after {
+      content: ': ';
+    }
+  </style>
+</head>
+<body>
+  <h2>Add New Todo</h2>
+  <p></p>
+  <hr>
+
+  <h2>Todo List</h2>
+  <ul>
+    <li class="yet"></li>
+  </ul>
+  <hr>
+
+  <h2>Completed Tasks</h2>
+  <ul>
+    <li></li>
+  </ul>
+  <hr>
+
+  <script>
+    // 여기에 코드를 작성하시오.
+    const newTodo = document.querySelector('p')
+    const nowList = document.querySelector('.yet')
+
+    const newLabel = document.createElement('label')
+    newLabel.innerText = 'Add New Todo'
+    const newInput = document.createElement('input')
+    newInput.addEventListener('keydown', function(){
+      if (newInput.value && window.event.keyCode == 13) {
+        // nowList.append(addTodo(newInput.value))
+        addTodo()
+      }
+    })
+    const addBtn = document.createElement('button')
+    addBtn.innerText = 'Add'
+    addBtn.addEventListener('click', function(){
+      if (newInput.value) {
+        // nowList.append(addTodo(newInput.value))
+        addTodo()
+      }
+    })
+    newTodo.append(newLabel, newInput, addBtn)
+
+    const addTodo = function(text){
+      const newLi = document.createElement('li')
+      const todoList = document.createElement('span')
+      if (text) {
+        todoList.innerText = text
+      } else {
+        todoList.innerText = newInput.value
+      }
+      newInput.value = ''
+
+      const checkBtn = document.createElement('input')
+      checkBtn.type = 'checkbox'
+      checkBtn.addEventListener('click', function(){
+        if (todoList.style.textDecoration) {
+          todoList.style.textDecoration = ''
+        } else {
+          todoList.style.textDecoration = 'line-through'
+        }
+      })
+      const editInput = document.createElement('input')
+      editInput.addEventListener('keydown', function(){
+        if (editInput.value && window.event.keyCode == 13) {
+          todoList.innerText = editInput.value
+          editInput.value = ''
+        }
+      })
+      const editBtn = document.createElement('button')
+      editBtn.innerText = 'EDIT'
+      editBtn.addEventListener('click', function(){
+        if (editInput.value){
+          todoList.innerText = editInput.value
+          editInput.value = ''
+        }
+      })
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'DEL'
+      deleteBtn.addEventListener('click', function(){
+        newLi.remove()
+      })
+      newLi.append(checkBtn, todoList, editInput, editBtn, deleteBtn)
+      nowList.append(newLi)
+  }
+  const myList = [
+    'Django ModelForm 복습',
+    'Javascript DOM 조작 복습',
+    'Django static, media 복습',
+  ]
+  myList.forEach((text) => {
+    addTodo(text)
+  })
+  </script>
+</body>
+</html>
