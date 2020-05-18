@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    label:after {
+      content: ': ';
+    }
+  </style>
+  <title>0518 exercise & workshop</title>
+</head>
+<body>
+  <h2>Add New Todo</h2>
+  <p></p>
+  <hr>
+
+  <h2>Todo List</h2>
+  <ul class="now"></ul>
+  <hr>
+
+  <h2>Completed Tasks</h2>
+  <ul></ul>
+  <hr>
+
+  <script>
+    // 여기에 코드를 작성하시오.
+    const newTodo = document.querySelector('p')
+    const todoList = document.querySelector('.now')
+
+    const newLabel = document.createElement('label')
+    newLabel.innerText = 'Add New Todo'
+    const newInput = document.createElement('input')
+    const addBtn = document.createElement('button')
+    addBtn.innerText = 'Add'
+    newTodo.append(newLabel, newInput, addBtn)
+
+    const addTodo = function(arg){
+      const newLi = document.createElement('li')
+      const checkBtn = document.createElement('input')
+      checkBtn.type = 'checkbox'
+      const todo = document.createElement('span')
+      todo.innerText = arg
+      const editInput = document.createElement('input')
+      const editBtn = document.createElement('button')
+      editBtn.innerText = 'Edit'
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'Delete'
+
+      newLi.append(checkBtn, todo, editInput, editBtn, deleteBtn)
+      todoList.append(newLi)
+    }
+
+    const myList = [
+      'Django ModelForm 복습',
+      'Javascript DOM 조작 복습',
+      'Django static, media 복습',
+    ]
+    // myList.forEach(text => {
+    //   addTodo(text)
+    // })
+    myList.forEach(function(text) {
+      addTodo(text)
+    })
+    
+    // const myList = [
+    //   'Django ModelForm 복습',
+    //   'Javascript DOM 조작 복습',
+    //   'Django static, media 복습',
+    // ]
+    // for(const arg of myList){
+    //   addTodo(arg)
+    // }
+  </script>
+</body>
+</html>
