@@ -1,0 +1,53 @@
+{% extends 'board/base.html' %}
+{% block title %} DETAIL {% endblock %}
+{% block body %}
+<h1>DETAIL</h1>
+<h4>제목: {{ article.title }}</h4>
+<p>내용: {{ article.content }}</p>
+{% if article.image %}
+이미지: <img src="{{ article.image.url }}" alt="{{ article.image }}">
+{% else %}
+이미지: <img src="/media/noimage.png" alt="no_images">
+{% endif %}
+<p>작성시간: {{ article.created_at }}</p>
+<p>수정시간: {{ article.updated_at }}</p>
+<hr>
+
+<h3>댓글</h3>
+{% if user.is_authenticated %}
+    {% for comment in comments|dictsortreversed:'id' %}
+        <p><b>{{ comment.user }} 님의 댓글 : {{ comment.content }}</b></p>
+        {% if comment.user == request.user %}
+            <form action="{% url 'board:comments_delete' article.id comment.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="댓글삭제">
+            </form>
+        {% endif %}
+    {% empty %}
+        <p>댓글이 없습니다</p>
+    {% endfor %}
+
+{% else %}
+    <a href="{% url 'accounts:login' %}">로그인이 필요합니다</a>
+{% endif %}
+<hr>
+
+<h3>댓글 작성</h3>
+<form action="{% url 'board:comments_create' article.id %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" value="댓글등록">
+</form>
+
+<hr>
+<div>
+    <form action="{% url 'board:delete' article.id %}" method="POST">
+        {% csrf_token %}
+        <a href="{% url 'board:index' %}"><input type="button" value="메인 페이지"></a>
+        {% if user == article.user %}
+            <a href="{% url 'board:update' article.id %}"><input type="button" value="수정"></a>
+            <input type="submit" value="삭제">
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

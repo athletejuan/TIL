@@ -1,0 +1,9 @@
+<!-- index.html 에 아래 내용을 써도 좋지만 너무 길어지면 가독성이 떨어지기 때문에 모듈화 한다. -->
+<div class="card-body">
+	{% if user in article.like_users.all %}
+	<i class="fas fa-heart fa-lg like-button" data-id="{{ article.pk }}" style=" color:crimson"></i>
+	{% else %}
+	<i class="far fa-heart fa-lg like-button" data-id="{{ article.pk }}" style=" color:crimson"></i>
+	{% endif %}
+	<span id="like-count-{{ article.pk }}" class="card-text">{{ article.like_users.count }} 명이 이 글을 좋아합니다</span>
+</div>

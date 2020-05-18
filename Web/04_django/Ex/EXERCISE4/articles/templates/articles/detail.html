@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h1>DETAIL</h1>
+  <hr>
+  <h2>No.{{ article.pk }} - {{ article.title }}</h2>
+  <p>내용: {{ article.content }}</p>
+  <p>작성: {{ article.created_at }}</p>
+  <p>수정: {{ article.updated_at }}</p>
+  <hr>
+  <a href="{% url 'articles:update' article.pk %}">EDIT</a>
+  <a href="{% url 'articles:delete' article.pk %}">DELETE</a>
+  <a href="{% url 'articles:index' %}">BACK</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h1>CREATE</h1>
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    제목: <input type="text" name="title" value="{{ article.title }}"><br>
+    내용: <textarea name="content" id="" cols="30" rows="10">{{ article.content }}</textarea><br>
+    <button>입력</button>
+  </form>
+  <a href="{% url 'articles:index' %}">BACK</a>
+{% endblock %}

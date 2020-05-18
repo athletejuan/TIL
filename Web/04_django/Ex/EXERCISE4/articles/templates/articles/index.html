@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h1>INDEX</h1>
+  <hr>
+  <a href="{% url 'articles:create' %}">New</a>
+  <ul>
+    {% for article in articles %}
+      <li>No.{{ article.pk }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></li>
+      <!-- 좋아요 HTML -->
+        {% if user in article.like_users.all %}
+        <i class="fas fa-heart like-button" data-id="{{ article.id }}" style="color:crimson"></i>
+        {% else %}
+        <i class="far fa-heart like-button" data-id="{{ article.id }}" style="color:crimson"></i>
+        {% endif %}
+      <span class="like-count-{{ article.id }}"> {{ article.like_users.count }} 명이 이 글을 좋아합니다.</span>
+      <!-- 여기까지 -->
+    {% endfor %}
+  </ul>
+  <!-- 좋아요 JS -->
+  <script>
+    const likeBtn = document.querySelectorAll('.like-button')
+    likeBtn.forEach(button => {
+      button.addEventListener('click', function(e){
+        const articleId = e.target.dataset.id
+        axios.get(`/articles/${articleId}/like/`)
+          .then(response => {
+            document.querySelector(`.like-count-${articleId}`).innerText = `${response.data.count} 명이 이 글을 좋아합니다.`
+            // 빈 하트/찬 하트 로 분기(Notion workshop해설에서는 하트 색깔 변경)
+            if (response.data.liked){
+              e.target.classList.remove('far')
+              e.target.classList.add('fas')
+            } else {
+              e.target.classList.remove('fas')
+              e.target.classList.add('far')
+            }
+          })
+          .catch(err => console.log(err))
+      })
+    })
+  </script>
+{% endblock %}
