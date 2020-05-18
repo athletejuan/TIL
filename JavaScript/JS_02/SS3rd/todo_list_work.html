@@ -16,15 +16,11 @@
   <hr>
 
   <h2>Todo List</h2>
-  <ul>
-    <li class="yet"></li>
-  </ul>
+  <ul class="yet"></ul>
   <hr>
 
   <h2>Completed Tasks</h2>
-  <ul>
-    <li class="done"></li>
-  </ul>
+  <ul class="done"></ul>
   <hr>
 
   <script>
@@ -57,14 +53,14 @@
       const newLi = document.createElement('li')
       const checkBtn = document.createElement('input')
       checkBtn.type = 'checkbox'
-      checkBtn.addEventListener('click', function(e){
-        if (!e.target.checked) {
+      checkBtn.addEventListener('click', function(){
+        if (!this.checked) {
           todoList.style.textDecoration = ''
-          nowList.append(newLi)
+          nowList.append(newLi);
         } else {
           todoList.style.textDecoration = 'line-through'
           doneList.append(newLi)
-        }
+        } 
       })
       const todoList = document.createElement('span')
       todoList.innerText = added
