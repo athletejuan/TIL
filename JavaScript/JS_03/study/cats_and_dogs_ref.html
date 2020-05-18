@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- axios CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>exercise</title>
+</head>
+<body>
+  <h1>Cats & Dogs</h1>
+  <hr>
+  
+  <h2>고양이</h2>
+  <button id="cat">고양이 내놔</button>
+  <div class="cats"></div>
+
+  <h2>강아지</h2>
+  <button id="dog">강아지 내놔</button>
+  <div class="dogs"></div>
+
+  <script>
+    // 여기에 코드를 작성하시오.
+    const catImage = document.querySelector('.cats')
+    const getCat = document.querySelector('#cat')
+    getCat.addEventListener('click', function(){
+      axios.get('https://api.thecatapi.com/v1/images/search')
+        .then(res => {
+          const catUrl = res.data[0].url
+          const catTag = document.createElement('img')
+          catTag.src = catUrl
+          catTag.style.height = '300px'
+          catImage.append(catTag)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+    const dogImage = document.querySelector('.dogs')
+    const getDog = document.querySelector('#dog')
+    getDog.addEventListener('click', function(){
+      axios.get('https://dog.ceo/api/breeds/image/random')
+        .then(res => {
+          const dogUrl = res.data.message
+          const dogTag = document.createElement('img')
+          dogTag.src = dogUrl
+          dogTag.style.height = '300px'
+          dogImage.append(dogTag)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+  </script>
+</body>
+</html>
