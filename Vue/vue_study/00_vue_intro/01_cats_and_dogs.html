@@ -13,8 +13,10 @@
     <button @click="getDogImg">멍멍</button>
     <button @click="getCatImg">야옹</button>
     <br>
-    <img :src="dogImage" alt="" width="300px">
-    <img :src="catImage" alt="" width="300px">
+    <img :src="dogImage" alt="" height="300px">
+    <img :src="catImage" alt="" height="300px">
+    <!-- 이미지 리스트로 보여주기 -->
+    <!-- <img v-for="catImage in catImages" :src="catImage" alt="" height="300px"> -->
   </div>
   <script>
     const app = new Vue({
@@ -22,6 +24,7 @@
       data: {
         dogImage: '',
         catImage: '',
+        // catImages: [],
       },
       methods: {
         getDogImg: function(){
@@ -36,6 +39,7 @@
           axios.get(catUrl)
             .then(response => {
               this.catImage = response.data[0].url
+              // this.catImages.push(response.data[0].url)
             })
         }
       }
