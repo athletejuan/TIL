@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>0525 workshop</title>
+  <style>
+    img {
+      display: block;
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Cat Image</h1>
+  <div id="cats">
+    <button @click="getCatImage">야옹</button><br>
+    <img :src="catImage" alt="">
+  </div>
+  <div id="dogs">
+    <button @click="getDogImage">멍멍</button>
+    <img :src="dogImage" alt="">
+  </div>
+  <script>
+    const cats = new Vue({
+      el: '#cats',
+      data: {
+        catImage: '',
+      },
+      methods: {
+        getCatImage: function(){
+          axios.get('https://api.thecatapi.com/v1/images/search')
+            .then(response => {
+              this.catImage = response.data[0].url
+            })
+            .catch(error => console.log(error))
+        },
+      }
+    })
+    const dogs = new Vue({
+      el: '#dogs',
+      data: {
+        dogImage: '',
+      },
+      methods: {
+        getDogImage: function(){
+          axios.get('https://dog.ceo/api/breeds/image/random')
+            .then(response => {
+              this.dogImage = response.data.message
+            })
+            .catch(error => console.log(error))
+        }
+      }
+    })
+  </script>
+</body>
+</html>
