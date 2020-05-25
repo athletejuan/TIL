@@ -15,6 +15,8 @@
     <br>
     <img v-bind:src="dog_image" alt="" width="300px">
     <img v-bind:src="cat_image" alt="" width="300px">
+    <br>
+    <input type="text" @keyup.enter="getImage" v-model="message">
   </div>
   
   <script>
@@ -23,6 +25,7 @@
       data: {
         dog_image: '',
         cat_image: '',
+        message: '',
       },
       methods: {
         getDogImage: function(){
@@ -38,6 +41,21 @@
             .then(response => {
               this.cat_image = response.data[0].url
             })
+        },
+        getImage: function(){
+          const catUrl = 'https://api.thecatapi.com/v1/images/search'
+          const dogUrl = 'https://dog.ceo/api/breeds/image/random'
+          if (this.message === '고양이') {
+            axios.get(catUrl)
+            .then(response => {
+              this.cat_image = response.data[0].url
+            })
+          } else if (this.message === '강아지') {
+            axios.get(dogUrl)
+            .then(response => {
+              this.dog_image = response.data.message
+            })
+          }
         }
       }
     })
