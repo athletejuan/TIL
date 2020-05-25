@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app">
+  <div class="app">
     {{ message }}
   </div>
   <div id="app2">
@@ -16,9 +16,12 @@
     </span>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 작업하고있는 HTML파일의 Vue 인스턴스를 보기위해서는 Extension아이콘 우클릭 > 확장프로그램 관리 > Allow access to file URLs(파일 URL에 대한 엑세스 허용)체크 필요 -->
+  <!-- CDN 상용버전: Vue Devtools를 설치해도 개발자도구에서 Vue탭이 나타나지 않는다. -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
   <script>
     const app = new Vue({
-      el: '#app',
+      el: '.app',
       data: {
         message: 'Hello, Vue!'
       }

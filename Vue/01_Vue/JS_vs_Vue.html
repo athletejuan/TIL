@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- ver. JS-->
+  <h2>JavaScript</h2>
+  <input id="jsInput" type="text">
+  <p id="jsParagraph"></p>
+  <hr>
+
+  <!-- ver. Vue -->
+  <h2>Vue.js</h2>
+  <div id="app">
+    <input v-model="message">
+    <p>{{ message }}</p>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // Ver. JS
+    //1. 잡아서
+    const userInput = document.querySelector('#jsInput')
+    
+    //3. 이벤트가 발생하면!
+    userInput.addEventListener('keydown', function(event) {
+      //2. 값을 변경한다. 언제?
+      const inputValue = event.target.value
+      document.querySelector('#jsParagraph').innerText = inputValue
+    })
+
+    // Ver. Vue.js
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: null,
+      }
+    })
+  </script>
+</body>
+</html>

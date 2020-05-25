@@ -25,6 +25,42 @@
     <p>{{ message }}</p>
     <input v-model="message">
   </div>
+  <div id="app7">
+    <ul v-for="(subject, index) in subjects">
+      <li>{{ index }}: {{ subject }}</li>
+    </ul>
+    <input v-model="message">
+    <p>{{ message }}</p>
+    <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="john" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <p>체크한 이름: {{ checkedNames }}</p>
+    <select v-model="selected">
+      <option disable value="">Please select one</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <p>선택함: {{ selected }}</p>
+    <hr>
+    <select v-model="selected2" multiple>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected2 }}</span>
+    <hr>
+    <button @click="counter += 1">Add 1</button>
+    <p>위 버튼을 클릭한 횟수는 {{ counter }}번입니다.</p>
+    <button @click="greet">Greet</button>
+  </div>
+  <div id="view">
+
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
     const app3 = new Vue({
@@ -58,6 +94,36 @@
       el: "#app6",
       data: {
         message: '안녕하세요? Vue.js!'
+      }
+    })
+    const model = {
+      data: {
+        name: 'ssafy'
+      }
+    }
+    const viewmodel = new Vue(model)
+    const app7 = new Vue({
+      el: '#app7',
+      data: {
+        subjects: [
+          'Python',
+          'Django',
+          'JavaScript',
+          'Vue.js',
+          'React',
+        ],
+        message: null,
+        checkedNames: [],
+        selected: null,
+        selected2: [],
+        counter: 0,
+        name: 'SSAFY 3기 하얀구름님',
+      },
+      methods: {
+        greet: function(event){
+          alert('Hello '+this.name + '!')
+          alert(`Hello ${this.name}!`)
+        }
       }
     })
   </script>
