@@ -1,46 +1,13 @@
 <template>
   <div id="app">
-    <div>
-      <button @click="statusIndex">Index</button>
-      <button @click="statusLotto">Lotto</button>
-      <button @click="statusLunch">Lunch</button>
+    <div id="nav">
+      <router-link to="/">Index</router-link> |
+      <router-link to="/lunch">Lunch</router-link> |
+      <router-link to="/lotto">Lotto</router-link>
     </div>
-    <Index v-if="status == 'index'"/>
-    <Lunch v-if="status == 'lunch'"/>
-    <Lotto v-if="status == 'lotto'"/>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import Index from './components/Index.vue'
-import Lunch from './components/Lunch.vue'
-import Lotto from './components/Lotto.vue'
-
-export default {
-  name: 'App',
-  components: {
-    Lunch,
-    Lotto,
-    Index,
-  },
-  data: function(){
-    return {
-      status: 'index',
-    }
-  },
-  methods: {
-    statusLunch(){
-      this.status = 'lunch'
-    },
-    statusLotto(){
-      this.status = 'lotto'
-    },
-    statusIndex(){
-      this.status = 'index'
-    },
-  }
-}
-</script>
 
 <style>
 #app {
@@ -49,6 +16,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
