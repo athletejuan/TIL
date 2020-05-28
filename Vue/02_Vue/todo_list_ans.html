@@ -60,6 +60,7 @@
           todo.completed = !todo.completed
         },
         addTodo: function(){
+          console.log(this)
           if (this.newTodo){
             this.todos.push({
               id: Date.now(),
@@ -70,12 +71,14 @@
           }
         },
         clearCompleted: function(){
+          console.log(this)
           const notCompleted = this.todos.filter((todo) => {
             return !todo.completed
           })
           this.todos = notCompleted
         },
         todosByStatus: function(){
+          console.log(this)
           if (this.status === 'active'){
             return this.todos.filter((todo)=> {
               return !todo.completed
