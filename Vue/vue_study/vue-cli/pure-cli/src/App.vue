@@ -5,6 +5,7 @@
       <button @click="statusLunch">Lunch</button>
       <button @click="statusLotto">Lotto</button>
     </div>
+    <!-- step.3 사용한다. -->
     <Index v-if="status === 'index'"/>
     <!-- lunch-menu === lunchMenu === LunchMenu -->
     <!-- lotto === Lotto -->
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+// 컴포넌트 사용하기
+// step.1 : import 한다.
 import Index from './components/Index.vue'
 import Lunch from './components/Lunch.vue'
 import Lotto from './components/Lotto.vue'
@@ -21,6 +24,7 @@ import Lotto from './components/Lotto.vue'
 export default {
   name: 'App',
   components: {
+    // step.2 : 등록한다.
     Index,
     Lunch,
     Lotto,
