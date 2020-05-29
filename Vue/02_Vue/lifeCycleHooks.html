@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    .button-bottom {
+      position: fixed;
+      right: 20vw;
+      bottom: 20vh;
+    }
+  </style>
+  <title>Scroller</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="getPhotos">Get Photos</button>
+    <div v-for="photo in photos">
+      <h5>{{ photo.title }}</h5>
+      <img :src="photo.thumbnailUrl" :alt="photo.title">
+    </div>
+    <button @click="scrollToTop" class="button-bottom">^</button>
+    <div id="bottomSensor"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        photos: [],
+        page: 1,
+      },
+      methods: {
+        getPhotos: function(){
+          const options = {
+            params: {
+              _page: this.page++,
+              _limit: 3,
+            }
+          }
+          // photoUrl = `https://jsonplaceholder.typicode.com/photos?_page=${this.page}&_limit=5`
+          photoUrl = 'https://jsonplaceholder.typicode.com/photos'
+          axios.get(photoUrl, options)
+          // .then(function(res) {console.log(this.photos)})
+          .then(res => {
+            // console.log('>>> GET PHOTOS <<<')
+            this.photos = [...this.photos, ...res.data]
+            // this.photos = res.data
+          })
+          .catch(error => console.log(error))
+        },
+
+        addScrollWatcher: function(){
+          const bottomSensor = document.querySelector('#bottomSensor')
+          const watcher = scrollMonitor.create(bottomSensor)
+          watcher.enterViewport(()=>{
+            // console.log('____BOTTOM____')
+            setTimeout(() =>{
+              this.getPhotos()
+            }, 500)
+          })
+        },
+
+        scrollToTop: function(){
+          scroll(0, 0)
+        },
+
+        loadUntilViewportIsFull: function(){
+          const bottomSensor = document.querySelector('#bottomSensor')
+          const watcher = scrollMonitor.create(bottomSensor)
+          // console.log(watcher.isFullyInViewport)
+          if (watcher.isFullyInViewport) {
+            this.getPhotos()
+          }
+        }
+      },
+      // 초기화 이후 AJAX요청을 보내기 좋은 시점
+      created: function(){
+        this.getPhotos()
+      },
+      // DOM과 Vue 인스턴스가 연동이 완료되고 난 이후에 실행
+      mounted: function(){
+        this.addScrollWatcher()
+      },
+      // 데이터가 바뀌고, 화면이 다시 렌더링 되었을 때,
+      updated: function(){
+        this.loadUntilViewportIsFull()
+      }
+    })
+  </script>
+</body>
+</html>
