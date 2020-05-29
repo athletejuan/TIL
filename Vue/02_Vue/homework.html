@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ count }}</h1><br>
+    <h2>computed: {{ calculated }}</h2>
+    <button @click="decreaseCount">카운트 감소</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        count: 3,
+      },
+      methods: {
+        decreaseCount: function(){
+          this.count = this.count - 1
+        }
+      },
+      // computed 속성은 해당 속성이 종속된 대상이 변경될때만 함수 실행
+      // 여기서는 count의 값이 변경될 때 함수 실행, 계산한 값을 출력
+      // 선언형 프로그래밍 방식
+      computed: {
+        calculated: function () {
+          return this.count * 3
+        }
+      },
+      // watch 속성은 감시할 데이터 지정, 그 데이터가 바뀌면 함수 실행
+      // 명령형 프로그래밍 방식
+      watch: {
+        count: function (newVal) {
+          if(newVal === 0) {
+            alert('값이 0이 되었습니다.')
+            this.count = 3
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

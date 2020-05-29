@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="visible = !visible">Toggle</button>
+    <ul v-if="visible">
+      <!-- Method는 호출이라 '()' -->
+      <li>dateMethod: {{ dateMethod() }}</li>
+      <!-- computed는 계산된 값을 부르는 거라 '()' X -->
+      <li>dateComputed: {{ dateComputed }}</li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        visible: true,
+      },
+      methods: {
+        dateMethod: function() {
+          return new Date()
+        }
+      },
+      computed: {
+        dateComputed: function() {
+          return new Date()
+        }
+      }
+    })
+  </script>
+</body>
+</html>
