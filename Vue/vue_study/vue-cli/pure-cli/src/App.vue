@@ -4,6 +4,11 @@
       <button @click="statusIndex">Index</button>
       <button @click="statusLunch">Lunch</button>
       <button @click="statusLotto">Lotto</button>
+      <button @click="welcoming">Welcome</button>
+    </div>
+    <div>
+      <input v-model="welcomeMessage"/>
+      <Welcome v-if="status === 'welcome'" @welcome="sayHi" :welcomeMessage="welcomeMessage"/>
     </div>
     <!-- step.3 사용한다. -->
     <Index v-if="status === 'index'"/>
@@ -20,6 +25,7 @@
 import Index from './components/Index.vue'
 import Lunch from './components/Lunch.vue'
 import Lotto from './components/Lotto.vue'
+import Welcome from './components/Welcome.vue'
 
 export default {
   name: 'App',
@@ -28,10 +34,12 @@ export default {
     Index,
     Lunch,
     Lotto,
+    Welcome,
   },
   data: function(){
     return {
       status: 'index',
+      welcomeMessage: '',
     }
   },
   methods: {
@@ -43,8 +51,14 @@ export default {
     },
     statusIndex(){
       this.status = 'index'
-    }
-  }
+    },
+    welcoming(){
+      this.status = 'welcome'
+    },
+    sayHi(welcomeCount) {
+      alert(`you welcomed me ${welcomeCount} times.`)
+    },
+  },
 }
 </script>
 
