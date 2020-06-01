@@ -29,8 +29,8 @@ export default {
     onInputChange(inputValue){
       axios.get(API_URL, {
         params: {
-          type: 'video',
           key: API_KEY,
+          type: 'video',
           part: 'snippet',
           q: inputValue
         }
