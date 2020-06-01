@@ -9,8 +9,10 @@ export default {
   name: 'SearchBar',
   methods: {
     onInput(e) {
-      // console.log(e.target.value)
-      this.$emit('input-change', e.target.value)
+      if (e.target.value.trim()){
+        console.log(e)
+        this.$emit('input-change', e.target.value)
+      }
     }
   }
 }
