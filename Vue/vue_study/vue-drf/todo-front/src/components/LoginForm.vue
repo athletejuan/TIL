@@ -24,6 +24,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../router'
 
 export default {
   name: 'LoginForm',
@@ -41,11 +42,16 @@ export default {
     login() {
       if (this.checkForm()) {
         this.loading = true
-        axios.post('http://localhost:8000/', this.credentials)
+        axios.post('http://localhost:8000/api-token-auth/', this.credentials)
         .then(res => {
-          console.log(res)
+          this.$session.start()
+          this.$session.set('jwt', res.data.token)
+          router.push('/')
+          // this.loading = false
+          // console.log(res)
         })
         .catch(e => {
+          this.loading = false
           console.log(e)
         })
       } else {
