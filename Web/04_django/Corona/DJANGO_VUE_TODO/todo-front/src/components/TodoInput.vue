@@ -16,11 +16,12 @@ export default {
   methods: {
     onInput() {
       if (this.todo.trim()) {
-        this.$emit('input-change', {
-          id: Date.now(),
-          content: this.todo,
-          isCompleted: false,
-        })
+        this.$emit('input-change', this.todo)
+        // this.$emit('input-change', {
+        //   id: Date.now(),
+        //   content: this.todo,
+        //   isCompleted: false,
+        // })
         this.todo = ''
       }
     }
