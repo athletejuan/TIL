@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>List</h1>
-    <li v-for="article in articles" :key="article.id">{{ article }}</li>
+    <h1>Article List</h1>
+    <li v-for="article in articles" :key="article.id">{{ article.title }} - {{ article.user.username }}</li>
   </div>
 </template>
 <script>

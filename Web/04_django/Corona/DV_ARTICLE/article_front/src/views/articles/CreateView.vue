@@ -1,10 +1,8 @@
 <template>
   <div>
     <h1>create</h1>
-    title : <input type="text" v-model="title">
-    <br>
-    content : <input type="text" v-model="content">
-    <br>
+    title : <input type="text" v-model="title"><br>
+    content : <input type="text" v-model="content"><br>
     <button @click="createArticle">create</button>
   </div>
 </template>

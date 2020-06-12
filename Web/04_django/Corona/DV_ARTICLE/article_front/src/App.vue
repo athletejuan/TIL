@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <span v-if="isLogin">
-        <router-link to="/accounts/logout" @click.native="logout">Logout</router-link>
+        <router-link to="/accounts/logout" @click.native="logout">Logout</router-link> |
+        <router-link to="/articles/create">Create Article</router-link>
       </span>
       <span v-else>
         <router-link to="/accounts/signup">Signup</router-link> |
@@ -79,6 +80,9 @@ export default {
           this.$cookies.remove('auth-token')
           this.isLogin = false
           this.$router.push('/')
+        })
+        .catch(err => { 
+          console.log(err.response)
         })
     }
   }  
