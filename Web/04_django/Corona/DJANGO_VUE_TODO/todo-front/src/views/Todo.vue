@@ -27,7 +27,7 @@ export default {
       const requestForm = new FormData()
       requestForm.append('content', todo)
 
-      axios.post('http://localhost:8000/api/v1/todos/', requestForm)
+      axios.post('https://django-vue-todolist.herokuapp.com/api/v1/todos/', requestForm)
         .then(res => {
           console.log(res.data)
           this.todos.push(res.data)
@@ -41,7 +41,7 @@ export default {
       todo.is_completed = !todo.is_completed
     },
     deleteTodo(selected_todo) {
-      axios.delete(`http://localhost:8000/api/v1/todos/${selected_todo.id}`)
+      axios.delete(`https://django-vue-todolist.herokuapp.com/api/v1/todos/${selected_todo.id}`)
         .then(res => {
           console.log(res.data)
         })
