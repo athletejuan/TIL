@@ -12,7 +12,8 @@ export default {
   },
   methods: {
     VideoSelect() {
-      this.$emit('selected-video', this.video)
+      // this.$emit('selected-video', this.video)
+      this.$store.commit('setSelectedVideo', this.video)
     }
   },
   computed: {

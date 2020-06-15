@@ -1,16 +1,19 @@
 <template>
   <div class="container">
-    <input type="text" @change="onInput">
-    <button @click="onInput">검색</button>
+    <input type="text" @change="fetchVideos">
+    <button @click="fetchVideos">검색</button>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: "SearchBar",
   methods: {
-    onInput(e) {
-      this.$emit('input-change', e.target.value)
-    }
+    ...mapActions(['fetchVideos']),
+    // onInput(e) {
+    //   this.$emit('input-change', e.target.value)
+    // }
   }
 }
 </script>
