@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://kit.fontawesome.com/eb4e6c57f5.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <style>
     body {
       background: midnightblue;
@@ -20,11 +22,22 @@
         transform: translateY(105vh);
       }
     }
+    .clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: white;
+    font-size: 60px;
+    font-family: 'Orbitron';
+    letter-spacing: 7px;
+   }
   </style>
   <title>SnowFall</title>
 </head>
 <body>
   <i class="fas fa-snowflake"></i>
+  <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
   <script>
     setInterval(createSnowFlake, 50)
     function createSnowFlake() {
@@ -42,6 +55,38 @@
         snowFlake.remove()
       }, 5000)
     }
+
+    function showTime(){
+    let date = new Date();
+    let Y = date.getFullYear();
+    let M = date.getMonth() + 1;
+    let d = date.getDate();
+    let h = date.getHours(); // 0 - 23
+    let m = date.getMinutes(); // 0 - 59
+    let s = date.getSeconds(); // 0 - 59
+    let session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    let today = Y + "." + M + "." + d
+    let time = h + ":" + m + ":" + s + " " + session;
+    document.querySelector("#MyClockDisplay").innerHTML = today + '<br>' + time;
+    // document.querySelector("#MyClockDisplay").textContent = today + time;
+    
+    setTimeout(showTime, 1000);
+    }
+    showTime();
   </script>
 </body>
 </html>
