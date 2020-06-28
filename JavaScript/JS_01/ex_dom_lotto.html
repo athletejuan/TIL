@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="lottoBtn">
+    로또 1회 추천 버튼 - <button class="onceBtn">Lotto</button>
+  </div>
+  <div id="result"></div>
+  <hr>
+  <div id="multiLotto">
+    로또 <input type="text" class="many">회 추천 버튼 - 
+    <button class="manyBtn">Lottos</button>
+  </div>
+  <div>
+    <ul id="results"></ul>
+  </div>
+  <script>
+		// 로또 1회 추천 기능
+    const oneTime = document.querySelector('.onceBtn')
+    const resNum = document.querySelector('#result')
+    oneTime.addEventListener('click', function(){
+      if (resNum) {
+        resNum.innerText = ''
+      }
+      resNum.append(`당신의 행운의 번호는: ` + _.sortBy(_.sampleSize(_.range(1, 46), 6)))
+    })
+
+		// 로또 여러번 추천 기능
+    const multi = document.querySelector('.many')
+    const manyTimes = document.querySelector('.manyBtn')
+    const resNums = document.querySelector('#results')
+    manyTimes.addEventListener('click', function(){
+      if (resNums) {
+        resNums.innerText = ''
+      }
+      for (i = 0; i < multi.value; i++){
+        const li = document.createElement('li')
+        li.innerText = `${i+1}번째 추천번호: ` + _.sortBy(_.sampleSize(_.range(1, 46), 6))
+        results.append(li)
+      }
+    })
+  </script>
+</body>
+</html>
