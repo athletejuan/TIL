@@ -7,32 +7,51 @@
   <title>Form Events</title>
 </head>
 <body>
-  <form id="signup-form" action="/NOOOO" method="get">
-    <input type="text" placeholder="credit card" id="credit-card">
-    <label>
-      I agree to use this credit card.
-      <input type="checkbox" id="terms">
-    </label>
-    <select name="" id="programming-language">
-      <option value="python">Python</option>
-      <option value="javascript">Javascript</option>
-      <option value="go">Go</option>
-    </select>
-    <input type="submit">
-  </form>
+  <!-- <form id="signup-form" action="/NOOOO" method="get"> -->
+  <input name="creditCard" type="text" placeholder="credit card" id="credit-card">
+  <label>
+    I agree to use this credit card.
+    <input name="agreeToTerms" type="checkbox" id="terms">
+  </label>
+  <select name="selectedLanguage" id="programming-language">
+    <option value="python">Python</option>
+    <option value="javascript">Javascript</option>
+    <option value="go">Go</option>
+  </select>
+  <input type="submit">
+  <!-- </form> -->
   <script>
-    const form = document.querySelector('#signup-form')
+    // const form = document.querySelector('#signup-form')
     const creditCardInput = document.querySelector('#credit-card')
     const termsCheckbox = document.querySelector('#terms')
     const languageSelect = document.querySelector('#programming-language')
-    form.addEventListener('submit', function(event) {
-    event.preventDefault()
-    console.dir(event)
-    console.log(event.target)
-    console.log('creditCard: ', creditCardInput.value)
-    console.log('terms: ', termsCheckbox.checked)
-    console.log('languageSelect: ', languageSelect.value)
-  })
+    const formData = {}
+  //   form.addEventListener('submit', function(event) {
+  //   event.preventDefault()
+  //   console.dir(event)
+  //   console.log(event.target)
+  //   console.log('creditCard: ', creditCardInput.value)
+  //   console.log('terms: ', termsCheckbox.checked)
+  //   console.log('languageSelect: ', languageSelect.value)
+  // })
+    // creditCardInput.addEventListener('input', (event) => {
+    //   console.log('Credit Card Change', event)
+    //   formData['creditCard'] = event.target.value
+    // })
+    // termsCheckbox.addEventListener('input', (event) => {
+    //   console.log('Terms Change', event)
+    //   formData['termsChange'] = event.target.value
+    // })
+    // languageSelect.addEventListener('input', (event) => {
+    //   console.log('Language Change', event)
+    //   formData['languageChange'] = event.target.value
+    // })
+    for (let input of [ creditCardInput, termsCheckbox, languageSelect ]) {
+      input.addEventListener('input', (event) => {
+        formData[event.target.name] = event.target.value
+        console.log(formData)
+      })
+    }
   </script>
 </body>
 </html>
