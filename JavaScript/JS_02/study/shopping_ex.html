@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>My Shopping List</h1>
+  Enter a new item: <input id="item-input" type="text">
+  <button id="add-button">Add Item</button>
+  <ul id="shopping-list"></ul>
+  <script>
+    const itemInput = document.querySelector('#item-input')
+    const addBtn = document.querySelector('#add-button')
+    const shoppingList = document.querySelector('#shopping-list')
+    addBtn.addEventListener('click', function(){
+      if (itemInput.value){
+        addFunc()
+      }
+    })
+    itemInput.addEventListener('keydown', function(){
+      if (itemInput.value && window.event.keyCode === 13) {
+        addFunc()
+      }
+    })
+    const addFunc = function(){
+      const item = document.createElement('li')
+      item.innerText = itemInput.value + ' - '
+      itemInput.value = ''
+      const delBtn = document.createElement('button')
+      delBtn.innerText = 'Delete'
+      delBtn.addEventListener('click', function(){
+        item.remove()
+      })
+      item.append(delBtn)
+      shoppingList.append(item)
+    }
+  </script>
+</body>
+</html>

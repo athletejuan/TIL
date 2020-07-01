@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+		h1 {
+      text-align: center;
+    }
+    #boxes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .box {
+      height: 200px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+	<h1>Pick a Color</h1>
+	<div id="boxes"></div>
+  
+  <script>
+    const colors = ['red', 'yellow', 'green', 'blue', 'purple', 'indigo', 'violet']
+		const container = document.querySelector('#boxes')
+    const changeColor = function(){
+          // console.log(box.style.backgroundColor)
+          const title = document.querySelector('h1')
+          title.style.color = this.style.backgroundColor
+        }
+    for (let color of colors) {
+      const box = document.createElement('div')
+      box.classList.add('box')
+      box.style.backgroundColor = color
+      box.addEventListener('click', changeColor)
+      container.append(box)
+    }
+  </script>
+</body>
+</html>
