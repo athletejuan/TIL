@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .parent {
+      height: 100%;
+    }
+    #time {
+      font-size: 5rem;
+      padding: 0 2rem;
+      background-color: rgba(0, 0, 0, .2);
+      border-radius: 10px;
+    }
+    .row {
+      margin: 0;
+    }
+  </style>
+  <title>Momentum</title>
+</head>
+<body>
+  <nav class="navbar justify-content-end fixed-top">
+    <span id="weather" class="font-weight-bold text-light"></span>
+  </nav>
+  <div class="parent row justify-content-center align-items-center">
+    <div id="time" class="font-weight-bold text-light"></div>
+  </div>
+  <script>
+    // unsplash 미가입시
+    // axios.get('https://source.unsplash.com/random')
+    // unsplash 회원가입 후 앱 생성한 경우(scm에 올리지 않도록)
+    axios.get('https://api.unsplash.com/photos/random/?client_id={Your_APP_Access_Key}')
+      .then(res => {
+        // unsplash 회원미가입시
+        // const imgUrl = res.request.responseURL
+        // unsplash 회원가입 후 앱 생성한 경우
+        const imgUrl = res.data.urls.regular
+        document.body.style.backgroundImage = `url('${imgUrl}')`
+      })
+    const dpTime = function() {
+      const now = new Date()
+      hours = now.getHours()
+      minutes = now.getMinutes()
+      seconds = now.getSeconds()
+      if (hours > 12) {
+        hours -= 12
+        ampm = '오후 '
+      } else {
+        ampm = '오전 '
+      }
+      if (hours < 10) {
+        hours = '0' + hours
+      }
+      if (minutes < 10) {
+        minutes = '0' + minutes
+      }
+      if (seconds < 10) {
+        seconds = '0' + seconds
+      }
+      document.querySelector('#time').innerHTML = ampm + hours + ":" + minutes + ":" + seconds
+    }
+
+    setInterval(dpTime, 1000)
+
+    let weather = document.querySelector('#weather')
+    // openweathermap 회원가입 필요
+    const WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/weather?q=Seoul,kr&APPID={your api key}'
+    axios.get(WEATHER_API_URL)
+      .then(function(response){
+        const weatherCity = response.data.name
+        const weatherData = response.data.weather[0].description
+        const temperature = (response.data.main.temp - 273.15).toFixed()
+        weather.innerText = `${temperature}°C ${weatherCity} ${weatherData}`
+      })
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
