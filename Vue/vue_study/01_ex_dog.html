@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Vue-Dog</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="getDogImage">댕댕이</button>
+    <hr>
+    <img :src="dog_image" alt="" height="400px">
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        dog_image: ''
+      },
+      methods: {
+        getDogImage: function(){
+          const dogUrl = 'https://dog.ceo/api/breeds/image/random'
+          axios.get(dogUrl)
+           .then(res => {
+             this.dog_image = res.data.message
+           })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
