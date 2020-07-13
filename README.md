@@ -22,9 +22,12 @@
 
   
 
-- Ad_GIT
+- GIT_ex
   - Github_basic
-  - Github_flow
+    - Git branch
+    - Git merge
+  - Github_Advanced
+    - Github_flow
 
 
 

@@ -1,7 +1,0 @@
-text 1
-text 2
-text 3
-
-branch merging 
-master text 4
-login text 4
