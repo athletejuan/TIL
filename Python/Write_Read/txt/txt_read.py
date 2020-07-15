@@ -18,11 +18,17 @@
 #     for line in lines:
 #         print(line.strip()) # 개행 문자 제거! (print 함수 자체에 개행 문자 있음.)
 
-f = open('ssafy.txt','r')
-lines = f.readlines()
-re_lines = []
-for i in range(len(lines)):
-    re_lines.append(lines.pop())
-# w = open('reverse_ssafy.txt','w')
-with open('reverse_ssafy.txt', 'w', encoding='utf-8') as f:
-    f.writelines(re_lines)
+# reverse save
+# f = open('ssafy.txt','r')
+# lines = f.readlines()
+# re_lines = []
+# for i in range(len(lines)):
+#     re_lines.append(lines.pop())
+#1
+# w = open('reverse_ssafy2.txt','w', encoding='utf-8')
+# for j in re_lines:
+#     w.write(j)
+# w.close()
+#2
+# with open('reverse_ssafy.txt', 'w', encoding='utf-8') as f:
+#     f.writelines(re_lines)
