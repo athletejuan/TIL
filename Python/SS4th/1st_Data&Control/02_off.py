@@ -3,9 +3,7 @@
 # 1. 계단만들기
 
 # 자연수 N을 입력 받아, 아래와 같이 높이가 N인 내려가는 계단을 출력하시오.
-
-# [예시]
-# N이 4일 경우, 아래와 같이 출력됩니다.
+# [예시] N이 4일 경우, 아래와 같이 출력됩니다.
 
 # 1
 # 1 2
@@ -38,14 +36,11 @@ for i in range(2, 10):
 # 입력으로 1개의 정수 N이 주어진다.
 # 정수 N의 약수를 오름차순으로 출력하는 프로그램을 작성하라.
 
-# [제약사항]
-# N은 1이상 1,000이하의 정수이다. (1 ≤ N ≤ 1,000)
+# [제약사항] N은 1이상 1,000이하의 정수이다. (1 ≤ N ≤ 1,000)
  
-# [입력]
-# 입력으로 정수 N이 주어진다.
+# [입력] 입력으로 정수 N이 주어진다.
 
-# [출력]
-# 정수 N의 모든 약수를 오름차순으로 출력한다.
+# [출력] 정수 N의 모든 약수를 오름차순으로 출력한다.
 
 N = int(input())
 
@@ -111,18 +106,46 @@ print(average)
 
 # Practice 1
 
-# 1. 최대값 구하기
+# 1. 갯수 구하기
+
+students = ['김철수', '이영희', '조민지']
+
+print(len(students))
+
+result = 0
+for student in students:
+    result = result + 1
+    # result += 1
+print(result)
+
+# 2. 득표수 구하기
+
+students = ['이영희', '김철수', '이영희', '조민지', '김철수', '조민지', '이영희', '이영희']
+
+count = 0
+for student in students:
+    if student == '이영희':
+        count += 1
+print(count)
+
+# 3. 최대값 구하기
 
 N = [7, 10, 22, 4, 3, 17]
 
-max_num = N[0]
+# print(max(numbers))
+# print(sorted(numbers[-1]))
+# 메모리 제한 걸릴 수 있음
+
+max_num = 0
+# 항목들이 모두 음수값이면 0이 출력될 수 있으니 첫번째 값으로 초기화하는 것이 나음
+# max_num = N[0]
 
 for num in N:
     if num > max_num:
         max_num = num
 print(max_num)
 
-# 2. 최소값 구하기
+# 4. 최소값 구하기
 
 min_num = N[0]
 
@@ -131,7 +154,22 @@ for num in N:
         min_num = num
 print(min_num)
 
-# 3. 5의 개수 구하기
+# 5. 최대값과 등장 횟수 구하기
+
+numbers = [7, 10, 22, 7, 22, 22]
+
+max_num = numbers[0]
+count = 0
+
+for num in numbers:
+    if num > max_num:
+        max_num = num
+        count = 1
+    elif num == max_num:
+        count += 1
+print(max_num, count)
+
+# 6. 5의 개수 구하기
 
 N = [7, 17, 10, 5, 4, 3, 17, 5, 2, 5]
 
@@ -142,7 +180,7 @@ for num in N:
         count_five += 1
 print(count_five)
 
-# 4. 'a'가 싫어
+# 7. 'a'가 싫어
 
 W = input()
 
@@ -152,7 +190,7 @@ for char in W:
         new += char
 print(new)
 
-# 5. 단어 뒤집기
+# 8. 단어 뒤집기
 
 re = ''
 for char in W:
@@ -162,7 +200,7 @@ print(re)
 re = W[::-1]
 print(re)
 
-# 6. 회문 판별하기
+# 9. 회문 판별하기(extra)
 
 for i in range(len(W)):
     if W[i] != W[-i-1]:
@@ -190,7 +228,7 @@ for i in range(1, N+1):
         s += i*3
 print(s)
 
-# 2. 두 번째로 많은 수의 개수 구하기
+# 2. 두 번째로 많은 수의 개수 구하기(extra)
 
 N = [7, 17, 10, 5, 4, 3, 17, 5, 2, 5]
 
@@ -203,7 +241,7 @@ for j in N:
         print(j)    # 두 번째로 많은 수를 출력
         break
 
-# 3. 자릿수 더하기(SWEA #2058)
+# 3. 자릿수 더하기(SWEA #2058) (extra)
 # 자연수 n을 입력 받아, 각 자릿수의 합을 계산하여 출력하시오.
 
 # [제약 사항] 자연수 n은 1부터 9999까지의 자연수이다. (1 ≤ n ≤ 9999)
@@ -235,22 +273,18 @@ print(s)
 # [입력] 입력으로 정수 N이 주어진다.
 # [출력] 정수 N이 소수이면 'Y', 소수가 아니면 'N'을 출력한다.
 
-N = int(input())
+number = int(input())
 
-is_prime = True
-
-for i in range(2, N):
-    if N % i == 0:
-        is_prime = False
+is_prime = 'Y'
+for i in range(2, number):
+    if number % i == 0:
+        is_prime = 'N'
+        # 추가
         break
+print(is_prime)
 
-if is_prime or N == 2:
-    print('Y')
-else:
-    print('N')
-
-for i in range(2, N):
-    if not N % i:
+for i in range(2, number):
+    if not number % i:
         print('N')
         break
 else:
@@ -268,17 +302,30 @@ else:
 # 79은(는) 소수입니다.
 # 85은(는) 소수가 아닙니다. 5은(는) 85의 인수입니다.
 
-N = [26, 39, 51, 53, 57, 79, 85]
+numbers = [26, 39, 51, 53, 57, 79, 85]
 
-for i in N:
-    for j in range(2, i):
-        if not i % j:
-            print(f'{i}은(는) 소수가 아닙니다. {j}은(는) {i}의 인수입니다.')
+for number in numbers:
+    # 1. 아래는 동일
+    is_prime = 'Y'
+    for i in range(2, number):
+        if number % i == 0:
+            is_prime = 'N'
+            break
+    # 2. 값에 따라 다른 출력.
+    if is_prime == 'Y':
+        print(f'{number}은(는) 소수입니다.')
+    else:
+        print(f'{number}은(는) 소수가 아닙니다. {i}은(는) {number}의 인수입니다.')
+
+for number in numbers:
+    for i in range(2, number):
+        if not number % i:
+            print(f'{number}은(는) 소수가 아닙니다. {i}은(는) {number}의 인수입니다.')
             break
     else:
-        print(f'{i}은(는) 소수입니다.')
+        print(f'{number}은(는) 소수입니다.')
 
-# 6. Collatz 추측
+# 6. Collatz 추측 (extra)
 N = int(input())
 
 count = 0
