@@ -1,6 +1,21 @@
 # Workshop
 
-# 1. 계단만들기
+# 1. 간단한 N의 약수(SWEA #1933)
+
+# 입력으로 1개의 정수 N이 주어진다.
+# 정수 N의 약수를 오름차순으로 출력하는 프로그램을 작성하라.
+
+# [제약사항] N은 1이상 1,000이하의 정수이다. (1 ≤ N ≤ 1,000)
+# [입력] 입력으로 정수 N이 주어진다.
+# [출력] 정수 N의 모든 약수를 오름차순으로 출력한다.
+
+N = int(input())
+
+for i in range(1, N+1):
+    if not N % i:
+        print(i, end=' ')
+
+# 2. 계단만들기
 
 # 자연수 N을 입력 받아, 아래와 같이 높이가 N인 내려가는 계단을 출력하시오.
 # [예시] N이 4일 경우, 아래와 같이 출력됩니다.
@@ -23,30 +38,13 @@ for i in range(1, N+1):
         print(j, end=' ')
     print(i)
 
-# 2. 구구단
+# 3. 구구단
 
 for i in range(2, 10):
     print(f'------ [{i}단] ------')
     for j in range(1, 10):
         print(f'{i} x {j} = {i*j}')
     print()
-
-# 3. 간단한 N의 약수(SWEA #1933)
-
-# 입력으로 1개의 정수 N이 주어진다.
-# 정수 N의 약수를 오름차순으로 출력하는 프로그램을 작성하라.
-
-# [제약사항] N은 1이상 1,000이하의 정수이다. (1 ≤ N ≤ 1,000)
- 
-# [입력] 입력으로 정수 N이 주어진다.
-
-# [출력] 정수 N의 모든 약수를 오름차순으로 출력한다.
-
-N = int(input())
-
-for i in range(1, N+1):
-    if not N % i:
-        print(i, end=' ')
 
 # Homework
 
@@ -228,42 +226,7 @@ for i in range(1, N+1):
         s += i*3
 print(s)
 
-# 2. 두 번째로 많은 수의 개수 구하기(extra)
-
-N = [7, 17, 10, 5, 4, 3, 17, 5, 2, 5]
-
-many = set()
-for i in N:
-    many.add(N.count(i))
-print(sorted(many)[-2]) # 두 번째로 많은 수의 개수
-for j in N:
-    if N.count(j) == sorted(many, reverse=True)[1]:
-        print(j)    # 두 번째로 많은 수를 출력
-        break
-
-# 3. 자릿수 더하기(SWEA #2058) (extra)
-# 자연수 n을 입력 받아, 각 자릿수의 합을 계산하여 출력하시오.
-
-# [제약 사항] 자연수 n은 1부터 9999까지의 자연수이다. (1 ≤ n ≤ 9999)
-# [입력] 입력으로 자연수 n이 주어진다.
-# [출력] 각 자릿수의 합을 출력한다.
-
-n = input()
-
-s = 0
-for char in n:
-    s += int(char)
-print(s)
-
-n = int(input())
-
-s = 0
-while n:
-    s += n % 10
-    n = n//10
-print(s)
-
-# 4. 간단한 소수 판별 1
+# 2. 간단한 소수 판별 1
 # 간단한 소수 판별
 
 # 입력으로 1개의 정수 N이 주어진다.
@@ -290,7 +253,7 @@ for i in range(2, number):
 else:
     print('Y')
 
-# 5. 간단한 소수 판별 2
+# 3. 간단한 소수 판별 2
 # 조건, 반복문을 응용하여 numbers 리스트의 요소들이 소수인지 아닌지 판단하는 코드를 작성하시오.
 
 # [출력]
@@ -324,6 +287,41 @@ for number in numbers:
             break
     else:
         print(f'{number}은(는) 소수입니다.')
+
+# 4. 두 번째로 많은 수의 개수 구하기(extra)
+
+N = [7, 17, 10, 5, 4, 3, 17, 5, 2, 5]
+
+many = set()
+for i in N:
+    many.add(N.count(i))
+print(sorted(many)[-2]) # 두 번째로 많은 수의 개수
+for j in N:
+    if N.count(j) == sorted(many, reverse=True)[1]:
+        print(j)    # 두 번째로 많은 수를 출력
+        break
+
+# 5. 자릿수 더하기(SWEA #2058) (extra)
+# 자연수 n을 입력 받아, 각 자릿수의 합을 계산하여 출력하시오.
+
+# [제약 사항] 자연수 n은 1부터 9999까지의 자연수이다. (1 ≤ n ≤ 9999)
+# [입력] 입력으로 자연수 n이 주어진다.
+# [출력] 각 자릿수의 합을 출력한다.
+
+n = input()
+
+s = 0
+for char in n:
+    s += int(char)
+print(s)
+
+n = int(input())
+
+s = 0
+while n:
+    s += n % 10
+    n = n//10
+print(s)
 
 # 6. Collatz 추측 (extra)
 N = int(input())
