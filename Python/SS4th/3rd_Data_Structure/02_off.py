@@ -11,6 +11,14 @@ def is_pal_while(word):
         i += 1
     return True
 
+def is_pal_while(word):
+    while len(word) > 1:
+        if word[0] == word[-1]:
+            word = word[1:-1]
+        else:
+            return False
+    return True
+
 print(is_pal_while('tomato'))
 print(is_pal_while('racecar'))
 print(is_pal_while('azza'))
@@ -23,6 +31,17 @@ def is_pal_recursive(word):
         if len(word) < 2:
             return True
         return is_pal_recursive(word)
+    else:
+        return False
+
+def is_pal_recursive(word):
+    # 1. 종료조건 선언
+    if len(word) <= 1:
+        return True
+    # 2. 양 끝이 같으면 => 다음 subword를 넣어 함수 호출
+    if word[0] == word[-1]:
+        return is_pal_recursive(word[1:-1])
+    # 2-1. 다르면 => False
     else:
         return False
 
@@ -74,33 +93,48 @@ print(lonely([4, 4, 4, 3, 3]))
 
 # 1. Built-in 함수와 메서드
 # sorted()와 .sort()의 차이점
-# sorted()는 정렬한 결과를 반환하기 때문에 print로 결과를 볼 수 있는 반면 .sort()는 반환값이 없어서 print시 None이 출력된다.
+# sorted()는 정렬한 결과를 반환하기 때문에 print로 결과를 볼 수 있다
+# .sort()는 원본을 변경하고, 반환값은 없기 때문에 print시 None이 출력된다.
 
-# a = [3,2,4,8,6]
-# print(sorted(a))
-# print(a.sort())
+a = [3, 2, 4, 8, 6]
+b = [5, 1, 9, 0, 7]
+print(sorted(a))
+print(b.sort())
+print(b)
 
 # 2. .extend()와 .append()
 # extend()는 iterable의 각 항목을 추가하고, append는 항목 자체를 원소로 추가한다.
-# a.extend('string')
-# print(a)
-# a.append('string')
-# print(a)
+a.extend('string')
+print(a)
+b.append('string')
+print(b)
 
 # 3. 복사가 잘 된건가?
 a = [1, 2, 3, 4, 5]
 b = a
 
 # shallow copy
-# b = a[:]
+a = [1, 2, 3]
+b = a[:]
+# b = list(a)
+
+b[0] = 5
+print(a)
+
 # 2중 list인 경우 list안의 list는 적용되지 않음
+a = [1, 2, [1, 2]]
+b = a[:]
+
+b[2][0] = 3
+print(a)
 
 # deepcopy
-# import copy
-# b = copy.deepcopy(a)
+import copy
 
-a[2] = 5
+a = [1, 2, [1, 2]]
+b = copy.deepcopy(a)
 
+b[2][0] = 3
 print(a)
 print(b)
 
@@ -109,25 +143,33 @@ print(b)
 
 # 1. 중복되지 않은 숫자의 합
 def sum_of_repeat_number(numbers):
-    solo = []
-    for i in numbers:
-        if numbers.count(i) < 2:
-            solo.append(i)
-    return sum(solo)
+    once = []
+    multiple = []
+    for number in numbers:
+        if number in once:
+            multiple.append(number)
+            once.remove(number)
+        elif number not in multiple:
+            once.append(number)
+    return sum(once)
+
+def sum_of_repeat_number(numbers):
+    solo = 0
+    for number in numbers:
+        if numbers.count(number) == 1:
+            solo += number
+    return solo
 
 print(sum_of_repeat_number([4, 4, 7, 8, 10]))
 
 # 2. 썩은 과일 찾기
-# 만약 리스트가 null/nil/None이거나 비어 있는 경우 빈 리스트를 반환한다.
-# 반환된 리스트의 요소는 모두 소문자여야 한다.
 def change_rotten_fruit(fruit_bag):
     fine = []
-    if fruit_bag:
-        for fruit in fruit_bag:
-            if fruit[:6] == 'rotten':
-                fine.append(fruit[6:].lower())
-            else:
-                fine.append(fruit)
+    for fruit in fruit_bag:
+        if fruit[:6] == 'rotten':
+            fine.append(fruit[6:].lower())
+        else:
+            fine.append(fruit)
     return fine
 
 print(change_rotten_fruit(['apple', 'rottenBanana', 'apple']))
