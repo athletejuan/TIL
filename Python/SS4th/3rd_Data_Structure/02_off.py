@@ -4,6 +4,11 @@
 
 # while
 def is_pal_while(word):
+    for j in range(len(word)//2):
+        if word[j] != word[-1-j]:
+            return False
+    return True 
+
     i = 0
     while i < len(word)//2:
         if word[i] != word[-1-i]:
