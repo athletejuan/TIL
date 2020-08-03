@@ -1,0 +1,51 @@
+body {
+  width: 800px;
+}
+
+/* 모든 스타일링 요소를 클래스로 만들어 사용합니다. */
+
+/* 1. article 태그는 white로 나머지 시멘틱 태그는 lightgrey로 배경색을 바꿔주세요. */
+.bg-lightgrey {
+  background-color: lightgrey;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+/* 2. 모든 시멘틱 태그의 margin과 padding을 4px로 만들어주세요. */
+.m-4 {
+  margin: 4px;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+/* 3. h1 태그를 중앙 정렬 시켜주세요. */
+.text-center {
+  text-align: center;
+}
+
+/* 4. section과 aside 태그의 display를 inline-block으로 바꿔주세요. */
+.d-inline-block {
+  display: inline-block;
+}
+
+/* 5. section 태그는 width 482px height 300px, aside 태그는 width 280px height 300px로 만들어주세요.*/
+.section-width-height {
+  width: 482px;
+  height: 300px;
+}
+
+.aside-width-height {
+  width: 280px;
+  height: 300px;
+  line-height: 140px;
+}
+/* 6. aside 태그에 line-height 속성의 값을 250px로 적용해주세요.*/
+
+/* 7. 모든 semantic 태그의 border 둘레를 4px로 만들어주세요. */
+.br-4 {
+  border-radius: 4px;
+}
