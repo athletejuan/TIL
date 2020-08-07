@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style02.css">
+  <title>workshop</title>
+</head>
+<body>
+  <h1>Workshop01</h1>
+  <!-- 1. -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Bootstrap Grid System 1</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-4">
+        <p>4개</p>
+      </div>
+      <div class="item col-4">
+        <p>4개</p>
+      </div>
+      <div class="item col-4">
+        <p>4개</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-6">
+        <p>6개</p>
+      </div>
+      <div class="item col-6">
+        <p>6개</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col">
+        <p>3개</p>
+      </div>
+      <div class="item col-6">
+        <p>6개</p>
+      </div>
+      <div class="item col">
+        <p>3개</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-2">
+        <p>2개</p>
+      </div>
+      <div class="item col-7">
+        <p>7개</p>
+      </div>
+      <div class="item col-3">
+        <p>3개</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Bootstrap Grid System 2</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-4 col-sm-2">
+        <p>576px 미만 4 <br> 576px 이상 2</p>
+      </div>
+      <div class="item col-4 col-sm-5">
+        <p>576px 미만 4 <br> 576px 이상 5</p>
+      </div>
+      <div class="item col-4 col-sm-5">
+        <p>576px 미만 4 <br> 576px 이상 5</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-1 col-md-2">
+        <p>768px 미만 1 <br> 768px 이상 2</p>
+      </div>
+      <div class="item col-3 col-md-3">
+        <p>768px 미만 3 <br> 768px 이상 3</p>
+      </div>
+      <div class="item col-4 col-md-3">
+        <p>768px 미만 4 <br> 768px 이상 3</p>
+      </div>
+      <div class="item col-1 col-md-2">
+        <p>768px 미만 1 <br> 768px 이상 2</p>
+      </div>
+      <div class="item col-3 col-md-2">
+        <p>768px 미만 3 <br> 768px 이상 2</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-4 col-sm-3 col-md-6">
+        <p>576px 미만 4 <br> 768px 미만 3 <br> 768px 이상 6</p>
+      </div>
+      <div class="item col-6 col-sm-3 col-md-6">
+        <p>576px 미만 6 <br> 768px 미만 3 <br> 768px 이상 6</p>
+      </div>
+      <div class="item col-2 col-sm-6 col-md-12">
+        <p>576px 미만 2 <br> 768px 미만 6 <br> 768px 이상 12</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="item col-12 col-md-4 col-xl-2">
+        <p>768px 미만 12 <br> 768px 이상 4 <br> 1200px 이상 2</p>
+      </div>
+      <div class="item col-12 col-md-4 col-xl-2">
+        <p>768px 미만 12 <br> 768px 이상 4 <br> 1200px 이상 2</p>
+      </div>
+      <div class="item col-12 col-md-4 col-xl-12">
+        <p>768px 미만 12 <br> 768px 이상 4 <br> 1200px 이상 12</p>
+      </div>
+    </div>
+
+    <!-- 3. -->
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Bootstrap Grid System 3</h1>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="item col-4 col-md-4">
+          <p>item1</p>
+        </div>
+        <div class="item col-8 offset-md-4 col-md-4">
+          <p>item2</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="item col-4 offset-md-4 col-md-4 offset-lg-7 col-lg-5">
+          <p>item1</p>
+        </div>
+        <div class="item col-4 offset-4 col-md-4 offset-md-0 offset-lg-2 col-lg-8">
+          <p>item2</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="item col-12 col-md-3">
+          item1
+        </div>
+        <div class="item col-12 col-md-9">
+          <div class="row">
+            <div class="item col-6 col-lg-3">item2</div>
+            <div class="item col-6 col-lg-3">item3</div>
+            <div class="item col-6 col-lg-3">item4</div>
+            <div class="item col-6 col-lg-3">item5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
