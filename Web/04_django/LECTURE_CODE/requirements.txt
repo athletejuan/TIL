@@ -13,7 +13,7 @@ django-appconf==1.0.3
 django-bootstrap4==1.0.1
 django-extensions==2.2.1
 django-imagekit==4.0.2
-Faker==2.0.3
+Faker==4.1.1
 Flask==1.1.1
 idna==2.8
 itsdangerous==1.1.0
@@ -21,7 +21,7 @@ Jinja2==2.10.3
 MarkupSafe==1.1.1
 oauthlib==3.1.0
 pilkit==2.0
-Pillow==6.2.2
+Pillow==7.2.0
 python-dateutil==2.8.0
 python-decouple==3.1
 python3-openid==3.1.0
