@@ -32,6 +32,15 @@
   position: absolute;
   left: 200px;
   top: 200px;
+  /* position: relative;
+  margin: auto;
+  margin-top: 200px; */
+  /* position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto; */
   /* 큰 사각형의 가운데 위치시키기 */
 }
 

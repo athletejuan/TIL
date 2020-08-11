@@ -10,6 +10,7 @@
 }
 
 .card {
+  border: 2px dashed;
   width: 700px;
 }
 
@@ -45,12 +46,13 @@ img {
 }
 
 .card-body-title > * {
-  display: inline;
+  display: inline-block;
 }
 
 .card-body-title > p {
   position: absolute;
   right: 0;
+  bottom: 0;
 }
 
 .card-body-content {
