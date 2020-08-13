@@ -11,113 +11,119 @@
 1. 제시된 요소에 사용된 Bootstrap Component가 무엇인지 작성하시오. <br>
 2. Bootstrap Component를 사용하여 유사한 형태가 되는 코드 작성하시오.
 <hr>
-1. 로그인 버튼 Button <br>
-<button class="btn btn-success w-50">Sign in</button>
-<hr>
-2. 네비게이션 Navbar
-<!-- Just an image -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark h-10">
-  <a class="navbar-brand" href="#">
-    <img style="height:60px" class="mr-5" src="../images/ssafy.png" alt="" loading="lazy">
-  </a>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          프로젝트
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">내 프로젝트</a>
-          <a class="dropdown-item" href="#">즐겨찾기</a>
-          <a class="dropdown-item" href="#">프로젝트 검색</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          그룹들
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">내 그룹</a>
-          <a class="dropdown-item" href="#">그룹 검색</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          더 보기
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Activity</a>
-          <a class="dropdown-item" href="#">Milestones</a>
-          <a class="dropdown-item" href="#">Snippets</a>
-        </div>
-      </li>
+<body class="container">
+  <h3>1. 로그인 버튼 Button</h3>
+  <button class="btn btn-success w-50">Sign in</button>
+  <hr>
+  <h3>2. 네비게이션 Navbar</h3>
+  <!-- Just an image -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark h-10">
+    <a class="navbar-brand" href="#">
+      <img style="height:60px" class="mr-5" src="../images/ssafy.png" alt="" loading="lazy">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            프로젝트
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">내 프로젝트</a>
+            <a class="dropdown-item" href="#">즐겨찾기</a>
+            <a class="dropdown-item" href="#">프로젝트 검색</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            그룹들
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">내 그룹</a>
+            <a class="dropdown-item" href="#">그룹 검색</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            더 보기
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Activity</a>
+            <a class="dropdown-item" href="#">Milestones</a>
+            <a class="dropdown-item" href="#">Snippets</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <hr>
+  <h3>3. 페이지네이션</h3>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled"><a class="page-link" href="#">&laquo; Prev</a></li>
+      <li class="page-item"><a class="page-link text-decoration-none" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" href="#">5</a></li>
+      <li class="page-item"><a class="page-link" href="#">...</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      <li class="page-item"><a class="page-link" href="#">Last &raquo;</a></li>
     </ul>
+  </nav>
+  <hr>
+  <h3>4. 로그인 페이지</h3>
+  <div style="background-color:red; color:white;" class="alert alert-danger" role="alert">
+    Invalid Login or password.
   </div>
-</nav>
-<hr>
-3. 페이지네이션
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled"><a class="page-link" href="#">&laquo; Prev</a></li>
-    <li class="page-item"><a class="page-link text-decoration-none" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" href="#">5</a></li>
-    <li class="page-item"><a class="page-link" href="#">...</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    <li class="page-item"><a class="page-link" href="#">Last &raquo;</a></li>
-  </ul>
-</nav>
-<hr>
-4. 로그인 페이지
-<div style="background-color:red; color:white;" class="alert alert-danger" role="alert">
-  Invalid Login or password.
-</div>
-<h2>SSAFY 전용 GitLab 시스템</h2>
-<hr>
-<div class="container border border-secondary round-lg p-3 mb-3">
-  <p class="text-center font-weight-bold">Sign in</p>
-  <hr class="background-color-blue">
-  <form>
-    <div class="form-group">
-      <label class="font-weight-bold" for="exampleInputEmail1">Username or email</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label class="font-weight-bold" for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="d-flex justify-content-between">
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+  <h2 class="d-flex justify-content-center">SSAFY 전용 GitLab 시스템</h2>
+  <hr>
+  <div class="border border-secondary round-lg p-3 mb-3">
+    <p class="text-center font-weight-bold">Sign in</p>
+    <hr style="border-color: blue;">
+    <form>
+      <div class="form-group">
+        <label class="font-weight-bold" for="exampleInputEmail1">Username or email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
-      <a href="#">Forgot your password?</a>
+      <div class="form-group">
+        <label class="font-weight-bold" for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Remember me</label>
+        </div>
+        <a href="#">Forgot your password?</a>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Sign in</button>
+    </form>
+  </div>
+  <div class="container border border-secondary round-lg p-3">
+    <p class="font-weight-bold">Sign in with</p>
+    <div class="dropdown">
+      <button class="btn btn-light w-100 mb-3" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        SSAFY
+      </button>
+      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item">SSAFY</button>
+        <button class="dropdown-item">MultiCampus</button>
+        <button class="dropdown-item">Apple</button>
+      </div> -->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">SSAFY</a>
+        <a class="dropdown-item" href="#">MultiCampus</a>
+        <a class="dropdown-item" href="#">Apple</a>
+      </div>
     </div>
-    <button type="submit" class="btn btn-success w-100">Sign in</button>
-  </form>
-</div>
-<div class="container border border-secondary round-lg p-3">
-  <p class="font-weight-bold">Sign in with</p>
-  <div class="dropdown">
-    <button class="btn btn-light w-100 mb-3" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      SSAFY
-    </button>
-    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <button class="dropdown-item">SSAFY</button>
-      <button class="dropdown-item">MultiCampus</button>
-      <button class="dropdown-item">Apple</button>
-    </div> -->
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">SSAFY</a>
-      <a class="dropdown-item" href="#">MultiCampus</a>
-      <a class="dropdown-item" href="#">Apple</a>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Remember me</label>
     </div>
   </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Remember me</label>
-  </div>
-</div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
