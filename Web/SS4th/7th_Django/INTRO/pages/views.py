@@ -7,3 +7,11 @@ def lotto(request):
         'numbers':numbers
     }
     return render(request, 'lotto.html', context)
+
+
+def dinner(request, menu, peoples):
+    context = {
+        'menu': menu,
+        'peoples':peoples
+    }
+    return render(request, 'dinner.html', context)
