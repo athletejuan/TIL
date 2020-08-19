@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+  <h1 class="text-center">Detail Page</h1>
+  <hr>
+  <h2>No.{{ article.pk }} - {{ article.title }}</h2>
+  <p>글 내용: {{ article.content }}</p>
+  <p>작성시간: {{ article.created_at }}</p>
+  <p>수정시간: {{ article.updated_at }}</p>
+  <hr>
+  {% comment %} <a href="{% url 'articles:delete' article.pk %}">[DELETE]</a> {% endcomment %}
+  <a href="{% url 'articles:edit' article.pk %}" class="btn btn-success">EDIT</a>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST" class="d-inline">
+    {% csrf_token %}
+    <button class="btn btn-danger">DELETE</button>
+  </form>
+  <a href="{% url 'articles:index' %}">[MAIN]</a>
+{% endblock content %}
