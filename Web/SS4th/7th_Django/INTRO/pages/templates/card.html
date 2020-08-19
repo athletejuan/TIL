@@ -3,7 +3,7 @@
 <div class="row">
   {% for article in articles %}
     <div class="card" style="width: 18rem;">
-      <img src="https://picsum.photos/200/300" class="card-img-top" alt="random_image">
+      <img src="https://picsum.photos/200/300?random={{ forloop.counter }}" class="card-img-top" alt="random_image">
       <div class="card-body">
         <h5 class="card-title">{{ article.0 }}</h5>
         <p class="card-text">{{ article.1 }}</p>
