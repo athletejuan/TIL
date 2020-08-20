@@ -5,8 +5,8 @@
   <hr>
   <h2>No.{{ article.pk }} - {{ article.title }}</h2>
   <p>글 내용: {{ article.content }}</p>
-  <p>작성시간: {{ article.created_at }}</p>
-  <p>수정시간: {{ article.updated_at }}</p>
+  <p>작성시간: {{ article.created_at|naturalday }}</p>
+  <p>수정시간: {{ article.updated_at|naturaltime }}</p>
   <hr>
   {% comment %} <a href="{% url 'articles:delete' article.pk %}">[DELETE]</a> {% endcomment %}
   <a href="{% url 'articles:edit' article.pk %}" class="btn btn-success">EDIT</a>
