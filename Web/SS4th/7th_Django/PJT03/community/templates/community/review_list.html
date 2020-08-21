@@ -4,6 +4,12 @@
   <h1 class="text-center">Review List</h1>
   <hr>
   {% for review in reviews %}
-    <h3>No.{{ review.pk }} - <a href="{% url 'community:review_detail' review.pk %}">{{ review.title }}</a></h3>
+    <div class="d-flex justify-content-between">
+      <h3>No.{{ review.pk }} - <a href="{% url 'community:review_detail' review.pk %}">{{ review.title }}</a></h3>
+      <form action="{% url 'community:review_delete' review.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger btn-sm">DELETE</button>
+      </form>
+    </div>
   {% endfor %}
 {% endblock content %}

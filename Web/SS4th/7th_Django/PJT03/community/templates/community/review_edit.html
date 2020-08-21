@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">New Review</h1>
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label for="title">Title: </label>
+    <input type="text" id="title" name="title" value="{{ review.title }}"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content" cols="30" rows="10">{{ review.content }}</textarea><br>
+    <label for="rank">Rank: </label>
+    <input type="number" id="rank" name="rank" value="{{ review.rank }}">
+    <button class="btn btn-warning">작성</button>
+  </form>
+  <hr>
+  <a href="{% url 'community:review_detail' review.pk %}" class="btn btn-outline-info">BACK</a>
+{% endblock content %}

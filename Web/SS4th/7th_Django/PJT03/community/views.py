@@ -29,3 +29,23 @@ def review_detail(request, pk):
     return render(request, 'community/review_detail.html', context)
 
 
+def review_edit(request, pk):
+    review = Review.objects.get(pk=pk)
+    if request.method == 'POST':
+        review.title = request.POST.get('title')
+        review.content = request.POST.get('content')
+        review.rannk = request.POST.get('rank')
+        review.save()
+        return redirect('community:review_detail', review.pk)
+    else:
+        context = {
+            'review': review
+        }
+        return render(request, 'community/review_edit.html', context)
+
+
+def review_delete(request, pk):
+    review = Review.objects.get(pk=pk)
+    if request.method == 'POST':
+        review.delete()
+    return redirect('community:review_list')

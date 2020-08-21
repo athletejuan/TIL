@@ -4,9 +4,18 @@
   <h1 class="text-center">Review Detail</h1>
   <hr>
   <h2>No.{{ review.pk }} - {{ review.title }}</h2>
-  <p>내용: {{ review.content }}</p>
-  <p>작성시간: {{ review.created_at }}</p>
-  <p>수정시간: {{ review.updated_at }}</p>
+  <p>내용: {{ review.content|linebreaksbr }}</p>
+  <div class="d-flex justify-content-end">
+    <p class="d-inline-block">작성시간: {{ review.created_at }} /</p>
+    <p class="d-inline-block ml-1">수정시간: {{ review.updated_at }}</p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'community:review_edit' review.pk %}" class="btn btn-outline-warning mx-1">EDIT</a>
+    <form action="{% url 'community:review_delete' review.pk %}" method="POST" class="d-inline-block order-1 mx-1">
+      {% csrf_token %}
+      <button class="btn btn-outline-danger">DELETE</button>
+    </form>
+    <a href="{% url 'community:review_list' %}" class="btn btn-outline-info mx-1">MAIN</a>
+  </div>
   <hr>
-  <a href="{% url 'community:review_list' %}">[MAIN]</a>
 {% endblock content %}
