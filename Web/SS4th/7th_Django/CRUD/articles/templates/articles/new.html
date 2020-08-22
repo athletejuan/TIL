@@ -8,8 +8,8 @@
     <input type="text" id="title" name="title"><br>
     <label for="content">CONTENT: </label>
     <textarea name="content" id="content" cols="30" rows="10"></textarea><br>
-    <input type="submit" value="작성">
+    <input type="submit" value="작성" class="btn btn-warning">
   </form>
   <hr>
-  <a href="{% url 'articles:index' %}">[BACK]</a>
+  <a href="{% url 'articles:index' %}" class="btn btn-outline-info">BACK</a>
 {% endblock content %}
