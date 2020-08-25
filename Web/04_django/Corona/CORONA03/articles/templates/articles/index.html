@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Index</h1>
+  <a href="{% url 'articles:new' %}" class="btn btn-warning">New</a>
+  <hr>
+  {% for article in articles %}
+    <h4>No.{{ article.pk }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></h4>
+  {% endfor %}
+{% endblock content %}

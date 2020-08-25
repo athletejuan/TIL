@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">New</h1>
+  <hr>
+  <form action="" method="POST" class="d-inline-block">
+    {% csrf_token %}
+    <label for="title">Title: </label>
+    <input type="text" id="title" name="title"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content" cols="30" rows="10"></textarea><br>
+    <button class="btn btn-warning">작성</button>
+  </form>
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
+{% endblock content %}

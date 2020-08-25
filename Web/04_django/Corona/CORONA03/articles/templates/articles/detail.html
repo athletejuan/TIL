@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+  <h1 class="text-center">Detail</h1>
+  <hr>
+  <h2>No.{{ article.pk }} - {{ article.title }}</h2>
+  <p>내용: {{ article.content|linebreaksbr }}</p>
+  <div class="d-flex justify-content-end">
+    <p class="mr-1">작성: {{ article.created_at|naturalday }} / </p>
+    <p>수정: {{ article.updated_at|naturaltime }}</p>
+  </div>
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
+{% endblock content %}
