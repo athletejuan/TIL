@@ -10,5 +10,10 @@
     <p class="mr-1">작성: {{ article.created_at|naturalday }} / </p>
     <p>수정: {{ article.updated_at|naturaltime }}</p>
   </div>
-  <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
+  <a href="{% url 'articles:edit' article.pk %}" class="btn btn-outline-warning">EDIT</a>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST" class="d-inline-block">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger">DELETE</button>
+  </form>
+  <a href="{% url 'articles:index' %}" class="btn btn-outline-secondary">BACK</a>
 {% endblock content %}

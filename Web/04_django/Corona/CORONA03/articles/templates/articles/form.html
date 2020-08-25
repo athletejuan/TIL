@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  {% if request.resolver_match.url_name == 'new' %}
+    <h1 class="text-center">CREATE</h1>
+  {% else %}
+    <h1 class="text-center">UPDATE</h1>
+  {% endif %}
+  <hr>
+  <form action="" method="POST" class="d-inline-block">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% buttons submit="Submit" reset="Cancel" %}{% endbuttons %}
+    {% comment %} {% for field in form %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <div class="alert alert-warning" role="alert">{{ error|escape }}</div>
+        {% endfor %}
+      {% endif %}
+      <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
+    {% endfor %} {% endcomment %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+    {% comment %} <label for="title">Title: </label>
+    <input type="text" id="title" name="title"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content" cols="30" rows="10"></textarea><br> {% endcomment %}
+    {% comment %} <button class="btn btn-warning">작성</button> {% endcomment %}
+  </form>
+  {% if request.resolver_match.url_name == 'new' %}
+    <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
+  {% else %}
+    {% comment %} <a href="{% url 'articles:detail' article.pk %}" class="btn btn-secondary">BACK</a> {% endcomment %}
+    <a href="{{ article.get_absolute_url }}" class="btn btn-secondary">BACK</a>
+  {% endif %}
+{% endblock content %}

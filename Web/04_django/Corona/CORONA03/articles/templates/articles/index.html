@@ -5,6 +5,9 @@
   <a href="{% url 'articles:new' %}" class="btn btn-warning">New</a>
   <hr>
   {% for article in articles %}
-    <h4>No.{{ article.pk }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></h4>
+    <div class="d-flex justify-content-between">
+      <h4>No.{{ article.pk }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></h4>
+      <form action="{% url 'articles:delete' article.pk %}" method="POST">{% csrf_token %}<button class="btn btn-outline-danger btn-sm">DELETE</button></form>
+    </div>
   {% endfor %}
 {% endblock content %}
