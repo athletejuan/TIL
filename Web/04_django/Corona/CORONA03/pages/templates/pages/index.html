@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}static page{% endblock title %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'pages/stylesheets/style.css' %}">
+{% endblock css %}
+
+{% block content %}
+  <h1 class="text-center">여기는 두번째 앱 index입니다.</h1>
+  <div class="d-flex justify-content-center">
+    <img src="{% static 'pages/images/bluejays_ryu.jpg' %}" alt="ryu">
+  </div>
+{% endblock content %}

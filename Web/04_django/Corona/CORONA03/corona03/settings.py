@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'articles',
+    'pages',
     'bootstrap4',
     'django.contrib.humanize',
     'django.contrib.admin',
