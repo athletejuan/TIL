@@ -34,11 +34,13 @@ for i in range(6):
                     cnt += 1
             elif idx == N:
                 cnt += 1
-                if six[N-2] == 5:
+                if six[N-1] == 5:
                     cnt += 1
             else:
                 cnt += 2
-                if six[idx-1] == 5 or six[idx+1] == 5:
+                if six[idx-1] == 5 and six[idx+1] == 5:
+                    cnt += 2
+                elif six[idx-1] == 5 or six[idx+1] == 5:
                     cnt += 1
     answer.append(6*N - cnt)
 print(max(answer))
