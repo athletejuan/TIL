@@ -8,7 +8,7 @@
     <h1 class="text-center">UPDATE</h1>
   {% endif %}
   <hr>
-  <form action="" method="POST" class="d-inline-block">
+  <form action="" method="POST" class="d-inline-block" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
     {% buttons submit="Submit" reset="Cancel" %}{% endbuttons %}

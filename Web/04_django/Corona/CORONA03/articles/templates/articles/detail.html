@@ -5,6 +5,9 @@
   <h1 class="text-center">Detail</h1>
   <hr>
   <h2>No.{{ article.pk }} - {{ article.title }}</h2>
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% endif %}
   <p>내용: {{ article.content|linebreaksbr }}</p>
   <div class="d-flex justify-content-end">
     <p class="mr-1">작성: {{ article.created_at|naturalday }} / </p>

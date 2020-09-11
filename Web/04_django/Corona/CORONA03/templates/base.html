@@ -25,10 +25,13 @@
         <li class="nav-item">
           <a class="nav-link text-white font-weight-bold" href="{% url 'pages:index' %}">Pages</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:signup' %}">| Signup</a>
+        </li>
       </ul>
     </div>
   </nav>
-  <div class="container">
+  <div class="container mb-5">
     {% block content %}
     {% endblock content %}
   </div>

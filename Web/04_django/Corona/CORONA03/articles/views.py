@@ -14,7 +14,7 @@ def index(request):
 @require_http_methods(['GET', 'POST'])
 def new(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             # title = form.cleaned_data.get('title')
             # content = form.cleaned_data.get('content')
@@ -45,7 +45,7 @@ def detail(request, pk):
 def edit(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
-        form = ArticleForm(request.POST, instance=article)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             # article.title = form.cleaned_data.get('title')
             # article.content = form.cleaned_data.get('content')
@@ -57,6 +57,7 @@ def edit(request, pk):
             return redirect('articles:detail', article.pk)
     else:
         # form = ArticleForm(instance=article)
+        # form = ArticleForm(initial={'title': article.title, 'content':article.content})
         form = ArticleForm(initial=article.__dict__)
     context = {
         'article': article,

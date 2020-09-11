@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Django ver_3.1{% endblock title %}
 
+{% block css %}
+  <link rel="stylesheet" href="{% static 'articles/stylesheets/style.css' %}">
+{% endblock css %}
+
 {% block content %}
   <h1 class="text-center">Index</h1>
+  <div class="d-flex justify-content-center">
+    <img src="{% static 'articles/images/ssafy.png' %}" alt="ssafy">
+  </div>
   <a href="{% url 'articles:new' %}" class="btn btn-warning">New</a>
   <hr>
   {% for article in articles %}
