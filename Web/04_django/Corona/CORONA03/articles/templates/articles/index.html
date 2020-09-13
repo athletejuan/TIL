@@ -9,10 +9,14 @@
 
 {% block content %}
   <h1 class="text-center">Index</h1>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mb-3">
     <img src="{% static 'articles/images/ssafy.png' %}" alt="ssafy">
   </div>
-  <a href="{% url 'articles:new' %}" class="btn btn-warning">New</a>
+  {% if request.user_isauthenticated %}
+    <a href="{% url 'articles:new' %}" class="btn btn-warning">New</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary">글을 작성하려면 로그인하세요</a>
+  {% endif %}
   <hr>
   {% for article in articles %}
     <div class="d-flex justify-content-between">

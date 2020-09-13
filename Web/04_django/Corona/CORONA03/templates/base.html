@@ -19,14 +19,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item d-flex flex-row">
           <a class="nav-link text-white font-weight-bold" href="{% url 'articles:index' %}">Articles</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link text-white font-weight-bold" href="{% url 'pages:index' %}">Pages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:signup' %}">| Signup</a>
+          {% if request.user.is_authenticated %}
+            <a class="nav-link text-white font-weight-bold">Hello! {{ user.username }}</a>
+            <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:update' %}">| Update</a>
+            <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:change_password' %}">| Change Password</a>
+            <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:logout' %}">| Logout</a>
+            <form action="{% url 'accounts:delete' %}" method="POST">
+              {% csrf_token %}
+              <button class="nav-link bg-dark text-white font-weight-bold border-0">| Quit</button>
+              {% comment %} <input type="submit" class="nav-link text-white font-weight-bold bg-dark" value="Quit"> {% endcomment %}
+            </form>
+          {% else %}
+            <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:signup' %}">| Signup</a>
+            <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:login' %}">| Login</a>
+          {% endif %}
         </li>
       </ul>
     </div>
