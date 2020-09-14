@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1 class="text-center">Articles</h1>
-  <a href="{% url 'articles:new' %}" class="btn btn-primary">New</a>
+  <a href="{% url 'articles:create' %}" class="btn btn-primary">New</a>
   <hr>
   {% for article in articles %}
     <p>No.{{ article.pk }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></p>

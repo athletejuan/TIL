@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
+  <h1 class="text-center">New Article</h1>
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% comment %} <label for="title">TITLE: </label>
+    <input type="text" id="title" name="title"><br>
+    <label for="content">CONTENT: </label>
+    <textarea name="content" id="content" cols="30" rows="10"></textarea><br> {% endcomment %}
+    <input type="submit" value="작성" class="btn btn-warning">
+  </form>
+  <hr>
+  <a href="{% url 'articles:index' %}" class="btn btn-outline-info">BACK</a>
+{% endblock content %}
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
   <h1 class="text-center">글이 성공적으로 작성되었습니다.</h1>
   <a href="{% url 'articles:index' %}">[MAIN]</a>
-{% endblock content %}
+{% endblock content %} {% endcomment %}
