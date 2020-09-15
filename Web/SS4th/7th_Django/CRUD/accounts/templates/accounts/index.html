@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class='text-center'>Accounts</h1>
+  <hr>
+  {% for user in users %}
+    <p>User. {{ user.pk }}</p>
+    <p>ID: {{ user.username }}</p>
+  {% endfor %}
+{% endblock content %}

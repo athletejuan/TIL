@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> {% endcomment %}
-  <link rel="stylesheet" href="{% static 'articles/css/bootstrap.css'%}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
   {% block css %}{% endblock css %}
   <title>Document</title>
 </head>
@@ -19,11 +19,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item d-flex flex-row">
           <a class="nav-link" href="{% url 'articles:index' %}">Main</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="{% url 'articles:create' %}">New</a>
+        </li>
+        <li class="nav-item d-flex flex-row">
+          <a class="nav-link" href="{% url 'accounts:signup' %}">회원가입</a>
         </li>
       </ul>
     </div>
@@ -33,7 +34,6 @@
     {% endblock content %}
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="{% static 'articles/js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
 </body>
 </html>
