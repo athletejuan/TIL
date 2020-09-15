@@ -2,7 +2,7 @@
 {% block content %}
   <h1 class="text-center">Article Edit</h1>
   <hr>
-  <form action="" method="POST" class="d-inline-block">
+  <form action="" method="POST" enctype="multipart/form-data" class="d-inline-block">
     {% csrf_token %}
     {{ form.as_p }}
     {% comment %} <label for="title">TITLE: </label>

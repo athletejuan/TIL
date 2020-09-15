@@ -4,6 +4,9 @@
   <h1 class="text-center">Detail Page</h1>
   <hr>
   <h2>No.{{ article.pk }} - {{ article.title }}</h2>
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% endif %}
   <p>글 내용: {{ article.content|linebreaksbr }}</p>
   <p>작성시간: {{ article.created_at|naturalday }}</p>
   <p>수정시간: {{ article.updated_at|naturaltime }}</p>
