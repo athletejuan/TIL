@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .models import Article
 from .forms import ArticleForm
 
@@ -15,6 +17,7 @@ def index(request):
 #     return render(request, 'articles/new.html')
 
 
+@login_required
 def create(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
@@ -49,6 +52,7 @@ def detail(request, pk):
 #     return render(request, 'articles/edit.html', context)
 
 
+@login_required
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
@@ -68,10 +72,11 @@ def update(request, pk):
     return render(request, 'articles/update.html', context)
 
 
+@require_POST
 def delete(request, pk):
     article = Article.objects.get(pk=pk)
-    if request.method == 'POST':
-        article.delete()
-        return redirect('articles:index')
-    else:
-        return redirect('articles:detail', article.pk)
+    # if request.method == 'POST':
+    article.delete()
+    return redirect('articles:index')
+    # else:
+    #     return redirect('articles:detail', article.pk)

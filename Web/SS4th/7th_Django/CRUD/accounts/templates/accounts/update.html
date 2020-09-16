@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class='text-center mt-3'>회원정보 수정</h1>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'articles:index' %}">뒤로가기</a>
+  </div>
+  <hr>
+  <div class="d-flex justify-content-center">
+    <form action="" method="POST" class="d-inline border border-dark p-3">
+      {% csrf_token %}
+      {% comment %} {{ form.as_p }} {% endcomment %}
+      {% bootstrap_form form %}
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-warning">수정하기</button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
