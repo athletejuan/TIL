@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Review List</h1>
+  <a href="{% url 'community:create' %}">New</a>
+  <hr>
+  {% for review in reviews %}
+    <p>No.{{ review.pk }} - <a href="{% url 'community:detail' review.pk %}">{{ review.title }}({{ review.movie_title }})</a></p>
+  {% endfor %}
+{% endblock content %}

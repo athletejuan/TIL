@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Review Detail</h1>
+  <hr>
+  <p>No.{{ review.pk }} - {{ review.title }}({{ review.movie_title }})</p>
+  <p>내용: {{ review.content }}</p>
+  <p>작성: {{ review.created_at }}</p>
+  <p>수정: {{ review.updated_at }}</p>
+  <hr>
+  <a class="btn btn-outline-info" href="{% url 'community:update' review.pk %}">수정</a>
+  <form action="{% url 'community:delete' review.pk %}" method="POST" class="d-inline-block">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger">삭제</button>
+  </form>
+  <a class="btn btn-outline-warning" href="{% url 'community:review_list' %}">목록</a>
+{% endblock content %}
