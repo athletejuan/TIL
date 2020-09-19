@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Authentication{% endblock title %}
+
+{% block content %}
+  {% if request.resolver_match.url_name == 'signup' %}
+    <h1 class="text-center">Signup</h1>
+  {% elif request.resolver_match.url_name == 'login'%}
+    <h1 class="text-center">Login</h1>
+  {% elif request.resolver_match.url_name == 'update'%}
+    <h1 class="text-center">Update</h1>
+  {% else %}
+    <h1 class="text-center">Password Change</h1>
+  {% endif %}
+  <hr>
+  <div class="d-flex justify-content-center">
+    <form action="" method="POST" class="border border-dark p-3">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-warning">Submit</button>
+      </div>
+    </form>
+  </div>
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary float-right mt-2">BACK</a>
+{% endblock content %}
