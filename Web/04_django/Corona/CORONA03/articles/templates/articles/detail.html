@@ -13,10 +13,34 @@
     <p class="mr-1">작성: {{ article.created_at|naturalday }} / </p>
     <p>수정: {{ article.updated_at|naturaltime }}</p>
   </div>
-  <a href="{% url 'articles:edit' article.pk %}" class="btn btn-outline-warning">EDIT</a>
-  <form action="{% url 'articles:delete' article.pk %}" method="POST" class="d-inline-block">
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'articles:edit' article.pk %}" class="btn btn-outline-warning">EDIT</a>
+    <form action="{% url 'articles:delete' article.pk %}" method="POST" class="d-inline-block mx-2">
+      {% csrf_token %}
+      <button class="btn btn-outline-danger">DELETE</button>
+    </form>
+    <a href="{% url 'articles:index' %}" class="btn btn-outline-secondary">BACK</a>
+  </div>
+  <hr>
+  <form action="{% url 'articles:comments_create' article.pk %}" method="POST" class="mb-3">
     {% csrf_token %}
-    <button class="btn btn-outline-danger">DELETE</button>
+    {{ comment_form }}
+    <button class="btn btn-outline-dark btn-sm">Comment</button>
   </form>
-  <a href="{% url 'articles:index' %}" class="btn btn-outline-secondary">BACK</a>
+  <h4>댓글 목록</h4>
+  {% if comments|length %}
+    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+  {% endif %}
+  {% for comment in comments %}
+    <ul class="d-flex justify-content-between mb-0">
+      <li>{{ comment.content }}</li>
+        <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST" class="d-inline-block">
+          {% csrf_token %}
+          <button class="btn btn-outline-danger btn-sm py-0">x</button>
+        </form>
+      {% comment %} </li> {% endcomment %}
+    </ul>
+  {% empty %}
+    <p><b>댓글이 없어요....</b></p>
+  {% endfor %}
 {% endblock content %}

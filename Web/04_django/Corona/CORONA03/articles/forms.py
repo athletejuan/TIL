@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article, Comment
 
 class ArticleForm(forms.ModelForm):
     title = forms.CharField(
@@ -45,3 +45,10 @@ class ArticleForm(forms.ModelForm):
 #     title = forms.CharField(max_length=30)
 #     content = forms.CharField(widget=forms.Textarea)
 #     region = forms.ChoiceField(choices=REGIONS, widget=forms.RadioSelect())
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        # fields = '__all__'
+        exclude = ['article', ]

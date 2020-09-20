@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'pages',
     'bootstrap4',
     'imagekit',
+    'django_extensions',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
