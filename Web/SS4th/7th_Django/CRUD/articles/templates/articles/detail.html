@@ -20,4 +20,22 @@
     </form>
     <a href="{% url 'articles:index' %}" class="btn btn-outline-info mx-1">MAIN</a>
   </div>
+  <hr>
+  <form action="{% url 'articles:comment_create' article.pk %}" method="POST" class="mb-3">
+    {% csrf_token %}
+    {{ comment_form }}
+    <button class="btn btn-outline-dark btn-sm">Comment</button>
+  </form>
+  <h4>댓글 목록{% if comments %} - {{ comments|length }}개의 댓글이 있습니다.{% endif %}</h4>
+  {% for comment in comments %}
+  <ul class="d-flex justify-content-between mb-0">
+    <li>{{ comment.content }}</li>
+    <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method="POST" class="d-inline-block">
+      {% csrf_token %}
+      <button class="btn btn-outline-danger btn-sm py-0">x</button>
+    </form>
+  </ul>
+  {% empty %}
+    <p>댓글이 아직 없어요...</p>
+  {% endfor %}
 {% endblock content %}
