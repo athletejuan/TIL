@@ -22,8 +22,10 @@
   <hr>
   {% for article in articles %}
     <div class="d-flex justify-content-between">
-      <p>No.{{ article.pk }} - <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></p>
-      <form action="{% url 'articles:delete' article.pk %}" method="POST">{% csrf_token %}<button class="btn btn-outline-danger btn-sm">X</button></form>
+      <p>No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: {{ article.user }}</p>
+      {% if request.user == article.user %}
+        <form action="{% url 'articles:delete' article.pk %}" method="POST">{% csrf_token %}<button class="btn btn-outline-danger btn-sm">X</button></form>
+      {% endif %}
     </div>
   {% endfor %}
 {% endblock content %}

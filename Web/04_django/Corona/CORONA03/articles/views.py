@@ -22,7 +22,9 @@ def new(request):
             # title = form.cleaned_data.get('title')
             # content = form.cleaned_data.get('content')
             # article = Article.objects.create(title=title, content=content)
-            article = form.save()
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()
         # article = Article()
         # article.title = request.POST.get('title')
         # article.content = request.POST.get('content')
@@ -52,21 +54,24 @@ def detail(request, pk):
 @require_http_methods(['GET', 'POST'])
 def edit(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES, instance=article)
-        if form.is_valid():
-            # article.title = form.cleaned_data.get('title')
-            # article.content = form.cleaned_data.get('content')
+    if request.user == article.user:
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, request.FILES, instance=article)
+            if form.is_valid():
+                # article.title = form.cleaned_data.get('title')
+                # article.content = form.cleaned_data.get('content')
+                # article.save()
+                form.save()
+            # article.title = request.POST.get('title')
+            # article.content = request.POST.get('content')
             # article.save()
-            form.save()
-        # article.title = request.POST.get('title')
-        # article.content = request.POST.get('content')
-        # article.save()
-            return redirect('articles:detail', article.pk)
+                return redirect('articles:detail', article.pk)
+        else:
+            # form = ArticleForm(instance=article)
+            # form = ArticleForm(initial={'title': article.title, 'content':article.content})
+            form = ArticleForm(initial=article.__dict__)
     else:
-        # form = ArticleForm(instance=article)
-        # form = ArticleForm(initial={'title': article.title, 'content':article.content})
-        form = ArticleForm(initial=article.__dict__)
+        return redirect('articles:index')
     context = {
         'article': article,
         'form': form,
@@ -79,7 +84,8 @@ def edit(request, pk):
 def delete(request, pk):
     if request.user.is_authenticated:
         article = get_object_or_404(Article, pk=pk)
-        article.delete()
+        if request.user == article.user:
+            article.delete()
         return redirect('articles:index')
     return HttpResponse('You are Unauthorized', status=401)
 
