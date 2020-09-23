@@ -6,9 +6,10 @@ class ArticleForm(forms.ModelForm):
     # content = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Article
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['user',]
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ['article', ]
+        exclude = ['article', 'user',]
