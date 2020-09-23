@@ -28,7 +28,7 @@ class ArticleForm(forms.ModelForm):
     )
     class Meta:
         model = Article
-        fields = ['title', 'content', ]
+        fields = ['title', 'content', 'image',]
         # fields = '__all__'
 
 # class ArticleForm(forms.Form):
@@ -51,4 +51,4 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         # fields = '__all__'
-        exclude = ['article', ]
+        exclude = ['article', 'user',]

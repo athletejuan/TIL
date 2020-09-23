@@ -24,22 +24,28 @@
     <a href="{% url 'articles:index' %}" class="btn btn-outline-secondary">BACK</a>
   </div>
   <hr>
-  <form action="{% url 'articles:comments_create' article.pk %}" method="POST" class="mb-3">
-    {% csrf_token %}
-    {{ comment_form }}
-    <button class="btn btn-outline-dark btn-sm">Comment</button>
-  </form>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'articles:comments_create' article.pk %}" method="POST" class="mb-3">
+      {% csrf_token %}
+      {{ comment_form }}
+      <button class="btn btn-outline-dark btn-sm">Comment</button>
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">댓글 작성을 위해 로그인</a>
+  {% endif %}
   <h4>댓글 목록</h4>
   {% if comments|length %}
     <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
   {% endif %}
   {% for comment in comments %}
     <ul class="d-flex justify-content-between mb-0">
-      <li>{{ comment.content }}</li>
+      <li>{{ comment.content }} - 작성자:{{ comment.user }}</li>
+      {% if request.user == comment.user %}
         <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST" class="d-inline-block">
           {% csrf_token %}
           <button class="btn btn-outline-danger btn-sm py-0">x</button>
         </form>
+      {% endif %}
       {% comment %} </li> {% endcomment %}
     </ul>
   {% empty %}

@@ -97,6 +97,7 @@ def comments_create(request, pk):
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
         comment.article = article
+        comment.user = request.user
         comment.save()
         return redirect('articles:detail', article.pk)
     context = {
@@ -108,7 +109,9 @@ def comments_create(request, pk):
 
 @require_POST
 def comments_delete(request, article_pk, comment_pk):
-    # comment = Comment.objects.get(pk=comment_pk)
-    comment = get_object_or_404(Comment, pk=comment_pk)
-    comment.delete()
+    if request.user.is_authenticated:
+        # comment = Comment.objects.get(pk=comment_pk)
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        if request.user == comment.user:
+            comment.delete()
     return redirect('articles:detail', article_pk)
