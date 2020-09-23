@@ -81,6 +81,10 @@ def comment_create(request, question_pk):
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
+        if comment.selecting == 'A':
+            comment.pick = False
+        else:
+            comment.pick = True
         comment.question_id = question_pk
         comment.save()
     return redirect('eithers:detail', question_pk)
