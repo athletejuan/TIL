@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">EITHER</h1>
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'eithers:create' %}">New</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">Login Please</a>
+  {% endif %}
+  <hr>
+  {% for question in questions %}
+    <h4><a href="{% url 'eithers:detail' question.pk %}">{{ question.title }}</a></h4>
+    <hr>
+  {% endfor %}
+{% endblock content %}

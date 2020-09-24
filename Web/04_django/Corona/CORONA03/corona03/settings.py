@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'articles',
     'accounts',
     'pages',
+    'eithers',
     'bootstrap4',
     'imagekit',
     'django_extensions',

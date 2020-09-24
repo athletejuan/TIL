@@ -23,6 +23,7 @@
         <li class="nav-item d-flex flex-row">
           <a class="nav-link text-white font-weight-bold" href="{% url 'articles:index' %}">Articles</a>
           <a class="nav-link text-white font-weight-bold" href="{% url 'pages:index' %}">Pages</a>
+          <a class="nav-link text-white font-weight-bold" href="{% url 'eithers:main' %}">Either</a>
           {% if request.user.is_authenticated %}
             <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:update' %}">| Update</a>
             <a class="nav-link text-white font-weight-bold" href="{% url 'accounts:change_password' %}">| Change Password</a>

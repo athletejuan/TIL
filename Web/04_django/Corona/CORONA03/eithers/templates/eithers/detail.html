@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1>{{ question.title }}</h1>
+  <hr>
+  <div class="d-flex flex-row font-weight-bold">
+    <div class="w-25 p-5 mx-1 bg-primary text-white text-center d-flex justify-content-center align-items-center">
+      <div class="d-flex flex-column">
+        <span>{{ question.select_A }}</span>
+        <span>{{ per_A }}</span>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mx-n4 px-3 bg-white rounded-circle">vs</div>
+    <div class="w-25 p-5 mx-1 bg-danger text-white text-center d-flex justify-content-center align-items-center">
+      <div class="d-flex flex-column">
+        <span>{{ question.select_B }}</span>
+        <span>{{ per_B }}</span>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="custom-control custom-radio">
+    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+    <label class="custom-control-label" for="customRadio1">{{ question.select_A }}</label>
+  </div>
+  <div class="custom-control custom-radio">
+    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+    <label class="custom-control-label" for="customRadio2">{{ question.select_B }}</label>
+  </div>
+  <form action="{% url 'eithers:comments' question.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <button class="btn btn-warning btn-sm">CHOICE</button>
+  </form>
+  <hr>
+  <h4>댓글 목록</h4>
+  {% for comment in comments %}
+    <li>{{ comment.select }} - {{ comment.content }}</li>
+  {% endfor %}
+{% endblock content %}
