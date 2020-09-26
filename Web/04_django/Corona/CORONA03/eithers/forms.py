@@ -4,17 +4,16 @@ from .models import Question, Comment
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['user',]
 
 
 class CommentForm(forms.ModelForm):
-    SELECT_A = False
-    SELECT_B = True
-    SELECTS = [
-        (SELECT_A, 'BLUE'),
-        (SELECT_B, 'RED'),
+    CHOICES = [
+        ['Blue', False],
+        ['Red', True],
     ]
-    select = forms.ChoiceField(choices=SELECTS, widget=forms.Select())
+    select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
 
     class Meta:
         model = Comment

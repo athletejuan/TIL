@@ -9,7 +9,13 @@
   {% endif %}
   <hr>
   {% for question in questions %}
-    <h4><a href="{% url 'eithers:detail' question.pk %}">{{ question.title }}</a></h4>
+    <div class="d-flex justify-content-between">
+      <h4 class="d-inline-block"><a href="{% url 'eithers:detail' question.pk %}">{{ question.title }}</a><span class="small"> - examiner: {{ question.user }}</span></h4>
+      <form action="{% url 'eithers:delete' question.pk %}" method="POST" class="d-inline-block">
+        {% csrf_token %}
+        <button class="btn btn-danger btn-sm py-0">x</button>
+      </form>
+    </div>
     <hr>
   {% endfor %}
 {% endblock content %}
