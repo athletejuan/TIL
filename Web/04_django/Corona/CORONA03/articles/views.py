@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 # from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_POST
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 
@@ -42,10 +43,12 @@ def detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm()
     comments = article.comments.order_by('-pk')
+    person = article.user
     context = {
         'article': article,
         'comment_form': comment_form,
         'comments': comments,
+        'person': person,
     }
     return render(request, 'articles/detail.html', context)
 
@@ -115,3 +118,17 @@ def comments_delete(request, article_pk, comment_pk):
         if request.user == comment.user:
             comment.delete()
     return redirect('articles:detail', article_pk)
+
+
+@require_POST
+def like(request, article_pk):
+    if request.user.is_authenticated:
+        article = get_object_or_404(Article, pk=article_pk)
+        user = request.user
+
+        if article.like_users.filter(pk=user.pk).exists():
+            article.like_users.remove(user)
+        else:
+            article.like_users.add(user)
+        return redirect('articles:index')
+    return redirect('accounts:login')

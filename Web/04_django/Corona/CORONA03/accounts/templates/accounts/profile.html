@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+  <h1 class="text-center">{{ person.username }}님의 Profile</h1>
+  <hr>
+  {% include 'accounts/_follow.html' %}
+  <h2>{{ person.username }}님이 쓴 글</h2>
+  {% for article in person.article_set.all %}
+    <div>{{ article.title }}</div>
+  {% endfor %}
+  <hr>
+  <h2>{{ person.username }}님이 쓴 댓글</h2>
+  {% for comment in person.comment_set.all %}
+    <div>{{ comment.content }}</div>
+  {% endfor %}
+  <hr>
+  <h2>{{ person.username }}님이 좋아요 한 글</h2>
+  {% for article in person.like_articles.all %}
+    <div>{{ article.title }}</div>
+  {% endfor %}
+  <hr>
+  <a href="{% url 'accounts:index' %}" class="btn btn-info">유저목록</a>
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
+{% endblock content %}

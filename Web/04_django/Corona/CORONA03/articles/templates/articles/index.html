@@ -22,10 +22,24 @@
   <hr>
   {% for article in articles %}
     <div class="d-flex justify-content-between">
-      <p>No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: {{ article.user }}</p>
+      <p>No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a></p>
       {% if request.user == article.user %}
         <form action="{% url 'articles:delete' article.pk %}" method="POST">{% csrf_token %}<button class="btn btn-outline-danger btn-sm">X</button></form>
       {% endif %}
     </div>
+    <form action="{% url 'articles:like' article.pk %}" method="POST">
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <button class="btn btn-link">
+          <i class="fas fa-heart fa-lg" style="color:crimson;"></i>
+        </button>
+      {% else %}
+        <button class="btn btn-link">
+          <i class="far fa-heart fa-lg" style="color:crimson;"></i>
+        </button>
+      {% endif %}
+    </form>
+    {{ article.like_users.all|length }}명이 이 글을 좋아합니다.
+    <hr>
   {% endfor %}
 {% endblock content %}

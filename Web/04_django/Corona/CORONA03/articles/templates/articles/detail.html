@@ -4,7 +4,10 @@
 {% block content %}
   <h1 class="text-center">Detail</h1>
   <hr>
-  <h2>No.{{ article.pk }} - {{ article.title }}</h2>
+  <div class="d-flex justify-content-between">
+  <h2 class="d-inline-block">No.{{ article.pk }} - {{ article.title }}</h2>
+  <span class="mt-auto">작성자: <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a></span>
+  </div>
   {% if article.image %}
     <img src="{{ article.image.url }}" alt="{{ article.image }}">
   {% endif %}
