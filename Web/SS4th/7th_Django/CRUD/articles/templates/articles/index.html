@@ -14,7 +14,16 @@
   {% endif %}
   <hr>
   {% for article in articles %}
-    <p>No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: {{ article.user }}</p>
+    <p class="mb-0">No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: {{ article.user }}</p>
+    <form action="{% url 'articles:like' article.pk %}" method="POST" class="d-inline-block">
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <button class="btn btn-link"><i class="fas fa-heart fa-lg" style="color:crimson;"></i></button>
+      {% else %}
+        <button class="btn btn-link"><i class="far fa-heart fa-lg" style="color:black;"></i></button>
+      {% endif %}
+    </form>
+    {{ article.like_users.all|length }}명이 이 글을 좋아합니다.
     <hr>
   {% endfor %}
 {% endblock content %}
