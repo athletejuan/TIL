@@ -112,3 +112,17 @@ def follow(request, user_pk):
             else:
                 person.followers.add(user)
     return redirect('accounts:profile', person.username)
+
+
+# url에서 <username> 사용시
+# @require_POST
+# def follow(request, username):
+#     if request.user.is_authenticated:
+#         person = get_object_or_404(get_user_model(), username=username)
+#         user = request.user
+#         if user != person:
+#             if person.followers.filter(username=user).exists():
+#                 person.followers.remove(user)
+#             else:
+#                 person.followers.add(user)
+#     return redirect('accounts:profile', person.username)
