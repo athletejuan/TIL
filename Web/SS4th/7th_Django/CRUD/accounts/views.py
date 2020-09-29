@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
@@ -93,3 +93,25 @@ def quit(request):
     if request.user.is_authenticated:
         request.user.delete()
     return redirect('articles:index')
+
+
+@login_required
+def profile(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+    context = {
+        'person': person
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+@require_POST
+def follow(request, username):
+    if request.user.is_authenticated:
+        person = get_object_or_404(get_user_model(), username=username)
+        user = request.user
+        if user != person:
+            if person.followers.filter(pk=user.pk).exists():
+                person.followers.remove(user)
+            else:
+                person.followers.add(user)
+    return redirect('accounts:profile', person.username)

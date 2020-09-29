@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'accounts/_follow.html' %}
+
+  <h3>{{ person.username }}이 작성한 게시글</h3>
+  {% for article in person.article_set.all %}
+    <li>{{ article.title }}</li>
+  {% endfor %}
+  <hr>
+  <h3>{{ person.username }}이 작성한 댓글</h3>
+  {% for comment in person.comment_set.all %}
+    <li>{{ comment.content }}</li>
+  {% endfor %}
+  <hr>
+  <h3>{{ person.username }}이 좋아한 게시글</h3>
+  {% for article in person.like_articles.all %}
+    <li>{{ article.title }}</li>
+  {% endfor %}
+  <hr>
+  <a href="{% url 'articles:index'%}">BACK</a>
+{% endblock content %}

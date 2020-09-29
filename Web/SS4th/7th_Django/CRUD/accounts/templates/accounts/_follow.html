@@ -1,0 +1,31 @@
+<div class="jumbotron bg-dark text-white font-weight-bold mt-5">
+  <h1 class="display-4 text-center">{{ person.username }}'s Profile</h1>
+  <hr class="my-4">
+  <h4 class="text-center">Followers: {{ person.followers.all|length }} / Follows: {{ person.followings.all|length }}</h4>
+  <div class="d-flex justify-content-center text-center">
+    <div class="w-50 d-inline">
+      <p>Followers</p>
+      {% for follower in person.followers.all %}
+        <li>{{ follower.username }}</li>
+      {% endfor %}
+    </div>
+    <div class="w-50 d-inline">
+      <p>Follows</p>
+      {% for follow in person.followings.all %}
+        <li>{{ follow.username }}</li>
+      {% endfor %}
+    </div>
+  </div>
+  <form action="{% url 'accounts:follow' person.username %}" method="POST">
+    {% csrf_token %}
+    {% if request.user != person %}
+    <div class="d-flex justify-content-center">
+      {% if request.user in person.followers.all %}
+        <button class="btn btn-secondary btn-lg">Unfollow</button>  
+      {% else %}
+        <button class="btn btn-primary btn-lg">Follow</button>
+      {% endif %}
+    </div>
+    {% endif %}
+  </form>
+</div>

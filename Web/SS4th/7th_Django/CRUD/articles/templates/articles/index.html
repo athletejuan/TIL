@@ -14,7 +14,7 @@
   {% endif %}
   <hr>
   {% for article in articles %}
-    <p class="mb-0">No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: {{ article.user }}</p>
+    <p class="mb-0">No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: <a href="{% url 'accounts:profile' article.user.username%}">{{ article.user }}</a></p>
     <form action="{% url 'articles:like' article.pk %}" method="POST" class="d-inline-block">
       {% csrf_token %}
       {% if user in article.like_users.all %}

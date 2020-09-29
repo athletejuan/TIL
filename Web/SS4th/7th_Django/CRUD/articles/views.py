@@ -124,6 +124,7 @@ def comment_delete(request, article_pk, comment_pk):
 def like(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     user = request.user
+    # if request.user in article.like_users.all():
     if article.like_users.filter(pk=user.pk).exists():
         article.like_users.remove(user)
     else:
