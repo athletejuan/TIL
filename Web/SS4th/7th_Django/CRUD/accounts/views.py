@@ -95,7 +95,7 @@ def quit(request):
     return redirect('articles:index')
 
 
-@login_required
+# @login_required
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username=username)
     context = {
@@ -114,4 +114,5 @@ def follow(request, username):
                 person.followers.remove(user)
             else:
                 person.followers.add(user)
-    return redirect('accounts:profile', person.username)
+        return redirect('accounts:profile', person.username)
+    return redirect('accounts:login')
