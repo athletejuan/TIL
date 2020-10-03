@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HTML Rendering</title>
+</head>
+<body>
+  <h1>Article List</h1>
+  <hr>
+  <p>
+    {% for article in articles %}
+      <h2>{{ article.id }}번 글. {{ article.title }}</h2>
+      <p>{{ article.content }}</p>
+      <p>{{ article.created_at }}</p>
+      <p>{{ article.updated_at }}</p>
+      <hr>
+    {% endfor %}
+  </p>
+</body>
+</html>
