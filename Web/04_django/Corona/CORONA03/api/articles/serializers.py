@@ -14,21 +14,22 @@ class ArticleSerializer(serializers.ModelSerializer):
     comment_set = CommentSerializer(
         # list 형태로 응답되기 때문에(댓글 개수 보장x) many=True 옵션 필수
         many=True,
-        # read_only=True,
+        read_only=True,
     )
 
     comment_count = serializers.IntegerField(
         # 1은 N의 개수를 보장할 수 없음
         # dotted notation을 활용할 수 있음
         source='comment_set.count',
-        # read_only=True,
+        read_only=True,
     )
 
     class Meta:
         model = Article
         fields = ('id', 'title', 'content', 'created_at', 'updated_at', 'comment_set', 'comment_count',)
         # fields = '__all__'
-        read_only_fields = ('comment_set', 'comment_count',)
+        # 특정 필드를 오버라이드 혹은 추가한 경우 read_only_fields shortcut이 동작하지 않는다.
+        # read_only_fields = ('comment_set', 'comment_count',) 
 
 
 class ArticleListSerializer(serializers.ModelSerializer):
