@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404
-from django.core import serializers
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -17,7 +16,7 @@ def article_list_create(request):
         # serializers.py에서 import한 Serializer의 첫번째 인자를 키워드 없이 입력하면 인스턴스로 처리되어 유효성 검사를 통과하지 못한다.
         # 인스턴스 없이 데이터만을 인자로 넣고자 할때는 data 키워드와 함께 사용해야 한다.
         # 인스턴스가 들어가는 경우에는 data 키워드 없이도 사용가능하다.
-        serializer = ArticleListSerializer(data=request.data)
+        serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
