@@ -8,6 +8,6 @@ admin.site.register(Review, ReviewAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'content', 'created_at', 'updated_at', ]
+    list_display = ['id', 'content', ]
 
 admin.site.register(Comment, CommentAdmin)
