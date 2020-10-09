@@ -1,13 +1,44 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
   <h1 class="text-center">Review Detail</h1>
   <hr>
   <h3>No.{{ review.pk }}_{{ review.title }}:{{ review.movie_title }}</h3>
+  <p><b>작성자: {{ review.user }}</b></p>
   <p>평점: {{ review.rank }}</p>
   <p>내용: {{ review.content }}</p>
   <p>작성: {{ review.created_at }}</p>
   <p>수정: {{ review.updated_at }}</p>
-  <hr>
+  {% if request.user in review.like_user.all %}
+    <form action="{% url 'community:like' review.pk %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <button class="btn btn-link"><i class="fas fa-heart fa-lg" style="color:crimson;"></i></button>
+    </form>
+  {% else %}
+    <form action="{% url 'community:like' review.pk %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <button class="btn btn-link"><i class="far fa-heart fa-lg" style="color:crimson;"></i></button>
+    </form>
+  {% endif %}
+  {% if review.like_user.all %}
+    {{ review.like_user.all|length }}명이 이 글을 좋아합니다.
+  {% endif %}
+  <br>
   <a href="{% url 'community:index' %}">BACK</a>
+  <hr>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'community:comment_create' review.pk %}" method="POST">
+      {% csrf_token %}
+      {% comment %} {{ comment_form }} {% endcomment %}
+      {% bootstrap_form comment_form layout='inline' %}
+      <button class="btn btn-primary btn-sm">댓글입력</button>
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">댓글작성을 위해 로그인해주세요</a>
+  {% endif %}
+  <br>
+  {% for comment in comments %}
+    <li>{{ comment.user }}: {{ comment.content }}</li>
+  {% endfor %}
 {% endblock content %}

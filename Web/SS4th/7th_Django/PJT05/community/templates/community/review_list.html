@@ -4,6 +4,7 @@
   <h1 class="text-center">Review List</h1>
   <hr>
   {% for review in reviews %}
-    <p><a href="{% url 'community:detail' review.pk %}">{{ review.title }}:{{ review.movie_title }}</a> - {{ review.rank }}</p>
+    <p>No.{{ review.pk }} <a href="{% url 'community:detail' review.pk %}">{{ review.title }}:{{ review.movie_title }}</a> - 평점:{{ review.rank }}</p>
+    <p>작성자: <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></p>
   {% endfor %}
 {% endblock content %}

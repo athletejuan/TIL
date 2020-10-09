@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.template.defaulttags import register
+from django.template.library import Library
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
@@ -29,10 +31,15 @@ def create(request):
     return render(request, 'community/form.html', context)
 
 
+@register.filter
+def get_item(reviews, key):
+    return reviews.get(key)
+
+
 def detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     comment_form = CommentForm()
-    comments = Comment.objects.order_by('-pk')
+    comments = review.comment_set.order_by('-pk')
     context = {
         'review': review,
         'comment_form': comment_form,
@@ -43,8 +50,22 @@ def detail(request, review_pk):
 
 @require_POST
 def comment_create(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
     comment_form = CommentForm(request.POST)
-    context = {
-        'comment_form': comment_form,
-    }
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.review = review
+        comment.user = request.user
+        comment.save()
     return redirect('community:detail', review_pk)
+
+
+@login_required
+def like(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'POST':
+        if review.like_user.filter(pk=request.user.pk).exists():
+            review.like_user.remove(request.user)
+        else:
+            review.like_user.add(request.user)
+    return redirect('community:detail', review.pk)

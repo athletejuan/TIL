@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/c93095fd57.js" crossorigin="anonymous"></script>
   <title>PJT05</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'community:index' %}">MovieReview</a>
+    {% if request.user.is_authenticated %}
+      <p class="text-white mb-0">Hello! {{ user.username }}</p>
+    {% endif %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,8 +30,10 @@
         <li class="nav-item">
           {% if request.user.is_authenticated %}
             <div class="d-flex align-items-center">
-              <p>Hello! {{ user.username }}</p>
-              <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+              <form action="{% url 'accounts:logout' %}" method="POST">
+                {% csrf_token %}
+                <button class="nav-link bg-dark border-0">Logout</button>
+              </form>
             </div>
           {% else %}
             <div class="d-flex align-items-center">
