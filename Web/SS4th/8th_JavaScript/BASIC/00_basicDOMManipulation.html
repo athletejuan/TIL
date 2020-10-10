@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic DOM Manipulation</title>
+	<style>
+	  #king {
+	    color: red;
+	  }
+	</style>
+</head>
+<body>
+  <h1 id="header">DOM Manipulation</h1>
+  <h2 id="langHeader">Programming Languages</h2>
+  <ul>
+    <li class="lang">Python</li>
+    <li class="lang">Java</li>
+    <li class="lang" id="specialLang">JavaScript</li>
+  </ul>
+
+  <h2 id="frameHeader">Frameworks</h2>
+  <ul>
+    <li class="framework" id="specialFrame">Django</li>
+    <li class="framework">Spring</li>
+    <li class="framework">Vue.js</li>
+  </ul>
+
+  <script>
+    //1. Read - querySelector / querySelectorAll
+
+    //1-1. window & document
+    // 최상위 객체, 문서 한 장, 최상위 객체 포함되어 있는 문서 한 장
+    console.log(window)
+    console.log(document)
+    console.log(window.document)
+
+    //1-2. querySelector
+    const mainHeader = document.querySelector('h1')
+    const langHeader = document.querySelector('#langHeader')
+    const frameHeader = document.querySelector('#frameHeader')
+    // console.log(mainHeader, langHeader, frameHeader)
+
+    //1-3. querySelectorAll
+    const langLi = document.querySelectorAll('.lang')
+    const frameworkLi = document.querySelectorAll('.framework')
+    // console.log(langLi, frameworkLi)
+
+    //1-4. 여러 개의 요소를 querySelector로 잡는 경우 처음으로 일치하는 요소를 반환
+    const selectOne = document.querySelector('.lang')
+    // console.log(selectOne)
+
+    //1-5. 복합 선택자도 활용 가능(descendant & child)
+    // querySelector의 유연함
+    const selectDescendant = document.querySelector('body li')
+    const selectChild = document.querySelector('body > li')
+    // console.log(selectDescendant) // Python
+    // console.log(selectChild)  // null
+
+    //1-6. 간단하게 getElementById, getElementByClassName 등을 사용
+    const selectSpecialLang = document.getElementById('specialLang')
+    const selectAllLangs = document.getElementsByClassName('framework')
+    const selectAllLiTags = document.getElementsByTagName('li')
+    console.log(selectSpecialLang, selectAllLangs, selectAllLiTags)
+  </script>
+</body>
+</html>

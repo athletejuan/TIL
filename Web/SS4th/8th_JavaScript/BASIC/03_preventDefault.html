@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>preventDefault</title>
+	<style>
+		body {
+		  height: 10000px;
+		}
+	</style>
+</head>
+<body>
+  <!-- 1. checkbox -->
+  <input type="checkbox" id="myCheckBox">
+  <hr>
+
+  <!-- 2. submit -->
+  <form action="/articles/" id="myForm">
+    <input type="text">
+    <input type="submit">
+  </form>
+  <hr>
+
+  <!-- 3. link -->
+  <a href="https://google.com" target="_blank" id="myLink">GoToGoogle</a>
+  <hr>
+
+  <!-- 4. input -->
+  <input type="text" id="myInput">
+  
+  <script>
+    const checkBox = document.querySelector('#myCheckBox')
+    checkBox.addEventListener('click', function(event){
+      event.preventDefault()
+    })
+    const myForm = document.querySelector('#myForm')
+    myForm.addEventListener('submit', function(event){
+      console.log(event)
+      event.preventDefault()
+      // event.target.reset()  // value 값 초기화
+    })
+    const link = document.querySelector('#myLink')
+    link.addEventListener('click', function(event) {
+      console.log(event)
+      event.preventDefault()
+    })
+    const input = document.querySelector('#myInput')
+    input.addEventListener('keydown', function(event) {
+      console.log(event)
+      event.preventDefault()
+    })
+    //5. preventDefault가 불가능한 이벤트
+    document.addEventListener('scroll', function(event) {
+      console.log(event.cancelable)
+      event.preventDefault()
+    })
+  </script>
+</body>
+</html>

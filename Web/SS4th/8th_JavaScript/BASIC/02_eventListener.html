@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Event Listener</title>
+</head>
+<body>
+  <!-- 1. onclick -->
+  <button>나를 눌러봐!</button>
+
+  <!-- 2. addEventListener -->
+  <button id="myButton">나를 눌러봐!!</button>
+  <hr>
+
+	<!-- 3. addEventListener2 -->
+  <p id="myParagraph"></p>
+
+  <form action="#">
+    <label for="myTextInput">내용을 입력하세요.</label>
+    <input id="myTextInput" type="text">
+  </form>
+  <hr>
+
+  <!-- 4. addEventListener3 -->
+  <h2>Change My Color</h2>
+    <label for="changeColorInput">원하는 색상을 영어로 입력하세요.</label>
+    <input id="changeColorInput"></input>
+  <hr>
+
+  <script>
+    const colorInput = document.querySelector('#changeColorInput')
+
+    const changeColor = function (e) {
+      // console.log(event)
+      console.log(e)
+      const h2Tag = document.querySelector('h2')
+      console.log(event.target.value)
+      h2Tag.style.color = e.target.value
+    }
+
+    colorInput.addEventListener('keydown', changeColor)
+  </script>
+</body>
+</html>

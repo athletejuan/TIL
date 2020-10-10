@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text">
+  <button>Todo</button>
+  <ul></ul>
+
+  <script>
+    // const input = document.querySelector('input')
+    // const content = input.value
+
+    // const li = document.querySelector('li')
+    // li.innerText = content
+    
+    // const ul = document.querySelector('ul')
+    // ul.appendChild(li)
+    function addTodo(){
+      const input = document.querySelector('input')
+      const content = input.value
+      if (content) {
+        const li = document.createElement('li')
+        li.innerText = content
+        li.addEventListener('click', function(event){
+          // console.log(event)  // target -> classList 체크
+          // if (event.target.classList.length) {
+          //   event.target.classList.remove('done')
+          // } else {
+          //   event.target.classList.add('done')
+          // }
+          event.target.classList.toggle('done')
+        })
+        const deleteButton = document.createElement('button')
+        deleteButton.innerText = 'x'
+        deleteButton.style.marginLeft = '10px'
+        li.appendChild(deleteButton)
+        deleteButton.addEventListener('click', function(){
+          li.remove()
+        })
+        const ul = document.querySelector('ul')
+        ul.appendChild(li)
+
+        input.value = ''
+      } else {
+        alert('할 일을 입력해주세요!')
+      }
+    }
+    const button = document.querySelector('button')
+    const input = document.querySelector('input')
+    
+    button.addEventListener('click', addTodo)
+    input.addEventListener('keydown', function(event){
+      if (event.code === 'Enter') {
+        addTodo()
+      }
+      // if (event.keyCode === 13) {
+      //   addTodo()
+      // }
+    })
+    
+    
+  </script>
+</body>
+</html>
