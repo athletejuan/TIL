@@ -31,6 +31,7 @@ def create(request):
     return render(request, 'community/form.html', context)
 
 
+# template로 dictionary 넘겨주고 그 안에서 특정 키값에 해당하는 밸류값을 반환하고자 할때
 @register.filter
 def get_item(reviews, key):
     return reviews.get(key)
@@ -46,6 +47,31 @@ def detail(request, review_pk):
         'comments': comments
     }
     return render(request, 'community/review_detail.html', context)
+
+
+def update(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('community:detail', review_pk)
+    else:
+        form = ReviewForm(instance=review)
+    context = {
+        'form': form,
+        'review': review,
+    }
+    return render(request, 'community/form.html', context)
+
+
+@login_required
+def delete(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'POST':
+        review.delete()
+        return redirect('community:index')
+    return redirect('community:detail', review_pk)
 
 
 @require_POST

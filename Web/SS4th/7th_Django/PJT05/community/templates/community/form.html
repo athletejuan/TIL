@@ -2,11 +2,20 @@
 {% load bootstrap4 %}
 
 {% block content %}
-  <h1 class="text-center">CREATE</h1>
+  {% if request.resolver_match.url_name == 'create' %}
+    <h1 class="text-center">CREATE</h1>
+  {% else %}
+    <h1 class="text-center">UPDATE</h1>
+  {% endif %}
   <hr>
   <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
     <button class="btn btn-success">제출</button>
   </form>
+  {% if request.resolver_match.url_name == 'create' %}
+    <a href="{% url 'community:index' %}">BACK</a>
+  {% else %}
+    <a href="{% url 'community:detail' review.pk %}">BACK</a>
+  {% endif %}
 {% endblock content %}

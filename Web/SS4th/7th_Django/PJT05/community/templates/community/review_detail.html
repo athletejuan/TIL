@@ -5,7 +5,7 @@
   <h1 class="text-center">Review Detail</h1>
   <hr>
   <h3>No.{{ review.pk }}_{{ review.title }}:{{ review.movie_title }}</h3>
-  <p><b>작성자: {{ review.user }}</b></p>
+  <p><b>작성자: <a href="{% url 'accounts:profile' review.user %}">{{ review.user }}</a></b></p>
   <p>평점: {{ review.rank }}</p>
   <p>내용: {{ review.content }}</p>
   <p>작성: {{ review.created_at }}</p>
@@ -25,6 +25,13 @@
     {{ review.like_user.all|length }}명이 이 글을 좋아합니다.
   {% endif %}
   <br>
+  {% if request.user == review.user %}
+    <a href="{% url 'community:update' review.pk %}">UPDATE</a>
+    <form action="{% url 'community:delete' review.pk %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <button class="btn btn-link">DELETE</button>
+    </form>
+  {% endif %}
   <a href="{% url 'community:index' %}">BACK</a>
   <hr>
   {% if request.user.is_authenticated %}
