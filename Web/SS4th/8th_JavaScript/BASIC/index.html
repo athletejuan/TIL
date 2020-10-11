@@ -16,18 +16,28 @@
   <script>
     function addTodo () {
       // input 요소를 선택하고, value 값을 꺼낸다.
-
+      const myInput = document.querySelector('input')
+      content = myInput.value
       // 새로운 li 요소를 생성하고, input value를 innerText로 넣는다.
-
+      const myList = document.createElement('li')
+      myList.innerText = content
       // ul 요소를 선택하고, li 요소를 자식요소로 추가한다.
-
+      const myUl = document.querySelector('ul')
+      myUl.append(myList)
       // input 요소의 value 값을 초기화한다.
-
+      myInput.value = ''
     }
 
     // button 요소를 선택하고, 클릭되었을 때 addTodo 함수를 실행한다.
     const button = document.querySelector('button')
     button.addEventListener('click', addTodo)
+    // input 요소를 선택하고, Enter를 눌렀을 때 addTodo 함수를 실행한다.
+    // const myInput = document.querySelector('input')
+    // myInput.addEventListener('keydown', function(event){
+    //   if (event.code === 'Enter') {
+    //     addTodo()
+    //   }
+    // })
   </script>
 </body>
 </html>
