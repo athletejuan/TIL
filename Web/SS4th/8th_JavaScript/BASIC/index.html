@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TODO</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
 </head>
 <body>
   <input type="text">     <!-- 입력을 받을 input -->
@@ -21,6 +26,29 @@
       // 새로운 li 요소를 생성하고, input value를 innerText로 넣는다.
       const myList = document.createElement('li')
       myList.innerText = content
+
+
+      // 10.13 practice
+      // li 요소를 클릭하면 해당 요소에 "done" 클래스가 toggle 된다.
+      myList.addEventListener('click', function(e){
+        e.target.classList.toggle('done')
+        // if (e.target.classList.length) {
+        //   e.target.removeAttribute('class', 'done')
+        // } else {
+        //   e.target.setAttribute('class', 'done')
+        // }
+      })
+      // 새로운 button 요소를 생성하고, "x" 문자를 innerText로 넣는다.
+      const deleteBtn = document.createElement('button')
+      deleteBtn.innerText = 'x'
+      // button 요소가 클릭되었을 때 li 요소를 삭제한다.
+      deleteBtn.addEventListener('click', function(){
+        myList.remove()
+      })
+      // li 요소에 button 요소를 자식요소로 추가한다.
+      myList.append(deleteBtn)
+
+
       // ul 요소를 선택하고, li 요소를 자식요소로 추가한다.
       const myUl = document.querySelector('ul')
       myUl.append(myList)
@@ -32,12 +60,12 @@
     const button = document.querySelector('button')
     button.addEventListener('click', addTodo)
     // input 요소를 선택하고, Enter를 눌렀을 때 addTodo 함수를 실행한다.
-    // const myInput = document.querySelector('input')
-    // myInput.addEventListener('keydown', function(event){
-    //   if (event.code === 'Enter') {
-    //     addTodo()
-    //   }
-    // })
+    const myInput = document.querySelector('input')
+    myInput.addEventListener('keydown', function(event){
+      if (event.code === 'Enter') {
+        addTodo()
+      }
+    })
   </script>
 </body>
 </html>
