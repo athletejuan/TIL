@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  const numbers = [1, 2, 3, 4]
+  console.log(numbers[0])
+  console.log(numbers[-1])
+  console.log(numbers.length)
+
+  /*
+  // reverse
+  numbers.reverse()
+  console.log(numbers)
+  numbers.reverse()
+  console.log(numbers)
+
+  // push & pop
+  numbers.push('a')
+  console.log(numbers)
+
+  numbers.pop()
+  console.log(numbers)
+
+  // unshift & shift
+  numbers.unshift('a')
+  console.log(numbers)
+
+  numbers.shift()
+  console.log(numbers)
+
+  // includes
+  console.log(numbers.includes(1))
+  console.log(numbers.includes(0))
+
+  // indexOf
+  numbers.push('a', 'a')
+  console.log(numbers)
+  console.log(numbers.indexOf('a'))
+  console.log(numbers.indexOf('b'))
+
+  // join
+  console.log(numbers.join())
+  console.log(numbers.join(''))
+  console.log(numbers.join('-'))
+
+
+  // object
+  const me = {
+    name: '홍길동',  // key가 한 단어일 때
+    'phone number': '01012345678',  // key가 여러 단어일 때
+    appleProducts: {
+      ipad: '2018pro',
+      iphone: '7+',
+      macbook: '2019pro',
+    },
+  }
+  console.log(me.name)
+  console.log(me['name'])
+  console.log(me['phone number'])
+  console.log(me.appleProducts)
+  console.log(me.appleProducts.ipad)
+
+  // 축약 문법(ES6+)
+  let books = ['Learning JS', 'Eloquent JS']
+
+  let comics = { 
+    DC: ['Aquaman', 'SHAZAM'], 
+    Marvel: ['Captain Marvel', 'Avengers'],
+  }
+
+  let magazines = null
+
+  const bookShop = {
+    books,
+    comics,
+    magazines,
+  }
+
+  console.log(bookShop) 
+  console.log(typeof bookShop)
+  console.log(bookShop.books[0])
+
+  
+  // JSON
+  // Object -> JSON(string)
+  const jsonData = JSON.stringify({
+    coffee: 'Americano',
+    iceCream: 'Cookie and cream',
+  })
+
+  console.log(jsonData)
+  console.log(typeof jsonData)
+
+  // JSON(string) -> Object
+  const parsedData = JSON.parse(jsonData)
+
+  console.log(parsedData)
+  console.log(typeof parsedData)
+
+
+  // Array Helper Method
+  // forEach
+  const colors = ['red', 'blue', 'green']
+
+  colors.forEach(function (color) {
+      console.log(color)
+  })
+
+  // ex
+  const images = [
+    { height: 10, width: 30 },
+    { height: 20, width: 90 },
+    { height: 54, width: 32 }
+  ]
+
+  const areas = []
+
+
+  // map
+  const numbers = [1, 2, 3]
+
+  const doubleNumbers = numbers.map(function (number) {
+    return number * 2
+  })
+  console.log(doubleNumbers)
+
+  // ex
+  const newNumbers = [4, 9, 16]
+
+  const images = [
+      { height: '34px', width: '39px' },
+      { height: '54px', width: '19px' },
+      { height: '83px', width: '75px' },
+  ]
+
+  const trips = [
+    { distance: 34, time: 10 },
+    { distance: 90, time: 50 },
+    { distance: 59, time: 25 },
+  ]
+
+  // filter
+  const products = [
+    { name: 'cucumber', type: 'vegetable' },
+    { name: 'banana', type: 'fruit' },
+    { name: 'carrot', type: 'vegetable' },
+    { name: 'apple', type: 'fruit' },
+  ]
+
+  const fruits = products.filter(function (product) {
+    return product.type === 'fruit'
+  })
+
+  // ex
+  const numbers = [15, 25, 35, 45, 55, 65, 75, 85, 95]
+
+
+  // reduce
+  const tests = [90, 90, 80, 77]
+
+  const sum = tests.reduce(function (total, x) {
+    return total + x
+  }, 0)
+
+
+  // find
+  const avengers = [
+    { name: 'Tony Stark', age: 45 },
+    { name: 'Steve Rogers', age: 32 },
+    { name: 'Thor', age: 40 },
+  ]
+
+  const avenger = avengers.find(function (avenger) {
+    return avenger.name === 'Tony Stark'
+  })
+
+  // ex
+  const people = [
+    { id: 1, admin: false },
+    { id: 2, admin: false },
+    { id: 3, admin: true },
+  ]
+
+
+  // some
+  const arr = [1, 2, 3, 4, 5]
+
+  const result = arr.some(elem => elem % 2 === 0)
+
+  // ex
+  const requests = [
+    { url: '/photos', status: 'complete' },
+    { url: '/albums', status: 'pending' },
+    { url: '/users', status: 'failed' },
+  ]
+
+  const inProgress = requests.some(function (request) {
+      return request.status === 'pending'
+  })
+
+
+  // every
+  const arr = [1, 2, 3, 4, 5]
+
+  const result2 = arr.every(elem => elem % 2 === 0)
+
+  // ex
+  const users = [
+      { id: 21, submmited: true },
+      { id: 33, submmited: false },
+      { id: 712, submmited: true},
+  ]
+  */
+  </script>
+</body>
+</html>
