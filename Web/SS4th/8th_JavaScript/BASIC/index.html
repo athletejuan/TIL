@@ -13,10 +13,7 @@
 <body>
   <input type="text">     <!-- 입력을 받을 input -->
   <button>Add</button>    <!-- 클릭 시 todo item을 추가해주는 버튼 -->
-  <ul>                    <!-- 순서 없는 list (Unordered List) -->
-    <li>Item 1</li>       <!-- Todo Item 1 -->
-    <li>Item 2</li>       <!-- Todo Item 2 -->
-  </ul>
+  <ul></ul>
 
   <script>
     function addTodo () {
@@ -25,12 +22,13 @@
       content = myInput.value
       // 새로운 li 요소를 생성하고, input value를 innerText로 넣는다.
       const myList = document.createElement('li')
-      myList.innerText = content
+      const newTodo = document.createElement('span')
+      newTodo.innerText = content
 
 
       // 10.13 practice
       // li 요소를 클릭하면 해당 요소에 "done" 클래스가 toggle 된다.
-      myList.addEventListener('click', function(e){
+      newTodo.addEventListener('click', function(e){
         e.target.classList.toggle('done')
         // if (e.target.classList.length) {
         //   e.target.removeAttribute('class', 'done')
@@ -38,6 +36,42 @@
         //   e.target.setAttribute('class', 'done')
         // }
       })
+
+
+      // 10.13 수정 기능 추가 관련
+      const editBtn = document.createElement('button')
+      editBtn.innerText = '수정'
+      editBtn.style.marginLeft = '10px'
+      editBtn.addEventListener('click', function() {
+        const editInput = document.createElement('input')
+        const editComplete = document.createElement('button')
+        editComplete.innerText = '수정완료'
+        editComplete.style.marginLeft = '10px'
+        editComplete.addEventListener('click', function() {
+          // editInput.remove()
+          // editComplete.remove()
+          myList.innerHTML = ''
+          newTodo.innerText = editInput.value
+          myList.append(newTodo, editBtn, deleteBtn)
+        })
+        // deleteBtn.remove()
+        // editBtn.remove()
+        // newTodo.innerText = ''
+        myList.innerHTML = ''
+        myList.append(editInput, editComplete)
+        editInput.value = newTodo.innerText
+        editInput.addEventListener('keydown', function() {
+          if (event.code === 'Enter') {
+            // editInput.remove()
+            // editComplete.remove()
+            myList.innerHTML = ''
+            newTodo.innerText = editInput.value
+            myList.append(newTodo, editBtn, deleteBtn)
+          }
+        })
+      })
+
+
       // 새로운 button 요소를 생성하고, "x" 문자를 innerText로 넣는다.
       const deleteBtn = document.createElement('button')
       deleteBtn.innerText = 'x'
@@ -46,7 +80,7 @@
         myList.remove()
       })
       // li 요소에 button 요소를 자식요소로 추가한다.
-      myList.append(deleteBtn)
+      myList.append(newTodo, editBtn, deleteBtn)
 
 
       // ul 요소를 선택하고, li 요소를 자식요소로 추가한다.
