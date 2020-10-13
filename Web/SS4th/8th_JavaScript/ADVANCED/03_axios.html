@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axios Example</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    //1. Promise
+    //1-1. Promise 객체 리턴
+    // const promise = axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    // console.log(promise) Pending
+
+    // 그 객체에 .then 메서드를 통해 이후에 할 것을 정의
+    // promise
+    //   .then(function (res) {
+    //     // console.log(res)
+    //     // console.log(res.data)
+    //     console.log(res.data.title)
+    //   })
+
+    //1-2. 위의 2개의 과정을 하나로 통합
+    // axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    //   .then(function (res) {
+    //     console.log(res)
+    //   })
+
+    //1-3. chaining (전 .then 내부의 return 값이 다음 callback의 인자로 넘어온다.)
+    // axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    //   .then(function (res) {
+    //     return res.data
+    //   })
+    //   .then(function (todo) {
+    //     // console.log(res.title)
+    //     return todo.title 
+    //   })
+    //   .then(function (title) {
+    //     console.log(title)
+    //   })
+
+
+    //2. async & await
+		//2-1. 1 -> 2 -> title (비동기)
+    // function getArticles () {
+    //   console.log('1')
+    //   axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    //   .then(function (res) {
+    //     console.log(res.data.title)
+    //   })
+    //   console.log('2')
+    // }
+
+    // getArticles()
+
+    // 응답을 기다려주지 않기 때문에 response는 undefined
+    // function getArticles () {
+    //   console.log('1')
+    //   var response = axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    //   var todo = response.data // undefined
+    //   console.log(todo.title) // Cannot read property 'title' of undefined
+    //   console.log('2')
+    // }
+
+    // getArticles()
+
+
+		//2-2. 1 -> title -> 2 (비동기 but, 동기적인 코드처럼 보임)
+    
+    async function getArticles () {
+      console.log('1')
+      var response = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
+      var todo = response.data
+      console.log(todo.title)
+      console.log('2')
+    }
+
+    getArticles()
+    
+
+  </script>
+</body>
+</html>

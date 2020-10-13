@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const promise = new Promise(function (resolve, reject) {
+    //   console.log('바로 실행됩니다.')
+    //   // return 'Promise Return'
+    //   return resolve('Promise Return!')
+    //   reject('Promise Return Error!')
+    // })
+    // promise
+    // .then(function (value) {
+    //   console.log(value)
+    // })
+    // .catch(function (error) {
+    //   console.error(error)
+    // })
+    // .finally(function () {
+    //   console.log('Finally는 무조건 실행됩니다!')
+    // })
+
+
+    const getArticle = function (url) {
+      return new Promise(function (resolve, reject) {
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            resolve(xhr.response)
+          } else {
+            reject(Error(xhr.statusText))
+          }
+        }
+        xhr.send()
+      })
+    }
+
+    // getArticle('https://jsonplaceholder.typicode.com/todos/1')
+    //   .then(function (res) {
+    //     const article = JSON.parse(res)
+    //     return article.title
+    //   })
+    //   .then(function (res) {
+    //     console.log(res)
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error)
+    //   })
+
+    async function getTitleInArticle (url) {
+      const title = await getArticle(url)
+      console.log(title)
+    }
+
+
+    console.log('hihi')
+    getTitleInArticle('https://jsonplaceholder.typicode.com/todos/1')
+    // getArticle('https://jsonplaceholder.typicode.com/todos/1').then(function (res) { console.log(res) })
+    console.log('byebye')
+  </script>
+</body>
+</html>
