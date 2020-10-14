@@ -1,8 +1,8 @@
 <div class="jumbotron bg-dark text-white font-weight-bold mt-5">
   <h1 class="display-4 text-center">{{ person.username }}'s Profile</h1>
   <hr class="my-4">
-  <h4 class="text-center">Followers: {{ person.followers.all|length }} / Follows: {{ person.followings.all|length }}</h4>
-  <div class="d-flex justify-content-center text-center">
+  <h4 id="follow-count" class="text-center lead">Followers: {{ person.followers.all|length }} / Follows: {{ person.followings.all|length }}</h4>
+  <!-- <div class="d-flex justify-content-center text-center">
     <div class="w-50 d-inline">
       <p>Followers</p>
       {% for follower in person.followers.all %}
@@ -15,8 +15,8 @@
         <li>{{ follow.username }}</li>
       {% endfor %}
     </div>
-  </div>
-  <form action="{% url 'accounts:follow' person.username %}" method="POST">
+  </div> -->
+  <form id="follow-form" data-user-name="{{ person.username }}">
     {% csrf_token %}
     {% if request.user != person %}
     <div class="d-flex justify-content-center">
@@ -29,3 +29,41 @@
     {% endif %}
   </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const form = document.querySelector('#follow-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  
+  // console.log(form)
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    console.log(event.target.dataset)
+    const userName = event.target.dataset.userName
+
+    axios.post(`http://127.0.0.1:8000/accounts/${userName}/follow/`, {}, {
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(function (response) {
+      // console.log(response)
+      const followersCount = response.data.followers_count
+      const followingsCount = response.data.followings_count
+      const followed = response.data.followed
+
+      const followCount = document.querySelector('#follow-count')
+      followCount.innerText = `Following: ${followingsCount} / Followers: ${followersCount}`
+
+      const followBtn = document.querySelector('#follow-form > div > button')
+      // 항상 두개의 클래스 중 하나만 존재함
+      followBtn.classList.toggle('btn-secondary')
+      followBtn.classList.toggle('btn-primary')
+      if (followed) {
+        followBtn.innerText = 'Unfollow'
+      } else {
+        followBtn.innerText = 'Follow'
+      }
+    })
+  })
+</script>

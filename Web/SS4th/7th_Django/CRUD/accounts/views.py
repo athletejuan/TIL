@@ -5,6 +5,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.http import JsonResponse
 
 User = get_user_model()
 
@@ -112,7 +113,15 @@ def follow(request, username):
         if user != person:
             if person.followers.filter(pk=user.pk).exists():
                 person.followers.remove(user)
+                followed = False
             else:
                 person.followers.add(user)
-        return redirect('accounts:profile', person.username)
+                followed = True
+            follow_status = {
+                'followers_count': person.followers.count(),
+                'followings_count': person.followings.count(),
+                'followed': followed,
+            }
+        return JsonResponse(follow_status)
+        # return redirect('accounts:profile', person.username)
     return redirect('accounts:login')
