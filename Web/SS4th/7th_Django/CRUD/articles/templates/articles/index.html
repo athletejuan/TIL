@@ -15,15 +15,61 @@
   <hr>
   {% for article in articles %}
     <p class="mb-0">No.{{ article.pk }} <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a> - 작성자: <a href="{% url 'accounts:profile' article.user.username%}">{{ article.user }}</a></p>
-    <form action="{% url 'articles:like' article.pk %}" method="POST" class="d-inline-block">
+    <form class="d-inline-block like-form" data-id="{{ article.pk }}">
       {% csrf_token %}
-      {% if user in article.like_users.all %}
-        <button class="btn btn-link"><i class="fas fa-heart fa-lg" style="color:crimson;"></i></button>
+      <button class="btn btn-link"><i id="like-{{ article.pk }}" class="far fa-heart fa-lg" style="color:crimson;"></i></button>
+      <!-- {% if user in article.like_users.all %}
       {% else %}
-        <button class="btn btn-link"><i class="far fa-heart fa-lg" style="color:black;"></i></button>
-      {% endif %}
+        <button class="btn btn-link"><i id="like-{{ article.pk }}" class="far fa-heart fa-lg" style="color:black;"></i></button>
+      {% endif %} -->
     </form>
-    {{ article.like_users.all|length }}명이 이 글을 좋아합니다.
+    <!-- {{ article.like_users.all|length }}명이 이 글을 좋아합니다. -->
+    <p>
+      <span id="like-count-{{ article.pk }}">
+        {{ article.like_users.all|length }}
+      </span> 명이 이 글을 좋아합니다.
+    </p>
     <hr>
   {% endfor %}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // 1. form 태그 class 선택자 활용해서 선택하기
+    const forms = document.querySelectorAll('.like-form')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    // console.log(csrftoken)
+
+    // 2. forms에서 반복을 통해 form을 꺼내고 articleId와 csrfToken과 요청 정보 안에 포함시켜 서버로 요청을 날린다.
+    forms.forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        // console.log(event.target.dataset.id)
+        const articleId = event.target.dataset.id
+        axios.post(`http://127.0.0.1:8000/articles/${articleId}/like/`, {}, {
+          headers: { 'X-CSRFToken': csrftoken }
+        })
+        .then(function (response) {
+          console.log(response)
+
+          // Destructuring 활용
+          // const { count, liked } = response.data
+          const count = response.data.count
+          const liked = response.data.liked
+
+          // console.log(count, liked)
+
+          const likeIconColor = document.querySelector(`#like-${articleId}`)
+          const likeCount = document.querySelector(`#like-count-${articleId}`)
+          if (liked) {
+            // likeIconColor.style.color = 'crimson'
+            likeIconColor.classList.add('fas')
+          } else {
+            // likeIconColor.style.color = 'black'
+            likeIconColor.classList.remove('fas')
+          }
+          // likeIconColor.style.color = liked ? 'crimson' : 'black'
+          likeCount.innerText = count
+        })
+      })
+    })
+  </script>
 {% endblock content %}

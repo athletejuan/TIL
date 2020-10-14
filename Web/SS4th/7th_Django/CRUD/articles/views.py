@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 
@@ -127,6 +128,13 @@ def like(request, article_pk):
     # if request.user in article.like_users.all():
     if article.like_users.filter(pk=user.pk).exists():
         article.like_users.remove(user)
+        liked = False
     else:
         article.like_users.add(user)
-    return redirect('articles:index')
+        liked = True
+    like_status = {
+        'liked': liked,
+        'count': article.like_users.count(),
+    }
+    # return redirect('articles:index')
+    return JsonResponse(like_status)
