@@ -28,9 +28,9 @@
 
     // 파스칼 케이스 - 클래스, 생성자
     class User {
-      // constructor: function (options) {
-      //   this.name = options.name
-      // }
+      constructor (options) {
+        this.name = options.name
+      }
     }
 
     const good = new User({
@@ -39,7 +39,7 @@
 
     // 대문자 스네이크 케이스 - 상수
     const API_KEY = 'SOMEKEY'
-    const PI = math.PI
+    const PI = Math.PI
   </script>
 </body>
 </html>
