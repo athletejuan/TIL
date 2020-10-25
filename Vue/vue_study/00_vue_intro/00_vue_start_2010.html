@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input id="js-input" type="text">
+  <p id="js-p"></p>
+
+  <div id="app">
+    <input id="vue-input" type="text" v-model="message">
+    <p id="vue-p">{{ message }} - {{ count }}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // JavaScript
+    const input = document.querySelector('#js-input')
+    const my_p = document.querySelector('#js-p')
+    input.addEventListener('keydown', function(){
+      if (event.code === 'Enter') {
+        my_p.innerText = input.value
+        input.value = ''
+      }
+    })
+
+    // Vue
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '',
+        count: 0,
+      },
+      methods: {
+        plus: function() {
+          this.count++
+        },
+        minus() {
+          this.count--
+        },
+        // 화살표 함수를 사용하는 경우 this가 달라짐
+        // plus: () => {
+        //   this.count++
+        // }
+      }
+    })
+  </script>
+</body>
+</html>
