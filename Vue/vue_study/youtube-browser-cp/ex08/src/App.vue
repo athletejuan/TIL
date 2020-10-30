@@ -2,7 +2,6 @@
   <div id="app">
     <SearchBar @inputChange="onInputChange"></SearchBar>
     <VideoList :videos="videos"></VideoList>
-    {{ videos.length }}
   </div>
 </template>
 
