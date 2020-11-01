@@ -1,6 +1,7 @@
 <template>
   <div>
     <input @keyup.enter="onInput" type="text">
+    <button @click="onInput">검색</button>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div v-if="video" class="col-lg-8">
     <div class="embed-responsive embed-responsive-16by9">
-      <iframe :src="videoUrl" frameborder="0" class="embed-responsive-item"></iframe>
+      <iframe :src="videoUrl" allow='autoplay' frameborder="0" class="embed-responsive-item"></iframe>
     </div>
     <div vlass="details">
       <h4>{{ video.snippet.title }}</h4>
@@ -19,7 +19,7 @@ export default {
   computed: {
     videoUrl() {
       const videoId = this.video.id.videoId
-      return `https://www.youtube.com/embed/${videoId}`
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1`
     }
   }
 }
