@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>점심메뉴</h2>
+    <button @click="pickOne">Pick One</button>
+    <p>{{ choice }}</p>
+    <h2>로또</h2>
+    <button @click="lucky">sampleSize</button>
+    <button @click="getRandom">random</button>
+    <p>{{ luckyNums }}</p>
+    <p>{{ randomNums }}</p>
+  </div>
+
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- Lodash -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        lunch: ['국밥', '짜장면', '햄버거'],
+        choice: '',
+        luckyNums: '',
+        randomNums: '',
+      },
+      methods: {
+        pickOne: function() {
+          const randomIdx = _.random(0, this.lunch.length - 1)
+          this.choice = this.lunch[randomIdx]
+        },
+        lucky: function() {
+          const sampleNums = _.sampleSize(_.range(1,46), 6)
+          this.luckyNums = sampleNums
+        },
+        getRandom: function() {
+          this.randomNums = [] 
+          while (this.randomNums.length < 6) {
+            const randomNum = _.random(1,45)
+            if (!this.randomNums.includes(randomNum)) {
+              this.randomNums.push(randomNum)
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
