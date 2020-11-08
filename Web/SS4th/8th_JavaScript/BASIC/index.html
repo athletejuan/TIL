@@ -12,9 +12,9 @@
 </head>
 <body>
   <input type="text">     <!-- 입력을 받을 input -->
-  <button>Add</button>    <!-- 클릭 시 todo item을 추가해주는 버튼 -->
+  <button class="add">Add</button>    <!-- 클릭 시 todo item을 추가해주는 버튼 -->
   <ul></ul>
-
+  <button class="clear">Clear Completed</button>
   <script>
     function addTodo () {
       // input 요소를 선택하고, value 값을 꺼낸다.
@@ -23,6 +23,13 @@
       // 새로운 li 요소를 생성하고, input value를 innerText로 넣는다.
       const myList = document.createElement('li')
       const newTodo = document.createElement('span')
+
+      // checkBtn 추가(20.11.10)
+      const checkBtn = document.createElement('input')
+      checkBtn.type = 'checkbox'
+      checkBtn.addEventListener('click', function(){
+        myList.classList.toggle('done')
+      })
       newTodo.innerText = content
 
 
@@ -66,7 +73,7 @@
             // editComplete.remove()
             myList.innerHTML = ''
             newTodo.innerText = editInput.value
-            myList.append(newTodo, editBtn, deleteBtn)
+            myList.append(checkBtn, newTodo, editBtn, deleteBtn)
           }
         })
       })
@@ -80,7 +87,7 @@
         myList.remove()
       })
       // li 요소에 button 요소를 자식요소로 추가한다.
-      myList.append(newTodo, editBtn, deleteBtn)
+      myList.append(checkBtn, newTodo, editBtn, deleteBtn)
 
 
       // ul 요소를 선택하고, li 요소를 자식요소로 추가한다.
@@ -90,9 +97,24 @@
       myInput.value = ''
     }
 
-    // button 요소를 선택하고, 클릭되었을 때 addTodo 함수를 실행한다.
-    const button = document.querySelector('button')
+    // clearCompleted 추가(20.11.10)
+    clearCompleted = function () {
+      const myUl = document.querySelector('ul')
+      const myLi = document.querySelectorAll('ul > li')
+      myUl.innerHTML = ''
+      for (Li of myLi) {
+        if (!Li.classList.length) {
+          myUl.append(Li)
+        }
+      }
+    }
+
+    // add button 요소를 선택하고, 클릭되었을 때 addTodo 함수를 실행한다.
+    const button = document.querySelector('.add')
     button.addEventListener('click', addTodo)
+    // clear button 요소를 선택하고, 클릭되었을 때 clearCompleted 함수를 실행한다.
+    const clearBtn = document.querySelector('.clear')
+    clearBtn.addEventListener('click', clearCompleted)
     // input 요소를 선택하고, Enter를 눌렀을 때 addTodo 함수를 실행한다.
     const myInput = document.querySelector('input')
     myInput.addEventListener('keydown', function(event){
