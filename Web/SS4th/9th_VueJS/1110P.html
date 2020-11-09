@@ -18,6 +18,7 @@
     <p>Watch: a는 {{ increase }}만큼 증가했습니다.</p>
     <input v-model.number="delta" type="number">
     <button @click="a = a + delta">a 증가</button>
+    <!-- <button @click="increaseNum">a 증가</button> -->
     <br>
     <button @click="getCat">Meow</button>
     <button @click="getDog">Bowwow</button>
@@ -54,6 +55,9 @@
               this.dogImg = res.data.message
             })
         },
+        // increaseNum: function () {
+        //   return this.a += this.delta
+        // }
       },
       created: function () {
         this.getCat()
@@ -66,14 +70,19 @@
       computed: {
         square: function () {
           console.log('Computed!');
+          // computed는 계산된 값을 return한다.
           return this.a**2
         },
       },
       watch: {
         a: function (newValue, oldValue) {
           console.log('Watch!')
+          // a 라는 특정 데이터의 변화에 따라 다른 데이터를 변화 시킨다.
           this.increase = newValue - oldValue
         },
+        // a: function () {
+        //   this.increase = this.delta
+        // },
       },
     })
   </script>
