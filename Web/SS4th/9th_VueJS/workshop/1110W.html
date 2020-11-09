@@ -31,11 +31,22 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
+    // Use Local Storage
+    const STORAGE_KEY = 'vue-todo-app'
+    const todoStorage = {
+      fetch: function () {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+      },
+      save: function (todos) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      },
+    }
+
     const app = new Vue({
       el: '#app',
       data: {
         content: '',
-        todos: [],
+        todos: todoStorage.fetch(),
         status: 'all'
       },
       methods: {
@@ -66,6 +77,15 @@
             }
             return true
           })
+        }
+      },
+      // Use Local Storage
+      watch: {
+        todos: {
+          handler: function (todos) {
+            todoStorage.save(todos)
+          },
+          deep: true,
         }
       }
     })
