@@ -23,7 +23,8 @@
     </select>
     <ul>
       <li v-for="todo in todoListByStatus" :key="todo.date">
-        <input :checked="todo.completed" @click="done(todo)" type="checkbox">
+        <input :checked="todo.completed" @change="done(todo)" type="checkbox">
+        <!-- <input v-model="todo.completed" type="checkbox"> -->
         <span :class="{ completed: todo.completed }">{{ todo.content }}</span>
       </li>
     </ul>
