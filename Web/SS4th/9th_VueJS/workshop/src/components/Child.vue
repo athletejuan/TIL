@@ -2,6 +2,7 @@
   <div id="child">
     <h2>Child</h2>
     <input v-model="childData" @input="onInput" type="text">
+    <!-- <input @input="onInput" type="text"> -->
     <p>appData: {{ appData }}</p>
     <p>parentData: {{ parentData }}</p>
   </div>
@@ -26,6 +27,7 @@ export default {
   methods: {
     onInput: function() {
       this.$emit('child-input', this.childData)
+      // this.$emit('child-input', event.target.value)
     }
   }
 }
