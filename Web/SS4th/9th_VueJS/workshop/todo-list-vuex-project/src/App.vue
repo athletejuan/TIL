@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Todo List</h1>
+    <h2>all Todo: {{ allTodosCount }}</h2>
     <h2>Completed Todo: {{ completedTodosCount }}</h2>
     <h2>Uncompleted Todo: {{ uncompletedTodosCount }}</h2>
     <TodoList />
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 
@@ -19,12 +21,20 @@ export default {
     TodoForm,
   },
   computed: {
-    completedTodosCount: function () {
-      return this.$store.getters.completedTodosCount
-    },
-    uncompletedTodosCount: function () {
-      return this.$store.getters.uncompletedTodosCount
-    }
+    // allTodosCount: function () {
+    //   return this.$store.getters.allTodosCount
+    // },
+    // completedTodosCount: function () {
+    //   return this.$store.getters.completedTodosCount
+    // },
+    // uncompletedTodosCount: function () {
+    //   return this.$store.getters.uncompletedTodosCount
+    // }
+    ...mapGetters([
+      'allTodosCount',
+      'completedTodosCount',
+      'uncompletedTodosCount',
+    ])
   }
 }
 </script>

@@ -1,13 +1,15 @@
 <template>
   <div>
     <div>
-      <span :class="{ completed: todo.completed }" @click="updateTodoStatus">{{ todo.title }} </span>
-      <button @click="deleteTodo">x</button>
+      <span :class="{ completed: todo.completed }" @click="updateTodoStatus(todo)">{{ todo.title }} </span>
+      <button @click="deleteTodo(todo)">x</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Todo',
   props: {
@@ -16,15 +18,19 @@ export default {
     }
   },
   methods: {
-    deleteTodo: function () {
-      // this.$store.commit('DELETE_TODO', this.todo)
-      this.$store.dispatch('deleteTodo', this.todo)
-      // console.log('Delete!')
-    },
-    updateTodoStatus: function () {
-      this.$store.dispatch('updateTodoStatus', this.todo)
-      // console.log('Update')
-    }
+    // deleteTodo: function () {
+    //   // this.$store.commit('DELETE_TODO', this.todo)
+    //   this.$store.dispatch('deleteTodo', this.todo)
+    //   // console.log('Delete!')
+    // },
+    // updateTodoStatus: function () {
+    //   this.$store.dispatch('updateTodoStatus', this.todo)
+    //   // console.log('Update')
+    // }
+    ...mapActions([
+      'deleteTodo',
+      'updateTodoStatus',
+    ])
   }
 }
 </script>

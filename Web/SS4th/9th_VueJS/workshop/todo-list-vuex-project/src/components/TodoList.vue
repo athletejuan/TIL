@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Todo from './Todo'
 
 export default {
@@ -13,9 +14,12 @@ export default {
     Todo,
   },
   computed: {
-    todos: function () {
-      return this.$store.state.todos
-    }
+    // todos: function () {
+    //   return this.$store.state.todos
+    // }
+    ...mapState([
+      'todos',
+    ])
   }
 }
 </script>

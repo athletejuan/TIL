@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -8,6 +9,9 @@ export default new Vuex.Store({
     todos: []
   },
   getters: {
+    allTodosCount: function (state) {
+      return state.todos.length
+    },
     completedTodosCount: function (state) {
       return state.todos.filter(function (todo) {
         return todo.completed === true
@@ -30,6 +34,10 @@ export default new Vuex.Store({
     UPDATE_TODO_STATUS: function (state, todoItem) {
       state.todos = state.todos.map((todo) => {
         if (todo === todoItem) {
+          // return {
+          //   title = todoItem.title,
+          //   completed: !todo.completed
+          // }
           return { ...todo, completed: !todo.completed }
         }
         return todo
@@ -53,5 +61,8 @@ export default new Vuex.Store({
     }
   },
   modules: {
-  }
+  },
+  plugins: [
+    createPersistedState(),
+  ]
 })
