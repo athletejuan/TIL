@@ -17,13 +17,23 @@ export default {
     }
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers: {
+          Authorization: `JWT ${token}`
+        }
+      }
+      return config
+    },
     createTodo: function () {
+      const config = this.setToken()
       const todoItem = {
         title: this.title,
       }
 
       if (todoItem.title) {
-      axios.post(`${SERVER_URL}/`, todoItem)
+      axios.post(`${SERVER_URL}/todos/`, todoItem, config)
         .then(() => {
           // console.log(res)
           this.$router.push({ name: 'TodoList' })

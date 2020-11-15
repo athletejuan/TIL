@@ -22,10 +22,20 @@ export default {
     }
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers: {
+          Authorization: `JWT ${token}`
+        }
+      }
+      return config
+    },
     getTodos: function () {
-      axios.get(`${SERVER_URL}/`)
+      const config = this.setToken()
+      axios.get(`${SERVER_URL}/todos/`, config)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.todos = res.data
         })
         .catch((err) => {
@@ -33,7 +43,8 @@ export default {
         })
     },
     deleteTodo: function (todo) {
-      axios.delete(`${SERVER_URL}/${todo.id}/`)
+      const config = this.setToken()
+      axios.delete(`${SERVER_URL}/todos/${todo.id}/`, config)
         .then((res) => {
           // console.log(res)
           const targetTodoIdx = this.todos.findIndex((todo) => {
@@ -46,12 +57,13 @@ export default {
         })
     },
     updateTodoStatus: function (todo) {
+      const config = this.setToken()
       const todoItem = {
         // title = this.title, ...,
         ...todo,
         completed: !todo.completed,
       }
-      axios.put(`${SERVER_URL}/${todo.id}/`, todoItem)
+      axios.put(`${SERVER_URL}/todos/${todo.id}/`, todoItem, config)
         .then(() => {
           // console.log(res)
           todo.completed = !todo.completed
@@ -62,7 +74,11 @@ export default {
     }
   },
   created: function () {
-    this.getTodos()
+    if (localStorage.getItem('jwt')) {
+      this.getTodos()
+    } else {
+      this.$router.push({ name: 'login' })
+    }
   }
 }
 </script>
