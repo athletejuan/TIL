@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <!-- 배경이미지 추가 -->
+  <div id="app" :style="{ backgroundImage: `url(${backgroundUrl})`}">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/Random">Random</router-link> |
@@ -8,6 +9,19 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+// 배경이미지 추가
+import backgroundUrl from "@/assets/images/ss4th.png";
+
+export default {
+  data() {
+    return {
+      backgroundUrl,
+    }
+  }
+}
+</script>
 
 <style>
 #app {
