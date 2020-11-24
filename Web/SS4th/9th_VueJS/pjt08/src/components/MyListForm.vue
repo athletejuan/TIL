@@ -17,7 +17,8 @@ export default {
     movieAdd: function () {
       const newMovie = {
         title: this.movieTitle,
-        completed: false
+        completed: false,
+        created: true
       }
       this.$store.dispatch('addMovie', newMovie)
       this.movieTitle = ''
