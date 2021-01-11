@@ -5,31 +5,22 @@
 ## SSnth
 
 - Python
-  - Notes(Python)
-    - Jupyter Notebook
+  - Jupyter Notebook
+  - Flask
+  - SS2nd
+  - SS3rd
+  - SS4th
+  - SS5th
 - Web
   - HTML/CSS
   - Django
 - JavaScript
-- Vue
+- Vue.js
 
 
 
 - Algorithm
 
   - SWEA
-  - Backjoon
-
-  
-
-- GIT_ex
-  - Github_basic
-    - Git branch
-    - Git merge
-  - Github_Advanced
-    - Github_flow
-
-
-
-- SS2nd
-  - Programmers
+  - BOJ
+  - ALGOSPOT
