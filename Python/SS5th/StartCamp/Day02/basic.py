@@ -234,36 +234,37 @@ for number in numbers:
         print(f'{number}은(는) 홀수입니다.')
 
 
-# # 함수
-# # 함수 정의
-# def sum(a, b):
-# 	result = a + b
-# 	return result
+# EXTRA
+# 함수
+# 함수 정의
+def sum(a, b):
+	result = a + b
+	return result
 
-# # 함수 실행
-# sum(1, 5)
-# print(sum(1, 5))
+# 함수 실행
+sum(1, 5)
+print(sum(1, 5))
 
-# # 함수 실행 결과 저장하기
-# result = sum(1, 5)
-# print(result)
+# 함수 실행 결과 저장하기
+result = sum(1, 5)
+print(result)
 
 
-# # 미니 실습
+# 미니 실습
 
-# # 1-1. 두 수의 곱을 계산하는 함수 mul을 만드시오.
-# def mul(a, b):
-# 	return a * b
+# 1-1. 두 수의 곱을 계산하는 함수 mul을 만드시오.
+def mul(a, b):
+	return a * b
 
-# print(mul(2, 4))
+print(mul(2, 4))
 
-# # 1-2. 주어진 양수 n이 짝수인지 판별하여 True/False를 반환하는 함수를 작성하시오.
-# def is_even(n):
-# 	if n % 2 == 1:
-# 		result = False
-# 	else:
-# 		result = True
-# 	return result
+# 1-2. 주어진 양수 n이 짝수인지 판별하여 True/False를 반환하는 함수를 작성하시오.
+def is_even(n):
+	if n % 2 == 1:
+		result = False
+	else:
+		result = True
+	return result
 
-# print(is_even(4))
-# print(is_even(5))
+print(is_even(4))
+print(is_even(5))
