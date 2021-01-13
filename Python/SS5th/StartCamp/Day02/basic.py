@@ -1,6 +1,8 @@
 # 숫자
-number = 3 
-print(type(number))
+number1 = 3
+number2 = 3.14
+print(type(number1))
+print(type(number2))
 
 # 문자
 string = '문자열'
@@ -51,6 +53,9 @@ my_home = {
 
 # 딕셔너리 원소 접근
 print(my_home['location'])
+# print(my_home['name'])
+print(my_home.get('location'))
+print(my_home.get('name'))
 
 # 딕셔너리 원소 변경
 my_home['location'] = 'gumi'
@@ -106,8 +111,8 @@ coin = {
 # 2-1. 코인의 정보에서 BTC의 최대 가격을 출력하시오.
 print(coin['BTC']['max_price'])
 
-# 2-2. BTC의 시가와(opening price) ETH의 시가를 더한 결과를 출력하시오.
-total_opening_price = int(coin['BTC']['opening_price']) + int(coin['XRP']['opening_price'])
+# 2-2. ETH의 시가와(opening price) XRP의 시가를 더한 결과를 출력하시오.
+total_opening_price = int(coin['ETH']['opening_price']) + float(coin['XRP']['opening_price'])
 print(total_opening_price)
 
 
@@ -161,11 +166,12 @@ movie = {
 # 1. 영화의 제목을 출력하시오.
 print(movie['movieInfo']['movieNm'])
 
-# 2. 다음 movie의 감독의 영어 이름을 출력하시오.
+# 2. 영화감독의 영어 이름을 출력하시오.
 print(movie['movieInfo']['directors'][0]['peopleNmEn'])
 
-# 3. 다음 movie의 배우의 인원을 출력하시오.
+# 3. 영화에 출연한 배우가 몇명인지 출력하시오.
 print(len(movie['movieInfo']['actors']))
+# print(len(movie.get('movieInfo').get('actors')))
 
 
 # 기초 연산자
@@ -228,36 +234,36 @@ for number in numbers:
         print(f'{number}은(는) 홀수입니다.')
 
 
-# 함수
-# 함수 정의
-def sum(a, b):
-	result = a + b
-	return result
+# # 함수
+# # 함수 정의
+# def sum(a, b):
+# 	result = a + b
+# 	return result
 
-# 함수 실행
-sum(1, 5)
-print(sum(1, 5))
+# # 함수 실행
+# sum(1, 5)
+# print(sum(1, 5))
 
-# 함수 실행 결과 저장하기
-result = sum(1, 5)
-print(result)
+# # 함수 실행 결과 저장하기
+# result = sum(1, 5)
+# print(result)
 
 
-# 미니 실습
+# # 미니 실습
 
-# 1-1. 두 수의 곱을 계산하는 함수 mul을 만드시오.
-def mul(a, b):
-	return a * b
+# # 1-1. 두 수의 곱을 계산하는 함수 mul을 만드시오.
+# def mul(a, b):
+# 	return a * b
 
-print(mul(2, 4))
+# print(mul(2, 4))
 
-# 1-2. 주어진 양수 n이 짝수인지 판별하여 True/False를 반환하는 함수를 작성하시오.
-def is_even(n):
-	if n % 2 == 1:
-		result = False
-	else:
-		result = True
-	return result
+# # 1-2. 주어진 양수 n이 짝수인지 판별하여 True/False를 반환하는 함수를 작성하시오.
+# def is_even(n):
+# 	if n % 2 == 1:
+# 		result = False
+# 	else:
+# 		result = True
+# 	return result
 
-print(is_even(4))
-print(is_even(5))
+# print(is_even(4))
+# print(is_even(5))
