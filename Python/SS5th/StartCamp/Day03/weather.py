@@ -48,11 +48,20 @@ elif (30 < dust):
 else:
     grade = '좋음'
 
+if (75 < ultrafine):
+    ugrade = '매우나쁨'
+elif (35 < ultrafine):
+    ugrade = '나쁨'
+elif (15 < ultrafine):
+    ugrade = '보통'
+else:
+    ugrade = '좋음'
+
 # print(f'{time} 기준 {station}의 미세먼지 농도는 {dust}, 초미세먼지 농도는 { ultrafine }이며, {grade} 수준입니다.')
 # message = f'{time} 기준 {station}의 미세먼지 농도는 {dust}, 초미세먼지 농도는 { ultrafine }이며, {grade} 수준입니다.'
 
 text = f'''{date[5:7]}월 {date[8:10]}일 {city}의 날씨는 {weather}로 예상되며, 낮 최고기온은 {max_temp}도 , 아침 최저기온은 {min_temp}도 로 예상됩니다.
-현재 서울 {station}의 미세먼지 농도는 {dust}, 초미세먼지 농도는 { ultrafine }이며, {grade} 수준입니다.
+현재 서울 {station}의 미세먼지 농도는 {dust}로 {grade}수준, 초미세먼지 농도는 { ultrafine }이며, {ugrade} 수준입니다.
 '''
 
 app_url = f'https://api.telegram.org/bot{TOKEN}'
