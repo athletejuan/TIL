@@ -2,24 +2,17 @@ T = int(input())
 
 for test_case in range(1, T+1):
     number = int(input())
-    li = [1, 1]
+    li = [0, 1, 0]
     print(f'#{test_case}')
-    if number == 1:
-        print('1')
-    else:
-        print('1')
-        print('1 1')
-        while len(li) < number:
-            newli = [1]
-            for i in range(len(li)-1):
-                newli.append(li[i] + li[i+1])
-            newli.append(1)
-            li = newli
-            print(' '.join(list(map(str, li))))
+    while len(li) < number+3:
+        print(' '.join(list(map(str, li[1:-1]))))
+        newli = [0]
+        for i in range(len(li)-1):
+            newli.append(li[i] + li[i+1])
+        newli.append(0)
+        li = newli
 
-
-# T = int(input())
-
+# 2중 리스트
 # for t in range(T):
 #     print('#{}'.format(t+1))
 #     print(f'{t+1}')
