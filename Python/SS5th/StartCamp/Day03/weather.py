@@ -31,13 +31,14 @@ min_temp = round(res['consolidated_weather'][0]['min_temp'], 1)
 
 # print(f'{date}일 {location}의 날씨는 {weather}로 예상되며, 최고 기온은 {max_temp}도, 최저 기온은 {min_temp}도 로 예상됩니다.')
 
-dust_url = f'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey={API_KEY}&numOfRows=10&pageNo=2&sidoName=서울&ver=1.0&returnType=json'
+dust_url = f'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey={API_KEY}&numOfRows=50&sidoName=서울&ver=1.0&returnType=json'
 response = requests.get(dust_url).json()
-item = response.get('response').get('body').get('items')[9]
-time = item.get('dataTime')
-station = item['stationName']
-dust = int(item.get('pm10Value'))
-ultrafine = int(item.get('pm25Value'))
+for dist in response.get('response').get('body').get('items'):
+    if dist['stationName'] == '강남구':
+        time = dist.get('dataTime')
+        station = dist['stationName']
+        dust = int(dist.get('pm10Value'))
+        ultrafine = int(dist.get('pm25Value'))
 
 if (150 < dust):
     grade = '매우나쁨'
