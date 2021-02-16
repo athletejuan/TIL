@@ -1,12 +1,13 @@
 T = int(input())
 
-for test_case in range(1, T+1):
-    nums = list(map(int, input().split()))
+for tc in range(1, T+1):
+    N,M = map(int, input().split())
     arr = list(map(int, input().split()))
-    ps_li = []
-    for i in range(nums[0]-nums[1]+1):
-        ps = 0
-        for j in range(i, nums[1]+i):
-            ps += arr[j]
-        ps_li.append(ps)
-    print(f'#{test_case} {sorted(ps_li)[-1] - sorted(ps_li)[0]}')
+    parts = []
+    for i in range(N-M+1):
+        part = 0
+        for j in range(i, i+M):
+            part += arr[j]
+        parts.append(part)
+    parts.sort()
+    print('#{} {}'.format(tc, parts[-1] - parts[0]))
