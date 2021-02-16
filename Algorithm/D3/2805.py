@@ -12,6 +12,27 @@ for tc in range(1, T+1):
     print(f'#{tc} {harvest}')
 
 
+# Ed
+# import sys
+# sys.stdin = open('input.txt', 'r')
+
+# T = int(input())
+
+# for test_case in range(1, T+1):
+#     N = int(input())
+
+#     center = (N // 2) + 1
+#     dr = 0
+#     res = 0
+#     for row in range(N):
+#         arr = list(map(int, list(input())))
+
+#         dr += 1 if row//center else -1
+#         res += sum(arr[center+dr : center-dr-1])
+
+#     print('#{} {}'.format(test_case, res))
+
+
 # 1st try
 
 # for test_case in range(1, T+1):
