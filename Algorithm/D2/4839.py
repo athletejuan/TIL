@@ -31,3 +31,36 @@ for tc in range(1, T+1):
             R = mid-1
         else:
             L = mid+1
+
+
+# Tony
+# import sys
+# sys.stdin = open('input.txt', 'r')
+
+
+# def binary_search(left, right, target_page, count):
+#     middle = int((left+right)/2)
+
+#     if target_page < middle:
+#         return binary_search(left, middle, target_page, count+1)
+#     elif target_page > middle:
+#         return binary_search(middle, right, target_page, count+1)
+#     else:
+#         return count
+
+
+# T = int(input())
+
+# for t in range(1, T+1):
+#     total_page, target_a, target_b = map(int, input().split())
+#     count_a = binary_search(1, total_page, target_a, 0)
+#     count_b = binary_search(1, total_page, target_b, 0)
+
+#     if count_a > count_b:
+#         result = 'B'
+#     elif count_a < count_b:
+#         result = 'A'
+#     else:
+#         result = 0
+
+#     print('#{} {}'.format(t, result))
