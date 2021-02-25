@@ -1,12 +1,33 @@
 for tc in range(1, 11):
     N = int(input())
-    builds = list(map(int, input().split()))
+    bds = list(map(int, input().split()))
     view = 0
     for i in range(2, N-2):
-        view_check = sorted(builds[i-2:i+3])
-        if builds[i] == view_check[-1]:
-            view += (builds[i] - view_check[-2])
+        top, sec = 0, 0
+        for idx,bd in enumerate(bds[i-2:i+3]):
+            if bd > top:
+                top = bd
+                top_idx = idx
+        if top_idx == 2:
+            for idx,bd in enumerate(bds[i-2:i+3]):
+                if idx == 2:
+                    continue
+                elif bd > sec:
+                    sec = bd
+            view += (top - sec)
     print('#{} {}'.format(tc, view))
+
+
+# 2nd try
+# for tc in range(1, 11):
+#     N = int(input())
+#     builds = list(map(int, input().split()))
+#     view = 0
+#     for i in range(2, N-2):
+#         view_check = sorted(builds[i-2:i+3])
+#         if builds[i] == view_check[-1]:
+#             view += (builds[i] - view_check[-2])
+#     print('#{} {}'.format(tc, view))
 
 
 # 1st try
