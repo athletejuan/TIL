@@ -9,7 +9,6 @@ for tc in range(1, T+1):
     while start < N:
         start += K
         if start >= N:
-            print(f'#{tc} {count}')
             break
         for i in range(start, start-K, -1):
             if i in stop:
@@ -17,8 +16,9 @@ for tc in range(1, T+1):
                 count += 1
                 break
         else:
-            print(f'#{tc} 0')
+            count = 0
             break
+    print('#{} {}'.format(tc, count))
 
 
 # 1st try
