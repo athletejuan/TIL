@@ -13,8 +13,8 @@ def DFS():
                 if maze[a][b] == '0':
                     way.append([a,b])
                 elif maze[a][b] == '3':
-                    return True
-    return False
+                    return 1
+    return 0
 
 for tc in range(1, T+1):
     N = int(input())
@@ -24,10 +24,7 @@ for tc in range(1, T+1):
         for j in range(N):
             if maze[i][j] == '2':
                 way.append([i,j])
-    if DFS():
-        print('#{} 1'.format(tc))
-    else:
-        print('#{} 0'.format(tc))
+    print('#{} {}'.format(tc, DFS()))
 
 
 # 1st try
