@@ -1,4 +1,3 @@
-# 40% 틀림?
 N,M = map(int, input().split())
 base = [input() for _ in range(N)]
 
