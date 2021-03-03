@@ -1,20 +1,23 @@
-for test_case in range(1, 11):
-    T = input()
-    ps = input()
-    check = []
-    op = '([{<'
-    cl = ')]}>'
-    for _ in ps:
-        if _ in op:
-            check.append(_)
+def paren_match():
+    for p in paren:
+        if p in match:
+            check.append(p)
         else:
-            if op.index(check[-1]) == cl.index(_):
+            if match[check[-1]] == p:
                 check.pop()
             else:
-                print(f'#{test_case} 0')
-                break
+                return 0
     else:
-        if not check:
-            print(f'#{test_case} 1')
-        else:
-            print(f'#{test_case} 0')
+        return 1 if not check else 0
+
+for tc in range(1, 11):
+    T = input()
+    paren = input()
+    check = []
+    match = {
+        '(': ')',
+        '[': ']',
+        '{': '}',
+        '<': '>'
+    }
+    print('#{} {}'.format(tc, paren_match()))
