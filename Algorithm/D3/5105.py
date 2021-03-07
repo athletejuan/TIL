@@ -36,3 +36,48 @@ for tc in range(1, T+1):
                 break
     BFS()
     print('#{} {}'.format(tc, move))
+
+
+# live code
+# def search():
+#     for i in range(N):
+#         for j in range(N):
+#             if maze[i][j] == '2':
+#                 return i,j
+
+# def BFS(S,G):
+#     # 선형큐 활용
+#     Q = [0] * 1000000
+#     front, rear = -1, 0
+#     Q[rear] = (S,G)
+
+#     dist = [[-1] * N for _ in range(N)]
+#     dist[S][G] = 0
+
+#     # 선형큐에서 공백 검사
+#     while front != rear:
+#         front += 1
+#         curr_r, curr_c = Q[front]
+#         if maze[curr_r][curr_c] == '3':
+#             return dist[curr_r][curr_c] - 1
+#         for i in range(4):
+#             nr = curr_r + dx[i]
+#             nc = curr_c + dy[i]
+
+#             # 벽으로 둘러싸지 않았기 때문에 범위검사를 해야함
+#             if nr < 0 or nr >= N or nc < 0 or nc >= N:
+#                 continue
+#             # 벽이 아니면서, 거리를 갱신하지 않았다면 좌표를 넣고 갱신
+#             if maze[nr][nc] != '1' and dist[nr][nc] == -1:
+#                 dist[nr][nc] = dist[curr_r][curr_c] + 1
+#                 rear += 1
+#                 Q[rear] = (nr, nc)
+#     return 0
+
+
+# for tc in range(1, T+1):
+#     N = int(input())
+#     maze = [list(input()) for _ in range(N)]
+
+#     S,G = search()
+#     print('#{} {}'.format(tc, BFS(S,G)))
