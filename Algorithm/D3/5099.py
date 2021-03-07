@@ -29,3 +29,26 @@ for tc in range(1, T+1):
             else:
                 end += 1
     print('#{} {}'.format(tc, last))
+
+
+# live code
+# for tc in range(1, T+1):
+#     N, M = map(int, input().split())
+#     pizza = list(map(int, input().split()))
+#     firepot = [[i+1, pizza[i]] for i in range(N)]
+#     next_pizza = N
+#     # last_pizza = -1
+
+#     while len(firepot) > 1:
+#     # while firepot:
+#         num, cheese = firepot.pop(0)
+
+#         cheese //= 2
+#         # last_pizza = num
+#         if cheese:
+#             firepot.append([num, cheese])
+#         else:
+#             if next_pizza < M:
+#                 firepot.append([next_pizza+1, pizza[next_pizza]])
+#                 next_pizza += 1
+#     print('#{} {}'.format(tc, firepot[0][0]))
