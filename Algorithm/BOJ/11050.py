@@ -11,7 +11,7 @@ print(start[K])
 
 # 재귀
 def binomial(N,K):
-    if N == 1 or not K or N == K:
+    if not K or N == K:
         return 1
     else:
         return binomial(N-1, K-1) + binomial(N-1, K)
