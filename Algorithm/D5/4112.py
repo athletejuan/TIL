@@ -1,6 +1,6 @@
 T = int(input())
 
-def piramid(x,y):
+def pyramid(x,y):
     room = plus = row = 1
     start = 0
     while room < x:
@@ -22,4 +22,4 @@ for tc in range(1, T+1):
     a,b = map(int, input().split())
     if a < b:
         a,b = b,a
-    print('#{} {}'.format(tc,piramid(a,b)))
+    print('#{} {}'.format(tc,pyramid(a,b)))
