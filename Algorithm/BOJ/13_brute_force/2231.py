@@ -1,17 +1,19 @@
-N = int(input())
+N = input()
+C = int(N)
 
-start = N
-if N < 20 and not N%2:
-    start = N//2
-for i in range(1, 9*len(str(N))+1):
-    sn = N-i
-    bn = sn
-    ds = sn
-    for j in range(len(str(ds))):
-        ds += sn%10
-        sn //= 10
-    if ds == N and start > bn:
-        start = bn
-if start == N or start < 0:
-    start = 0
-print(start)
+def div_sum(num):
+    new = num
+    while num:
+        new += num%10
+        num //= 10
+    if new == C:
+        return True
+
+start = 1 if C-(len(N)*9) < 0 else C-(len(N)*9)
+while start < C:
+    if div_sum(start):
+        print(start)
+        break
+    start += 1
+else:
+    print(0)
