@@ -16,7 +16,6 @@ def numbering(x,y,z):
                 island.append([a,b])
 
 def bridge(x,y,z,l,n):
-    global bl
     a, b = x+dx[z], y+dy[z]
     if 0 <= a < N and 0 <= b < M:
         if earth[a][b]:
