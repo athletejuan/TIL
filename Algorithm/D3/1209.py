@@ -1,16 +1,23 @@
 for _ in range(10):
     tc = input()
-    arr = []
-    col = [0]*102
+    arr = [list(map(int, input().split())) for i in range(100)]
+
+    c1 = c2 = 0
     for i in range(100):
-        row = list(map(int, input().split()))
-        arr.append(sum(row))
-        col[100] += row[i]
-        col[101] += row[99-i]
+        c1 += arr[i][i]
+        c2 += arr[i][99-i]
+    max_sum = c1 if c1 > c2 else c2
+
+    for i in range(100):
+        rs = cs = 0
         for j in range(100):
-            col[j] += row[j]
-    total = arr + col
-    print(f'#{tc} {max(total)}')
+            rs += arr[i][j]
+            cs += arr[j][i]
+        if rs > max_sum:
+            max_sum = rs
+        if cs > max_sum:
+            max_sum = cs
+    print('#{} {}'.format(tc, max_sum))
 
 
 # 1st try
