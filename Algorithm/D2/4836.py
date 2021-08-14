@@ -1,22 +1,25 @@
 T = int(input())
 
-for test_case in range(1, T+1):
+for tc in range(1, T+1):
+    arr = [[0]*10 for _ in range(10)]
     num = int(input())
-    red = []
-    blue = []
+    red, blue = [], []
     count = 0
     for i in range(num):
-        reg = list(map(int, input().split()))
-        for x in range(reg[0], reg[2]+1):
-            for y in range(reg[1], reg[3]+1):
-                if reg[4]%2:
-                    red.append((x,y))
-                else:
-                    blue.append((x,y))
-    for j in red:
-        if j in blue:
-            count += 1
-    print(f'#{test_case} {count}')
+        r1, c1, r2, c2, color = map(int, input().split())
+        for r in range(r1, r2+1):
+            for c in range(c1, c2+1):
+                arr[r][c] += color
+                if arr[r][c] == 3:
+                    count += 1
+    #             if color%2:
+    #                 red.append((x,y))
+    #             else:
+    #                 blue.append((x,y))
+    # for j in red:
+    #     if j in blue:
+    #         count += 1
+    print('#{} {}'.format(tc, count))
 
 
 # Tony
