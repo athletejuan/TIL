@@ -1,21 +1,23 @@
 T = int(input())
 
-for test_case in range(1, T+1):
+for tc in range(1, T+1):
     text = input()
-    op = '({'
-    cl = ')}'
-    ol = []
+    stack = []
+
     for i in text:
-        if i in op:
-            ol.append(i)
-        elif i in cl:
-            if ol and op.index(ol[-1]) == cl.index(i):
-                ol.pop()
+        if i == '(' or i == '{':
+            stack.append(i)
+        # 닫힌 괄호가 나온 경우라면 stack이 비어있으면 안된다(SWEA Runtime error)
+        elif i == ')':
+            if stack and stack[-1] == '(':
+                stack.pop()
             else:
-                print(f'#{test_case} 0')
-                break
-    else:
-        if ol:
-            print(f'#{test_case} 0')
-        else:
-            print(f'#{test_case} 1')
+                stack.append(i)
+        elif i == '}':
+            if stack and stack[-1] == '{':
+                stack.pop()
+            else:
+                stack.append(i)
+
+    result = 0 if stack else 1
+    print('#{} {}'.format(tc, result))
