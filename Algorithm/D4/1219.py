@@ -13,9 +13,7 @@ for tc in range(1, 11):
     result = 0
     for i in range(E):
         links[edges[i*2]].append(edges[i*2+1])
-
-    for j in range(len(links[0])):
-        dfs(links[0][j])
+    dfs(0)
 
     print('#{} {}'.format(tc, result))
 
