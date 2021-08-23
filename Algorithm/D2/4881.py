@@ -1,29 +1,27 @@
 T = int(input())
 
-def perm(idx):
-    global part_sum, total
-    if total > part_sum:
+def perm(idx, temp):
+    global result
+    if temp > result:
         return
     if idx == N:
-        if total < part_sum:
-            part_sum = total
+        if temp < result:
+            result = temp
     for i in range(N):
         if not use[i]:
-            total += arr[idx][i]
             use[i] = 1
-            perm(idx + 1)
-            total -= arr[idx][i]
+            perm(idx+1, temp+arr[idx][i])
             use[i] = 0
 
 
 for tc in range(1, T+1):
     N = int(input())
     arr = [list(map(int, input().split())) for _ in range(N)]
-    part_sum, total = 100, 0
+    result, temp = 100, 0
     use = [0] * N
 
-    perm(0)
-    print('#{} {}'.format(tc, part_sum))
+    perm(0, 0)
+    print('#{} {}'.format(tc, result))
 
 
 # 순서있는 비복원 추출로 순열 구한 후 풀이(시간초과)
