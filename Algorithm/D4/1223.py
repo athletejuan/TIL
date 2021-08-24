@@ -11,8 +11,8 @@ for tc in range(1, 11):
                     post.append(stack.pop())
                 stack.append(i)
             else:
-                while stack and stack[-1] == '*':
-                    post.append(stack.pop())
+                while stack and stack[-1] == '*':     # 곱셈 연산자 들어왔을때 우선순위 낮은 연산자 나올때까지 꺼내고 스택에 추가하는 코드
+                    post.append(stack.pop())          # 생략 해도 연산결과는 같지만 표기식의 연산자/피연산자 순서는 다름
                 stack.append(i)
     while stack:
         post.append(stack.pop())
@@ -95,35 +95,5 @@ for tc in range(1, 11):
 #             else:
 #                 # 곱해서 넣자
 #                 s2.append(opr1 * opr2)
-
 #     result = s2.pop()
-
 #     print('#{} {}'.format(tc, result))
-
-
-
-# 1st try
-# for tc in range(1, 11):
-#     l = int(input())
-#     eq = input()
-#     post = eq[0] + eq[2]
-#     cal = eq[1]
-#     stack = []
-#     for i in range(3, l):
-#         if i%2:
-#             if eq[i] == '+':
-#                 post += cal[::-1]
-#                 cal = '+'
-#             else:
-#                 cal += '*'
-#         else:
-#             post += eq[i]
-#     post += cal[::-1]
-#     for p in post:
-#         if p.isdecimal():
-#             stack.append(int(p))
-#         elif p == '+':
-#             stack.append(stack.pop()+stack.pop())
-#         else:
-#             stack.append(stack.pop()*stack.pop())
-#     print(f'#{tc} {"".join(str(stack[0]))}')
