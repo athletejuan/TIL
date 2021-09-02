@@ -1,27 +1,50 @@
 T = int(input())
 
-for test_case in range(1, T+1):
-    F = input().split()
-    fl = []
-    for f in F:
+def Forth():
+    for f in post:
         if f.isdigit():
-            fl.append(int(f))
-        elif len(fl) > 1:
-            b = fl.pop()
-            a = fl.pop()
+            stack.append(int(f))
+        elif len(stack) > 1:
+            b = stack.pop()
+            a = stack.pop()
             if f == '+':
-                fl.append(a+b)
+                stack.append(a+b)
             elif f == '-':
-                fl.append(a-b)
+                stack.append(a-b)
             elif f == '*':
-                fl.append(a*b)
+                stack.append(a*b)
             elif f == '/':
-                fl.append(a/b)
+                stack.append(a/b)
             else:
-                print(f'#{test_case} error')
-                break
-        elif len(fl) == 1 and f == '.':
-            print(f'#{test_case} {int(fl[0])}')
+                return 'error'
+        elif len(stack) == 1 and f == '.':
+            return stack[0]
         else:
-            print(f'#{test_case} error')
-            break
+            return 'error'
+
+for tc in range(1, T+1):
+    post = input().split()
+    stack = []
+    print('#{} {}'.format(tc, Forth()))
+    # for f in post:
+    #     if f.isdigit():
+    #         stack.append(int(f))
+    #     elif len(stack) > 1:
+    #         b = stack.pop()
+    #         a = stack.pop()
+    #         if f == '+':
+    #             stack.append(a+b)
+    #         elif f == '-':
+    #             stack.append(a-b)
+    #         elif f == '*':
+    #             stack.append(a*b)
+    #         elif f == '/':
+    #             stack.append(a/b)
+    #         else:
+    #             print(f'#{tc} error')
+    #             break
+    #     elif len(stack) == 1 and f == '.':
+    #         print(f'#{tc} {int(stack[0])}')
+    #     else:
+    #         print(f'#{tc} error')
+    #         break
