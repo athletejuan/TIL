@@ -1,30 +1,29 @@
-T = int(input())
-
 def inorder(n):
     if n:
-        inorder(left[n])
+        inorder(L[n])
         tree.append(n)
-        inorder(right[n])
+        inorder(R[n])
+
+T = int(input())
 
 for tc in range(1, T+1):
     N = int(input())
-    left = [0] * (N+1)
-    right = [0] * (N+1)
+    L = [0] * (N+1)
+    R = [0] * (N+1)
+
+    for i in range(2, N+1):
+        if L[i//2]:
+            R[i//2] = i
+        else:
+            L[i//2] = i
     tree = []
-
-    for i in range(1, N//2+1):
-        left[i] = i*2
-        if i*2+1 < N+1:
-            right[i] = i*2+1
-
     inorder(1)
-    print('#{}'.format(tc), end=' ')
-    for idx, value in enumerate(tree):
-        if value == 1:
-            print(idx+1, end=' ')
-    for idx, value in enumerate(tree):
-        if value == N//2:
-            print(idx+1)
+    for idx, num in enumerate(tree, start=1):
+        if num == 1:
+            root = idx
+        if num == N//2:
+            half = idx
+    print('#{} {} {}'.format(tc, root, half))
 
 
 # live
@@ -69,3 +68,33 @@ for tc in range(1, T+1):
 #     N = int(input())
 #     node = Node(N)
 #     print('#{} {}'.format(tc, node.result()))
+
+
+# 1st_try
+# T = int(input())
+#
+# def inorder(n):
+#     if n:
+#         inorder(left[n])
+#         tree.append(n)
+#         inorder(right[n])
+#
+# for tc in range(1, T+1):
+#     N = int(input())
+#     left = [0] * (N+1)
+#     right = [0] * (N+1)
+#     tree = []
+#
+#     for i in range(1, N//2+1):
+#         left[i] = i*2
+#         if i*2+1 < N+1:
+#             right[i] = i*2+1
+#
+#     inorder(1)
+#     print('#{}'.format(tc), end=' ')
+#     for idx, value in enumerate(tree):
+#         if value == 1:
+#             print(idx+1, end=' ')
+#     for idx, value in enumerate(tree):
+#         if value == N//2:
+#             print(idx+1)
