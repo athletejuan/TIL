@@ -7,10 +7,5 @@ for tc in range(1, T+1):
         node, num = map(int, input().split())
         tree[node] = num
     for j in range(N, 0, -1):
-        if j%2:
-            tree[j//2] = tree[j]+tree[j-1]
-        elif not tree[j//2]:
-            tree[j//2] = tree[j]
-        if tree[L]:
-            print('#{} {}'.format(tc, tree[L]))
-            break
+        tree[j//2] += tree[j]
+    print('#{} {}'.format(tc, tree[L]))
