@@ -1,39 +1,33 @@
 T = int(input())
 
 def search():
-    global where
+    where = 0
     for i in range(N):
-        row_poss, col_poss = 0, 0
+        cnt = 0
         for j in range(N):
             # 행 방향 입력가능한 셀 합산
             if puzzle[i][j]:
-                row_poss += 1
-                # 행의 마지막 열에 도착했을때 입력가능한 셀의 합이 K와 같으면 where 1 추가
-                if j == N-1 and row_poss == K:
+                cnt += 1
+                # 0이거나 벽에 도착했을때
+            if not puzzle[i][j] or j == N-1:
+                # 입력가능한 셀의 합이 K와 같으면 where 1 추가
+                if cnt == K:
                     where += 1
-            else:
-                # 입력 불가능한 셀이 나오는 경우 직전까지 합산한 값이 K와 같으면 where 1 추가 후 합산값 0으로 초기화
-                if row_poss == K:
-                    where += 1
-                row_poss = 0
+                cnt = 0
+        for j in range(N):
             if puzzle[j][i]:
-                col_poss += 1
-                # 열의 마지막 행에 도착했을때 입력가능한 셀의 합이 K와 같으면 where 1 추가
-                if j == N-1 and col_poss == K:
+                cnt += 1
+            if not puzzle[j][i] or  j == N-1:
+                if cnt == K:
                     where += 1
-            else:
-                # 입력 불가능한 셀이 나오는 경우 직전까지 합산한 값이 K와 같으면 where 1 추가 후 합산값 0으로 초기화
-                if col_poss == K:
-                    where += 1
-                col_poss = 0
+                cnt = 0
+    return where
 
 for tc in range(1, T+1):
     N,K = map(int, input().split())
-    where = 0
 
     puzzle = [list(map(int, input().split())) for _ in range(N)]
-    search()
-    print('#{} {}'.format(tc, where))
+    print('#{} {}'.format(tc, search()))
 
     
 
