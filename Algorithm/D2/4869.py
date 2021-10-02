@@ -9,7 +9,7 @@ for tc in range(1, T+1):
             p = (p*2) - 1
         else:
             p = (p*2) + 1
-    print(f'#{tc} {p}')
+    print('#{} {}'.format(tc, p))
 
 
 # memoization(more fast)
@@ -23,12 +23,12 @@ for tc in range(1, T+1):
 #         max_N = N//10
 
 # t = max_N
-# memo = [1] + [0] * (t-1)
+# memo = [1]
 # for i in range(1, t):
 #     if i%2:
-#         memo[i] = (memo[i-1]*2) + 1
+#         memo.append(memo[i-1]*2 + 1) 
 #     else:
-#         memo[i] = (memo[i-1]*2) - 1
+#         memo.append(memo[i-1]*2 - 1) 
 
-# for idx,j in enumerate(Ns):
+# for idx, j in enumerate(Ns):
 #     print('#{} {}'.format(idx+1, memo[j-1]))
