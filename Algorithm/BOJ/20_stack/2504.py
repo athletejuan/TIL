@@ -1,87 +1,31 @@
 import sys
-text = sys.stdin.readline().rstrip()
-
+string = sys.stdin.readline().rstrip()
 stack = []
 
-for s in text:
-    if s == '(' or s == '[':
-        stack.append(s)
-    elif s == ')':
-        temp = 0
-
-        while stack:
+def check(string):
+    result = 0
+    for s in string:
+        if s == '(' or s == '[':
+            stack.append(s)
+        elif stack:
             last = stack.pop()
-            if last == '(':
-                if temp == 0:
-                    stack.append(2)
-                else:
-                    stack.append(temp*2)
-                break
-            elif last == '[':
-                print(0)
-                exit(0)
-            else:
+            temp = 0 if type(last) == int else 1
+            m = 2 if s == ')' else 3
+            while stack and type(last) == int:
                 temp += last
-    else:
-        temp = 0
-
-        while stack:
-            last = stack.pop()
-            if last == '[':
-                if temp == 0:
-                    stack.append(3)
-                else:
-                    stack.append(temp*3)
-                break
-            elif last == '(':
-                print(0)
-                exit(0)
+                last = stack.pop()
+            if (m == 2 and last == '(') or (m == 3 and last == '['):
+                stack.append(temp*m)
             else:
-                temp += last
+                return 0
+        else:
+            return 0
+    while stack:
+        num = stack.pop()
+        if type(num) == int:
+            result += num
+        else:
+            return 0
+    return result
 
-ans = 0
-for i in stack:
-    if i == "(" or i == "[":
-        print(0)
-        exit(0)
-    else:
-        ans += i
-print(ans)
-
-
-# text = input()
-# stack = []
-# n = 0
-
-# for s in text:
-#     if s == '(' or s == '[':
-#         stack.append(s)
-#     elif s == ')':
-#         last = stack.pop()
-#         if last == '(':
-#             stack.append(2)
-#         elif last == '[':
-#             print(0)
-#             break
-#         else:
-#             while type(stack[-1]) == int:
-#                 last += stack.pop()
-#             stack.pop()
-#             stack.append(last*2)
-#     else:
-#         last = stack.pop()
-#         if last == '[':
-#             stack.append(3)
-#         elif last == '(':
-#             print(0)
-#             break
-#         else:
-#             while type(stack[-1]) == int:
-#                 last += stack.pop()
-#             stack.pop()
-#             stack.append(last*3)
-# else:
-#     if type(stack[0]) != int:
-#         print(0)
-#     else:
-#         print(sum(stack))
+print(check(string))
