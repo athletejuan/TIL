@@ -2,7 +2,7 @@ T = int(input())
 
 def Forth():
     for f in post:
-        if f.isdigit():
+        if f.isdecimal():
             stack.append(int(f))
         elif len(stack) > 1:
             b = stack.pop()
@@ -14,10 +14,10 @@ def Forth():
             elif f == '*':
                 stack.append(a*b)
             elif f == '/':
-                stack.append(a/b)
+                stack.append(a//b)
             else:
                 return 'error'
-        elif len(stack) == 1 and f == '.':
+        elif stack and f == '.':
             return stack[0]
         else:
             return 'error'
