@@ -1,4 +1,4 @@
 n = int(input())
+root = int(n**.5)
 
-root = int(n**.5)+1 if n > 1 else n
-print(root)
+print(root+1 if n > root**2 else root)
