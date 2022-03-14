@@ -3,7 +3,7 @@
 def cook(forA, forB, half):
     A = B = 0
     for i in range(half-1):
-        for j in range(i, half):
+        for j in range(i+1, half):
             A += ingredients[forA[i]][forA[j]] + ingredients[forA[j]][forA[i]]
             B += ingredients[forB[i]][forB[j]] + ingredients[forB[j]][forB[i]]
     return abs(A-B)
