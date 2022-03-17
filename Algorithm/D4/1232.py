@@ -42,7 +42,7 @@ for tc in range(1, 11):
 
         if len(tmp) == 4:
             tree[int(tmp[0])][2] = int(tree[int(tmp[0])][2])
-            tree[int(tmp[0])][2] = int(tree[int(tmp[0])][3])
+            tree[int(tmp[0])][3] = int(tree[int(tmp[0])][3])
         else:
             tree[int(tmp[0])][1] = int(tree[int(tmp[0])][1])
 
