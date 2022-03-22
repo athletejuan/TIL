@@ -9,9 +9,7 @@ def DFS(x,y,n):
     for i in range(4):
         a,b = x+dx[i],y+dy[i]
         if 0 <= a < 4 and 0 <= b < 4:
-            n += base[a][b]
-            DFS(a,b,n)
-            n = n[:-1]
+            DFS(a,b,n+base[a][b])
 
 for tc in range(1, T+1):
     base = [input().split() for _ in range(4)]
