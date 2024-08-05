@@ -33,4 +33,4 @@ soupsieve==1.9.3
 sqlparse==0.3.0
 text-unidecode==1.3
 urllib3==1.26.5
-Werkzeug==0.16.0
+Werkzeug==2.2.3
